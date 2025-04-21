@@ -1,8 +1,10 @@
-# PROJECT NAME
+# Team-01 Exploding Kittens
 
 ## Contributors
-- PERSON
-- PERSON
+- Caleb Weldon
+- Benjamin Ye
+- Eiko Reisz
+- Samarth Arul
 
 ## Dependencies
 - JDK 11
