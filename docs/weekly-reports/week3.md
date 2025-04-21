@@ -1,11 +1,9 @@
 # Week 3
 
----
-
-# Part 1. Team Planning of the Week :ledger:
+## Part 1. Team Planning of the Week :ledger:
 N/A
 
-# Part 2. Team Progress of the Week w.r.t Last Week's Planning :green_book:
+## Part 2. Team Progress of the Week w.r.t Last Week's Planning :green_book:
 **Evaluation Date**: 04/21/2025
 
 **Item Progress**:
@@ -16,5 +14,5 @@ N/A
 5. [done] completed week 3 report
 6. [in progress] Establish bi-weekly meeting time with Dr. Yiji
 
-# Part 3. Individual Progress of the Week :coffee:
+## Part 3. Individual Progress of the Week :coffee:
 N/A
