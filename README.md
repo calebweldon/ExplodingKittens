@@ -1,3 +1,4 @@
+![Gradle Build](https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/actions/workflows/main.yml/badge.svg)
 # Team-01 Exploding Kittens
 
 ## Contributors
