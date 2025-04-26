@@ -45,7 +45,7 @@ tasks.test {
 }
 
 application {
-    mainClass = "Code.Main" // this may need to change later - I'm basing off template
+    mainClass = "ui.Main"
 }
 
 // Spotbugs README: https://github.com/spotbugs/spotbugs-gradle-plugin#readme
