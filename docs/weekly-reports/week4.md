@@ -5,9 +5,12 @@
 
 **Items Planned**:
 1. Create Deck class
-2. Create abstract Card Class + One Concrete Card
+2. Create abstract Card Class + some concrete cards (atleast exploding and defuse)
 3. Create TurnController Class
-4. Create Player Class
+4. Create Player Class 
+5. Complete Item 1 (game setup) in week 4 checklist
+6. Complete item 2 (setup spotbugs + checkstyle) in week 4 checklist
+7. Complete item 3 (week 4 report) in week 4 checklist
 
 # Part 2. Team Progress of the Week w.r.t Last Week's Planning :green_book:
 **Evaluation Date**: 04/24/2024
