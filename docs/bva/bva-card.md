@@ -29,18 +29,18 @@
 
 ## Method 2: ```public boolean checkIfFaceUp()```
 ### Step 1-3 Results
-|        | Input                                                               | (if more to consider for input)  | Output        |
-|--------|---------------------------------------------------------------------|----------------------------------|---------------|
-| Step 1 | Card                                                                |                                  | true or false |
-| Step 2 | Card with an isFaceUp field                                         |                                  | boolean       |
-| Step 3 | Two cards, one with isFaceUp set to true and the other set to false |                                  | True or False |
+|        | Input                                                               | (if more to consider for input)  | Output                             |
+|--------|---------------------------------------------------------------------|----------------------------------|------------------------------------|
+| Step 1 | Card                                                                |                                  | whether card is faceup or facedown |
+| Step 2 | Card with an isFaceUp field                                         |                                  | boolean                            |
+| Step 3 | Two cards, one with isFaceUp set to true and the other set to false |                                  | true or false                      |
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|              | System under test      | Expected output | Implemented? |
-|--------------|------------------------|-----------------|--------------|
-| Test Case 1  | Card, isFaceUp = True  | True            | :x:          |
-| Test Case 2  | Card, isFaceUp = False | False           | :x:          |
+|              | System under test      | Expected output | Implemented?       |
+|--------------|------------------------|-----------------|--------------------|
+| Test Case 1  | Card, isFaceUp = True  | True            | :x:                |
+| Test Case 2  | Card, isFaceUp = False | False           | :white_check_mark: |
 
 
 ## Method 3: ```public void setToFaceUp()```
@@ -51,7 +51,7 @@
 | Step 2 | Card with an isFaceUp field                                          |                                  | Card.IsFaceUp                      |
 | Step 3 | Two cards, one with isFaceUp set to true and the other set to false  |                                  | Card.IsFaceUp = true in both cases |
 ### Step 4:
-##### All-combination or each-choice: All Combination
+##### All-combination or each-choice: Each-Choice
 
 |              | System under test      | Expected output        | Implemented? |
 |--------------|------------------------|------------------------|--------------|
@@ -62,11 +62,11 @@
 ### Step 1-3 Results
 |        | Input                                                                | (if more to consider for input)  | Output                              |
 |--------|----------------------------------------------------------------------|----------------------------------|-------------------------------------|
-| Step 1 | Card                                                                 |                                  | card is faceup                      |
+| Step 1 | Card                                                                 |                                  | card is facedown                    |
 | Step 2 | Card with an isFaceUp field                                          |                                  | Card.IsFaceUp                       |
 | Step 3 | Two cards, one with isFaceUp set to true and the other set to false  |                                  | Card.IsFaceUp = false in both cases |
 ### Step 4:
-##### All-combination or each-choice: All Combination
+##### All-combination or each-choice: Each-Choice
 
 |              | System under test      | Expected output       | Implemented? |
 |--------------|------------------------|-----------------------|--------------|
