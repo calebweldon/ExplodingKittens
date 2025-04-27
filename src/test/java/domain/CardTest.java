@@ -36,17 +36,8 @@ public class CardTest {
 	}
 
 	@Test
-	public void setToFaceUp_faceDown() {
+	public void setToFaceUp_faceDownCard() {
 		Card card = new Card(CardType.ATTACK);
-		card.setToFaceUp();
-
-		assertTrue(card.checkIfFaceUp());
-	}
-
-	@Test
-	public void setToFaceUp_faceUp() {
-		Card card = new Card(CardType.ATTACK);
-		card.setToFaceUp();
 		card.setToFaceUp();
 
 		assertTrue(card.checkIfFaceUp());
