@@ -20,4 +20,8 @@ public class Card {
 	public void setToFaceUp() {
 		this.isFaceUp = true;
 	}
+
+	public void setToFaceDown() {
+		this.isFaceUp = false;
+	}
 }

@@ -4,7 +4,7 @@
 ### Step 1-3 Results
 |        | Input                                                                                                                                                                      | (if more to consider for input)  | Output                 |
 |--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|------------------------|
-| Step 1 | Card                                                                                                                                                                       |                                  | CardType               |
+| Step 1 | Card                                                                                                                                                                       |                                  | type of card           |
 | Step 2 | Card with a CardType field set                                                                                                                                             |                                  | CardType               |
 | Step 3 | Cards of each CardType: EXPLODING_KITTEN, DEFUSE, ATTACK, SHUFFLE, SKIP, SEE_THE_FUTURE, NOPE, FAVOUR, TACO_CAT, CATTERMELLON, POTATO_CAT, BEARD_CAT, RAINBOW_RALPHING_CAT |                                  | Corresponding CardType |
 ### Step 4:
@@ -29,11 +29,11 @@
 
 ## Method 2: ```public boolean checkIfFaceUp()```
 ### Step 1-3 Results
-|        | Input                                                               | (if more to consider for input)  | Output                             |
-|--------|---------------------------------------------------------------------|----------------------------------|------------------------------------|
-| Step 1 | Card                                                                |                                  | whether card is faceup or facedown |
-| Step 2 | Card with an isFaceUp field                                         |                                  | boolean                            |
-| Step 3 | Two cards, one with isFaceUp set to true and the other set to false |                                  | true or false                      |
+|        | Input                                                               | (if more to consider for input)  | Output                               |
+|--------|---------------------------------------------------------------------|----------------------------------|--------------------------------------|
+| Step 1 | Card                                                                |                                  | whether card is face up or face down |
+| Step 2 | card with isFaceUp field                                            |                                  | boolean                              |
+| Step 3 | Two cards, one with isFaceUp set to true and the other set to false |                                  | true or false                        |
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
@@ -48,7 +48,7 @@
 |        | Input                      | (if more to consider for input)  | Output                  |
 |--------|----------------------------|----------------------------------|-------------------------|
 | Step 1 | Card                       |                                  | whether card is face up |
-| Step 2 | card with isFaceUp field   |                                  | Card.IsFaceUp           |
+| Step 2 | card with isFaceUp field   |                                  | boolean                 |
 | Step 3 | Card with isFaceUp = false |                                  | Card.IsFaceUp = true    |
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
@@ -60,15 +60,15 @@
 
 ## Method 4: ```public void setToFaceDown()```
 ### Step 1-3 Results
-|        | Input                     | (if more to consider for input)  | Output                   |
-|--------|---------------------------|----------------------------------|--------------------------|
-| Step 1 | Card                      |                                  | whether card is facedown |
-| Step 2 | card with isFaceUp field  |                                  | Card.IsFaceUp            |
-| Step 3 | Card with isFaceUp = true |                                  | Card.IsFaceUp = false    |
+|        | Input                     | (if more to consider for input)  | Output                    |
+|--------|---------------------------|----------------------------------|---------------------------|
+| Step 1 | Card                      |                                  | whether card is face down |
+| Step 2 | card with isFaceUp field  |                                  | boolean                   |
+| Step 3 | Card with isFaceUp = true |                                  | Card.IsFaceUp = false     |
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
 
 |              | System under test      | Expected output       | Implemented?        |
 |--------------|------------------------|-----------------------|---------------------|
-| Test Case 1  | Card, isFaceUp = True  | Card.isFaceUp = false | :x:                 |
+| Test Case 1  | Card, isFaceUp = True  | Card.isFaceUp = false | :white_check_mark:  |
 
