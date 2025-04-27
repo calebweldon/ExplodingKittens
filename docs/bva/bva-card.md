@@ -53,10 +53,11 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
 
-|              | System under test      | Expected output        | Implemented? |
-|--------------|------------------------|------------------------|--------------|
-| Test Case 1  | Card, isFaceUp = True  | Card.isFaceUp = true   | :x:          |
-| Test Case 2  | Card, isFaceUp = False | Card.isFaceUp = true   | :x:          |
+|              | System under test      | Expected output        | Implemented?        |
+|--------------|------------------------|------------------------|---------------------|
+| Test Case 1  | Card, isFaceUp = True  | Card.isFaceUp = true   | :x:                 |
+| Test Case 2  | Card, isFaceUp = False | Card.isFaceUp = true   | :white_check_mark:  |
+
 
 ## Method 4: ```public void setToFaceDown()```
 ### Step 1-3 Results
