@@ -37,10 +37,10 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|              | System under test      | Expected output | Implemented?       |
-|--------------|------------------------|-----------------|--------------------|
-| Test Case 1  | Card, isFaceUp = True  | True            | :x:                |
-| Test Case 2  | Card, isFaceUp = False | False           | :white_check_mark: |
+|              | System under test      | Expected output | Implemented?        |
+|--------------|------------------------|-----------------|---------------------|
+| Test Case 1  | Card, isFaceUp = True  | True            | :white_check_mark:  |
+| Test Case 2  | Card, isFaceUp = False | False           | :white_check_mark:  |
 
 
 ## Method 3: ```public void setToFaceUp()```

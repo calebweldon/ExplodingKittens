@@ -17,4 +17,7 @@ public class Card {
 		return isFaceUp;
 	}
 
+	public void setToFaceUp() {
+		this.isFaceUp = true;
+	}
 }
