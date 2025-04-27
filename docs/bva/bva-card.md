@@ -55,7 +55,7 @@
 
 |              | System under test      | Expected output        | Implemented?        |
 |--------------|------------------------|------------------------|---------------------|
-| Test Case 1  | Card, isFaceUp = True  | Card.isFaceUp = true   | :x:                 |
+| Test Case 1  | Card, isFaceUp = True  | Card.isFaceUp = true   | :white_check_mark:  |
 | Test Case 2  | Card, isFaceUp = False | Card.isFaceUp = true   | :white_check_mark:  |
 
 

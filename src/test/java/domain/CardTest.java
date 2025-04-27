@@ -43,4 +43,13 @@ public class CardTest {
 		assertTrue(card.checkIfFaceUp());
 	}
 
+	@Test
+	public void setToFaceUp_faceUp() {
+		Card card = new Card(CardType.ATTACK);
+		card.setToFaceUp();
+		card.setToFaceUp();
+
+		assertTrue(card.checkIfFaceUp());
+	}
+
 }
