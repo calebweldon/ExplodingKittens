@@ -6,6 +6,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -39,6 +41,22 @@ public class DeckTest {
         deck.insertCardAtIndex(secondCard, 1);
         assertEquals(2, deck.getSize());
         assertEquals(secondCard, deck.getCardAtIndex(1));
+    }
+
+    @Test
+    public void insertCardAtRandomIndex_EmptyDeck() {
+        Card card = EasyMock.createMock(Card.class);
+        Random rand = EasyMock.createMock(Random.class);
+        Deck deck = new Deck(rand);
+
+        EasyMock.expect(rand.nextInt(1)).andReturn(0);
+        EasyMock.replay(rand);
+        deck.insertCardAtRandomIndex(card);
+
+        assertEquals(1, deck.getSize());
+        assertEquals(card, deck.getCardAtIndex(0));
+
+        EasyMock.verify(rand);
     }
 
     @ParameterizedTest

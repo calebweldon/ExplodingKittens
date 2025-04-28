@@ -28,10 +28,10 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|             | System under test                     | Expected output                       | Implemented? |
-|-------------|---------------------------------------|---------------------------------------|--------------|
-| Test Case 1 | [], Card(DEFUSE)                      | [Card(Defuse)]                        | :x:          |
-| Test Case 2 | [Card(SHUFFLE)], Card(SEE_THE_FUTURE) | [Card(SHUFFLE), Card(SEE_THE_FUTURE)] | :x:          |
+|             | System under test                     | Expected output                       | Implemented?       |
+|-------------|---------------------------------------|---------------------------------------|--------------------|
+| Test Case 1 | [], Card(DEFUSE)                      | [Card(Defuse)]                        | :white_check_mark: |
+| Test Case 2 | [Card(SHUFFLE)], Card(SEE_THE_FUTURE) | [Card(SHUFFLE), Card(SEE_THE_FUTURE)] | :x:                |
 
 
 ## Method 3: ```public Card drawCard()```
