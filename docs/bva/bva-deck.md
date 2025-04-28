@@ -95,5 +95,5 @@
 |-------------|-------------------------------------------------------------|---------------------------|--------------------|
 | Test Case 1 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)], -1      | IndexOutOfBoundsException | :white_check_mark: |
 | Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)], INT_MAX | IndexOutOfBoundsException | :white_check_mark: |
-| Test Case 3 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 0        | Card(SKIP)                | :x:                |
-| Test Case 4 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 1        | Card(EXPLODING_KITTEN)    | :x:                |
+| Test Case 3 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 0        | Card(SKIP)                | :white_check_mark: |
+| Test Case 4 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 1        | Card(EXPLODING_KITTEN)    | :white_check_mark: |
