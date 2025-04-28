@@ -52,6 +52,12 @@
 | Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN)] | Card(SKIP)      | :x:          |
 
 ## Method 4: ```public void shuffleDeck()```
+
+## Note:
+ - It may be easiest to implement using Collection object's static shuffle() method...
+ - If so, unit tests aren't viable and BVA may not be helpful
+ - Discuss with professor
+
 ### Step 1-3 Results
 |        | Input                                                                             | Output                                                                            |
 |--------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
@@ -67,6 +73,12 @@
 | Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] | [Card(DEFUSE), Card(SKIP), Card(EXPLODING_KITTEN)] | :x:          |
 
 ## Method 5: ```public void flipDeck()```
+
+## Note:
+- It may be easiest to implement using Collection object's static reverse() method...
+- If so, unit tests aren't viable and BVA may not be helpful
+- Discuss with professor
+
 ### Step 1-3 Results
 |        | Input                                                                             | Output                                                                            |
 |--------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|

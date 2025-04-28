@@ -1,6 +1,7 @@
 package domain;
 
 import javax.print.attribute.standard.PrinterMakeAndModel;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -25,6 +26,14 @@ public class Deck {
     public void insertCardAtRandomIndex(Card card) {
         int index = this.rand.nextInt(getSize() + 1);
         insertCardAtIndex(card, index);
+    }
+
+    public void shuffleDeck(){
+        Collections.shuffle(deck);
+    }
+
+    public void flipDeck(){
+        Collections.reverse(deck);
     }
 
     public Card getCardAtIndex(int index){
