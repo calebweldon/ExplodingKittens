@@ -46,10 +46,11 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
 
-|             | System under test                    | Expected output | Implemented? |
-|-------------|--------------------------------------|-----------------|--------------|
-| Test Case 1 | [Card(SHUFFLE)]                      | Card(SHUFFLE)   | :x:          |
-| Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN)] | Card(SKIP)      | :x:          |
+|             | System under test                                  | Expected output        | Implemented?       |
+|-------------|----------------------------------------------------|------------------------|--------------------|
+| Test Case 1 | [Card(EXPLODING_KITTEN)]                           | Card(EXPLODING_KITTEN) | :white_check_mark: |
+| Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN)]               | Card(SKIP)             | :white_check_mark: |
+| Test Case 2 | [Card(ATTACK), Card(SKIP), Card(EXPLODING_KITTEN)] | Card(ATTACK)           | :white_check_mark: |
 
 ## Method 4: ```public void shuffleDeck()```
 

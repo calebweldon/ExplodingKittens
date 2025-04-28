@@ -28,6 +28,10 @@ public class Deck {
         insertCardAtIndex(card, index);
     }
 
+    public Card drawCard(){
+        return deck.poll();
+    }
+
     public void shuffleDeck(){
         Collections.shuffle(deck);
     }

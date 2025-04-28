@@ -80,6 +80,23 @@ public class DeckTest {
         EasyMock.verify(rand);
     }
 
+    @Test
+    public void drawCard_NormalCase() {
+        Card firstcard = EasyMock.createMock(Card.class);
+        Card secondcard = EasyMock.createMock(Card.class);
+        Card thirdcard = EasyMock.createMock(Card.class);
+        Random rand = EasyMock.createMock(Random.class);
+        Deck deck = new Deck(rand);
+
+        deck.insertCardAtIndex(firstcard, 0);
+        deck.insertCardAtIndex(secondcard, 1);
+        deck.insertCardAtIndex(thirdcard, 2);
+
+        assertEquals(3, deck.getSize());
+        assertEquals(firstcard, deck.drawCard());
+        assertEquals(secondcard, deck.drawCard());
+        assertEquals(thirdcard, deck.drawCard());
+    }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 2147483647})
