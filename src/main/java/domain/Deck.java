@@ -9,15 +9,16 @@ public class Deck {
     }
 
     public void insertCardAtIndex(Card card, int index) {
-        if(index < 0 || index > deck.size()) {
-            throw new IndexOutOfBoundsException("Invalid index: index out of range");
-        }
+        this.checkBounds(index);
     }
 
     public Card getCardAtIndex(int index){
-        if(index < 0 || index > deck.size()) {
-            throw new IndexOutOfBoundsException("Invalid index: index out of range");
-        }
+        this.checkBounds(index);
         return deck.get(index);
     }
+
+    private void checkBounds(int index){
+        if(index < 0 || index > deck.size()) throw new IndexOutOfBoundsException("Invalid index: index out of range");
+    }
+
 }
