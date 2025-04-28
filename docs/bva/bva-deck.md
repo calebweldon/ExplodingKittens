@@ -1,6 +1,6 @@
 # BVA Analysis for Card
 
-## Method 1: ```public void insert(card Card, int index)```
+## Method 1: ```public void insertCardAtIndex(card Card, int index)```
 ### Step 1-3 Results
 |        | input 1                               | input 2                                                | input 3              | Output                                                                              |
 |--------|---------------------------------------|--------------------------------------------------------|----------------------|-------------------------------------------------------------------------------------|
@@ -10,15 +10,15 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|              | System under test                        | Expected output                       | Implemented?       |
-|--------------|------------------------------------------|---------------------------------------|--------------------|
-| Test Case 1  | [], CARD(ATTACK), -1                     | UnsupportedOperationException         | :x:                |
-| Test Case 2  | [], CARD(SKIP), INT_MAX                  | UnsupportedOperationException         | :x:                |
-| Test Case 3  | [], Card(DEFUSE), 0                      | [Card(Defuse)]                        | :x:                |
-| Test Case 4  | [Card(SHUFFLE)], Card(SEE_THE_FUTURE), 1 | [Card(SHUFFLE), Card(SEE_THE_FUTURE)] | :x:                |
+|             | System under test                        | Expected output                       | Implemented?    |
+|-------------|------------------------------------------|---------------------------------------|-----------------|
+| Test Case 1 | [], CARD(ATTACK), -1                     | IndexOutOfBoundsException             | :white_check_mark: |
+| Test Case 2 | [], CARD(SKIP), INT_MAX                  | IndexOutOfBoundsException             | :white_check_mark:              |
+| Test Case 3 | [], Card(DEFUSE), 0                      | [Card(Defuse)]                        | :x:             |
+| Test Case 4 | [Card(SHUFFLE)], Card(SEE_THE_FUTURE), 1 | [Card(SHUFFLE), Card(SEE_THE_FUTURE)] | :x:             |
 
 
-## Method 2: ```public void insertRandom(card Card)```
+## Method 2: ```public void insertCardAtRandomIndex(card Card)```
 ### Step 1-3 Results
 |        | input 1             | input 2                                                | Output                                                |
 |--------|---------------------|--------------------------------------------------------|-------------------------------------------------------|
