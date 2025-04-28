@@ -60,6 +60,28 @@ public class DeckTest {
     }
 
     @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2})
+    public void insertCardAtRandomIndex_NormalCase(int index) {
+        Card firstcard = EasyMock.createMock(Card.class);
+        Card secondcard = EasyMock.createMock(Card.class);
+        Card thirdcard = EasyMock.createMock(Card.class);
+        Random rand = EasyMock.createMock(Random.class);
+        Deck deck = new Deck(rand);
+        deck.insertCardAtIndex(firstcard, 0);
+        deck.insertCardAtIndex(secondcard, 1);
+
+        EasyMock.expect(rand.nextInt(deck.getSize()+1)).andReturn(index);
+        EasyMock.replay(rand);
+        deck.insertCardAtRandomIndex(thirdcard);
+
+        assertEquals(3, deck.getSize());
+        assertEquals(thirdcard, deck.getCardAtIndex(index));
+
+        EasyMock.verify(rand);
+    }
+
+
+    @ParameterizedTest
     @ValueSource(ints = {-1, 2147483647})
     public void getCardAtIndex_invalidIndex_throwException(int invalidIndex) {
         Deck deck = new Deck();
