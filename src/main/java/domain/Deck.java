@@ -1,6 +1,5 @@
 package domain;
 
-import javax.print.attribute.standard.PrinterMakeAndModel;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
