@@ -14,4 +14,10 @@ public class Deck {
         }
     }
 
+    public Card getCardAtIndex(int index){
+        if(index < 0 || index > deck.size()) {
+            throw new IndexOutOfBoundsException("Invalid index: index out of range");
+        }
+        return deck.get(index);
+    }
 }

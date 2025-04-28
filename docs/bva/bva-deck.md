@@ -6,16 +6,16 @@
 |--------|---------------------------------------|--------------------------------------------------------|----------------------|-------------------------------------------------------------------------------------|
 | Step 1 | Deck                                  | Card                                                   | Number               | Deck                                                                                |
 | Step 2 | collection                            | Card                                                   | interval [0,INT_MAX] | collection                                                                          |
-| Step 3 | [], [Card(ATTACK)], array of max size | [Card(SKIP)], [Card(EXPLODING_KITTEN)], [Card(DEFUSE)] | -1, 0, INT_MAX       | UnsupportedOperationException, [Card(SKIP)], [Card(ATTACK), Card(EXPLODING_KITTEN)] |
+| Step 3 | [], [Card(ATTACK)], array of max size | [Card(SKIP)], [Card(EXPLODING_KITTEN)], [Card(DEFUSE)] | -1, 0, INT_MAX       | IndexOutOfBoundsException, [Card(SKIP)], [Card(ATTACK), Card(EXPLODING_KITTEN)] |
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|             | System under test                        | Expected output                       | Implemented?    |
-|-------------|------------------------------------------|---------------------------------------|-----------------|
+|             | System under test                        | Expected output                       | Implemented?       |
+|-------------|------------------------------------------|---------------------------------------|--------------------|
 | Test Case 1 | [], CARD(ATTACK), -1                     | IndexOutOfBoundsException             | :white_check_mark: |
-| Test Case 2 | [], CARD(SKIP), INT_MAX                  | IndexOutOfBoundsException             | :white_check_mark:              |
-| Test Case 3 | [], Card(DEFUSE), 0                      | [Card(Defuse)]                        | :x:             |
-| Test Case 4 | [Card(SHUFFLE)], Card(SEE_THE_FUTURE), 1 | [Card(SHUFFLE), Card(SEE_THE_FUTURE)] | :x:             |
+| Test Case 2 | [], CARD(SKIP), INT_MAX                  | IndexOutOfBoundsException             | :white_check_mark: |
+| Test Case 3 | [Card(NOPE)], Card(DEFUSE), 0            | [Card(DEFUSE), Card(NOPE)]            | :x:                |
+| Test Case 4 | [Card(SHUFFLE)], Card(SEE_THE_FUTURE), 1 | [Card(SHUFFLE), Card(SEE_THE_FUTURE)] | :x:                |
 
 
 ## Method 2: ```public void insertCardAtRandomIndex(card Card)```
@@ -81,3 +81,19 @@
 | Test Case 1 | [Card(SHUFFLE), Card(ATTACK)]                      | [Card(ATTACK), Card(SHUFFLE)]                      | :x:          |
 | Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] | [Card(DEFUSE), Card(EXPLODING_KITTEN), Card(SKIP)] | :x:          |
 
+## Method 6: ```public void getCardAtIndex(int index)```
+### Step 1-3 Results
+|        | input 1                           | input 3           | Output                                                                                    |
+|--------|-----------------------------------|-------------------|-------------------------------------------------------------------------------------------|
+| Step 1 | Deck                              | Number            | Card                                                                                      |
+| Step 2 | collection                        | Interval          | Card                                                                                      |
+| Step 3 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] | -1, 0, 1, INT_MAX | IndexOutOfBoundsException, Card(SKIP), Card(EXPLODING_KITTEN)], IndexOutOfBoundsException |
+### Step 4:
+##### All-combination or each-choice: Each-choice
+
+|             | System under test                                           | Expected output           | Implemented? |
+|-------------|-------------------------------------------------------------|---------------------------|--------------|
+| Test Case 1 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)], -1      | IndexOutOfBoundsException | :x:          |
+| Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)], INT_MAX | IndexOutOfBoundsException | :x:          |
+| Test Case 3 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 0        | Card(SKIP)                | :x:          |
+| Test Case 4 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 1        | Card(EXPLODING_KITTEN)    | :x:          |

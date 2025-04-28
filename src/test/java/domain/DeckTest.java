@@ -24,4 +24,19 @@ public class DeckTest {
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 2147483647})
+    public void getCardAtIndex_invalidIndex_throwException(int invalidIndex) {
+        Deck deck = new Deck();
+
+        String expectedMessage = "Invalid index: index out of range";
+        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+            deck.getCardAtIndex(invalidIndex);
+        });
+
+        String actualMessage = exception.getMessage();
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+
 }
