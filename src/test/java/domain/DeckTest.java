@@ -5,123 +5,128 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class DeckTest {
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 2147483647})
-    public void insertCard_invalidIndex_throwException(int invalidIndex) {
-        Card card = EasyMock.createMock(Card.class);
-        Deck deck = new Deck();
+	public static final int INT_MAX = 2147483647;
 
-        String expectedMessage = "Invalid index: index out of range";
-        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
-            deck.insertCardAtIndex(card, invalidIndex);
-        });
+	@ParameterizedTest
+	@ValueSource(ints = {-1, INT_MAX})
+	public void insertCard_invalidIndex_throwException(int invalidIndex) {
+		Card card = EasyMock.createMock(Card.class);
+		Deck deck = new Deck();
 
-        String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
-    }
+		String expectedMessage = "Invalid index: index out of range";
+		Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+			deck.insertCardAtIndex(card, invalidIndex);
+		});
 
-    @Test
-    public void insertCard_validIndex() {
-        Card firstCard = EasyMock.createMock(Card.class);
-        Card secondCard = EasyMock.createMock(Card.class);
+		String actualMessage = exception.getMessage();
+		assertEquals(expectedMessage, actualMessage);
+	}
 
-        Deck deck = new Deck();
+	@Test
+	public void insertCard_validIndex() {
+		Card firstCard = EasyMock.createMock(Card.class);
+		Card secondCard = EasyMock.createMock(Card.class);
 
-        deck.insertCardAtIndex(firstCard, 0);
-        assertEquals(1, deck.getSize());
-        assertEquals(firstCard, deck.getCardAtIndex(0));
+		Deck deck = new Deck();
 
-        deck.insertCardAtIndex(secondCard, 1);
-        assertEquals(2, deck.getSize());
-        assertEquals(secondCard, deck.getCardAtIndex(1));
-    }
+		deck.insertCardAtIndex(firstCard, 0);
+		assertEquals(1, deck.getSize());
+		assertEquals(firstCard, deck.getCardAtIndex(0));
 
-    @Test
-    public void insertCardAtRandomIndex_EmptyDeck() {
-        Card card = EasyMock.createMock(Card.class);
-        Random rand = EasyMock.createMock(Random.class);
-        Deck deck = new Deck(rand);
+		deck.insertCardAtIndex(secondCard, 1);
+		assertEquals(2, deck.getSize());
+		assertEquals(secondCard, deck.getCardAtIndex(1));
+	}
 
-        EasyMock.expect(rand.nextInt(1)).andReturn(0);
-        EasyMock.replay(rand);
-        deck.insertCardAtRandomIndex(card);
+	@Test
+	public void insertCardAtRandomIndex_EmptyDeck() {
+		Card card = EasyMock.createMock(Card.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand);
 
-        assertEquals(1, deck.getSize());
-        assertEquals(card, deck.getCardAtIndex(0));
+		EasyMock.expect(rand.nextInt(1)).andReturn(0);
+		EasyMock.replay(rand);
+		deck.insertCardAtRandomIndex(card);
 
-        EasyMock.verify(rand);
-    }
+		assertEquals(1, deck.getSize());
+		assertEquals(card, deck.getCardAtIndex(0));
 
-    @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2})
-    public void insertCardAtRandomIndex_NormalCase(int index) {
-        Card firstcard = EasyMock.createMock(Card.class);
-        Card secondcard = EasyMock.createMock(Card.class);
-        Card thirdcard = EasyMock.createMock(Card.class);
-        Random rand = EasyMock.createMock(Random.class);
-        Deck deck = new Deck(rand);
-        deck.insertCardAtIndex(firstcard, 0);
-        deck.insertCardAtIndex(secondcard, 1);
+		EasyMock.verify(rand);
+	}
 
-        EasyMock.expect(rand.nextInt(deck.getSize()+1)).andReturn(index);
-        EasyMock.replay(rand);
-        deck.insertCardAtRandomIndex(thirdcard);
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1, 2})
+	public void insertCardAtRandomIndex_NormalCase(int index) {
+		Card firstcard = EasyMock.createMock(Card.class);
+		Card secondcard = EasyMock.createMock(Card.class);
+		Card thirdcard = EasyMock.createMock(Card.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand);
+		final int expectedSize = 3;
 
-        assertEquals(3, deck.getSize());
-        assertEquals(thirdcard, deck.getCardAtIndex(index));
+		deck.insertCardAtIndex(firstcard, 0);
+		deck.insertCardAtIndex(secondcard, 1);
 
-        EasyMock.verify(rand);
-    }
+		EasyMock.expect(rand.nextInt(deck.getSize() + 1)).andReturn(index);
+		EasyMock.replay(rand);
+		deck.insertCardAtRandomIndex(thirdcard);
 
-    @Test
-    public void drawCard_NormalCase() {
-        Card firstcard = EasyMock.createMock(Card.class);
-        Card secondcard = EasyMock.createMock(Card.class);
-        Card thirdcard = EasyMock.createMock(Card.class);
-        Random rand = EasyMock.createMock(Random.class);
-        Deck deck = new Deck(rand);
+		assertEquals(expectedSize, deck.getSize());
+		assertEquals(thirdcard, deck.getCardAtIndex(index));
 
-        deck.insertCardAtIndex(firstcard, 0);
-        deck.insertCardAtIndex(secondcard, 1);
-        deck.insertCardAtIndex(thirdcard, 2);
+		EasyMock.verify(rand);
+	}
 
-        assertEquals(3, deck.getSize());
-        assertEquals(firstcard, deck.drawCard());
-        assertEquals(secondcard, deck.drawCard());
-        assertEquals(thirdcard, deck.drawCard());
-    }
+	@Test
+	public void drawCard_NormalCase() {
+		Card firstcard = EasyMock.createMock(Card.class);
+		Card secondcard = EasyMock.createMock(Card.class);
+		Card thirdcard = EasyMock.createMock(Card.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		final int expectedSize = 3;
 
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 2147483647})
-    public void getCardAtIndex_invalidIndex_throwException(int invalidIndex) {
-        Deck deck = new Deck();
+		Deck deck = new Deck(rand);
 
-        String expectedMessage = "Invalid index: index out of range";
-        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
-            deck.getCardAtIndex(invalidIndex);
-        });
+		deck.insertCardAtIndex(firstcard, 0);
+		deck.insertCardAtIndex(secondcard, 1);
+		deck.insertCardAtIndex(thirdcard, 2);
 
-        String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
-    }
+		assertEquals(expectedSize, deck.getSize());
+		assertEquals(firstcard, deck.drawCard());
+		assertEquals(secondcard, deck.drawCard());
+		assertEquals(thirdcard, deck.drawCard());
+	}
 
-    @Test
-    public void getCardAtIndex_validIndex() {
-        Card firstCard = EasyMock.createMock(Card.class);
-        Card secondCard = EasyMock.createMock(Card.class);
+	@ParameterizedTest
+	@ValueSource(ints = {-1, INT_MAX})
+	public void getCardAtIndex_invalidIndex_throwException(int invalidIndex) {
+		Deck deck = new Deck();
 
-        Deck deck = new Deck();
+		String expectedMessage = "Invalid index: index out of range";
+		Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+			Card card = deck.getCardAtIndex(invalidIndex);
+		});
 
-        deck.insertCardAtIndex(firstCard, 0);
-        deck.insertCardAtIndex(secondCard, 1);
-        assertEquals(2, deck.getSize());
-        assertEquals(firstCard, deck.getCardAtIndex(0));
-        assertEquals(secondCard, deck.getCardAtIndex(1));
-    }
+		String actualMessage = exception.getMessage();
+		assertEquals(expectedMessage, actualMessage);
+	}
+
+	@Test
+	public void getCardAtIndex_validIndex() {
+		Card firstCard = EasyMock.createMock(Card.class);
+		Card secondCard = EasyMock.createMock(Card.class);
+
+		Deck deck = new Deck();
+
+		deck.insertCardAtIndex(firstCard, 0);
+		deck.insertCardAtIndex(secondCard, 1);
+		assertEquals(2, deck.getSize());
+		assertEquals(firstCard, deck.getCardAtIndex(0));
+		assertEquals(secondCard, deck.getCardAtIndex(1));
+	}
 }
