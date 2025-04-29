@@ -5,7 +5,7 @@
 
 **Items Planned**:
 1. Create Deck class
-2. Create abstract Card Class + One Concrete Card
+2. Create Card class
 3. Create TurnController Class
 4. Create Player Class
 
@@ -57,16 +57,18 @@
 - link to PR
 
 
-### Team member: YOUR_NAME
+### Team member: Caleb Weldon
 #### PR created:
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/2
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/3
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/4
 
 ### PR done and approved
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/2
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/3
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/4
 
 ### Other people's PR reviewed by you
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/5#pullrequestreview-2801664471
 - link to PR
 
