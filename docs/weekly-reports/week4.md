@@ -29,18 +29,16 @@
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/3
 
 
-### Team member: YOUR_NAME
+### Team member: Benjamin Ye
 #### PR created:
-- link to PR
-- link to PR
+- N/A
 
 ### PR done and approved
-- link to PR
-- link to PR
+- N/A
 
 ### Other people's PR reviewed by you
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/3
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/4
 
 
 
