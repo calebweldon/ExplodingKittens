@@ -9,6 +9,7 @@ public class Deck {
 	private SecureRandom rand;
 
 	public Deck() {
+		//Note: Discuss underlying data structure
 		this.deck = new LinkedList<>();
 		this.rand = new SecureRandom();
 	}
@@ -32,6 +33,7 @@ public class Deck {
 		return deck.poll();
 	}
 
+	//Note: Not unit-testable. Implement this ourselves?
 	public void shuffleDeck() {
 		Collections.shuffle(deck);
 	}
