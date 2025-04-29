@@ -205,10 +205,4 @@ public class TurnController {
         from.removeFromHand(stolen);
         to.addToHand(stolen);
     }
-
-    /** Called by Nope cards: you’d need an effect‐stack to fully support chaining. */
-    public boolean applyNope() {
-        // TODO: implement a stack of pending effects and allow players to cancel
-        return true;
-    }
 }
