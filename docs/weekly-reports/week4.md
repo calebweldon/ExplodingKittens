@@ -43,9 +43,9 @@
 
 
 
-### Team member: YOUR_NAME
+### Team member: Samarth Arul
 #### PR created:
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/6
 - link to PR
 
 ### PR done and approved
