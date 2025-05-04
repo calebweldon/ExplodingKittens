@@ -52,47 +52,18 @@
 | Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN)]               | Card(SKIP)             | :white_check_mark: |
 | Test Case 2 | [Card(ATTACK), Card(SKIP), Card(EXPLODING_KITTEN)] | Card(ATTACK)           | :white_check_mark: |
 
+
 ## Method 4: ```public void shuffleDeck()```
 
 ## Note:
- - It may be easiest to implement using Collection object's static shuffle() method...
- - If so, unit tests aren't viable and BVA may not be helpful
- - Discuss with professor
+ - Implement using Collection object's static shuffle() method. Hence, not unit-testable
 
-### Step 1-3 Results
-|        | Input                                                                             | Output                                                                            |
-|--------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| Step 1 | Deck                                                                              | Deck                                                                              |
-| Step 2 | collection                                                                        | collection                                                                        |
-| Step 3 | [Card(SHUFFLE), Card(ATTACK)], [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] | [Card(ATTACK), Card(SHUFFLE)], [Card(DEFUSE), Card(SKIP), Card(EXPLODING_KITTEN)] |
-### Step 4:
-##### All-combination or each-choice: Each-Choice
-
-|             | System under test                                  | Expected output                                    | Implemented? |
-|-------------|----------------------------------------------------|----------------------------------------------------|--------------|
-| Test Case 1 | [Card(SHUFFLE), Card(ATTACK)]                      | [Card(ATTACK), Card(SHUFFLE)]                      | :x:          |
-| Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] | [Card(DEFUSE), Card(SKIP), Card(EXPLODING_KITTEN)] | :x:          |
 
 ## Method 5: ```public void flipDeck()```
 
 ## Note:
-- It may be easiest to implement using Collection object's static reverse() method...
-- If so, unit tests aren't viable and BVA may not be helpful
-- Discuss with professor
+- Implement using Collection object's static reverse() method. Hence, not unit-testable
 
-### Step 1-3 Results
-|        | Input                                                                             | Output                                                                            |
-|--------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| Step 1 | Deck                                                                              | Deck                                                                              |
-| Step 2 | collection                                                                        | collection                                                                        |
-| Step 3 | [Card(SHUFFLE), Card(ATTACK)], [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] | [Card(ATTACK), Card(SHUFFLE)], [Card(DEFUSE), Card(EXPLODING_KITTEN), Card(SKIP)] |
-### Step 4:
-##### All-combination or each-choice: Each-Choice
-
-|             | System under test                                  | Expected output                                    | Implemented? |
-|-------------|----------------------------------------------------|----------------------------------------------------|--------------|
-| Test Case 1 | [Card(SHUFFLE), Card(ATTACK)]                      | [Card(ATTACK), Card(SHUFFLE)]                      | :x:          |
-| Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] | [Card(DEFUSE), Card(EXPLODING_KITTEN), Card(SKIP)] | :x:          |
 
 ## Method 6: ```public void getCardAtIndex(int index)```
 ### Step 1-3 Results
@@ -110,3 +81,23 @@
 | Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)], INT_MAX | IndexOutOfBoundsException | :white_check_mark: |
 | Test Case 3 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 0        | Card(SKIP)                | :white_check_mark: |
 | Test Case 4 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 1        | Card(EXPLODING_KITTEN)    | :white_check_mark: |
+
+
+## Method 7: ```public void drawCardFromBottom(int index)```
+### Note:
+- White Box BVA: The Deck will never be empty since we will always reinsert Exploding Kittens
+### Step 1-3 Results
+|        | Input                                                 | Output 1                              | Output 2         |
+|--------|-------------------------------------------------------|---------------------------------------|------------------|
+| Step 1 | Deck                                                  | Card                                  | Deck             |
+| Step 2 | collection                                            | Card                                  | collection       |
+| Step 3 | [Card(SHUFFLE)], [Card(SKIP), Card(EXPLODING_KITTEN)] | Card(SHUFFLE), Card(EXPLODING_KITTEN) | [], [Card(SKIP)] |
+
+### Step 4:
+##### All-combination or each-choice: Each-Choice
+
+|             | System under test                                  | Expected output        | Implemented? |
+|-------------|----------------------------------------------------|------------------------|--------------|
+| Test Case 1 | [Card(EXPLODING_KITTEN)]                           | Card(EXPLODING_KITTEN) | :x:          |
+| Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN)]               | Card(EXPLODING_KITTEN) | :x:          |
+| Test Case 2 | [Card(ATTACK), Card(SKIP), Card(EXPLODING_KITTEN)] | Card(EXPLODING_KITTEN) | :x:          |
