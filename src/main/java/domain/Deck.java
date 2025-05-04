@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.security.SecureRandom;
 
 public class Deck {
-	private LinkedList<Card> deck;
+	private List<Card> deck;
 	private SecureRandom rand;
 
 	public Deck() {
@@ -14,13 +14,13 @@ public class Deck {
 		this.rand = new SecureRandom();
 	}
 
-	Deck(SecureRandom rand) {
-		this.deck = new LinkedList<>();
+	Deck(SecureRandom rand, List<> deck) {
+		this.deck = deck;
 		this.rand = rand;
 	}
 
 	public void insertCardAtIndex(Card card, int index) {
-		checkBounds(index);
+		checkIndexOutOfBounds(index);
 		deck.add(index, card);
 	}
 
@@ -43,7 +43,7 @@ public class Deck {
 	}
 
 	public Card getCardAtIndex(int index) {
-		checkBounds(index);
+		checkIndexOutOfBounds(index);
 		return deck.get(index);
 	}
 
@@ -51,7 +51,7 @@ public class Deck {
 		return deck.size();
 	}
 
-	private void checkBounds(int index) {
+	private void checkIndexOutOfBounds(int index) {
 		if (index < 0 || index > getSize()) {
 			throw new IndexOutOfBoundsException("Invalid index: index out of range");
 		}
