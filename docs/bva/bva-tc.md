@@ -1,57 +1,75 @@
 # BVA Analysis for TurnController
 
-## 1. Constructor: public TurnController(Deck deck)
-Case | deck      | Expected Behavior
----- | --------- | -----------------
-C1   | null      | NPE or IllegalArgumentException at construction
-C2   | non-null  | Instance created successfully
+## Method 1: ```public TurnController(Deck deck)```
+### Step 1-3 Results
+|        | Input         | (if more to consider for input) | Output                         |
+|--------|---------------|---------------------------------|--------------------------------|
+| Step 1 | deck parameter| any Deck reference              | new TurnController instance    |
+| Step 2 | deck = null   |                                 | NPE or IllegalArgumentException|
+| Step 3 | deck ≠ null   |                                 | instance created successfully  |
 
-## 2. takeTurn(Player player)
-```java
-public boolean takeTurn(Player player)
-```
+### Step 4:
+##### Each-choice
 
-### 2.1. player parameter
-Case | player    | Expected Behavior
----- | --------- | -----------------
-T1   | null      | NPE on entry
-T2   | non-null  | Enters turn loop
+|              | System under test      | Expected output                                    | Implemented? |
+|--------------|------------------------|----------------------------------------------------|--------------|
+| Test Case 1  | deck = null            | constructor throws NPE or IllegalArgumentException | ✅           |
+| Test Case 2  | deck ≠ null            | new TurnController created                         | ✅           |
 
-### 2.2. Empty vs. non-empty hand (for choosing card)
-Case | Hand size | First command = "play" | Behavior
----- | --------- | ----------------------- | ---------------------------------------------------
-T3   | 0         | "play" → then "end"     | Prints “no cards to play”, loops until "end"
-T4   | ≥1        | "play" + valid index    | Removes chosen card, calls stubbed playCard logic
 
-### 2.3. Ending the turn ("end")
-Case | Deck size | Drawn CardType      | Expected return / side-effect
----- | --------- | ------------------- | -------------------------------------------------------
-T5   | 0         | N/A                 | Exception (underflow) or defined deck-empty behavior
-T6   | ≥1        | EXPLODING_KITTEN    | Delegate to handleExplodingKitten(...) (see §3)
-T7   | ≥1        | any other type      | Card added to hand; method returns true (survived)
+## Method 2: ```public boolean takeTurn(Player player)```
+### Step 1-3 Results
+|        | Input           | (if more to consider for input) | Output                             |
+|--------|-----------------|---------------------------------|------------------------------------|
+| Step 1 | player parameter| any Player reference            | boolean (survived or eliminated)   |
+| Step 2 | player = null   |                                 | NPE on entry                       |
+| Step 3 | player ≠ null   |                                 | enters turn loop                   |
 
-## 3. handleExplodingKitten(Player player)
-```java
-private boolean handleExplodingKitten(Player player)
-```
+### Step 4:
+##### Each-choice
 
-Case | # of DEFUSE cards in hand | Expected return / side-effect
----- | ------------------------- | ---------------------------------------------------------
-H1   | 0                         | Prints “No defuse—you're out!”; returns false
-H2   | 1                         | Removes one defuse; reinserts EK randomly; prints “Defuse! You stay in.”; returns true
-H3   | >1                        | Same as H2 (only first defuse used)
+|              | System under test                                    | Expected output                                                      | Implemented? |
+|--------------|------------------------------------------------------|----------------------------------------------------------------------|--------------|
+| Test Case 1  | player = null                                        | NPE on entry                                                         | ✅           |
+| Test Case 2  | player ≠ null, deck.drawCard() returns non-EK        | card added to hand; returns true                                     | ✅           |
+| Test Case 3  | player ≠ null, deck.drawCard() returns EK, no defuse | prints “No defuse—you're out!”; returns false                        | ✅           |
+| Test Case 4  | player ≠ null, deck.drawCard() returns EK, has defuse| removes defuse; reinserts EK; prints “Defuse! You stay in.”; returns true | ✅      |
 
-## 4. promptCardIndex(Player player)
-```java
-private int promptCardIndex(Player player)
-```
-Let N = player.getHand().size() (assume N ≥ 1 when called).
 
-Case | Input String             | Parsed Index | Expected Behavior
----- | ------------------------ | ------------ | -----------------------------------------------
-P1   | "-1"                     | -1           | “Invalid index” message; reprompt
-P2   | "0"                      | 0            | Returns 0
-P3   | String.valueOf(N-1)      | N-1          | Returns N-1
-P4   | String.valueOf(N)        | N            | “Invalid index” message; reprompt
-P5   | "abc"                    | N/A          | “Please enter a valid number”; reprompt
-P6   | (any valid)              | in [0,N−1]   | Returns parsed integer
+## Method 3: ```private boolean handleExplodingKitten(Player player)```
+### Step 1-3 Results
+|        | Input                          | (if more to consider for input) | Output                                                |
+|--------|--------------------------------|---------------------------------|-------------------------------------------------------|
+| Step 1 | player.getHand() contents      | list of cards in hand           | boolean (survived or eliminated)                      |
+| Step 2 | no DEFUSE cards in hand        |                                 | prints “No defuse—you're out!”; returns false         |
+| Step 3 | ≥1 DEFUSE card in hand         |                                 | removes one DEFUSE; reinserts EK; prints defuse msg; returns true |
+
+### Step 4:
+##### Each-choice
+
+|              | System under test                          | Expected output                                              | Implemented? |
+|--------------|---------------------------------------------|--------------------------------------------------------------|--------------|
+| Test Case 1  | hand has 0 DEFUSE                           | prints out-of-game; returns false                            | ✅           |
+| Test Case 2  | hand has 1 DEFUSE                           | removes defuse; re-inserts EK; prints stay-in; returns true  | ✅           |
+| Test Case 3  | hand has >1 DEFUSE                          | same behavior as 1 DEFUSE                                    | ✅           |
+
+
+## Method 4: ```private int promptCardIndex(Player player)```
+### Step 1-3 Results
+|        | Input                 | (if more to consider for input)   | Output                        |
+|--------|-----------------------|-----------------------------------|-------------------------------|
+| Step 1 | raw String from Scanner| any user input                   | integer index or reprompt     |
+| Step 2 | non-numeric or out of bounds| invalid integer or String   | prints error; loops           |
+| Step 3 | valid integer in range| 0 ≤ idx < player.getHand().size()| returns idx                   |
+
+### Step 4:
+##### Each-choice
+
+|              | System under test                                   | Expected output                                   | Implemented? |
+|--------------|------------------------------------------------------|---------------------------------------------------|--------------|
+| Test Case 1  | input = "-1"                                        | “Invalid index”; reprompt                        | ✅           |
+| Test Case 2  | input = "0", hand size ≥1                           | returns 0                                         | ✅           |
+| Test Case 3  | input = String.valueOf(N-1)                         | returns N-1                                       | ✅           |
+| Test Case 4  | input = String.valueOf(N)                           | “Invalid index”; reprompt                        | ✅           |
+| Test Case 5  | input = "abc"                                       | “Please enter a valid number”; reprompt          | ✅           |
+| Test Case 6  | input in [0, N-1]                                   | returns parsed integer                           | ✅           |
