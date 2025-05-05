@@ -79,4 +79,40 @@ public class PlayerTest {
 		assertEquals(tacoCat, actual);
 		EasyMock.verify(deck, tacoCat);
 	}
+
+	@Test
+	public void playCard_threeCardInHand() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		Card card1 = EasyMock.createMock(Card.class);
+		Card card2 = EasyMock.createMock(Card.class);
+		Card card3 = EasyMock.createMock(Card.class);
+		EasyMock.expect(deck.drawCard()).andReturn(card1);
+		EasyMock.expect(deck.drawCard()).andReturn(card2);
+		EasyMock.expect(deck.drawCard()).andReturn(card3);
+		EasyMock.replay(deck, card1, card2, card3);
+
+		Player player = new Player();
+		player.drawCard(deck);
+		player.drawCard(deck);
+		player.drawCard(deck);
+
+		Card actualMiddleCard = player.playCard(1);
+		assertEquals(card2, actualMiddleCard);
+
+		List<Card> actualCardsBetweenPlayCards = player.viewHand();
+		List<Card> expectedCardsBetweenPlayCards = new ArrayList<Card>();
+		expectedCardsBetweenPlayCards.add(card1);
+		expectedCardsBetweenPlayCards.add(card3);
+		assertEquals(expectedCardsBetweenPlayCards, actualCardsBetweenPlayCards);
+
+		Card actualEndCard = player.playCard(1);
+		assertEquals(card3, actualEndCard);
+
+		List<Card> actualCardsAfterPlayCards = player.viewHand();
+		List<Card> expectedCardsAfterPlayCards = new ArrayList<Card>();
+		expectedCardsAfterPlayCards.add(card1);
+		assertEquals(expectedCardsAfterPlayCards, actualCardsAfterPlayCards);
+
+		EasyMock.verify(deck, card1, card2, card3);
+	}
 }
