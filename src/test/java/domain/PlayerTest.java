@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class PlayerTest {
+	public static final int INT_MAX = 2147483647;
+	public static final int INT_MIN = -2147483648;
 	
 	@Test
 	public void viewHand_emptyHand_returnsEmpty() {
@@ -114,5 +117,23 @@ public class PlayerTest {
 		assertEquals(expectedCardsAfterPlayCards, actualCardsAfterPlayCards);
 
 		EasyMock.verify(deck, card1, card2, card3);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {INT_MIN, -1, 1, INT_MAX})
+	public void playCard_invalidIndex_throwsException(int index) {
+		Deck deck = EasyMock.createMock(Deck.class);
+		Card tacoCat = EasyMock.createMock(Card.class);
+		EasyMock.expect(deck.drawCard()).andReturn(tacoCat);
+		EasyMock.replay(deck, tacoCat);
+
+		Player player = new Player();
+		player.drawCard(deck);
+
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			player.playCard(index);
+		});
+
+		EasyMock.verify(deck, tacoCat);
 	}
 }

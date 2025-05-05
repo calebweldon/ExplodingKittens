@@ -21,6 +21,10 @@ public class Player {
 	}
 
 	public Card playCard(int index) {
+		if (index < 0 || index >= hand.size()) {
+			throw new IndexOutOfBoundsException("Invalid index: " + index);
+		}
+
 		return hand.remove(index);
 	}
 }
