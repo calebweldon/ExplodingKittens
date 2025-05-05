@@ -16,7 +16,7 @@ public class Player {
 	}
 
 	public List<Card> viewHand() {
-		List<Card> copy = new ArrayList<Card>(hand);
+		List<Card> copy = List.copyOf(hand);
 		return copy;
 	}
 
