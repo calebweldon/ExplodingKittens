@@ -55,7 +55,7 @@
 
 |             | System under test                               | Expected output                                 | Implemented? |
 |-------------|-------------------------------------------------|-------------------------------------------------|--------------|
-| Test Case 1 | Player w/ [TACO_CAT]; index 0                   | TACO_CAT; Player w/ []                          | :x:          |
+| Test Case 1 | Player w/ [TACO_CAT]; index 0                   | TACO_CAT; Player w/ []                          | :white_check_mark:          |
 | Test Case 2 | Player w/ [POTATO_CAT, SKIP, TACO_CAT]; index 1 | SKIP; Player w/ [POTATO_CAT, TACO_CAT]          | :x:          |
 | Test Case 3 | Player w/ [POTATO_CAT, TACO_CAT]; index 1       | TACO_CAT; Player w/ [POTATO_CAT]                | :x:          |
 | Test Case 4 | Player w/ [TACO_CAT]; index 1                   | IndexOutOfBoundsException; Player w/ [TACO_CAT] | :x:          |

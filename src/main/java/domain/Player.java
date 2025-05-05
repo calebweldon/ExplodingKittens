@@ -19,4 +19,8 @@ public class Player {
 		List<Card> copy = new ArrayList<Card>(hand);
 		return copy;
 	}
+
+	public Card playCard(int index) {
+		return hand.remove(index);
+	}
 }

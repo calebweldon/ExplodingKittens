@@ -37,4 +37,20 @@ public class PlayerTest {
 		assertEquals(expected, actual);
 		EasyMock.verify(deck, tacoCat);
 	}
+
+	@Test
+	public void playCard_oneCardInHand_removesCard() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		Card tacoCat = EasyMock.createMock(Card.class);
+		EasyMock.expect(deck.drawCard()).andReturn(tacoCat);
+		EasyMock.replay(deck, tacoCat);
+
+		Player player = new Player();
+		player.drawCard(deck);
+
+		Card actual = player.playCard(0);
+
+		assertEquals(tacoCat, actual);
+		EasyMock.verify(deck, tacoCat);
+	}
 }
