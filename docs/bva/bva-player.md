@@ -38,7 +38,7 @@
 |              | System under test                      | Expected output              | Implemented? |
 |--------------|----------------------------------------|------------------------------|--------------|
 | Test Case 1  | Player w/ []                           | []                           | :white_check_mark: |
-| Test Case 2  | Player w/ [TACO_CAT]                   | [TACO_CAT]                   | :x:          |
+| Test Case 2  | Player w/ [TACO_CAT]                   | [TACO_CAT]                   | :white_check_mark:          |
 | Test Case 3  | Player w/ [POTATO_CAT, SKIP, TACO_CAT] | [POTATO_CAT, SKIP, TACO_CAT] | :x:          |
 
 
