@@ -8,6 +8,9 @@ public class TurnController {
     private final Scanner scanner = new Scanner(System.in);
 
     public TurnController(Deck deck) {
+        if (deck == null) {
+            throw new NullPointerException("Deck cannot be null");
+        }
         this.deck = deck;
     }
 
@@ -24,7 +27,7 @@ public class TurnController {
             String cmd = "";
             // Must enter a valid command, prompt if invalid
             while (true) {
-                System.out.println("\n" + player.getName() + "'s turn. [play] a card or [end] turn?");
+                //System.out.println("\n" + player.getName() + "'s turn. [play] a card or [end] turn?");
                 cmd = scanner.nextLine().trim().toLowerCase();
 
                 if ("play".equals(cmd) || "end".equals(cmd)) {
@@ -36,13 +39,13 @@ public class TurnController {
 
             // choose a card to play, if "play" selected
             if ("play".equals(cmd)) {
-                if (player.getHand().isEmpty()) {
+                if (player.viewHand().isEmpty()) {
                     System.out.println("You have no cards to play.");
                     continue;
                 }
-                System.out.println("Your hand: " + player.getHand());
+                System.out.println("Your hand: " + player.viewHand());
                 int idx = promptCardIndex(player);
-                Card c = player.getHand().remove(idx);
+                Card c = player.viewHand().remove(idx);
                 // player.playCard(c);
                 // playCard(c);
             }
@@ -53,7 +56,7 @@ public class TurnController {
                 if (drawn.getCardType() == CardType.EXPLODING_KITTEN) {
                     return handleExplodingKitten(player);
                 } else {
-                    player.getHand().add(drawn);
+                    player.viewHand().add(drawn);
                     turnOver = true;
                 }
             }
@@ -66,10 +69,10 @@ public class TurnController {
      * @return false if player is eliminated, true if they defuse and stay in game
      */
     private boolean handleExplodingKitten(Player player) {
-    for (Card c : player.getHand()) {
+    for (Card c : player.viewHand()) {
         if (c.getCardType() == CardType.DEFUSE) {
             System.out.println("Defuse! You stay in.");
-            player.getHand().remove(c);
+            player.viewHand().remove(c);
             deck.insertCardAtRandomIndex(new Card(CardType.EXPLODING_KITTEN));
             return true;
         }
@@ -90,10 +93,10 @@ public class TurnController {
             String input = scanner.nextLine();
             try {
                 idx = Integer.parseInt(input);
-                if (idx >= 0 && idx < player.getHand().size()) {
+                if (idx >= 0 && idx < player.viewHand().size()) {
                     return idx;
                 } else {
-                    System.out.println("Invalid index. Please enter a number between 0 and " + (player.getHand().size() - 1) + ".");
+                    System.out.println("Invalid index. Please enter a number between 0 and " + (player.viewHand().size() - 1) + ".");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");

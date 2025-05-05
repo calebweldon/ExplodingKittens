@@ -40,7 +40,7 @@
 ### Step 1-3 Results
 |        | Input                          | (if more to consider for input) | Output                                                |
 |--------|--------------------------------|---------------------------------|-------------------------------------------------------|
-| Step 1 | player.getHand() contents      | list of cards in hand           | boolean (survived or eliminated)                      |
+| Step 1 | player.viewHand() contents      | list of cards in hand           | boolean (survived or eliminated)                      |
 | Step 2 | no DEFUSE cards in hand        |                                 | prints “No defuse—you're out!”; returns false         |
 | Step 3 | ≥1 DEFUSE card in hand         |                                 | removes one DEFUSE; reinserts EK; prints defuse msg; returns true |
 
@@ -60,7 +60,7 @@
 |--------|-----------------------|-----------------------------------|-------------------------------|
 | Step 1 | raw String from Scanner| any user input                   | integer index or reprompt     |
 | Step 2 | non-numeric or out of bounds| invalid integer or String   | prints error; loops           |
-| Step 3 | valid integer in range| 0 ≤ idx < player.getHand().size()| returns idx                   |
+| Step 3 | valid integer in range| 0 ≤ idx < player.viewHand().size()| returns idx                   |
 
 ### Step 4:
 ##### Each-choice
