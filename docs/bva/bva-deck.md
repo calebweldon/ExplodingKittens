@@ -96,8 +96,8 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
 
-|             | System under test                                  | Expected output        | Implemented? |
-|-------------|----------------------------------------------------|------------------------|--------------|
-| Test Case 1 | [Card(EXPLODING_KITTEN)]                           | Card(EXPLODING_KITTEN) | :x:          |
-| Test Case 2 | [Card(SKIP), Card(EXPLODING_KITTEN)]               | Card(EXPLODING_KITTEN) | :x:          |
-| Test Case 2 | [Card(ATTACK), Card(SKIP), Card(EXPLODING_KITTEN)] | Card(EXPLODING_KITTEN) | :x:          |
+|             | System under test                                  | Expected output        | Implemented?       |
+|-------------|----------------------------------------------------|------------------------|--------------------|
+| Test Case 1 | [Card(ATTACK)]                                     | Card(ATTACK)           | :white_check_mark: |
+| Test Case 2 | [Card(ATTACK), Card(SKIP)]                         | Card(SKIP)             | :white_check_mark: |
+| Test Case 2 | [Card(ATTACK), Card(SKIP), Card(EXPLODING_KITTEN)] | Card(EXPLODING_KITTEN) | :white_check_mark: |
