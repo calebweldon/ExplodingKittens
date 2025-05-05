@@ -1,190 +1,103 @@
 package domain;
 
-import java.util.*;
-import java.util.logging.Logger;
+import java.security.SecureRandom;
+import java.util.Scanner;
 
 public class TurnController {
-    private static final Logger log = Logger.getLogger(TurnController.class.getName());
-
-    private final List<Player> players;
     private final Deck deck;
-    private final Deque<Card> discardPile = new ArrayDeque<>();
+    private final Scanner scanner = new Scanner(System.in);
 
-    private int currentPlayerIdx = 0;
-    private Direction direction = Direction.CLOCKWISE;
-    private boolean gameOver = false;
-
-    private int pendingExtraTurns = 0;
-    private boolean skipNextDraw = false;
-
-    private enum Direction { CLOCKWISE, COUNTERCLOCKWISE }
-
-    public TurnController(List<Player> players, Deck deck) {
-        if (players == null || players.isEmpty()) {
-            throw new IllegalArgumentException("Must have at least one player");
-        }
-        if (deck == null) {
-            throw new IllegalArgumentException("Deck cannot be null");
-        }
-        this.players = new ArrayList<>(players);
+    public TurnController(Deck deck) {
         this.deck = deck;
     }
 
-    public void startGame() {
-        dealInitialHands();
-        insertExplodingKittens();
-        deck.shuffleDeck();
+    /**
+     * Execute one turn for the given player.
+     * Called by Game Controller
+     * @param player the player whose turn it is
+     * @return true if player survives, false if they explode
+     */
+    public boolean takeTurn(Player player) {
+        boolean turnOver = false;
 
-        while (!gameOver) {
-            Player current = players.get(currentPlayerIdx);
-            if (current.isAlive()) {
-                playPhase(current);
-                drawPhase(current);
-                checkGameOver();
+        while (!turnOver) {
+            String cmd = "";
+            // Must enter a valid command, prompt if invalid
+            while (true) {
+                System.out.println("\n" + player.getName() + "'s turn. [play] a card or [end] turn?");
+                cmd = scanner.nextLine().trim().toLowerCase();
+
+                if ("play".equals(cmd) || "end".equals(cmd)) {
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter 'play' or 'end'.");
+                }
             }
-            advanceToNextPlayer();
-        }
 
-        announceWinner();
+            // choose a card to play, if "play" selected
+            if ("play".equals(cmd)) {
+                if (player.getHand().isEmpty()) {
+                    System.out.println("You have no cards to play.");
+                    continue;
+                }
+                System.out.println("Your hand: " + player.getHand());
+                int idx = promptCardIndex(player);
+                Card c = player.getHand().remove(idx);
+                // player.playCard(c);
+                // playCard(c);
+            }
+            // end the turn (draw card), if "end" selected
+            else { 
+                Card drawn = deck.drawCard();
+                System.out.println("You drew: " + drawn.getCardType());
+                if (drawn.getCardType() == CardType.EXPLODING_KITTEN) {
+                    return handleExplodingKitten(player);
+                } else {
+                    player.getHand().add(drawn);
+                    turnOver = true;
+                }
+            }
+        }
+        return true;  // survived this turn
     }
 
-    private void dealInitialHands() {
-        for (Player p : players) {
-            for (int i = 0; i < 7; i++) {
-                p.addToHand(deck.drawCard());
-            }
-            p.addToHand(deck.drawCardOfType(CardType.DEFUSE));
-        }
-    }
 
-    private void insertExplodingKittens() {
-        int n = players.size() - 1;
-        for (int i = 0; i < n; i++) {
+    /**
+     * @return false if player is eliminated, true if they defuse and stay in game
+     */
+    private boolean handleExplodingKitten(Player player) {
+    for (Card c : player.getHand()) {
+        if (c.getCardType() == CardType.DEFUSE) {
+            System.out.println("Defuse! You stay in.");
+            player.getHand().remove(c);
             deck.insertCardAtRandomIndex(new Card(CardType.EXPLODING_KITTEN));
+            return true;
         }
     }
 
-    /** Called by PlayerController to play a card. */
-    public void playCard(Card card, Player player) {
-        player.removeFromHand(card);
-        card.applyEffect(this, player);
-        discardPile.push(card);
-
-        if (card.getCardType() == CardType.SKIP) {
-            skipNextDraw = true;
-        }
+    System.out.println("No defuse—you're out!");
+    return false;
     }
 
-    private void playPhase(Player p) {
+    /**
+     * Prompts user to select a valid card index from their hand.
+     * Keeps prompting until a valid integer within bounds is entered.
+     */
+    private int promptCardIndex(Player player) {
+        int idx = -1;
         while (true) {
-            Optional<Card> choice = p.chooseCardToPlay();
-            if (!choice.isPresent()) {
-                return;
-            }
-            Card c = choice.get();
-            playCard(c, p);
-
-            if (c.getCardType() == CardType.SKIP) {
-                return;
-            }
-        }
-    }
-
-    private void drawPhase(Player p) {
-        if (skipNextDraw) {
-            skipNextDraw = false;
-            log.info(p.getName() + " skips their draw.");
-            return;
-        }
-
-        int draws = Math.max(1, pendingExtraTurns);
-        pendingExtraTurns = 0;
-
-        for (int i = 0; i < draws; i++) {
-            Card drawn = Optional.ofNullable(deck.drawCard())
-                                 .orElseThrow(() -> new IllegalStateException("Deck is empty!"));
-            if (drawn.getCardType() == CardType.EXPLODING_KITTEN) {
-                handleExploding(p, drawn);
-                if (!p.isAlive()) return;
-            } else {
-                p.addToHand(drawn);
+            System.out.print("Which index to play? ");
+            String input = scanner.nextLine();
+            try {
+                idx = Integer.parseInt(input);
+                if (idx >= 0 && idx < player.getHand().size()) {
+                    return idx;
+                } else {
+                    System.out.println("Invalid index. Please enter a number between 0 and " + (player.getHand().size() - 1) + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
             }
         }
-    }
-
-    private void handleExploding(Player p, Card kitten) {
-        log.warning(p.getName() + " drew an Exploding Kitten!");
-        if (p.hasCardType(CardType.DEFUSE)) {
-            p.removeCardOfType(CardType.DEFUSE);
-            discardPile.push(new Card(CardType.DEFUSE));
-            int pos = p.chooseInsertPosition(deck.getSize());
-            deck.insertCardAtIndex(kitten, pos);
-            log.info(p.getName() + " defused and reinserted at " + pos);
-        } else {
-            p.setAlive(false);
-            discardPile.push(kitten);
-            log.warning(p.getName() + " has exploded and is out!");
-        }
-    }
-
-    private void checkGameOver() {
-        long alive = players.stream().filter(Player::isAlive).count();
-        if (alive <= 1) {
-            gameOver = true;
-        }
-    }
-
-    private void advanceToNextPlayer() {
-        int step = (direction == Direction.CLOCKWISE ? 1 : -1);
-        currentPlayerIdx = (currentPlayerIdx + step + players.size()) % players.size();
-    }
-
-    private void announceWinner() {
-        players.stream()
-               .filter(Player::isAlive)
-               .findFirst()
-               .ifPresent(w -> System.out.println(w.getName() + " wins!"));
-    }
-
-    // ───────────
-    // some helpers
-    // ───────────
-
-    public void applyAttack() {
-        pendingExtraTurns += 2;
-    }
-
-    public void applyShuffle() {
-        deck.shuffleDeck();
-    }
-
-    public List<Card> peekTop(int n) {
-        List<Card> peeked = new ArrayList<>();
-        for (int i = 0; i < n && i < deck.getSize(); i++) {
-            peeked.add(deck.getCardAtIndex(i));
-        }
-        return peeked;
-    }
-
-    public void reorderTop(List<Card> newOrder) {
-        for (int i = 0; i < newOrder.size(); i++) {
-            deck.insertCardAtIndex(newOrder.get(i), i);
-        }
-    }
-
-    public void applyFlip() {
-        deck.flipDeck();
-    }
-
-    public void applyFavor(Player from, Player to) {
-        Card given = from.chooseCardForFavor();
-        from.removeFromHand(given);
-        to.addToHand(given);
-    }
-
-    public void applyPairSteal(Player from, Player to) {
-        Card stolen = from.randomDiscard();
-        from.removeFromHand(stolen);
-        to.addToHand(stolen);
     }
 }
