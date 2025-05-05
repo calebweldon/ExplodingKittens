@@ -1,122 +1,57 @@
 # BVA Analysis for TurnController
 
-## Constructor: public TurnController(List<Player> players, Deck deck)
+## 1. Constructor: public TurnController(Deck deck)
+Case | deck      | Expected Behavior
+---- | --------- | -----------------
+C1   | null      | NPE or IllegalArgumentException at construction
+C2   | non-null  | Instance created successfully
 
-### Step 1-3 Results
-|        | Input                                | (if more to consider for input) | Output             |
-|--------|--------------------------------------|---------------------------------|--------------------|
-| Step 1 | List of players, Deck object         |                                 | New TurnController |
-| Step 2 | Players must be non-null, non-empty  |                                 | Exception or success |
-| Step 3 | Deck must be non-null                |                                 | Exception or success |
+## 2. takeTurn(Player player)
+```java
+public boolean takeTurn(Player player)
+```
 
-### Step 4:
-##### Each-choice
+### 2.1. player parameter
+Case | player    | Expected Behavior
+---- | --------- | -----------------
+T1   | null      | NPE on entry
+T2   | non-null  | Enters turn loop
 
-|              | System under test                  | Expected output        | Implemented?        |
-|--------------|-------------------------------------|-------------------------|---------------------|
-| Test Case 1  | null players, valid deck            | IllegalArgumentException | ✅ |
-| Test Case 2  | empty players list, valid deck      | IllegalArgumentException | ✅ |
-| Test Case 3  | valid players, null deck            | IllegalArgumentException | ✅ |
-| Test Case 4  | valid players, valid deck           | Success (instance created) | ✅ |
+### 2.2. Empty vs. non-empty hand (for choosing card)
+Case | Hand size | First command = "play" | Behavior
+---- | --------- | ----------------------- | ---------------------------------------------------
+T3   | 0         | "play" → then "end"     | Prints “no cards to play”, loops until "end"
+T4   | ≥1        | "play" + valid index    | Removes chosen card, calls stubbed playCard logic
 
+### 2.3. Ending the turn ("end")
+Case | Deck size | Drawn CardType      | Expected return / side-effect
+---- | --------- | ------------------- | -------------------------------------------------------
+T5   | 0         | N/A                 | Exception (underflow) or defined deck-empty behavior
+T6   | ≥1        | EXPLODING_KITTEN    | Delegate to handleExplodingKitten(...) (see §3)
+T7   | ≥1        | any other type      | Card added to hand; method returns true (survived)
 
-## Method 1: public void startGame()
+## 3. handleExplodingKitten(Player player)
+```java
+private boolean handleExplodingKitten(Player player)
+```
 
-### Step 1-3 Results
-|        | Input                  | (if more to consider for input) | Output                      |
-|--------|-------------------------|---------------------------------|------------------------------|
-| Step 1 | Pre-built players and deck |                               | Game plays to completion    |
-| Step 2 | Valid setup with Defuse cards |                            | Winner announced            |
-| Step 3 | Game with multiple players   |                             | Game ends properly           |
+Case | # of DEFUSE cards in hand | Expected return / side-effect
+---- | ------------------------- | ---------------------------------------------------------
+H1   | 0                         | Prints “No defuse—you're out!”; returns false
+H2   | 1                         | Removes one defuse; reinserts EK randomly; prints “Defuse! You stay in.”; returns true
+H3   | >1                        | Same as H2 (only first defuse used)
 
-### Step 4:
-##### Each-choice
+## 4. promptCardIndex(Player player)
+```java
+private int promptCardIndex(Player player)
+```
+Let N = player.getHand().size() (assume N ≥ 1 when called).
 
-|              | System under test               | Expected output                | Implemented?        |
-|--------------|----------------------------------|---------------------------------|---------------------|
-| Test Case 1  | Game starts with 2 players       | 1 winner announced              | ✅ |
-| Test Case 2  | Game starts with 4 players       | 1 winner announced              | ✅ |
-
-
-# BVA Analysis for TurnController (Helper Methods)
-
-## Method: public void applyAttack()
-
-### Step 1-3 Results
-|        | Input     | (if more to consider for input) | Output               |
-|--------|-----------|---------------------------------|----------------------|
-| Step 1 | Call applyAttack |                         | Adds +2 pending turns |
-
-### Step 4:
-##### Each-choice
-
-|              | System under test            | Expected output         | Implemented?        |
-|--------------|-------------------------------|--------------------------|---------------------|
-| Test Case 1  | pendingExtraTurns = 0, call applyAttack | pendingExtraTurns = 2 | ✅ |
-| Test Case 2  | pendingExtraTurns = 1, call applyAttack | pendingExtraTurns = 3 | ✅ |
-
-
-## Method: public void applyShuffle()
-
-### Step 1-3 Results
-|        | Input     | (if more to consider for input) | Output          |
-|--------|-----------|---------------------------------|-----------------|
-| Step 1 | Call applyShuffle |                       | Deck is shuffled |
-
-### Step 4:
-##### Each-choice
-
-|              | System under test         | Expected output   | Implemented?        |
-|--------------|----------------------------|-------------------|---------------------|
-| Test Case 1  | applyShuffle called         | Deck is shuffled  | ✅ |
-
-
-## Method: public List<Card> peekTop(int n)
-
-### Step 1-3 Results
-|        | Input       | (if more to consider for input) | Output                         |
-|--------|-------------|---------------------------------|--------------------------------|
-| Step 1 | int n        |                                 | Top n cards from deck          |
-| Step 2 | Deck smaller than n |                        | As many as available           |
-
-### Step 4:
-##### Each-choice
-
-|              | System under test              | Expected output                          | Implemented?        |
-|--------------|---------------------------------|------------------------------------------|---------------------|
-| Test Case 1  | n = 3, deck has ≥3 cards         | Returns 3 cards                         | ✅ |
-| Test Case 2  | n = 5, deck has 2 cards          | Returns 2 cards                         | ✅ |
-| Test Case 3  | n = 0                           | Returns empty list                      | ✅ |
-
-
-## Method: public void reorderTop(List<Card> newOrder)
-
-### Step 1-3 Results
-|        | Input                | (if more to consider for input) | Output             |
-|--------|----------------------|---------------------------------|--------------------|
-| Step 1 | newOrder list of cards |                                 | Top of deck reordered |
-
-### Step 4:
-##### Each-choice
-
-|              | System under test                | Expected output              | Implemented?        |
-|--------------|-----------------------------------|-------------------------------|---------------------|
-| Test Case 1  | Reorder 3 cards at top            | Top 3 cards match newOrder    | ✅ |
-| Test Case 2  | Reorder empty list                | No change                    | ✅ |
-
-
-## Method: public void applyFavor(Player from, Player to)
-
-### Step 1-3 Results
-|        | Input                         | (if more to consider for input) | Output                |
-|--------|-------------------------------|---------------------------------|-----------------------|
-| Step 1 | from and to are valid players  |                                 | One card transferred  |
-| Step 2 | from has no cards              |                                 | May crash if unchecked |
-
-### Step 4:
-##### Each-choice
-
-|              | System under test                        | Expected output                 | Implemented?        |
-|--------------|-------------------------------------------|----------------------------------|---------------------|
-| Test Case 1  | from has cards, to receives one           | to's hand +1 card                | ✅ |
-| Test Case 2  | from has no cards                         | Should throw or handle error     | (Depends on Player class) |
+Case | Input String             | Parsed Index | Expected Behavior
+---- | ------------------------ | ------------ | -----------------------------------------------
+P1   | "-1"                     | -1           | “Invalid index” message; reprompt
+P2   | "0"                      | 0            | Returns 0
+P3   | String.valueOf(N-1)      | N-1          | Returns N-1
+P4   | String.valueOf(N)        | N            | “Invalid index” message; reprompt
+P5   | "abc"                    | N/A          | “Please enter a valid number”; reprompt
+P6   | (any valid)              | in [0,N−1]   | Returns parsed integer
