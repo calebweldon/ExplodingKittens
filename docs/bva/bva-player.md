@@ -1,10 +1,7 @@
 # BVA Analysis for Player
 
 
-## Method 1: ```public void drawCard()```
-
-> [!NOTE]
-> Deck is an instance variable of the Player class.
+## Method 1: ```public void drawCard(Deck deck)```
 
 ### Step 1-3 Results
 |        | Input 1                                                   | Input 2                                               | Output                                                           |
