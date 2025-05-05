@@ -15,9 +15,9 @@ public class PlayerTest {
 	public void viewHand_emptyHand_returnsEmpty() {
 		Player player = new Player();
 		
-		List<Card> expected = player.viewHand();
+		List<Card> actual = player.viewHand();
 
-		assertTrue(expected.isEmpty());
+		assertTrue(actual.isEmpty());
 	}
 
 	@Test
