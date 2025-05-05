@@ -55,11 +55,11 @@
 
 |             | System under test                               | Expected output                                 | Implemented? |
 |-------------|-------------------------------------------------|-------------------------------------------------|--------------|
-| Test Case 1 | Player w/ [TACO_CAT]; index 0                   | TACO_CAT; Player w/ []                          | :white_check_mark:          |
-| Test Case 2 | Player w/ [POTATO_CAT, SKIP, TACO_CAT]; index 1 | SKIP; Player w/ [POTATO_CAT, TACO_CAT]          | :white_check_mark:          |
-| Test Case 3 | Player w/ [POTATO_CAT, TACO_CAT]; index 1       | TACO_CAT; Player w/ [POTATO_CAT]                | :white_check_mark:          |
-| Test Case 4 | Player w/ [TACO_CAT]; index 1                   | IndexOutOfBoundsException; Player w/ [TACO_CAT] | :white_check_mark:          |
-| Test Case 5 | Player w/ [TACO_CAT]; index -1                  | IndexOutOfBoundsException; Player w/ [TACO_CAT] | :white_check_mark:          |
-| Test Case 6 | Player w/ [TACO_CAT]; index INT_MAX             | IndexOutOfBoundsException; Player w/ [TACO_CAT] | :white_check_mark:          |
-| Test Case 7 | Player w/ []; index 0                           | IndexOutOfBoundsException; Player w/ []         | :x:          |
+| Test Case 1 | Player w/ [TACO_CAT]; index 0                   | TACO_CAT; Player w/ []                          | :white_check_mark: |
+| Test Case 2 | Player w/ [POTATO_CAT, SKIP, TACO_CAT]; index 1 | SKIP; Player w/ [POTATO_CAT, TACO_CAT]          | :white_check_mark: |
+| Test Case 3 | Player w/ [POTATO_CAT, TACO_CAT]; index 1       | TACO_CAT; Player w/ [POTATO_CAT]                | :white_check_mark: |
+| Test Case 4 | Player w/ [TACO_CAT]; index 1                   | IndexOutOfBoundsException; Player w/ [TACO_CAT] | :white_check_mark: |
+| Test Case 5 | Player w/ [TACO_CAT]; index -1                  | IndexOutOfBoundsException; Player w/ [TACO_CAT] | :white_check_mark: |
+| Test Case 6 | Player w/ [TACO_CAT]; index INT_MAX             | IndexOutOfBoundsException; Player w/ [TACO_CAT] | :white_check_mark: |
+| Test Case 7 | Player w/ []; index 0                           | IndexOutOfBoundsException; Player w/ []         | :white_check_mark: |
 

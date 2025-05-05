@@ -136,4 +136,17 @@ public class PlayerTest {
 
 		EasyMock.verify(deck, tacoCat);
 	}
+
+	@Test
+	public void playCard_emptyHand_throwsException() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		Player player = new Player();
+		EasyMock.replay(deck);
+
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			player.playCard(0);
+		});
+
+		EasyMock.verify(deck);
+	}
 }
