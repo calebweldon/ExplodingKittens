@@ -83,7 +83,7 @@
 | Test Case 4 | [Card(SKIP), Card(EXPLODING_KITTEN), Card(DEFUSE)] 1        | Card(EXPLODING_KITTEN)    | :white_check_mark: |
 
 
-## Method 7: ```public void drawCardFromBottom(int index)```
+## Method 7: ```public void drawCardFromBottom()```
 ### Note:
 - White Box BVA: The Deck will never be empty since we will always reinsert Exploding Kittens
 ### Step 1-3 Results
