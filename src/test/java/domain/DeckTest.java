@@ -7,7 +7,6 @@ import org.easymock.EasyMock;
 
 import java.security.SecureRandom;
 import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -162,6 +161,40 @@ public class DeckTest {
 
 		String actualMessage = exception.getMessage();
 		assertEquals(expectedMessage, actualMessage);
+	}
+
+	@Test
+	public void drawCardFromBottom_NormalCase() {
+		Card firstcard = EasyMock.createMock(Card.class);
+		Card secondcard = EasyMock.createMock(Card.class);
+		Card thirdcard = EasyMock.createMock(Card.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		LinkedList<Card> list = EasyMock.createMock(LinkedList.class);
+		final int expectedSize = 3;
+
+		EasyMock.expect(list.size()).andReturn(0);
+		list.add(0, firstcard);
+		EasyMock.expect(list.size()).andReturn(1);
+		list.add(1, secondcard);
+		EasyMock.expect(list.size()).andReturn(2);
+		list.add(2, thirdcard);
+		EasyMock.expect(list.size()).andReturn(expectedSize);
+		EasyMock.expect(list.remove(0)).andReturn(thirdcard);
+		EasyMock.expect(list.remove(0)).andReturn(secondcard);
+		EasyMock.expect(list.remove(0)).andReturn(firstcard);
+		EasyMock.replay(list);
+
+		Deck deck = new Deck(rand, list);
+
+		deck.insertCardAtIndex(firstcard, 0);
+		deck.insertCardAtIndex(secondcard, 1);
+		deck.insertCardAtIndex(thirdcard, 2);
+
+		assertEquals(expectedSize, deck.getSize());
+		assertEquals(thirdcard, deck.drawCard());
+		assertEquals(secondcard, deck.drawCard());
+		assertEquals(firstcard, deck.drawCard());
+		EasyMock.verify(list);
 	}
 
 	@Test

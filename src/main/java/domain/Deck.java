@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.security.SecureRandom;
 
 public class Deck {
@@ -9,12 +10,11 @@ public class Deck {
 	private SecureRandom rand;
 
 	public Deck() {
-		//Note: Discuss underlying data structure
 		this.deck = new LinkedList<>();
 		this.rand = new SecureRandom();
 	}
 
-	Deck(SecureRandom rand, List<> deck) {
+	Deck(SecureRandom rand, List<Card> deck) {
 		this.deck = deck;
 		this.rand = rand;
 	}
@@ -30,10 +30,13 @@ public class Deck {
 	}
 
 	public Card drawCard() {
-		return deck.poll();
+		return deck.remove(0);
 	}
 
-	//Note: Not unit-testable. Implement this ourselves?
+	public Card drawCardFromBottom() {
+		return deck.remove(getSize() - 1);
+	}
+
 	public void shuffleDeck() {
 		Collections.shuffle(deck);
 	}
@@ -53,7 +56,7 @@ public class Deck {
 
 	private void checkIndexOutOfBounds(int index) {
 		if (index < 0 || index > getSize()) {
-			throw new IndexOutOfBoundsException("Invalid index: index out of range");
+			throw new IndexOutOfBoundsException("Invalid index: " + index);
 		}
 	}
 
