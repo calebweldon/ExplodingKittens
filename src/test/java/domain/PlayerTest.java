@@ -39,6 +39,32 @@ public class PlayerTest {
 	}
 
 	@Test
+	public void drawCard_threeCardsInDeck() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		Card card1 = EasyMock.createMock(Card.class);
+		Card card2 = EasyMock.createMock(Card.class);
+		Card card3 = EasyMock.createMock(Card.class);
+		EasyMock.expect(deck.drawCard()).andReturn(card1);
+		EasyMock.expect(deck.drawCard()).andReturn(card2);
+		EasyMock.expect(deck.drawCard()).andReturn(card3);
+		EasyMock.replay(deck, card1, card2, card3);
+		
+		Player player = new Player();
+		List<Card> expected = new ArrayList<Card>();
+
+		final int numCards = 3;
+		Card[] cardOrder = {card1, card2, card3};
+		for (int i = 0; i < numCards; i++) {
+			player.drawCard(deck);
+			expected.add(cardOrder[i]);
+			List<Card> actual = player.viewHand();
+			assertEquals(expected, actual);
+		}
+
+		EasyMock.verify(deck, card1, card2, card3);
+	}
+
+	@Test
 	public void playCard_oneCardInHand_removesCard() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		Card tacoCat = EasyMock.createMock(Card.class);

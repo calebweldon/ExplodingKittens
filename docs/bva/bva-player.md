@@ -16,12 +16,12 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|             | System under test                                                    | Expected output                                                    | Implemented? |
-|-------------|----------------------------------------------------------------------|--------------------------------------------------------------------|--------------|
-| Test Case 1 | Player w/ []; deck w/ [TACO_CAT]                                     | Player w/ [TACO_CAT]; deck w/ []                                   | :white_check_mark:          |
-| Test Case 2 | Player w/ []; deck w/ [POTATO_CAT, SKIP, TACO_CAT, EXPLODING_KITTEN] | Player w/ [POTATO_CAT]; deck w/ [SKIP, TACO_CAT, EXPLODING_KITTEN] | :x:          |
-| Test Case 3 | Player w/ [POTATO_CAT]; deck w/ [SKIP, TACO_CAT, EXPLODING_KITTEN]   | Player w/ [POTATO_CAT, SKIP]; deck w/ [TACO_CAT, EXPLODING_KITTEN] | :x:          |
-| Test Case 4 | Player w/ [POTATO_CAT, SKIP]; deck w/ [TACO_CAT, EXPLODING_KITTEN]   | Player w/ [POTATO_CAT, SKIP, TACO_CAT]; deck w/ [EXPLODING_KITTEN] | :x:          |
+|             | System under test                                                    | Expected output                                                    | Implemented?       |
+|-------------|----------------------------------------------------------------------|--------------------------------------------------------------------|--------------------|
+| Test Case 1 | Player w/ []; deck w/ [TACO_CAT]                                     | Player w/ [TACO_CAT]; deck w/ []                                   | :white_check_mark: |
+| Test Case 2 | Player w/ []; deck w/ [POTATO_CAT, SKIP, TACO_CAT, EXPLODING_KITTEN] | Player w/ [POTATO_CAT]; deck w/ [SKIP, TACO_CAT, EXPLODING_KITTEN] | :white_check_mark: |
+| Test Case 3 | Player w/ [POTATO_CAT]; deck w/ [SKIP, TACO_CAT, EXPLODING_KITTEN]   | Player w/ [POTATO_CAT, SKIP]; deck w/ [TACO_CAT, EXPLODING_KITTEN] | :white_check_mark: |
+| Test Case 4 | Player w/ [POTATO_CAT, SKIP]; deck w/ [TACO_CAT, EXPLODING_KITTEN]   | Player w/ [POTATO_CAT, SKIP, TACO_CAT]; deck w/ [EXPLODING_KITTEN] | :white_check_mark: |
 
 
 ## Method 2: ```public List<Card> viewHand()```
@@ -35,11 +35,11 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|              | System under test                      | Expected output              | Implemented? |
-|--------------|----------------------------------------|------------------------------|--------------|
+|              | System under test                      | Expected output              | Implemented?       |
+|--------------|----------------------------------------|------------------------------|--------------------|
 | Test Case 1  | Player w/ []                           | []                           | :white_check_mark: |
-| Test Case 2  | Player w/ [TACO_CAT]                   | [TACO_CAT]                   | :white_check_mark:          |
-| Test Case 3  | Player w/ [POTATO_CAT, SKIP, TACO_CAT] | [POTATO_CAT, SKIP, TACO_CAT] | :x:          |
+| Test Case 2  | Player w/ [TACO_CAT]                   | [TACO_CAT]                   | :white_check_mark: |
+| Test Case 3  | Player w/ [POTATO_CAT, SKIP, TACO_CAT] | [POTATO_CAT, SKIP, TACO_CAT] | :white_check_mark: |
 
 
 ## Method 3: ```public Card playCard(index: int)```
