@@ -6,9 +6,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
 
 import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.lang.reflect.Method;
 import java.security.SecureRandom;
 import java.util.*;
+
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,8 +26,9 @@ class TurnControllerTest {
 	}
 
 	private void provideInput(String data) {
-		ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
+		InputStream testIn = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
 		System.setIn(testIn);
+
 	}
 
 	// --- Method 1: Constructor ---

@@ -3,9 +3,12 @@ package domain;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
-public class TurnController {
+import java.nio.charset.StandardCharsets;
+
+
+public final class TurnController {
 	private final Deck deck;
-	private final Scanner scanner = new Scanner(System.in);
+	private final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 
 	public TurnController(Deck deck) {
 		if (deck == null) {
@@ -47,7 +50,10 @@ public class TurnController {
 					System.out.println("You have no cards to play.");
 					continue;
 				}
-				System.out.println("Your hand: " + player.viewHand());
+				System.out.println(new StringBuilder()
+					.append("Your hand: ")
+					.append(player.viewHand())
+					.toString());
 				int idx = promptCardIndex(player);
 				Card c = player.viewHand().remove(idx);
 				// player.playCard(c);
@@ -56,7 +62,10 @@ public class TurnController {
 			// end the turn (draw card), if "end" selected
 			else {
 				Card drawn = deck.drawCard();
-				System.out.println("You drew: " + drawn.getCardType());
+				System.out.println(new StringBuilder()
+					.append("You drew: ")
+					.append(drawn.getCardType())
+					.toString());
 				if (drawn.getCardType() == CardType.EXPLODING_KITTEN) {
 					return handleExplodingKitten(player);
 				} else {
@@ -100,10 +109,11 @@ public class TurnController {
 				if (idx >= 0 && idx < player.viewHand().size()) {
 					return idx;
 				} else {
-					System.out.println(
-							"Invalid index. Enter a num b/w 0 and "
-									+ (player.viewHand().size() - 1)
-									+ ".");
+					System.out.println(new StringBuilder()
+						.append("Invalid index. Enter a num b/w 0 and ")
+						.append(player.viewHand().size() - 1)
+						.append(".")
+						.toString());
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("Please enter a valid number.");
