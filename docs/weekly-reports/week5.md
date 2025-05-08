@@ -1,4 +1,4 @@
-# Week 4
+# Week 5
 
 # Part 1. Team Planning of the Week :ledger:
 **Planning Date**: 05/01/2025
@@ -26,34 +26,35 @@
 
 ### Team member: Eiko Reisz
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/11
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/13
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/16
 
 ### PR done and approved
-- 
+- N/A
 
 ### Other people's PR reviewed by you
-- 
+- N/A
 
 
 
 ### Team member: Benjamin Ye
 #### PR created:
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/10
 
 ### PR done and approved
 - N/A
 
 ### Other people's PR reviewed by you
-- 
+- N/A
 
 
 ### Team member: Samarth Arul
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/6
 
 ### PR done and approved
-- link to PR
-- link to PR
+- N/A
 
 ### Other people's PR reviewed by you
 - link to PR
@@ -62,11 +63,11 @@
 
 ### Team member: Caleb Weldon
 #### PR created:
-- 
+- N/A
 
 ### PR done and approved
-- 
+- N/A
 
 ### Other people's PR reviewed by you
-- 
+- N/A
 
