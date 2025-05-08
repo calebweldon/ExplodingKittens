@@ -31,10 +31,11 @@
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/16
 
 ### PR done and approved
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/17
 
 ### Other people's PR reviewed by you
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/14
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/15
 
 
 
@@ -43,10 +44,10 @@
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/10
 
 ### PR done and approved
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/14
 
 ### Other people's PR reviewed by you
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/17
 
 
 ### Team member: Samarth Arul
@@ -66,8 +67,8 @@
 - N/A
 
 ### PR done and approved
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/15
 
 ### Other people's PR reviewed by you
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/14
 
