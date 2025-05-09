@@ -6,7 +6,7 @@ import java.util.List;
 import java.security.SecureRandom;
 
 public class Deck {
-	private List<Card> deck;
+	private List<CardType> deck;
 	private SecureRandom rand;
 
 	public Deck() {
@@ -14,26 +14,26 @@ public class Deck {
 		this.rand = new SecureRandom();
 	}
 
-	Deck(SecureRandom rand, List<Card> deck) {
-		this.deck = deck;
+	Deck(SecureRandom rand) {
+		this.deck = new LinkedList<>();
 		this.rand = rand;
 	}
 
-	public void insertCardAtIndex(Card card, int index) {
+	public void insertCardAtIndex(CardType card, int index) {
 		checkIndexOutOfBounds(index);
 		deck.add(index, card);
 	}
 
-	public void insertCardAtRandomIndex(Card card) {
+	public void insertCardAtRandomIndex(CardType card) {
 		int index = this.rand.nextInt(getSize() + 1);
 		insertCardAtIndex(card, index);
 	}
 
-	public Card drawCard() {
+	public CardType drawCard() {
 		return deck.remove(0);
 	}
 
-	public Card drawCardFromBottom() {
+	public CardType drawCardFromBottom() {
 		return deck.remove(getSize() - 1);
 	}
 
@@ -45,7 +45,7 @@ public class Deck {
 		Collections.reverse(deck);
 	}
 
-	public Card getCardAtIndex(int index) {
+	public CardType getCardAtIndex(int index) {
 		checkIndexOutOfBounds(index);
 		return deck.get(index);
 	}

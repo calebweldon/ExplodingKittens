@@ -14,7 +14,7 @@
 |-------------|------------------------------------------|---------------------------------------|--------------------|
 | Test Case 1 | [], CARD(ATTACK), -1                     | IndexOutOfBoundsException             | :white_check_mark: |
 | Test Case 2 | [], CARD(SKIP), INT_MAX                  | IndexOutOfBoundsException             | :white_check_mark: |
-| Test Case 3 | [Card(NOPE)], Card(DEFUSE), 0            | [Card(DEFUSE), Card(NOPE)]            | :white_check_mark: |
+| Test Case 3 | [], Card(DEFUSE), 0                      | [Card(DEFUSE)]                        | :white_check_mark: |
 | Test Case 4 | [Card(SHUFFLE)], Card(SEE_THE_FUTURE), 1 | [Card(SHUFFLE), Card(SEE_THE_FUTURE)] | :white_check_mark: |
 
 
