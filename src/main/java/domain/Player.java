@@ -24,4 +24,9 @@ public class Player {
 		int count = this.hand.getOrDefault(cardType, 0);
 		this.hand.put(cardType, count + 1);
 	}
+
+	public void playCard(CardType cardType) {
+		int count = this.hand.getOrDefault(cardType, 0);
+		this.hand.put(cardType, count - 1);
+	}
 }
