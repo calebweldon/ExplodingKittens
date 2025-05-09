@@ -19,7 +19,11 @@ public class PlayerTest {
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
-		player.addCard(CardType.TACO_CAT);
+		try {
+			player.addCard(CardType.TACO_CAT);
+		} catch (IllegalArgumentException e) {
+			fail("Should not have thrown an exception");
+		}
 
 		EasyMock.verify(hand);
 	}
@@ -36,9 +40,32 @@ public class PlayerTest {
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
-		player.addCard(CardType.TACO_CAT);
-		player.addCard(CardType.POTATO_CAT);
-		player.addCard(CardType.TACO_CAT);
+		try {
+			player.addCard(CardType.TACO_CAT);
+			player.addCard(CardType.POTATO_CAT);
+			player.addCard(CardType.TACO_CAT);
+		} catch (IllegalArgumentException e) {
+			fail("Should not have thrown an exception");
+		}
+
+		EasyMock.verify(hand);
+	}
+
+	@Test
+	public void addCard_explodingKitten_throwsException() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		EasyMock.replay(hand);
+
+		Player player = new Player(hand);
+
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			player.addCard(CardType.EXPLODING_KITTEN);
+		});
+
+		String expectedMessage = "You cannot add an Exploding Kitten to your hand.";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
 
 		EasyMock.verify(hand);
 	}
