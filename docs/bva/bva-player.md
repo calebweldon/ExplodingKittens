@@ -14,8 +14,8 @@
 |             | System under test                                 | Expected output                        | Implemented?       |
 |-------------|---------------------------------------------------|----------------------------------------|--------------------|
 | Test Case 1 | Player w/ []; card = TACO_CAT                     | Player w/ [TACO_CAT]                   | :white_check_mark: |
-| Test Case 2 | Player w/ [TACO_CAT]; card = POTATO_CAT           | Player w/ [TACO_CAT, POTATO_CAT]       | :x:                |
-| Test Case 3 | Player w/ [TACO_CAT, POTATO_CAT]; card = TACO_CAT | Player w/ [TACO_CAT x2, POTATO_CAT]    | :x:                |
+| Test Case 2 | Player w/ [TACO_CAT]; card = POTATO_CAT           | Player w/ [TACO_CAT, POTATO_CAT]       | :white_check_mark: |
+| Test Case 3 | Player w/ [TACO_CAT, POTATO_CAT]; card = TACO_CAT | Player w/ [TACO_CAT x2, POTATO_CAT]    | :white_check_mark: |
 | Test Case 4 | Player w/ []; card = EXPLODING_KITTEN             | Player w/ []; IllegalArgumentException | :x:                |
 
 
