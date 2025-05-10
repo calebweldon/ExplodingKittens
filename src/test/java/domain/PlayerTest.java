@@ -100,7 +100,7 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void playCard_multipleBaseKitten_succeeds() {
+	public void playCard_multipleBasicKitten_succeeds() {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(2);
 		EasyMock.expect(hand.put(CardType.TACO_CAT, 0)).andReturn(2);
