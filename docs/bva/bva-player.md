@@ -36,7 +36,7 @@
 | Test Case 2 | Player w/ [ATTACK x2]; card = ATTACK     | Player w/ [ATTACK]                             | :white_check_mark  |
 | Test Case 3 | Player w/ [TACO_CAT x2]; card = TACO_CAT | Player w/ []                                   | :white_check_mark: |
 | Test Case 4 | Player w/ []; card = ATTACK              | Player w/ []; IllegalArgumentException         | :white_check_mark: |
-| Test Case 6 | Player w/ [TACO_CAT]; card = TACO_CAT    | Player w/ [TACO_CAT]; IllegalArgumentException | :x:                |
+| Test Case 6 | Player w/ [TACO_CAT]; card = TACO_CAT    | Player w/ [TACO_CAT]; IllegalArgumentException | :white_check_mark: |
 
 
 ## Method 3: ```public void removeCard(CardType card)```

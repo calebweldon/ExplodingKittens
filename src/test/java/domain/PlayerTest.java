@@ -131,4 +131,24 @@ public class PlayerTest {
 
 		EasyMock.verify(hand);
 	}
+
+	@Test
+	public void playCard_oneBasicKitten_throwsException() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(1);
+		EasyMock.replay(hand);
+
+		Player player = new Player(hand);
+
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			player.playCard(CardType.TACO_CAT);
+		});
+
+		String expectedMessage = "You do not have enough cards to play.";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+
+		EasyMock.verify(hand);
+	}
 }
