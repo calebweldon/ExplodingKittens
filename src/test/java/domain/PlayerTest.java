@@ -98,4 +98,17 @@ public class PlayerTest {
 
 		EasyMock.verify(hand);
 	}
+
+	@Test
+	public void playCard_multipleBaseKitten_succeeds() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(2);
+		EasyMock.expect(hand.put(CardType.TACO_CAT, 0)).andReturn(2);
+		EasyMock.replay(hand);
+
+		Player player = new Player(hand);
+		player.playCard(CardType.TACO_CAT);
+
+		EasyMock.verify(hand);
+	}
 }
