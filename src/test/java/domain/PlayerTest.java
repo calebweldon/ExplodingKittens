@@ -166,6 +166,22 @@ public class PlayerTest {
 	}
 
 	@Test
+	public void removeCard_multipleBasicKittens_succeeds() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(2);
+		EasyMock.expect(hand.put(CardType.TACO_CAT, 1)).andReturn(2);
+		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(1);
+		EasyMock.expect(hand.put(CardType.TACO_CAT, 0)).andReturn(1);
+		EasyMock.replay(hand);
+
+		Player player = new Player(hand);
+		player.removeCard(CardType.TACO_CAT);
+		player.removeCard(CardType.TACO_CAT);
+
+		EasyMock.verify(hand);
+	}
+
+	@Test
 	public void removeCard_multipleCards_succeeds() {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(2);
