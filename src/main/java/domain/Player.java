@@ -42,4 +42,9 @@ public class Player {
 		}
 		this.hand.put(cardType, count - removeCount);
 	}
+
+	public void removeCard(CardType cardType) {
+		int count = this.hand.getOrDefault(cardType, 0);
+		this.hand.put(cardType, count - 1);
+	}
 }

@@ -151,4 +151,17 @@ public class PlayerTest {
 
 		EasyMock.verify(hand);
 	}
+
+	@Test
+	public void removeCard_oneCard_succeeds() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.replay(hand);
+
+		Player player = new Player(hand);
+		player.removeCard(CardType.ATTACK);
+
+		EasyMock.verify(hand);
+	}
 }
