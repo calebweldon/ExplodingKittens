@@ -33,7 +33,7 @@
 |             | System under test                        | Expected output                                  | Implemented?      |
 |-------------|------------------------------------------|--------------------------------------------------|-------------------|
 | Test Case 1 | Player w/ [ATTACK]; card = ATTACK        | Player w/ []                                     | :white_check_mark |
-| Test Case 2 | Player w/ [ATTACK x2]; card = ATTACK     | Player w/ [ATTACK]                               | :x:               |
+| Test Case 2 | Player w/ [ATTACK x2]; card = ATTACK     | Player w/ [ATTACK]                               | :white_check_mark |
 | Test Case 3 | Player w/ [TACO_CAT x2]; card = TACO_CAT | Player w/ []                                     | :x:               |
 | Test Case 4 | Player w/ []; card = ATTACK              | Player w/ []; InsufficientCardsException         | :x:               |
 | Test Case 6 | Player w/ [TACO_CAT]; card = TACO_CAT    | Player w/ [TACO_CAT]; InsufficientCardsException | :x:               |
