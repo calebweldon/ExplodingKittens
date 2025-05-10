@@ -196,4 +196,24 @@ public class PlayerTest {
 
 		EasyMock.verify(hand);
 	}
+
+	@Test
+	public void removeCard_emptyHand_throwsException() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(0);
+		EasyMock.replay(hand);
+
+		Player player = new Player(hand);
+
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			player.removeCard(CardType.ATTACK);
+		});
+
+		String expectedMessage = "Not enough cards to remove.";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+
+		EasyMock.verify(hand);
+	}
 }

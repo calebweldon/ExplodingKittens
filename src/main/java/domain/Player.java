@@ -45,6 +45,9 @@ public class Player {
 
 	public void removeCard(CardType cardType) {
 		int count = this.hand.getOrDefault(cardType, 0);
+		if (count < 1) {
+			throw new IllegalArgumentException("Not enough cards to remove.");
+		}
 		this.hand.put(cardType, count - 1);
 	}
 }
