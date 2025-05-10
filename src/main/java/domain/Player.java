@@ -25,7 +25,7 @@ public class Player {
 		this.hand.put(cardType, count + 1);
 	}
 
-	public void playCard(CardType cardType) {
+	public void playCard(CardType cardType) throws IllegalArgumentException {
 		int removeCount = 1;
 		if (false
 				|| cardType == CardType.TACO_CAT
@@ -36,6 +36,10 @@ public class Player {
 			removeCount = 2;
 		}
 		int count = this.hand.getOrDefault(cardType, 0);
+		if (count < removeCount) {
+			String message = "You do not have enough cards to play.";
+			throw new IllegalArgumentException(message);
+		}
 		this.hand.put(cardType, count - removeCount);
 	}
 }
