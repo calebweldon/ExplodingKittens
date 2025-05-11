@@ -1,9 +1,9 @@
 package domain;
 
 public class TurnResult {
-	public int extraTurnsForNextPlayer; // if attack card played
+	public int extraTurnsForNextPlayer;
 	public boolean playerEliminated;
-	public boolean playerWon; // if all Explodia Card's are drawn
+	public boolean playerWon;
 
 	TurnResult(int extraTurnsForNextPlayer, boolean playerEliminated, boolean playerWon) {
 		this.extraTurnsForNextPlayer = extraTurnsForNextPlayer;

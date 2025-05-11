@@ -17,13 +17,13 @@ public class GameController {
 		this.turnController = new TurnController(deck);
 	}
 
-	public void startGame(){
+	public void startGame() {
 		Player winner = runGameLoop();
 		endGame(winner);
 	}
 
-	private Player runGameLoop(){
-		while(true){
+	private Player runGameLoop() {
+		while (true) {
 			PlayerTurn playerTurn = getNextPlayerTurn();
 			int remainingTurns = playerTurn.remainingTurns;
 			Player currPlayer = playerTurn.player;
@@ -42,18 +42,18 @@ public class GameController {
 					remainingTurns = 0;
 					changeNumTurns(result.extraTurnsForNextPlayer);
 				}
-				if(remainingTurns == 0 && !result.playerEliminated){
+				if (remainingTurns == 0 && !result.playerEliminated) {
 					reinsertPlayer(currPlayer);
 				}
 			}
 		}
 	}
 
-	private TurnResult playTurn(Player player){
+	private TurnResult playTurn(Player player) {
 		return this.turnController.takeTurn(player);
 	}
 
-	private void changeNumTurns(int extraTurns){
+	private void changeNumTurns(int extraTurns) {
 		if (!playerTurns.isEmpty()) {
 			PlayerTurn next = playerTurns.poll();
 			next.remainingTurns += extraTurns;
@@ -61,18 +61,19 @@ public class GameController {
 		}
 	}
 
-	private PlayerTurn getNextPlayerTurn(){
+	private PlayerTurn getNextPlayerTurn() {
 		return playerTurns.poll();
 	}
-	private void reinsertPlayer(Player player){
+
+	private void reinsertPlayer(Player player) {
 		playerTurns.offer(new PlayerTurn(player, 1));
 	}
 
-	private boolean onlyOnePlayerLeft(){
+	private boolean onlyOnePlayerLeft() {
 		return 1 == playerTurns.size();
 	}
 
-	public void endGame(Player winner){
+	public void endGame(Player winner) {
 		//TODO: Call GameView or what have you
 	}
 }
