@@ -32,17 +32,20 @@ public class GameController {
 				TurnResult result = playTurn(currPlayer);
 				remainingTurns--;
 
-				if (result.playerEliminated && onlyOnePlayerLeft()) {
-					return getNextPlayerTurn().player;
-				} else if (result.playerWon) {
+				if(result.playerEliminated) {
+					if(onlyOnePlayerLeft())
+						return getNextPlayerTurn().player;
+					break;
+				}
+				if (result.playerWon) {
 					return currPlayer;
 				}
 
-				if (result.extraTurnsForNextPlayer > 0) {
+				if (result.extraTurnsForNextPlayer > 0){
+					changeNumTurns(result.extraTurnsForNextPlayer + remainingTurns);
 					remainingTurns = 0;
-					changeNumTurns(result.extraTurnsForNextPlayer);
 				}
-				if (remainingTurns == 0 && !result.playerEliminated) {
+				if (remainingTurns == 0) {
 					reinsertPlayer(currPlayer);
 				}
 			}
