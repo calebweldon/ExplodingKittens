@@ -64,16 +64,15 @@ N/A - Reset + replanned after meeting with Dr. Yiji
 - link to PR
 
 
-### Team member: YOUR_NAME
+### Team member: Caleb Weldon
 #### PR created:
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/15
 
 ### PR done and approved
-- link to PR
-- link to PR
+- N/A
 
 ### Other people's PR reviewed by you
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/14
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/13
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/10
 
