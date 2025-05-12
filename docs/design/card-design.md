@@ -64,6 +64,11 @@
 2. Flip the deck
     - Flips the order of the deck
     - discard upon use
-3. ???
-4. ???
+3. Show Hand / Embarrass
+    - Choose another player and have them display their hand
+4. Recycle
+    - Add the most recent non-Exploding Kitten card back into the deck
+5. Swap Hand
+    - Choose another player and swap hands with them
+
 
