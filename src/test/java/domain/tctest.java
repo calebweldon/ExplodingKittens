@@ -35,7 +35,7 @@ class TurnControllerTest {
 
 	@Test
 	void constructor_nullDeck_throwsException() {
-		assertThrows(NullPointerException.class, () -> new TurnController(null));
+		assertThrows(IllegalArgumentException.class, () -> new TurnController(null));
 	}
 
 	@Test

@@ -12,8 +12,9 @@ public final class TurnController {
 
 	public TurnController(Deck deck) {
 		if (deck == null) {
-			throw new NullPointerException("Deck cannot be null");
+			throw new IllegalArgumentException("Deck cannot be null");
 		}
+		// spotbugs wants me to make a defensive copy...
 		this.deck = deck;
 	}
 
