@@ -21,18 +21,16 @@ N/A - Reset + replanned after meeting with Dr. Yiji
 
 # Part 3. Individual Progress of the Week :coffee:
 
-### Team member: YOUR_NAME
+### Team member: Eiko Reisz
 #### PR created:
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/18
 
 ### PR done and approved
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/16
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/13
 
 ### Other people's PR reviewed by you
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/10
 
 
 ### Team member: YOUR_NAME
