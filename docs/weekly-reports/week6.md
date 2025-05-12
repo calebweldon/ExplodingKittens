@@ -33,9 +33,9 @@ N/A - Reset + replanned after meeting with Dr. Yiji
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/10
 
 
-### Team member: YOUR_NAME
+### Team member: Samarth Arul
 #### PR created:
-- link to PR
+- WIP: https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/6
 - link to PR
 
 ### PR done and approved
