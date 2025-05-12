@@ -2,14 +2,14 @@ package domain;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.security.SecureRandom;
 
 public class Deck {
-	private LinkedList<Card> deck;
+	private List<CardType> deck;
 	private SecureRandom rand;
 
 	public Deck() {
-		//Note: Discuss underlying data structure
 		this.deck = new LinkedList<>();
 		this.rand = new SecureRandom();
 	}
@@ -19,21 +19,24 @@ public class Deck {
 		this.rand = rand;
 	}
 
-	public void insertCardAtIndex(Card card, int index) {
-		checkBounds(index);
+	public void insertCardAtIndex(CardType card, int index) {
+		checkIndexOutOfBounds(index);
 		deck.add(index, card);
 	}
 
-	public void insertCardAtRandomIndex(Card card) {
+	public void insertCardAtRandomIndex(CardType card) {
 		int index = this.rand.nextInt(getSize() + 1);
 		insertCardAtIndex(card, index);
 	}
 
-	public Card drawCard() {
-		return deck.poll();
+	public CardType drawCard() {
+		return deck.remove(0);
 	}
 
-	//Note: Not unit-testable. Implement this ourselves?
+	public CardType drawCardFromBottom() {
+		return deck.remove(getSize() - 1);
+	}
+
 	public void shuffleDeck() {
 		Collections.shuffle(deck);
 	}
@@ -42,8 +45,8 @@ public class Deck {
 		Collections.reverse(deck);
 	}
 
-	public Card getCardAtIndex(int index) {
-		checkBounds(index);
+	public CardType getCardAtIndex(int index) {
+		checkIndexOutOfBounds(index);
 		return deck.get(index);
 	}
 
@@ -51,9 +54,9 @@ public class Deck {
 		return deck.size();
 	}
 
-	private void checkBounds(int index) {
+	private void checkIndexOutOfBounds(int index) {
 		if (index < 0 || index > getSize()) {
-			throw new IndexOutOfBoundsException("Invalid index: index out of range");
+			throw new IndexOutOfBoundsException("Invalid index: " + index);
 		}
 	}
 
