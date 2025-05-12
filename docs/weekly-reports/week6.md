@@ -43,8 +43,8 @@ N/A - Reset + replanned after meeting with Dr. Yiji
 - link to PR
 
 ### Other people's PR reviewed by you
-- link to PR
-- link to PR
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/16
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/17
 
 
 
