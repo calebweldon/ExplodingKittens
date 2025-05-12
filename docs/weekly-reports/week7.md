@@ -28,17 +28,16 @@
 
 ### Team member: Eiko Reisz
 #### PR created:
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/18
+- link to PR
 
 ### PR done and approved
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/16
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/13
+- link to PR
 
 ### Other people's PR reviewed by you
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/10
+- link to PR
 
 
-### Team member: YOUR_NAME
+### Team member: Samarth Arul
 #### PR created:
 - link to PR
 - link to PR
@@ -53,7 +52,7 @@
 
 
 
-### Team member: YOUR_NAME
+### Team member: Benjamin Ye
 #### PR created:
 - link to PR
 - link to PR
@@ -69,13 +68,11 @@
 
 ### Team member: Caleb Weldon
 #### PR created:
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/15
+- link to PR
 
 ### PR done and approved
-- N/A
+- link to PR
 
 ### Other people's PR reviewed by you
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/14
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/13
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/10
+- link to PR
 
