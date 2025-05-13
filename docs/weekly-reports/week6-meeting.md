@@ -10,13 +10,23 @@
 ## Agenda
 
 ### Progress Evaluation
+- working on game setup phase (deck, player, card, turn controller)
+- ui effort: 
+- finishing up the game setup phase classes, and then game setup and game controller
+- comment: one Controller per card (and a corresponding View)
+- Suggestion: quickly prototype with one card
 
 ### Questions from the team (about design, linter, tests, etc.)
+- dependency injection that makes SpotBugs mad 
+- enum: 
+- card class design
 
 
 ### Teamwork
 #### Strength: What has been working well
-
+- meet weekly
+- real feedback
+- 
 
 #### Concerns: What can be improved
 
