@@ -52,6 +52,6 @@ public class Player {
 	}
 
 	public Map<CardType, Integer> viewHand() {
-		return this.hand;
+		return new HashMap<>(this.hand);
 	}
 }

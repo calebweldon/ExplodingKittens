@@ -24,23 +24,25 @@ public final class TurnController {
 		while (!turnOver) {
 			String input = promptForInput();
 			switch (input) {
-				case "play" -> {
+				case "play": {
 					if (player.viewHand().isEmpty()) {
 						System.out.println("You have no cards to play.");
 						continue;
 					}
-					System.out.println("Your hand: " + player.viewHand());
+					System.out.printf("Your hand: %s%n", player.viewHand());
 					CardType cardType = promptCardChoice(player);
 					try {
-						PlayCard(player, cardType);
-						turnOver = doCardAction(cardType); // semi-stub for now
+						playCard(player, cardType);
+						// semi-stub for now (below)
+						turnOver = doCardAction(cardType);
 					} catch (IllegalArgumentException e) {
 						System.out.println("Invalid card play: " + e.getMessage());
 					}
+					break;
 				}
-				case "draw" -> {
+				case "draw": {
 					CardType drawn = drawCard();
-					System.out.println("You drew: " + drawn);
+					System.out.printf("You drew: %s%n", drawn);
 					if (drawn == CardType.EXPLODING_KITTEN) {
 						eliminated = !handleExplodingKitten(player);
 					} else {
@@ -52,7 +54,10 @@ public final class TurnController {
 					}
 					endPlayerTurn();
 					turnOver = true;
+					break;
 				}
+				default:
+					System.out.println("Should not happen.");
 			}
 		}
 
@@ -70,18 +75,21 @@ public final class TurnController {
 		}
 	}
 
-	public void PlayCard(Player player, CardType cardType) {
+	public void playCard(Player player, CardType cardType) {
 		player.playCard(cardType);
 	}
 
 	public String getCardInfo(CardType type) {
-		// Stub: add descriptions for each card type if needed
-		return switch (type) {
-			case EXPLODING_KITTEN -> "Draw this and you're out—unless you defuse it.";
-			case DEFUSE -> "Defuse an Exploding Kitten.";
-			default -> "No description available.";
-		};
+		switch (type) {
+			case EXPLODING_KITTEN:
+				return "Draw this and you're out—unless you defuse it.";
+			case DEFUSE:
+				return "Defuse an Exploding Kitten.";
+			default:
+				return "No description available.";
+		}
 	}
+
 
 	public void endPlayerTurn() {
 		// placeholder for cleanup logic
@@ -108,14 +116,15 @@ public final class TurnController {
 
 	private boolean doCardAction(CardType cardType) {
 		switch (cardType) {
-			case SKIP -> {
+			case SKIP:
 				System.out.println("SKIP card played. Turn ends immediately.");
 				return true;
-			}
-			default -> System.out.println("Played card: " + cardType);
+			default:
+				System.out.printf("Played card: %s%n", cardType);
 		}
 		return false;
-	}	
+}
+
 
 	private CardType promptCardChoice(Player player) {
 		CardType[] hand = player.viewHand().keySet().toArray(new CardType[0]);
@@ -130,7 +139,7 @@ public final class TurnController {
 				if (idx >= 0 && idx < hand.length) {
 					return hand[idx];
 				}
-			} catch (NumberFormatException ignored) {}
+			} catch (NumberFormatException ignored) { }
 			System.out.println("Invalid index.");
 		}
 	}

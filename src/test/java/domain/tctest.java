@@ -92,94 +92,72 @@ class TurnControllerTest {
 
 
 	@Test
-	void takeTurn_endEK_noDefuse_returnsFalse() {
-		// Setup an exploding kitten card
-		Card ek = EasyMock.createMock(Card.class);
-		EasyMock.expect(ek.getCardType()).andReturn(CardType.EXPLODING_KITTEN).anyTimes();
-		EasyMock.replay(ek);
-
-		// Deck.drawCard() → ek
+	void takeTurn_drawsEK_noDefuse_playerEliminated() {
+		// 1) Deck.drawCard() → EXPLODING_KITTEN
 		Deck deck = EasyMock.createMock(Deck.class);
-		EasyMock.expect(deck.drawCard()).andReturn(ek);
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.EXPLODING_KITTEN);
 		EasyMock.replay(deck);
 
-		// Player with empty hand (no DEFUSE)
+		// 2) Player has empty hand (no DEFUSE)
 		Player player = EasyMock.createMock(Player.class);
-		List<Card> hand = new ArrayList<>();
-		EasyMock.expect(player.viewHand()).andReturn(hand).anyTimes();
-		//EasyMock.expect(player.getName()).andReturn("Bob").anyTimes();
+		Map<CardType, Integer> emptyHand = Collections.emptyMap();
+		EasyMock.expect(player.viewHand()).andReturn(emptyHand).anyTimes();
 		EasyMock.replay(player);
 
-		provideInput("end\n");
+		// 3) Simulate "draw"
+		provideInput("draw\n");
 
+		// 4) Run
 		TurnController tc = new TurnController(deck);
-		assertFalse(tc.takeTurn(player), "Should return false when no defuse available");
+		TurnResult result = tc.takeTurn(player);
 
-		EasyMock.verify(ek, deck, player);
+		// 5) Check
+		assertNotNull(result);
+		assertTrue(result.playerEliminated);
+		assertFalse(result.playerWon);
+		assertEquals(0, result.extraTurns);
+
+		EasyMock.verify(deck, player);
 	}
 
+
 	@Test
-	void takeTurn_endEK_withDefuse_returnsTrue_andDefuseConsumed() {
-		// Exploding kitten
-		Card ek = EasyMock.createMock(Card.class);
-		EasyMock.expect(ek.getCardType()).andReturn(CardType.EXPLODING_KITTEN).anyTimes();
-
-		// Defuse card
-		Card defuse = EasyMock.createMock(Card.class);
-		EasyMock.expect(defuse.getCardType()).andReturn(CardType.DEFUSE).anyTimes();
-
-		EasyMock.replay(ek, defuse);
-
-		// Deck: draw EK, expect insertCardAtRandomIndex(...)
+	void takeTurn_drawsEK_withDefuse_playerSurvives_andDefuseConsumed() {
+		// 1) Deck.drawCard() → EXPLODING_KITTEN
 		Deck deck = EasyMock.createMock(Deck.class);
-		EasyMock.expect(deck.drawCard()).andReturn(ek);
-		deck.insertCardAtRandomIndex(EasyMock.anyObject(Card.class));
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.EXPLODING_KITTEN);
+		deck.insertCardAtRandomIndex(CardType.EXPLODING_KITTEN);
 		EasyMock.expectLastCall();
 		EasyMock.replay(deck);
 
-		// Player with one DEFUSE in hand
+		// 2) Player has 1 DEFUSE
+		Map<CardType, Integer> hand = new HashMap<>();
+		hand.put(CardType.DEFUSE, 1);
 		Player player = EasyMock.createMock(Player.class);
-		List<Card> hand = new ArrayList<>(Collections.singletonList(defuse));
 		EasyMock.expect(player.viewHand()).andReturn(hand).anyTimes();
-		//EasyMock.expect(player.getName()).andReturn("Carol").anyTimes();
+		player.removeCard(CardType.DEFUSE);
+		EasyMock.expectLastCall().andAnswer(() -> {
+			hand.put(CardType.DEFUSE, hand.get(CardType.DEFUSE) - 1);
+			return null;
+		});
 		EasyMock.replay(player);
 
-		provideInput("end\n");
+		// 3) Simulate "draw"
+		provideInput("draw\n");
 
+		// 4) Run
 		TurnController tc = new TurnController(deck);
-		boolean survived = tc.takeTurn(player);
+		TurnResult result = tc.takeTurn(player);
 
-		assertTrue(survived, "Should return true when defuse is used");
-		assertTrue(hand.isEmpty(), "Defuse card should be removed from hand");
+		// 5) Check
+		assertNotNull(result);
+		assertFalse(result.playerEliminated);
+		assertFalse(result.playerWon);
+		assertEquals(0, result.extraTurns);
+		assertEquals(0, hand.getOrDefault(CardType.DEFUSE, 0));
 
-		EasyMock.verify(ek, defuse, deck, player);
+		EasyMock.verify(deck, player);
 	}
 
-	// --- Method 4: promptCardIndex(Player) ---
 
-	@Test
-	void promptCardIndex_repromptsUntilValid() throws Exception {
-		// Prepare input: invalid "-1", then valid "0"
-		provideInput("-1\n0\n");
-
-		// Dummy deck (unused)
-		Deck deck = EasyMock.createMock(Deck.class);
-		TurnController tc = new TurnController(deck);
-
-		// Player with exactly one card in hand
-		Player player = EasyMock.createMock(Player.class);
-		Card mockCard = EasyMock.createMock(Card.class);
-		List<Card> hand = new ArrayList<>(Collections.singletonList(mockCard));
-		EasyMock.expect(player.viewHand()).andReturn(hand).anyTimes();
-		EasyMock.replay(player);
-
-		// Invoke private method with reflection
-		Method m = TurnController.class.getDeclaredMethod("promptCardIndex", Player.class);
-		m.setAccessible(true);
-		int idx = (int) m.invoke(tc, player);
-
-		assertEquals(0, idx, "Should skip invalid -1 and return 0");
-
-		EasyMock.verify(player);
-	}
 }
