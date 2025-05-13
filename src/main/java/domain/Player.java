@@ -27,7 +27,8 @@ public class Player {
 
 	public void playCard(CardType cardType) throws IllegalArgumentException {
 		int removeCount = 1;
-		if (false || cardType == CardType.TACO_CAT
+		if (false
+				|| cardType == CardType.TACO_CAT
 				|| cardType == CardType.CATTERMELLON
 				|| cardType == CardType.POTATO_CAT
 				|| cardType == CardType.BEARD_CAT
