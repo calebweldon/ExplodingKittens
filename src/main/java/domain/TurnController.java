@@ -4,7 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Scanner;
 
+// suppress deck warning
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 public final class TurnController {
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared and mutated by game logic")
 	private final Deck deck;
 	private final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 

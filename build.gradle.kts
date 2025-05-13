@@ -36,6 +36,9 @@ dependencies {
     testImplementation("io.cucumber:cucumber-java")
     testImplementation("io.cucumber:cucumber-junit-platform-engine")
     testImplementation("io.cucumber:cucumber-picocontainer:7.20.1")
+
+	// suppress deck warning
+	compileOnly("com.github.spotbugs:spotbugs-annotations:4.7.3")
 }
 
 java {
