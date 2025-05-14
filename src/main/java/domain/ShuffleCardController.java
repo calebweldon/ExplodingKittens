@@ -1,7 +1,10 @@
 package domain;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared and mutated")
 public class ShuffleCardController implements CardController {
-	private Deck deck;
+	private final Deck deck;
 
 	public ShuffleCardController(Deck deck) {
 		this.deck = deck;

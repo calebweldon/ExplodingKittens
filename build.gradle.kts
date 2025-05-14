@@ -28,6 +28,9 @@ dependencies {
     // https://github.com/spotbugs/spotbugs-gradle-plugin/blob/master/README.md
     spotbugs("com.github.spotbugs:spotbugs:4.8.6")
     spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.13.0")
+
+    // for suppressing
+    compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.3")
 }
 
 java {
