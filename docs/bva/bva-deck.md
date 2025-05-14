@@ -79,8 +79,8 @@
 |-------------|----------------------------------------------------------------------|---------------------------|--------------------|
 | Test Case 1 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], -1      | IndexOutOfBoundsException | :white_check_mark: |
 | Test Case 2 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], INT_MAX | IndexOutOfBoundsException | :white_check_mark: |
-| Test Case 3 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE] 0        | CardType.SKIP             | :white_check_mark: |
-| Test Case 4 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE] 1        | CardType.EXPLODING_KITTEN | :white_check_mark: |
+| Test Case 3 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], 0       | CardType.SKIP             | :white_check_mark: |
+| Test Case 4 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], 1       | CardType.EXPLODING_KITTEN | :white_check_mark: |
 
 
 ## Method 7: ```public CardType drawCardFromBottom()```
