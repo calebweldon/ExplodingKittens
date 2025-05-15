@@ -23,21 +23,12 @@ public class GameSetup {
 			Player player = new Player();
 			for (int j = 0; j < HAND_SIZE; j++) {
 				CardType card = deck.drawCard();
-				try {
-					player.addCard(card);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+				player.addCard(card);
 			}
-			try {
-				player.addCard(CardType.DEFUSE);
-			} catch (Exception e) {
-					e.printStackTrace();
-			}
+			player.addCard(CardType.DEFUSE);
 			players.add(new Player());
 		}
-		deck.addSpecialCards();
+		deck.addSpecialCards(numPlayers - 1);
 
 		TurnController turnController = new TurnController(deck);
 
