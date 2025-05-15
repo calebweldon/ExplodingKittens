@@ -7,17 +7,20 @@ import java.util.*;
 public class GameController {
 	private LinkedList<PlayerTurn> playerTurns;
 	private TurnController turnController;
+	private GameView gameView;
 
-	GameController(Deck deck, List<Player> players) {
-		this.playerTurns = new LinkedList<PlayerTurn>();
+	GameController(List<Player> players, TurnController turnController, GameView gameView) {
+		this.playerTurns = new LinkedList<>();
 		for (Player p : players) {
 			playerTurns.add(new PlayerTurn(p, 1));
 		}
 		Collections.shuffle(playerTurns);
-		this.turnController = new TurnController(deck);
+		this.turnController = turnController;
+		this.gameView = gameView;
 	}
 
 	public void startGame() {
+		this.gameView.announceGameStart();
 		Player winner = runGameLoop();
 		endGame(winner);
 	}
@@ -78,6 +81,6 @@ public class GameController {
 	}
 
 	public void endGame(Player winner) {
-		//TODO: Call GameView or what have you
+		this.gameView.announceGameEnd(winner);
 	}
 }
