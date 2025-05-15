@@ -6,7 +6,7 @@ public class TurnController {
 	}
 
 	public TurnResult takeTurn(Player player) {
-		return new TurnResult(0, false, false);
+		return TurnResult.CONTINUE;
 	}
 
 }
