@@ -29,7 +29,7 @@ public class Player {
 		int removeCount = 1;
 		if (false
 				|| cardType == CardType.TACO_CAT
-				|| cardType == CardType.CATTERMELLON
+				|| cardType == CardType.CATTERMELON
 				|| cardType == CardType.POTATO_CAT
 				|| cardType == CardType.BEARD_CAT
 				|| cardType == CardType.RAINBOW_RALPHING_CAT) {
