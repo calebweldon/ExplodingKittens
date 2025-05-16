@@ -126,11 +126,11 @@
 |--------|-----------------------------------------------------------|------------|
 | Step 1 | Deck                                                      | Number     |
 | Step 2 | collection                                                | Collection |
-| Step 3 | Deck with IMPLODING_FACEUP, Deck without IMPLODING_FACEUP | 7, -1      |
+| Step 3 | Deck with IMPLODING_FACEUP, Deck without IMPLODING_FACEUP | 0, -1      |
 
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
 |             | System under test                   | Expected output | Implemented? |
 |-------------|-------------------------------------|-----------------|--------------|
 | Test Case 1 | Deck / CardType.IMPLODING_FACEUP    | -1              | :x:          |
-| Test Case 2 | Deck with CardType.IMPLODING_FACEUP | 7               | :x:          |
+| Test Case 2 | Deck with CardType.IMPLODING_FACEUP | 0               | :x:          |

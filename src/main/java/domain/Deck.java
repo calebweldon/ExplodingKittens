@@ -129,6 +129,10 @@ public class Deck {
 		return deck.get(index);
 	}
 
+	public int getImplodingIndex() {
+		return deck.indexOf(CardType.IMPLODING_FACEUP);
+	}
+
 	int getSize() {
 		return deck.size();
 	}

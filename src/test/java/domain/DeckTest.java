@@ -170,4 +170,12 @@ public class DeckTest {
 		assertEquals(num_explodia, deck.getCardCount(CardType.EXPLODIA));
 		assertEquals(1, deck.getCardCount(CardType.IMPLODING_FACEDOWN));
 	}
+
+	@Test
+	public void getImplodingIndex_WithoutImploding() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, false);
+
+		assertEquals(-1, deck.getImplodingIndex());
+	}
 }
