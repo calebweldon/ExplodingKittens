@@ -1,2 +1,5 @@
-package domain;public class flipCardController {
+package domain;
+
+public class FlipCardController implements CardController {
+
 }
