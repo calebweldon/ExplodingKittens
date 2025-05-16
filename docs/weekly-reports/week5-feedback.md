@@ -1,4 +1,4 @@
-# Intructor Feedback
+# Instructor Feedback
 
 ## Progress evaluation :scroll:
 - :white_check_mark: There is progress on Game Setup Phase
