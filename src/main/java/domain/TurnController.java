@@ -8,7 +8,7 @@ import java.util.Scanner;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public final class TurnController {
-	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared and mutated by game logic")
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck can be shared")
 	private final Deck deck;
 	private final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 
@@ -40,7 +40,10 @@ public final class TurnController {
 						// semi-stub for now (below)
 						turnOver = doCardAction(cardType);
 					} catch (IllegalArgumentException e) {
-						System.out.println("Invalid card play: " + e.getMessage());
+						System.out.printf(
+							"Invalid card play: %s%n",
+							e.getMessage()
+						);
 					}
 					break;
 				}
@@ -53,7 +56,10 @@ public final class TurnController {
 						try {
 							player.addCard(drawn);
 						} catch (IllegalArgumentException e) {
-							System.out.println("Card could not be added: " + e.getMessage());
+							System.out.printf(
+								"Card could not be added: %s%n",
+								e.getMessage()
+							);
 						}
 					}
 					endPlayerTurn();
@@ -135,7 +141,12 @@ public final class TurnController {
 		while (true) {
 			System.out.println("Select a card to play:");
 			for (int i = 0; i < hand.length; i++) {
-				System.out.printf("[%d] %s (%d)%n", i, hand[i], player.viewHand().get(hand[i]));
+				System.out.printf(
+					"[%d] %s (%d)%n",
+					i,
+					hand[i],
+					player.viewHand().get(hand[i])
+				);
 			}
 			System.out.print("Enter index: ");
 			try {

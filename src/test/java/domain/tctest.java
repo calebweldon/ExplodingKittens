@@ -26,9 +26,9 @@ class TurnControllerTest {
 	}
 
 	private void provideInput(String data) {
-		InputStream testIn = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
+		InputStream testIn = new ByteArrayInputStream(
+			data.getBytes(StandardCharsets.UTF_8));
 		System.setIn(testIn);
-
 	}
 
 	// --- Method 1: Constructor ---
