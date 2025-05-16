@@ -11,15 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeckTest {
 	public static final int INT_MAX = 2147483647;
+	public static final int NUM_THREE = 3;
+	public static final int NUM_FOUR = 4;
+
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, INT_MAX})
 	public void insertCard_invalidIndex_throwException(int invalidIndex) {
 		CardType card = CardType.ATTACK;
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		Deck deck = new Deck(rand);
-
-		EasyMock.replay(rand);
+		Deck deck = new Deck(rand, false);
 
 		String expectedMessage = "Invalid index: " + invalidIndex;
 		Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
@@ -34,8 +35,9 @@ public class DeckTest {
 	public void insertCard_validIndex() {
 		CardType firstCard = CardType.EXPLODING_KITTEN;
 		CardType secondCard = CardType.DEFUSE;
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 
-		Deck deck = new Deck();
+		Deck deck = new Deck(rand, false);
 
 		deck.insertCardAtIndex(firstCard, 0);
 		assertEquals(1, deck.getSize());
@@ -50,7 +52,7 @@ public class DeckTest {
 	public void insertCardAtRandomIndex_EmptyDeck() {
 		CardType card = CardType.DEFUSE;
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		Deck deck = new Deck(rand);
+		Deck deck = new Deck(rand, false);
 
 		EasyMock.expect(rand.nextInt(1)).andReturn(0);
 
@@ -70,7 +72,7 @@ public class DeckTest {
 		CardType secondcard = CardType.SEE_THE_FUTURE;
 		CardType thirdcard = CardType.FAVOR;
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		Deck deck = new Deck(rand);
+		Deck deck = new Deck(rand, false);
 		final int expectedSize = 3;
 
 		EasyMock.expect(rand.nextInt(expectedSize)).andReturn(index);
@@ -95,7 +97,7 @@ public class DeckTest {
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		final int expectedSize = 3;
 
-		Deck deck = new Deck(rand);
+		Deck deck = new Deck(rand, false);
 
 		deck.insertCardAtIndex(firstcard, 0);
 		deck.insertCardAtIndex(secondcard, 1);
@@ -115,7 +117,7 @@ public class DeckTest {
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		final int expectedSize = 3;
 
-		Deck deck = new Deck(rand);
+		Deck deck = new Deck(rand, false);
 
 		deck.insertCardAtIndex(firstcard, 0);
 		deck.insertCardAtIndex(secondcard, 1);
@@ -131,7 +133,7 @@ public class DeckTest {
 	@ValueSource(ints = {-1, INT_MAX})
 	public void getCardAtIndex_invalidIndex_throwException(int invalidIndex) {
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		Deck deck = new Deck(rand);
+		Deck deck = new Deck(rand, false);
 
 		String expectedMessage = "Invalid index: " + invalidIndex;
 		Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
@@ -148,12 +150,47 @@ public class DeckTest {
 		CardType secondCard = CardType.EXPLODING_KITTEN;
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 
-		Deck deck = new Deck(rand);
+		Deck deck = new Deck(rand, false);
 
 		deck.insertCardAtIndex(firstCard, 0);
 		deck.insertCardAtIndex(secondCard, 1);
 		assertEquals(2, deck.getSize());
 		assertEquals(firstCard, deck.getCardAtIndex(0));
 		assertEquals(secondCard, deck.getCardAtIndex(1));
+	}
+
+	@SuppressWarnings("checkstyle:MagicNumber")
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, NUM_THREE, NUM_FOUR})
+	public void addSpecialCards_FilledDeck(int numExplodingCards) {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, true);
+		final int num_explodia = 5;
+
+		deck.addSpecialCards(numExplodingCards);
+
+		assertEquals(numExplodingCards, deck.getCardCount(CardType.EXPLODING_KITTEN));
+		assertEquals(2, deck.getCardCount(CardType.DEFUSE));
+		assertEquals(num_explodia, deck.getCardCount(CardType.EXPLODIA));
+		assertEquals(1, deck.getCardCount(CardType.IMPLODING_FACEDOWN));
+	}
+
+	@Test
+	public void getImplodingIndex_WithoutImploding() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, false);
+
+		assertEquals(-1, deck.getImplodingIndex());
+	}
+
+	@Test
+	public void getImplodingIndex_WithImploding() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, false);
+		CardType imploding = CardType.IMPLODING_FACEUP;
+
+		deck.insertCardAtIndex(imploding, 0);
+
+		assertEquals(0, deck.getImplodingIndex());
 	}
 }
