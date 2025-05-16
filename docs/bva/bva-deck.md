@@ -72,9 +72,9 @@
 | Step 1 | Deck                                                        | Number            | CardType                                                                                        |
 | Step 2 | collection                                                  | Interval          | CardType                                                                                        |
 | Step 3 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE] | -1, 0, 1, INT_MAX | IndexOutOfBoundsException, CardType.SKIP, CardType.EXPLODING_KITTEN], IndexOutOfBoundsException |
+
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
-
 |             | System under test                                                    | Expected output           | Implemented?       |
 |-------------|----------------------------------------------------------------------|---------------------------|--------------------|
 | Test Case 1 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], -1      | IndexOutOfBoundsException | :white_check_mark: |
@@ -95,28 +95,26 @@
 
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
-
 |             | System under test                                           | Expected output           | Implemented?       |
 |-------------|-------------------------------------------------------------|---------------------------|--------------------|
 | Test Case 1 | [CardType.ATTACK]                                           | CardType.ATTACK           | :white_check_mark: |
 | Test Case 2 | [CardType.ATTACK, CardType.SKIP]                            | CardType.SKIP             | :white_check_mark: |
 | Test Case 2 | [CardType.ATTACK, CardType.SKIP, CardType.EXPLODING_KITTEN] | CardType.EXPLODING_KITTEN | :white_check_mark: |
 
+
 ## Method 8: ```public void addSpecialCards(int numExplodingCards)```
-### Note:
-- White Box BVA: The Deck will never be empty since we will always reinsert Exploding Kittens
 ### Step 1-3 Results
 |        | input 1    | input 2    | Output                                                                       |
 |--------|------------|------------|------------------------------------------------------------------------------|
 | Step 1 | Deck       | Number     | Deck                                                                         |
 | Step 2 | collection | Interval   | collection                                                                   |
-| Step 3 | Full Deck  | 2, 3, 4, 5 | Full Deck with exploding kittens, defuses, explodia, and an imploding kitten |
+| Step 3 | Full Deck  | 1, 2, 3, 4 | Full Deck with exploding kittens, defuses, explodia, and an imploding kitten |
 
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
-|             | System under test | Expected output                    | Implemented? |
-|-------------|-------------------|------------------------------------|--------------|
-| Test Case 1 | Deck, 2           | Full Deck with 1 Exploding Kitten  | :x:          |
-| Test Case 2 | Deck, 3           | Full Deck with 2 Exploding Kittens | :x:          |
-| Test Case 3 | Deck, 4           | Full Deck with 3 Exploding Kittens | :x:          |
-| Test Case 4 | Deck, 5           | Full Deck with 4 Exploding Kittens | :x:          |
+|             | System under test | Expected output                    | Implemented?       |
+|-------------|-------------------|------------------------------------|--------------------|
+| Test Case 1 | Deck, 1           | Full Deck with 1 Exploding Kitten  | :white_check_mark: |
+| Test Case 2 | Deck, 2           | Full Deck with 2 Exploding Kittens | :white_check_mark: |
+| Test Case 3 | Deck, 3           | Full Deck with 3 Exploding Kittens | :white_check_mark: |
+| Test Case 4 | Deck, 4           | Full Deck with 4 Exploding Kittens | :white_check_mark: |
