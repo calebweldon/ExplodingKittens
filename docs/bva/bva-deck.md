@@ -130,7 +130,7 @@
 
 ### Step 4:
 ##### All-combination or each-choice: Each-Choice
-|             | System under test                   | Expected output | Implemented? |
-|-------------|-------------------------------------|-----------------|--------------|
-| Test Case 1 | Deck / CardType.IMPLODING_FACEUP    | -1              | :x:          |
-| Test Case 2 | Deck with CardType.IMPLODING_FACEUP | 0               | :x:          |
+|             | System under test                   | Expected output | Implemented?       |
+|-------------|-------------------------------------|-----------------|--------------------|
+| Test Case 1 | Deck / CardType.IMPLODING_FACEUP    | -1              | :white_check_mark: |
+| Test Case 2 | Deck with CardType.IMPLODING_FACEUP | 0               | :white_check_mark: |

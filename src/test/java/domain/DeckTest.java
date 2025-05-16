@@ -178,4 +178,15 @@ public class DeckTest {
 
 		assertEquals(-1, deck.getImplodingIndex());
 	}
+
+	@Test
+	public void getImplodingIndex_WithImploding() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, false);
+		CardType imploding = CardType.IMPLODING_FACEUP;
+
+		deck.insertCardAtIndex(imploding, 0);
+
+		assertEquals(0, deck.getImplodingIndex());
+	}
 }
