@@ -118,3 +118,19 @@
 | Test Case 2 | Deck, 2           | Full Deck with 2 Exploding Kittens | :white_check_mark: |
 | Test Case 3 | Deck, 3           | Full Deck with 3 Exploding Kittens | :white_check_mark: |
 | Test Case 4 | Deck, 4           | Full Deck with 4 Exploding Kittens | :white_check_mark: |
+
+
+## Method 9: ```public int getImplodingIndex()```
+### Step 1-3 Results
+|        | input 1                                                   | Output     |
+|--------|-----------------------------------------------------------|------------|
+| Step 1 | Deck                                                      | Number     |
+| Step 2 | collection                                                | Collection |
+| Step 3 | Deck with IMPLODING_FACEUP, Deck without IMPLODING_FACEUP | 7, -1      |
+
+### Step 4:
+##### All-combination or each-choice: Each-Choice
+|             | System under test                   | Expected output | Implemented? |
+|-------------|-------------------------------------|-----------------|--------------|
+| Test Case 1 | Deck / CardType.IMPLODING_FACEUP    | -1              | :x:          |
+| Test Case 2 | Deck with CardType.IMPLODING_FACEUP | 7               | :x:          |
