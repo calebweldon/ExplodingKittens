@@ -1,6 +1,6 @@
 # BVA Analysis for ShuffleCardController
 
-## Method 1: ```private void handleCardAction()```
+## Method 1: ```public void handleCardAction()```
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
