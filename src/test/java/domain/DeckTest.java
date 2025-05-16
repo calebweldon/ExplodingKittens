@@ -68,7 +68,7 @@ public class DeckTest {
 	public void insertCardAtRandomIndex_NormalCase(int index) {
 		CardType firstcard = CardType.SHUFFLE;
 		CardType secondcard = CardType.SEE_THE_FUTURE;
-		CardType thirdcard = CardType.FAVOUR;
+		CardType thirdcard = CardType.FAVOR;
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Deck deck = new Deck(rand);
 		final int expectedSize = 3;
