@@ -6,6 +6,6 @@
 
 |             | System under test | Expected output | Implemented?       |
 |-------------|-------------------|-----------------|--------------------|
-| Test Case 1 | Deck              | Deck            | :white_check_mark: |
+| Test Case 1 | Deck              | Deck            | :x:                |
 
 
