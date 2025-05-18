@@ -8,8 +8,8 @@ import domain.TurnController;
 import java.util.ArrayList;
 
 public class GameSetup {
-	private GameController gameController;
-	private GameView gameView;
+	private final GameController gameController;
+	private final GameView gameView;
 	public static final int HAND_SIZE = 7;
 
 	public GameSetup() {
@@ -35,7 +35,7 @@ public class GameSetup {
 		this.gameController = new GameController(players, turnController, this.gameView);
 	}
 
-	public void setupGame() {
+	public void runGame() {
 		this.gameController.startGame();
 	}
 }
