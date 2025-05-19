@@ -5,9 +5,9 @@ import domain.*;
 import java.util.*;
 
 public class GameController {
-	private LinkedList<PlayerTurn> playerTurns;
-	private TurnController turnController;
-	private GameView gameView;
+	private final LinkedList<PlayerTurn> playerTurns;
+	private final TurnController turnController;
+	private final GameView gameView;
 
 	GameController(List<Player> players, TurnController turnController, GameView gameView) {
 		this.playerTurns = new LinkedList<>();
