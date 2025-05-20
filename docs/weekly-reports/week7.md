@@ -85,11 +85,13 @@
 
 ### Team member: Caleb Weldon
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/20
 
 ### PR done and approved
-- N/A
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/20
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/15
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/19
 
