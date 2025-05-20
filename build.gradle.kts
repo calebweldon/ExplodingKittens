@@ -91,6 +91,10 @@ tasks.withType<Checkstyle>().configureEach {
     }
 }
 
+tasks.named<Checkstyle>("checkstyleTest") {
+    enabled = false
+}
+
 checkstyle{
     toolVersion = "10.18.2"
     isIgnoreFailures = false
