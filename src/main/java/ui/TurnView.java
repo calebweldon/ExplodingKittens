@@ -2,9 +2,8 @@ package ui;
 
 import domain.CardType;
 
-public class GameView {
-	public GameView() {
-	}
+public class TurnView {
+	public TurnView() {}
 
 	public void showTopCards(CardType[] topCards) { }
 }

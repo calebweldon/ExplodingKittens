@@ -1,6 +1,6 @@
 package domain;
 
-import ui.GameView;
+import ui.TurnView;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -8,10 +8,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 public class SeeFutureCardController implements CardController {
 	private static final int NUM_CARDS_FROM_TOP = 3;
 
-	private final GameView view;
+	private final TurnView view;
 	private final Deck deck;
 
-	public SeeFutureCardController(GameView view, Deck deck) {
+	public SeeFutureCardController(TurnView view, Deck deck) {
 		this.view = view;
 		this.deck = deck;
 	}
