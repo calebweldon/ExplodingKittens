@@ -16,7 +16,7 @@ public class Player {
 		this.hand = hand;
 	}
 
-	public void addCard(CardType cardType) throws IllegalArgumentException {
+	public void addCard(CardType cardType) {
 		if (cardType == CardType.EXPLODING_KITTEN) {
 			String message = "You cannot add an Exploding Kitten to your hand.";
 			throw new IllegalArgumentException(message);
@@ -25,11 +25,11 @@ public class Player {
 		this.hand.put(cardType, count + 1);
 	}
 
-	public void playCard(CardType cardType) throws IllegalArgumentException {
+	public void playCard(CardType cardType) {
 		int removeCount = 1;
 		if (false
 				|| cardType == CardType.TACO_CAT
-				|| cardType == CardType.CATTERMELLON
+				|| cardType == CardType.CATTERMELON
 				|| cardType == CardType.POTATO_CAT
 				|| cardType == CardType.BEARD_CAT
 				|| cardType == CardType.RAINBOW_RALPHING_CAT) {
