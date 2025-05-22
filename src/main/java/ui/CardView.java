@@ -2,8 +2,8 @@ package ui;
 
 import domain.CardType;
 
-public class TurnView {
-	public TurnView() { }
+public class CardView {
+	public CardView() { }
 
 	public void showTopCards(CardType[] topCards) { }
 }
