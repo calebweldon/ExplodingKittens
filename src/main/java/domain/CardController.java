@@ -1,5 +1,5 @@
 package domain;
 
 public interface CardController {
-	public void handleCardAction();
+	public TurnResult handleCardAction();
 }
