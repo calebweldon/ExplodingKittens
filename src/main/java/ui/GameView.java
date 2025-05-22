@@ -49,6 +49,7 @@ public class GameView {
 		final String twoPlayersChosen = labels.getString("twoPlayersChosen");
 		final String threePlayersChosen = labels.getString("threePlayersChosen");
 		final String fourPlayersChosen = labels.getString("fourPlayersChosen");
+		final String fivePlayersChosen = labels.getString("fivePlayersChosen");
 		final String invalidNumPlayers = labels.getString("invalidNumPlayers");
 
 		System.out.println(promptForNumPlayers);
@@ -56,6 +57,7 @@ public class GameView {
 		final int twoPlayers = 2;
 		final int threePlayers = 3;
 		final int fourPlayers = 4;
+		final int fivePlayers = 5;
 		while (true) {
 			String userInput = scanner.nextLine();
 			switch (userInput) {
@@ -68,13 +70,17 @@ public class GameView {
 				case "4":
 					System.out.println(fourPlayersChosen);
 					return fourPlayers;
+				case "5":
+					System.out.println(fivePlayersChosen);
+					return fivePlayers;
 				default:
 					System.out.println(invalidNumPlayers);
 			}
 		}
 	}
 
-	public void announceGameStart() { }
+	public void announceGameStart() {
+	}
 
 	public void announceGameEnd(Player winner) { }
 
