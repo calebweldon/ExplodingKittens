@@ -27,7 +27,7 @@ public class GameSetup {
 				player.addCard(card);
 			}
 			player.addCard(CardType.DEFUSE);
-			players.add(new Player());
+			players.add(player);
 		}
 		deck.addSpecialCards(numPlayers - 1);
 
