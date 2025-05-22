@@ -32,10 +32,10 @@
 - 
 
 ### PR done and approved
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
 
 
 ### Team member: Samarth Arul
@@ -43,10 +43,10 @@
 - 
 
 ### PR done and approved
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
 
 
 ### Team member: Benjamin Ye
@@ -68,5 +68,6 @@
 - 
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
 
