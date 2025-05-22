@@ -1,6 +1,8 @@
 package ui;
 
 import domain.Player;
+
+import java.text.MessageFormat;
 import java.util.Scanner;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
@@ -8,6 +10,7 @@ import java.util.Locale;
 
 public class GameView {
 	private final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+	private ResourceBundle labels;
 
 	public GameView() { }
 
@@ -35,22 +38,18 @@ public class GameView {
 		}
 
 		Locale locale = LocaleContext.getLocale();
-		ResourceBundle labels = ResourceBundle.getBundle("labels", locale);
+		labels = ResourceBundle.getBundle("labels", locale);
 
 		final String languageSet = labels.getString("languageSet");
 		System.out.println(languageSet);
 	}
 
 	public int chooseNumPlayers() {
-		Locale locale = LocaleContext.getLocale();
-		ResourceBundle labels = ResourceBundle.getBundle("labels", locale);
 
 		final String promptForNumPlayers = labels.getString("promptForNumPlayers");
-		final String twoPlayersChosen = labels.getString("twoPlayersChosen");
-		final String threePlayersChosen = labels.getString("threePlayersChosen");
-		final String fourPlayersChosen = labels.getString("fourPlayersChosen");
-		final String fivePlayersChosen = labels.getString("fivePlayersChosen");
+		final String playersSelected = labels.getString("playersSelected");
 		final String invalidNumPlayers = labels.getString("invalidNumPlayers");
+		String playersSelectedMessage;
 
 		System.out.println(promptForNumPlayers);
 
@@ -62,16 +61,24 @@ public class GameView {
 			String userInput = scanner.nextLine();
 			switch (userInput) {
 				case "2":
-					System.out.println(twoPlayersChosen);
+					playersSelectedMessage = MessageFormat.format(
+							"{0} {1}", twoPlayers, playersSelected);
+					System.out.println(playersSelectedMessage);
 					return twoPlayers;
 				case "3":
-					System.out.println(threePlayersChosen);
+					playersSelectedMessage = MessageFormat.format(
+							"{0} {1}", threePlayers, playersSelected);
+					System.out.println(playersSelectedMessage);
 					return threePlayers;
 				case "4":
-					System.out.println(fourPlayersChosen);
+					playersSelectedMessage = MessageFormat.format(
+							"{0} {1}", fourPlayers, playersSelected);
+					System.out.println(playersSelectedMessage);
 					return fourPlayers;
 				case "5":
-					System.out.println(fivePlayersChosen);
+					playersSelectedMessage = MessageFormat.format(
+							"{0} {1}", fivePlayers, playersSelected);
+					System.out.println(playersSelectedMessage);
 					return fivePlayers;
 				default:
 					System.out.println(invalidNumPlayers);
@@ -80,9 +87,6 @@ public class GameView {
 	}
 
 	public void announceGameStart() {
-		Locale locale = LocaleContext.getLocale();
-		ResourceBundle labels = ResourceBundle.getBundle("labels", locale);
-
 		final String gameStarting = labels.getString("gameStarting");
 		System.out.println(gameStarting);
 	}
