@@ -16,6 +16,8 @@ public class GameView {
 		final String languageOptions  = "1) English\n2) French\n";
 		final String invalidChoice = "Invalid input. Please enter 1 or 2";
 
+		System.out.println(promptForLanguage);
+		System.out.println(languageOptions);
 		while (true) {
 			String userInput = scanner.nextLine();
 			switch (userInput) {
@@ -35,7 +37,7 @@ public class GameView {
 		Locale locale = LocaleContext.getLocale();
 		ResourceBundle labels = ResourceBundle.getBundle("labels", locale);
 
-		final String languageSet = labels.getString("language");
+		final String languageSet = labels.getString("languageSet");
 		System.out.println(languageSet);
 	}
 
