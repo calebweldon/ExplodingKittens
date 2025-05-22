@@ -5,9 +5,11 @@ import java.util.HashMap;
 
 
 public class Player {
+	private int id;
 	private Map<CardType, Integer> hand;
 
-	public Player() {
+	public Player(int id) {
+		this.id = id;
 		this.hand = new HashMap<>();
 	}
 
@@ -49,5 +51,9 @@ public class Player {
 			throw new IllegalArgumentException("Not enough cards to remove.");
 		}
 		this.hand.put(cardType, count - 1);
+	}
+
+	public int getId() {
+		return id;
 	}
 }
