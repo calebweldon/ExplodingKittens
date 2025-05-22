@@ -1,5 +1,8 @@
 package domain;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared")
 public class FlipCardController implements CardController {
 	private final Deck deck;
 
@@ -7,7 +10,8 @@ public class FlipCardController implements CardController {
 		this.deck = deck;
 	}
 
-	public void handleCardAction() {
+	public TurnResult handleCardAction() {
 		deck.flipDeck();
+		return TurnResult.CONTINUE;
 	}
 }
