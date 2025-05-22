@@ -5,7 +5,7 @@ import ui.TurnView;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared")
-public class SeeFutureCardController implements CardController {
+public class SeeFutureCardController implements ActionCardController {
 	private static final int NUM_CARDS_FROM_TOP = 3;
 
 	private final TurnView view;
