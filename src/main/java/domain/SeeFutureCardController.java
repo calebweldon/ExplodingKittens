@@ -16,7 +16,7 @@ public class SeeFutureCardController implements CardController {
 		this.deck = deck;
 	}
 
-	public void handleCardAction() {
+	public TurnResult handleCardAction() {
 		CardType[] topCards = new CardType[NUM_CARDS_FROM_TOP];
 		
 		for (int i = 0; i < NUM_CARDS_FROM_TOP; i++) {
@@ -24,5 +24,6 @@ public class SeeFutureCardController implements CardController {
 		}
 
 		view.showTopCards(topCards);
+		return TurnResult.CONTINUE;
 	}
 }
