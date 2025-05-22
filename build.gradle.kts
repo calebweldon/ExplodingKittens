@@ -31,6 +31,10 @@ dependencies {
     spotbugs("com.github.spotbugs:spotbugs:4.8.6")
     spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.13.0")
 
+
+    // for suppressing
+    compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.3")
+
     // cucumber
     testImplementation(platform("io.cucumber:cucumber-bom:7.20.1"))
     testImplementation("io.cucumber:cucumber-java")
