@@ -113,9 +113,7 @@ class TurnControllerTest {
 
 		// 5) Check
 		assertNotNull(result);
-		assertTrue(result.playerEliminated);
-		assertFalse(result.playerWon);
-		assertEquals(0, result.extraTurns);
+		assertEquals(TurnResult.ELIMINATED, result);
 
 		EasyMock.verify(deck, player);
 	}
@@ -151,13 +149,9 @@ class TurnControllerTest {
 
 		// 5) Check
 		assertNotNull(result);
-		assertFalse(result.playerEliminated);
-		assertFalse(result.playerWon);
-		assertEquals(0, result.extraTurns);
+		assertEquals(TurnResult.CONTINUE, result);
 		assertEquals(0, hand.getOrDefault(CardType.DEFUSE, 0));
 
 		EasyMock.verify(deck, player);
 	}
-
-
 }

@@ -5,19 +5,22 @@ import domain.*;
 import java.util.*;
 
 public class GameController {
-	private LinkedList<PlayerTurn> playerTurns;
-	private TurnController turnController;
+	private final LinkedList<PlayerTurn> playerTurns;
+	private final TurnController turnController;
+	private final GameView gameView;
 
-	GameController(Deck deck, List<Player> players) {
-		this.playerTurns = new LinkedList<PlayerTurn>();
+	GameController(List<Player> players, TurnController turnController, GameView gameView) {
+		this.playerTurns = new LinkedList<>();
 		for (Player p : players) {
 			playerTurns.add(new PlayerTurn(p, 1));
 		}
 		Collections.shuffle(playerTurns);
-		this.turnController = new TurnController(deck);
+		this.turnController = turnController;
+		this.gameView = gameView;
 	}
 
 	public void startGame() {
+		this.gameView.announceGameStart();
 		Player winner = runGameLoop();
 		endGame(winner);
 	}
@@ -32,18 +35,17 @@ public class GameController {
 				TurnResult result = playTurn(currPlayer);
 				remainingTurns--;
 
-				if (result.playerEliminated) {
+				if (result == TurnResult.ELIMINATED) {
 					if (onlyOnePlayerLeft()) {
 						return getNextPlayerTurn().player;
 					}
 					break;
 				}
-				if (result.playerWon) {
+				if (result == TurnResult.WON) {
 					return currPlayer;
 				}
-
-				if (result.extraTurns > 0) {
-					changeNumTurns(result.extraTurns + remainingTurns + 1);
+				if (result == TurnResult.ATTACK) {
+					changeNumTurns(2 + remainingTurns + 1);
 					remainingTurns = 0;
 				}
 				if (remainingTurns == 0) {
@@ -78,6 +80,6 @@ public class GameController {
 	}
 
 	public void endGame(Player winner) {
-		//TODO: Call GameView or what have you
+		this.gameView.announceGameEnd(winner);
 	}
 }

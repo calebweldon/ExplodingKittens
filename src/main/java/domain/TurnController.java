@@ -23,7 +23,7 @@ public final class TurnController {
 		boolean turnOver = false;
 		boolean eliminated = false;
 		boolean playerWon = false;
-		int extraTurns = 0;
+		TurnResult specialAction = TurnResult.CONTINUE;
 
 		while (!turnOver) {
 			String input = promptForInput();
@@ -37,8 +37,9 @@ public final class TurnController {
 					CardType cardType = promptCardChoice(player);
 					try {
 						playCard(player, cardType);
-						// semi-stub for now (below)
-						turnOver = doCardAction(cardType);
+						// Get the appropriate action based on the card played
+						specialAction = getCardAction(cardType);
+						turnOver = specialAction != TurnResult.CONTINUE;
 					} catch (IllegalArgumentException e) {
 						System.out.printf(
 							"Invalid card play: %s%n",
@@ -71,7 +72,27 @@ public final class TurnController {
 			}
 		}
 
-		return new TurnResult(extraTurns, eliminated, playerWon);
+		if (eliminated) {
+			return TurnResult.ELIMINATED;
+		} else if (playerWon) {
+			return TurnResult.WON;
+		} else {
+			return specialAction;
+		}
+	}
+
+	private TurnResult getCardAction(CardType cardType) {
+		switch (cardType) {
+			case SKIP:
+				System.out.println("SKIP card played. Turn ends immediately.");
+				return TurnResult.SKIP;
+			case ATTACK:
+				System.out.println("ATTACK card played");
+				return TurnResult.ATTACK;
+			default:
+				System.out.printf("Played card: %s%n", cardType);
+				return TurnResult.CONTINUE;
+		}
 	}
 
 	public String promptForInput() {
@@ -123,18 +144,6 @@ public final class TurnController {
 		System.out.println("No defuse found. You're eliminated.");
 		return false;
 	}
-
-	private boolean doCardAction(CardType cardType) {
-		switch (cardType) {
-			case SKIP:
-				System.out.println("SKIP card played. Turn ends immediately.");
-				return true;
-			default:
-				System.out.printf("Played card: %s%n", cardType);
-		}
-		return false;
-}
-
 
 	private CardType promptCardChoice(Player player) {
 		CardType[] hand = player.viewHand().keySet().toArray(new CardType[0]);
