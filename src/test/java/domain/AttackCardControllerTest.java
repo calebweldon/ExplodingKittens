@@ -7,5 +7,10 @@ public class AttackCardControllerTest {
 	@Test
 	public void handleAttackCardAction() {
 		AttackCardController attackCardController = new AttackCardController();
+
+		TurnResult expected = TurnResult.ATTACK;
+		TurnResult actual = attackCardController.handleCardAction();
+
+		assertEquals(expected, actual);
 	}
 }
