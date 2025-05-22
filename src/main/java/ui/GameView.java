@@ -80,6 +80,11 @@ public class GameView {
 	}
 
 	public void announceGameStart() {
+		Locale locale = LocaleContext.getLocale();
+		ResourceBundle labels = ResourceBundle.getBundle("labels", locale);
+
+		final String gameStarting = labels.getString("gameStarting");
+		System.out.println(gameStarting);
 	}
 
 	public void announceGameEnd(Player winner) { }
