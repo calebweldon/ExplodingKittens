@@ -26,4 +26,4 @@ public class GameView {
 	public void announceGameEnd(Player winner) {
 		System.out.printf("Game over! Winner: %s%n", winner);
 	}
-} 
+}
