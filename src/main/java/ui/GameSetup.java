@@ -31,7 +31,8 @@ public class GameSetup {
 		}
 		deck.addSpecialCards(numPlayers - 1);
 
-		TurnController turnController = new TurnController(deck);
+		TurnView turnView = new TurnView();
+		TurnController turnController = new TurnController(deck, turnView);
 
 		this.gameController = new GameController(players, turnController, this.gameView);
 	}
