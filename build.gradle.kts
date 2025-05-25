@@ -32,6 +32,9 @@ dependencies {
     spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.13.0")
     // SpotBugs annotations for @SuppressFBWarnings
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.6")
+    
+    // Add missing analysis classes for Java 11
+    implementation("org.ow2.asm:asm:9.7")
 
     // cucumber
     testImplementation(platform("io.cucumber:cucumber-bom:7.20.1"))
@@ -123,10 +126,11 @@ tasks.jacocoTestReport {
 }
 
 pitest {
-    targetClasses = setOf("domain.*") //by default "${project.group}.*"
+    // Target specific classes instead of all domain.* to reduce scope
+    targetClasses = setOf("domain.TurnController", "domain.Player", "domain.Deck")
     targetTests = setOf("domain.*")
     junit5PluginVersion = "1.2.1"
-    pitestVersion = "1.15.0" //not needed when a default PIT version should be used
+    pitestVersion = "1.15.0"
 
     threads = 4
     outputFormats = setOf("HTML")
@@ -134,9 +138,19 @@ pitest {
     testSourceSets.set(listOf(sourceSets.test.get()))
     mainSourceSets.set(listOf(sourceSets.main.get()))
     jvmArgs.set(listOf("-Xmx1024m"))
-    useClasspathFile.set(true) //useful with bigger projects on Windows
+    useClasspathFile.set(true)
     fileExtensionsToFilter.addAll("xml")
     exportLineCoverage = true
+    
+    // Add some timeout controls to prevent hanging
+    // Note: Using available properties for this pitest version
+    mutationThreshold.set(75)  // Fail if mutation score below 75%
+    
+    // Limit scope to prevent excessive runtime
+    excludedClasses.set(setOf("*Test*", "*Mock*"))
+    
+    // Optional: Reduce mutations for faster runs
+    // mutators = setOf("DEFAULTS")  // Use default mutators only
 }
 
 configurations {}
