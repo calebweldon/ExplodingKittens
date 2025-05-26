@@ -82,4 +82,12 @@ public class GameController {
 	public void endGame(Player winner) {
 		this.gameView.announceGameEnd(winner);
 	}
+
+	public List<Player> getActivePlayers() {
+		List<Player> activePlayers = new ArrayList<>();
+		for (PlayerTurn playerTurn : playerTurns) {
+			activePlayers.add(playerTurn.player);
+		}
+		return activePlayers;
+	}
 }

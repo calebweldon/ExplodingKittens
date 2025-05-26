@@ -21,13 +21,14 @@ public class GameSetup {
 
 		List<Player> players = new ArrayList<>(numPlayers);
 		for (int i = 0; i < numPlayers; i++) {
-			Player player = new Player();
+			int id = i + 1;
+			Player player = new Player(id);
 			for (int j = 0; j < HAND_SIZE - 1; j++) {
 				CardType card = deck.drawCard();
 				player.addCard(card);
 			}
 			player.addCard(CardType.DEFUSE);
-			players.add(new Player());
+			players.add(player);
 		}
 		deck.addSpecialCards(numPlayers - 1);
 
