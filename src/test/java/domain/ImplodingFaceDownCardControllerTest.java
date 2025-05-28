@@ -24,6 +24,6 @@ public class ImplodingFaceDownCardControllerTest {
 		TurnResult result = implodingFaceDownCardController.handleCardDraw();
 
 		assertEquals(TurnResult.CONTINUE, result);
-		EasyMock.verify(deck);
+		EasyMock.verify(deck, cv);
 	}
 }
