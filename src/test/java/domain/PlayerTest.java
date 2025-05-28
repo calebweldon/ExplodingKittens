@@ -4,9 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
+import ui.SwapHandCardView;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class PlayerTest {
@@ -215,5 +218,15 @@ public class PlayerTest {
 		assertTrue(actualMessage.contains(expectedMessage));
 
 		EasyMock.verify(hand);
+	}
+
+	@Test
+	public void OnePlayerWithIdZero_getId_returnZero() {
+		Player player = new Player(1);
+
+		Integer expected = 1;
+		Integer actual = player.getId();
+
+		assertEquals(expected, actual);
 	}
 }

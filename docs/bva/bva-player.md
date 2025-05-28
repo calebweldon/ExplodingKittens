@@ -65,9 +65,9 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|             | System under test | Expected output 1 | Implemented? |
-|-------------|-------------------|-------------------|--------------|
-| Test Case 1 | Player.id = 1     | 1                 | :x:          |
+|             | System under test | Expected output 1 | Implemented?       |
+|-------------|-------------------|-------------------|--------------------|
+| Test Case 1 | Player.id = 1     | 1                 | :white_check_mark: |
 
 ## Method 4: ```public int getHandSize()```
 ### Step 4:
