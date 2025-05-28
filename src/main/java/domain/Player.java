@@ -57,17 +57,17 @@ public class Player {
 		return id;
 	}
 
-	public void swapHandWith(Player playerToSwapWith) {
-		Map<CardType, Integer> temp = new HashMap<>(this.hand);
-		this.hand = new HashMap<>(playerToSwapWith.hand);
-		playerToSwapWith.hand = temp;
-	}
-
 	public int getHandSize() {
 		int handSize = 0;
 		for (int numberPerCard : hand.values()) {
 			handSize += numberPerCard;
 		}
 		return handSize;
+	}
+
+	public void swapHandWith(Player playerToSwapWith) {
+		Map<CardType, Integer> temp = new HashMap<>(this.hand);
+		this.hand = new HashMap<>(playerToSwapWith.hand);
+		playerToSwapWith.hand = temp;
 	}
 }
