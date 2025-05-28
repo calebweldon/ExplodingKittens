@@ -29,7 +29,7 @@ public class ExplodiaCardController implements CardController, ActionCardControl
 		int numExplodia = hand.get(CardType.EXPLODIA);
 
 		explodiaCardView.drawMessage(numExplodia);
-		return TurnResult.CONTINUE;
+		return numExplodia == TOTAL_EXPLODIA ? TurnResult.WON : TurnResult.CONTINUE;
 	}
 
 	@Override

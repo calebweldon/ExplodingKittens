@@ -32,4 +32,25 @@ public class ExplodiaCardControllerTest {
 		assertEquals(TurnResult.CONTINUE, result);
 		EasyMock.verify(cv, player, hand);
 	}
+
+	@Test
+	public void handleExplodiaCardDraw_Won() {
+		int numExplodia = 5;
+		Player player = EasyMock.createMock(Player.class);
+		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv);
+
+		explodiaCardController.updatePlayer(player);
+		EasyMock.expect(player.viewHand()).andReturn(hand);
+		EasyMock.expect(hand.get(CardType.EXPLODIA)).andReturn(numExplodia);
+
+		cv.drawMessage(numExplodia);
+		EasyMock.replay(cv, player, hand);
+
+		TurnResult result = explodiaCardController.handleCardDraw();
+
+		assertEquals(TurnResult.WON, result);
+		EasyMock.verify(cv, player, hand);
+	}
 }
