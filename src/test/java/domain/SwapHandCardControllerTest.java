@@ -2,13 +2,10 @@ package domain;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
-import ui.GameController;
 import ui.SwapHandCardView;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
