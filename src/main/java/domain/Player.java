@@ -50,4 +50,8 @@ public class Player {
 		}
 		this.hand.put(cardType, count - 1);
 	}
+
+	public Map<CardType, Integer> viewHand() {
+		return new HashMap<>(this.hand);
+	}
 }
