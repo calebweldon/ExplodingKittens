@@ -2,6 +2,7 @@ package domain;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+import ui.ShuffleCardView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,13 +10,16 @@ public class ShuffleCardControllerTest {
 	@Test
 	public void handleShuffleCardAction() {
 		Deck deck = EasyMock.createMock(Deck.class);
+		ShuffleCardView cv = EasyMock.createMock(ShuffleCardView.class);
 		TurnResult expected = TurnResult.CONTINUE;
-		ShuffleCardController shuffleCardController = new ShuffleCardController(deck);
-		deck.shuffleDeck();
-		EasyMock.replay(deck);
-		TurnResult result = shuffleCardController.handleCardAction();
+		ShuffleCardController shuffleCardController = new ShuffleCardController(deck, cv);
 
+		deck.shuffleDeck();
+		cv.actionMessage();
+		EasyMock.replay(deck, cv);
+
+		TurnResult result = shuffleCardController.handleCardAction();
 		assertEquals(expected, result);
-		EasyMock.verify(deck);
+		EasyMock.verify(deck, cv);
 	}
 }
