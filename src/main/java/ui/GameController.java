@@ -4,10 +4,12 @@ import domain.*;
 
 import java.util.*;
 
-public class GameController {
+public class GameController implements ActivePlayersSubject {
 	private final LinkedList<PlayerTurn> playerTurns;
 	private final TurnController turnController;
 	private final GameView gameView;
+	private final List<Player> activePlayers;
+	private final List<ActivePlayersObserver> observers = new ArrayList<>();
 
 	GameController(List<Player> players, TurnController turnController, GameView gameView) {
 		this.playerTurns = new LinkedList<>();
@@ -17,6 +19,7 @@ public class GameController {
 		Collections.shuffle(playerTurns);
 		this.turnController = turnController;
 		this.gameView = gameView;
+		this.activePlayers = players;
 	}
 
 	public void startGame() {
@@ -30,6 +33,9 @@ public class GameController {
 			PlayerTurn playerTurn = getNextPlayerTurn();
 			int remainingTurns = playerTurn.remainingTurns;
 			Player currPlayer = playerTurn.player;
+
+			updateActivePlayers();
+			notifyObservers();
 
 			while (remainingTurns > 0) {
 				TurnResult result = playTurn(currPlayer);
@@ -83,11 +89,24 @@ public class GameController {
 		this.gameView.announceGameEnd(winner);
 	}
 
-	public List<Player> getActivePlayers() {
-		List<Player> activePlayers = new ArrayList<>();
+	public void updateActivePlayers() {
+		this.activePlayers.clear();
 		for (PlayerTurn playerTurn : playerTurns) {
-			activePlayers.add(playerTurn.player);
+			this.activePlayers.add(playerTurn.player);
 		}
-		return activePlayers;
+	}
+
+	public void registerObserver(ActivePlayersObserver controller) {
+		observers.add(controller);
+	}
+
+	public void unregisterObserver(ActivePlayersObserver controller) {
+		observers.remove(controller);
+	}
+
+	public void notifyObservers() {
+		for (ActivePlayersObserver observer : observers) {
+			observer.updateActivePlayers(activePlayers);
+		}
 	}
 }
