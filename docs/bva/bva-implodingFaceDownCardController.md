@@ -1,4 +1,4 @@
-# BVA Analysis for ImplodingFaceUpController
+# BVA Analysis for ImplodingFaceDownController
 
 ## Method 1: ```public void handleCardDraw()```
 ### Step 4:
