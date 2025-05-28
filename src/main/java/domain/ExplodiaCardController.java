@@ -6,7 +6,8 @@ import ui.ExplodiaCardView;
 import java.util.Map;
 
 @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
-public class ExplodiaCardController implements CardController, ActionCardController, DrawCardController, TurnObserver {
+public class ExplodiaCardController implements CardController,
+		ActionCardController, DrawCardController, TurnObserver {
 	private ExplodiaCardView explodiaCardView;
 	private Player player;
 	private static final int TOTAL_EXPLODIA = 5;
