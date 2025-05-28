@@ -6,6 +6,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
 import ui.SwapHandCardView;
 
+import javax.smartcardio.Card;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -235,6 +237,19 @@ public class PlayerTest {
 		Player player = new Player(0);
 
 		Integer expected = 0;
+		Integer actual = player.getHandSize();
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void OnePlayerWithHandSizeOfThree_getHandSize_returnThree() {
+		Player player = new Player(0);
+		player.addCard(CardType.ATTACK);
+		player.addCard(CardType.ATTACK);
+		player.addCard(CardType.SKIP);
+
+		Integer expected = 3;
 		Integer actual = player.getHandSize();
 
 		assertEquals(expected, actual);
