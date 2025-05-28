@@ -89,7 +89,7 @@ public class GameController implements ActivePlayersSubject {
 		this.gameView.announceGameEnd(winner);
 	}
 
-	public void updateActivePlayersExcludingCurrent() {
+	private void updateActivePlayersExcludingCurrent() {
 		this.activePlayersExcludingCurrent.clear();
 		for (PlayerTurn playerTurn : playerTurns) {
 			this.activePlayersExcludingCurrent.add(playerTurn.player);
