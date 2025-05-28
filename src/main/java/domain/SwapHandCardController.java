@@ -1,13 +1,16 @@
 package domain;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import ui.GameController;
 import ui.SwapHandCardView;
 
 import java.util.List;
 
-public class SwapHandCardController implements CardController, ActionCardController {
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "currentPlayer must be shared")
+public class SwapHandCardController implements CardController, ActionCardController, TurnObserver {
 	private final SwapHandCardView view;
 	private final GameController gameController;
+	private Player currentPlayer;
 
 	public SwapHandCardController(SwapHandCardView view, GameController gameController) {
 		this.view = view;
@@ -19,9 +22,12 @@ public class SwapHandCardController implements CardController, ActionCardControl
 
 		Player playerToSwapWith = view.promptForPlayerToSwapWith(activePlayers);
 
-		// somehow get current player
-		// currPlayer.swapHandWith(playerToSwapWith)
+		currentPlayer.swapHandWith(playerToSwapWith);
 
 		return TurnResult.CONTINUE;
+	}
+
+	public void updatePlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
 	}
 }
