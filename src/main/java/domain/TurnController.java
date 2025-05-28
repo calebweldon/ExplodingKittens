@@ -20,6 +20,8 @@ public final class TurnController {
 		}
 		this.deck = deck;
 		this.turnView = turnView;
+		// TODO: Add CardController Map
+		// TODO: Add observers list
 	}
 
 	public TurnResult takeTurn(Player player) {
@@ -28,6 +30,7 @@ public final class TurnController {
 		boolean playerWon = false;
 		TurnResult specialAction = TurnResult.CONTINUE;
 
+		// TODO: Refactor loop condition
 		while (!turnOver) {
 			String input = promptForInput();
 			switch (input) {
@@ -52,6 +55,8 @@ public final class TurnController {
 				case "draw": {
 					CardType drawn = drawCard();
 					turnView.showCardDrawn(drawn);
+
+					// TODO: add drawCard function to handle draw cases
 					if (drawn == CardType.EXPLODING_KITTEN) {
 						eliminated = !handleExplodingKitten(player);
 					} else {
@@ -67,11 +72,13 @@ public final class TurnController {
 					turnOver = true;
 					break;
 				}
+				// TODO: Add "get info" case
 				default:
 					turnView.showUnexpectedAction();
 			}
 		}
 
+		// TODO: return specialAction
 		if (eliminated) {
 			return TurnResult.ELIMINATED;
 		} else if (playerWon) {
@@ -81,6 +88,7 @@ public final class TurnController {
 		}
 	}
 
+	// TODO: Remove
 	private TurnResult getCardAction(CardType cardType) {
 		turnView.showCardPlayed(cardType);
 		switch (cardType) {
@@ -97,10 +105,12 @@ public final class TurnController {
 		return turnView.promptForInput();
 	}
 
+	// TODO: Call corresponding CardController handleAction()
 	public void playCard(Player player, CardType cardType) {
 		player.playCard(cardType);
 	}
 
+	// TODO: Remove
 	public String getCardInfo(CardType type) {
 		switch (type) {
 			case EXPLODING_KITTEN:
@@ -116,14 +126,17 @@ public final class TurnController {
 		// placeholder for cleanup logic
 	}
 
+	// TODO: Remove?
 	public void endPrematurely() {
 		turnView.showTurnEndedPrematurely();
 	}
-	
+
+	// TODO: Add Corresponding CardController handleDraw()
 	public CardType drawCard() {
 		return deck.drawCard();
 	}
 
+	// TODO: Remove - handle in CardController handleDraw()
 	public boolean handleExplodingKitten(Player player) {
 		if (player.viewHand().getOrDefault(CardType.DEFUSE, 0) > 0) {
 			turnView.showDefuseUsed();

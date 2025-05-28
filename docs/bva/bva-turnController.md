@@ -1,5 +1,6 @@
 # BVA Analysis for TurnController
 
+[comment]: # (TODO: Remove - unnecessary for constructor)
 ## Method 1: ```public TurnController(Deck deck)```
 ### Step 1-3 Results
 |        | Input         | (if more to consider for input) | Output                         |
@@ -36,6 +37,7 @@
 | Test Case 4  | player ≠ null, deck.drawCard() returns EK, has defuse| removes defuse; reinserts EK; prints “Defuse! You stay in.”; returns true | ✅      |
 
 
+[comment]: # (TODO: Remove - unnecessary for private)
 ## Method 3: ```private boolean handleExplodingKitten(Player player)```
 ### Step 1-3 Results
 |        | Input                          | (if more to consider for input) | Output                                                |
@@ -54,6 +56,7 @@
 | Test Case 3  | hand has >1 DEFUSE                          | same behavior as 1 DEFUSE                                    | ✅           |
 
 
+[comment]: # (TODO: Remove - unnecessary for private)
 ## Method 4: ```private int promptCardIndex(Player player)```
 ### Step 1-3 Results
 |        | Input                 | (if more to consider for input)   | Output                        |

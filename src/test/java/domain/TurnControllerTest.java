@@ -33,6 +33,7 @@ class TurnControllerTest {
 		System.setIn(testIn);
 	}
 
+	// TODO: Remove constructor tests - unnecessary
 	// --- Constructor Tests ---
 
 	@Test
