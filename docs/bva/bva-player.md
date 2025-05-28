@@ -73,10 +73,10 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|             | System under test         | Expected output 1 | Implemented? |
-|-------------|---------------------------|-------------------|--------------|
-| Test Case 1 | Player has hand size of 0 | 0                 | :x:          |
-| Test Case 2 | Player has hand size of 1 | 1                 | :x:          |
+|             | System under test         | Expected output 1 | Implemented?       |
+|-------------|---------------------------|-------------------|--------------------|
+| Test Case 1 | Player has hand size of 0 | 0                 | :white_check_mark: |
+| Test Case 2 | Player has hand size of 2 | 2                 | :x:                |
 
 
 ## Method 4: ```public void swapHandWith(Player playerToSwapWith)```

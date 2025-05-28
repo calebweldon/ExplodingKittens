@@ -229,4 +229,14 @@ public class PlayerTest {
 
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	public void OnePlayerWithHandSizeOfZero_getHandSize_returnZero() {
+		Player player = new Player(0);
+
+		Integer expected = 0;
+		Integer actual = player.getHandSize();
+
+		assertEquals(expected, actual);
+	}
 }
