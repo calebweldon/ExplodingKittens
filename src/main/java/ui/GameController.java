@@ -8,8 +8,8 @@ public class GameController implements ActivePlayersSubject {
 	private final LinkedList<PlayerTurn> playerTurns;
 	private final TurnController turnController;
 	private final GameView gameView;
-	private final List<Player> activePlayers;
-	private final List<ActivePlayersObserver> observers = new ArrayList<>();
+	private final List<Player> activePlayersExcludingCurrent;
+	private final List<ActivePlayersExcludingCurrentObserver> observers = new ArrayList<>();
 
 	GameController(List<Player> players, TurnController turnController, GameView gameView) {
 		this.playerTurns = new LinkedList<>();
@@ -19,7 +19,7 @@ public class GameController implements ActivePlayersSubject {
 		Collections.shuffle(playerTurns);
 		this.turnController = turnController;
 		this.gameView = gameView;
-		this.activePlayers = players;
+		this.activePlayersExcludingCurrent = players;
 	}
 
 	public void startGame() {
@@ -34,7 +34,7 @@ public class GameController implements ActivePlayersSubject {
 			int remainingTurns = playerTurn.remainingTurns;
 			Player currPlayer = playerTurn.player;
 
-			updateActivePlayers();
+			updateActivePlayersExcludingCurrent();
 			notifyObservers();
 
 			while (remainingTurns > 0) {
@@ -89,24 +89,24 @@ public class GameController implements ActivePlayersSubject {
 		this.gameView.announceGameEnd(winner);
 	}
 
-	public void updateActivePlayers() {
-		this.activePlayers.clear();
+	public void updateActivePlayersExcludingCurrent() {
+		this.activePlayersExcludingCurrent.clear();
 		for (PlayerTurn playerTurn : playerTurns) {
-			this.activePlayers.add(playerTurn.player);
+			this.activePlayersExcludingCurrent.add(playerTurn.player);
 		}
 	}
 
-	public void registerObserver(ActivePlayersObserver controller) {
+	public void registerObserver(ActivePlayersExcludingCurrentObserver controller) {
 		observers.add(controller);
 	}
 
-	public void unregisterObserver(ActivePlayersObserver controller) {
+	public void unregisterObserver(ActivePlayersExcludingCurrentObserver controller) {
 		observers.remove(controller);
 	}
 
 	public void notifyObservers() {
-		for (ActivePlayersObserver observer : observers) {
-			observer.updateActivePlayers(activePlayers);
+		for (ActivePlayersExcludingCurrentObserver observer : observers) {
+			observer.updateActivePlayersExcludingCurrent(activePlayersExcludingCurrent);
 		}
 	}
 }

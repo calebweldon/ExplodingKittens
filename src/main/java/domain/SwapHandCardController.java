@@ -8,17 +8,20 @@ import java.util.List;
 @SuppressFBWarnings(value = "EI_EXPOSE_REP2",
 		justification = "currentPlayer and activePlayers must be shared")
 public class SwapHandCardController implements CardController, ActionCardController,
-		TurnObserver, ActivePlayersObserver {
+		TurnObserver, ActivePlayersExcludingCurrentObserver {
 	private final SwapHandCardView view;
 	private Player currentPlayer;
-	private List<Player> activePlayers;
+	private List<Player> activePlayersExcludingCurrent;
 
 	public SwapHandCardController(SwapHandCardView view) {
 		this.view = view;
 	}
 
 	public TurnResult handleCardAction() {
-		Player playerToSwapWith = view.promptForPlayerToSwapWith(activePlayers);
+		view.actionMessage();
+
+		Player playerToSwapWith = view.promptForPlayerToSwapWith
+				(activePlayersExcludingCurrent);
 
 		currentPlayer.swapHandWith(playerToSwapWith);
 
@@ -29,7 +32,8 @@ public class SwapHandCardController implements CardController, ActionCardControl
 		this.currentPlayer = currentPlayer;
 	}
 
-	public void updateActivePlayers(List<Player> activePlayers) {
-		this.activePlayers = activePlayers;
+	public void updateActivePlayersExcludingCurrent
+			(List<Player> activePlayersExcludingCurrent) {
+		this.activePlayersExcludingCurrent = activePlayersExcludingCurrent;
 	}
 }

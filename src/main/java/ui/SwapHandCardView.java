@@ -24,10 +24,10 @@ public class SwapHandCardView implements CardView {
 		System.out.print("Enter the ID of the player you want to swap with: ");
 	}
 
-	public Player promptForPlayerToSwapWith(List<Player> activePlayers) {
+	public Player promptForPlayerToSwapWith(List<Player> activePlayersExceptCurrent) {
 		// TODO: add locale
 
-		for (Player player : activePlayers) {
+		for (Player player : activePlayersExceptCurrent) {
 			int playerId = player.getId();
 			int handSize = player.getHandSize();
 			String playerAndHandSizeMessage = MessageFormat.format(
@@ -36,11 +36,10 @@ public class SwapHandCardView implements CardView {
 		}
 
 		while (true) {
-			actionMessage();
 			try {
 				int userInput = Integer.parseInt(scanner.nextLine());
 
-				for (Player player : activePlayers) {
+				for (Player player : activePlayersExceptCurrent) {
 					if (player.getId() == userInput) {
 						String playerChosenMessage = MessageFormat.format(
 								"Player {0} chosen", userInput);
