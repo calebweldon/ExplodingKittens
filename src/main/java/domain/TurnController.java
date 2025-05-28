@@ -1,10 +1,13 @@
 package domain;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TurnController {
-	private final List<ObserverCardController> observers = new ArrayList<>();
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
+public class TurnController implements SubjectDomain {
+	private final List<TurnObserver> observers = new ArrayList<>();
 	private Player currPlayer;
 
 	// TODO: Replace dummy method
@@ -18,16 +21,16 @@ public class TurnController {
 		return TurnResult.CONTINUE;
 	}
 
-	void registerObserver(ObserverCardController controller) {
-		observers.add((ObserverCardController) controller);
+	public void registerObserver(TurnObserver controller) {
+		observers.add(controller);
 	}
 
-	void unregisterObserver(ObserverCardController controller) {
-		observers.remove((ObserverCardController) controller);
+	public void unregisterObserver(TurnObserver controller) {
+		observers.remove(controller);
 	}
 
-	private void notifyObservers() {
-		for (ObserverCardController observer : observers) {
+	public void notifyObservers() {
+		for (TurnObserver observer : observers) {
 			observer.updatePlayer(currPlayer);
 		}
 	}

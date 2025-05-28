@@ -1,5 +1,5 @@
 package domain;
 
-public interface ObserverCardController {
+public interface TurnObserver {
 	public void updatePlayer(Player currentPlayer);
 }
