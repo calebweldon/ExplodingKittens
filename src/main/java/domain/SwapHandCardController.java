@@ -5,7 +5,7 @@ import ui.SwapHandCardView;
 
 import java.util.List;
 
-public class SwapHandCardController implements CardController {
+public class SwapHandCardController implements CardController, ActionCardController {
 	private final SwapHandCardView view;
 	private final GameController gameController;
 
