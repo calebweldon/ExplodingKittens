@@ -11,9 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeckTest {
 	public static final int INT_MAX = 2147483647;
-	public static final int NUM_THREE = 3;
-	public static final int NUM_FOUR = 4;
-
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, INT_MAX})
@@ -161,7 +158,7 @@ public class DeckTest {
 
 	@SuppressWarnings("checkstyle:MagicNumber")
 	@ParameterizedTest
-	@ValueSource(ints = {1, 2, NUM_THREE, NUM_FOUR})
+	@ValueSource(ints = {1, 2, 3, 4})
 	public void addSpecialCards_FilledDeck(int numExplodingCards) {
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Deck deck = new Deck(rand, true);
