@@ -254,4 +254,27 @@ public class PlayerTest {
 
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	public void TwoPlayers_swapHandWith_swapsHandAndChecksSizes() {
+		Player playerOne = new Player(0);
+		playerOne.addCard(CardType.ATTACK);
+		playerOne.addCard(CardType.ATTACK);
+		playerOne.addCard(CardType.SKIP);
+
+		Player playerTwo = new Player(1);
+
+		playerOne.swapHandWith(playerTwo);
+
+		Integer actualPlayerOneHandSize = playerOne.getHandSize();
+		Integer expectedPlayerOneHandSize = 0;
+
+		Integer actualPlayerTwoHandSize = playerTwo.getHandSize();
+		Integer expectedPlayerTwoHandSize = 3;
+
+		assertEquals(expectedPlayerOneHandSize, actualPlayerOneHandSize);
+		assertEquals(expectedPlayerTwoHandSize, actualPlayerTwoHandSize);
+
+
+	}
 }

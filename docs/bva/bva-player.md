@@ -83,6 +83,6 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|             | System under test                                             | Expected output 1               | Implemented? |
-|-------------|---------------------------------------------------------------|---------------------------------|--------------|
-| Test Case 1 | Two players, one with hand size of 0 and other with size of 1 | Players have reverse hand sizes | :x:          |
+|             | System under test                                             | Expected output 1               | Implemented?       |
+|-------------|---------------------------------------------------------------|---------------------------------|--------------------|
+| Test Case 1 | Two players, one with hand size of 0 and other with size of 3 | Players have reverse hand sizes | :white_check_mark: |
