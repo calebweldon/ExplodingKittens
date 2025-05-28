@@ -48,9 +48,6 @@ public class GameController {
 					changeNumTurns(2 + remainingTurns + 1);
 					remainingTurns = 0;
 				}
-				if (result == TurnResult.SKIP) {
-					remainingTurns--;
-				}
 				if (remainingTurns == 0) {
 					reinsertPlayer(currPlayer);
 				}
