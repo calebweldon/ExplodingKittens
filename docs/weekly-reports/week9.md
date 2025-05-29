@@ -67,8 +67,12 @@
 - 
 
 ### PR done and approved
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/43
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/41
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/40
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/38
 
 ### Other people's PR reviewed by you
--
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/45
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/42
 
