@@ -1,11 +1,13 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.CardType;
+import domain.Player;
+import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import ui.ExplodiaCardView;
-import ui.ImplodingFaceDownCardView;
 
 import java.util.Map;
 

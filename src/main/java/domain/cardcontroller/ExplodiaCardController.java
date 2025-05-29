@@ -1,5 +1,9 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.CardType;
+import domain.Player;
+import domain.TurnObserver;
+import domain.TurnResult;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import ui.ExplodiaCardView;
 

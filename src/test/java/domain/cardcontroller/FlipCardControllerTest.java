@@ -1,19 +1,22 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.Deck;
+import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ShuffleCardControllerTest {
+public class FlipCardControllerTest {
 	@Test
-	public void handleShuffleCardAction() {
+	public void handleFlipCardAction() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnResult expected = TurnResult.CONTINUE;
-		ShuffleCardController shuffleCardController = new ShuffleCardController(deck);
-		deck.shuffleDeck();
+		deck.flipDeck();
 		EasyMock.replay(deck);
-		TurnResult result = shuffleCardController.handleCardAction();
+
+		FlipCardController flipCardController = new FlipCardController(deck);
+		TurnResult result = flipCardController.handleCardAction();
 
 		assertEquals(expected, result);
 		EasyMock.verify(deck);
