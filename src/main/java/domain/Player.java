@@ -70,4 +70,8 @@ public class Player {
 		this.hand = new HashMap<>(playerToSwapWith.hand);
 		playerToSwapWith.hand = temp;
 	}
+
+	public Map<CardType, Integer> viewHand() {
+		return new HashMap<>(this.hand);
+	}
 }

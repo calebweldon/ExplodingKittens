@@ -6,4 +6,4 @@ public interface TurnSubject {
 	public void registerObserver(TurnObserver observer);
 
 	public void unregisterObserver(TurnObserver observer);
-}
+} 
