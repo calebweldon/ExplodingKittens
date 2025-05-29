@@ -7,18 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-// suppress deck warning
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 // TODO: Go through and restrict access modifiers - most methods should be private
 // TODO: Consider having one SuppressFBWarnings before class
-public final class TurnController implements SubjectDomain {
+public final class TurnController implements TurnSubject {
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck can be shared")
 	private final Deck deck;
 	private final TurnView turnView;
 	private final Map<CardType, CardController> cardControllers;
 	private final List<TurnObserver> observers = new ArrayList<>();
-	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", 
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2",
 		justification = "Player reference is intentionally stored for game state")
 	private Player currPlayer;
 
@@ -27,7 +26,7 @@ public final class TurnController implements SubjectDomain {
 		this(deck, turnView, new HashMap<>());
 	}
 
-	public TurnController(Deck deck, TurnView turnView, 
+	public TurnController(Deck deck, TurnView turnView,
 		Map<CardType, CardController> cardControllers) {
 		if (deck == null) {
 			throw new IllegalArgumentException("Deck cannot be null");
@@ -44,13 +43,13 @@ public final class TurnController implements SubjectDomain {
 		// TODO: Initialize list of observers
 	}
 
-	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", 
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2",
 		justification = "Player reference is intentionally stored for game state")
 	public TurnResult takeTurn(Player player) {
 		this.currPlayer = player;
 		// TODO: notify observers only if there is a change in currPlayer?
 		notifyObservers();
-		
+
 		TurnResult specialAction = TurnResult.CONTINUE;
 
 		while (specialAction == TurnResult.CONTINUE) {
@@ -80,14 +79,14 @@ public final class TurnController implements SubjectDomain {
 					// Use controller pattern for special draw cards
 					CardController controller = cardControllers.get(drawn);
 					if (controller instanceof DrawCardController) {
-						DrawCardController drawController = 
+						DrawCardController drawController =
 							(DrawCardController) controller;
 						return drawController.handleCardDraw();
 					}
 
 					// TODO: Refactor logic
 					//  - Exploding Kitten DOES have a DrawCardController
-					// Handle cards without DrawCardController 
+					// Handle cards without DrawCardController
 					// (like EXPLODING_KITTEN)
 					if (drawn == CardType.EXPLODING_KITTEN) {
 						if (!handleExplodingKitten(player)) {
@@ -112,8 +111,8 @@ public final class TurnController implements SubjectDomain {
 						int count = player.viewHand().get(cardType);
 						if (count > 0) {
 							System.out.printf(
-								"%s (%d): ", 
-								cardType, 
+								"%s (%d): ",
+								cardType,
 								count
 							);
 							turnView.showCardInfo(cardType);
@@ -130,7 +129,7 @@ public final class TurnController implements SubjectDomain {
 		return specialAction;
 	}
 
-	// TODO: Remove - temporary fallback until all cards have controllers 
+	// TODO: Remove - temporary fallback until all cards have controllers
 	// (SkipCardController, AttackCardController)
 	private TurnResult getCardAction(CardType cardType) {
 		turnView.showCardPlayed(cardType);
@@ -151,16 +150,16 @@ public final class TurnController implements SubjectDomain {
 	public TurnResult playCard(Player player, CardType cardType) {
 		// First, remove the card from player's hand
 		player.playCard(cardType);
-		
+
 		// Then, execute the card's special action if it has a controller
 		CardController controller = cardControllers.get(cardType);
 		if (controller instanceof ActionCardController) {
-			ActionCardController actionController = 
+			ActionCardController actionController =
 				(ActionCardController) controller;
 			return actionController.handleCardAction();
 		}
-		
-		// TODO: All cards should have controllers - remove this fallback 
+
+		// TODO: All cards should have controllers - remove this fallback
 		// once SkipCardController and AttackCardController are added
 		// For cards without controllers (like SKIP, ATTACK), use legacy method temporarily
 		return getCardAction(cardType);
@@ -176,11 +175,11 @@ public final class TurnController implements SubjectDomain {
 		if (player.viewHand().getOrDefault(CardType.DEFUSE, 0) > 0) {
 			turnView.showDefuseUsed();
 			player.removeCard(CardType.DEFUSE);
-			
+
 			// Let player choose where to put the exploding kitten back
 			int index = turnView.promptExplodingKittenIndex(deck.getSize());
 			deck.insertCardAtIndex(CardType.EXPLODING_KITTEN, index);
-			
+
 			return true;
 		}
 		turnView.showNoDefuseFound();
