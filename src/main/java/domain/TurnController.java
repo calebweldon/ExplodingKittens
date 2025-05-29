@@ -10,6 +10,8 @@ import java.util.ArrayList;
 // suppress deck warning
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+// TODO: Go through and restrict access modifiers - most methods should be private
+// TODO: Consider having one SuppressFBWarnings before class
 public final class TurnController implements SubjectDomain {
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck can be shared")
 	private final Deck deck;
@@ -20,6 +22,7 @@ public final class TurnController implements SubjectDomain {
 		justification = "Player reference is intentionally stored for game state")
 	private Player currPlayer;
 
+	// TODO: Update GameSetup and Remove this Constructor
 	public TurnController(Deck deck, TurnView turnView) {
 		this(deck, turnView, new HashMap<>());
 	}
@@ -38,17 +41,20 @@ public final class TurnController implements SubjectDomain {
 		this.deck = deck;
 		this.turnView = turnView;
 		this.cardControllers = new HashMap<>(cardControllers);
+		// TODO: Initialize list of observers
 	}
 
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", 
 		justification = "Player reference is intentionally stored for game state")
 	public TurnResult takeTurn(Player player) {
 		this.currPlayer = player;
+		// TODO: notify observers only if there is a change in currPlayer?
 		notifyObservers();
 		
 		TurnResult specialAction = TurnResult.CONTINUE;
 
 		while (specialAction == TurnResult.CONTINUE) {
+			// TODO: Print hand immediately
 			String input = promptForInput();
 			switch (input) {
 				case "play": {
@@ -60,6 +66,7 @@ public final class TurnController implements SubjectDomain {
 					CardType cardType = promptCardChoice(player);
 					try {
 						specialAction = playCard(player, cardType);
+						// TODO: remove unnecessary comments
 						// Loop will exit if specialAction != CONTINUE
 					} catch (IllegalArgumentException e) {
 						turnView.showInvalidCardPlay(e.getMessage());
@@ -77,7 +84,9 @@ public final class TurnController implements SubjectDomain {
 							(DrawCardController) controller;
 						return drawController.handleCardDraw();
 					}
-					
+
+					// TODO: Refactor logic
+					//  - Exploding Kitten DOES have a DrawCardController
 					// Handle cards without DrawCardController 
 					// (like EXPLODING_KITTEN)
 					if (drawn == CardType.EXPLODING_KITTEN) {
@@ -96,6 +105,7 @@ public final class TurnController implements SubjectDomain {
 					return specialAction;
 				}
 				case "info": {
+					// TODO: Remove prints and call TurnView
 					System.out.println("=== CARD INFO ===");
 					System.out.println("Cxards in your hand:");
 					for (CardType cardType : player.viewHand().keySet()) {
@@ -181,6 +191,7 @@ public final class TurnController implements SubjectDomain {
 		return turnView.promptCardChoice(player);
 	}
 
+	// TODO: Add BVA Analysis and unit tests for observer pattern methods
 	// Observer pattern methods
 	public void registerObserver(TurnObserver controller) {
 		observers.add(controller);
