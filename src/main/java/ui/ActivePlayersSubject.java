@@ -1,4 +1,6 @@
-package domain;
+package ui;
+
+import domain.ActivePlayersExcludingCurrentObserver;
 
 public interface ActivePlayersSubject {
 	public void notifyObservers();
