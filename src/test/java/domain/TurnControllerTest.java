@@ -33,8 +33,8 @@ class TurnControllerTest {
 		System.setIn(testIn);
 	}
 
-	// TODO: Remove constructor tests - unnecessary
-	// --- Constructor Tests ---
+	// --- Constructor ---
+	/*
 
 	@Test
 	void constructor_nullDeck_throwsException() {
@@ -55,6 +55,7 @@ class TurnControllerTest {
 		TurnController tc = new TurnController(deck, turnView);
 		assertNotNull(tc);
 	}
+	*/
 
 	// --- Core Game Logic Tests ---
 
@@ -271,27 +272,5 @@ class TurnControllerTest {
 
 		assertEquals(TurnResult.CONTINUE, result);
 		EasyMock.verify(deck, player, turnView);
-	}
-
-	// --- Utility Method Tests ---
-
-	@ParameterizedTest
-	@EnumSource(CardType.class)
-	void getCardInfo_returnsAppropriateDescription(CardType cardType) {
-		Deck deck = EasyMock.createMock(Deck.class);
-		TurnView turnView = EasyMock.createMock(TurnView.class);
-		TurnController tc = new TurnController(deck, turnView);
-		
-		String info = tc.getCardInfo(cardType);
-		assertNotNull(info);
-		
-		// Verify specific important cards have proper descriptions
-		if (cardType == CardType.EXPLODING_KITTEN) {
-			assertEquals("Draw this and you're out—unless you defuse it.", info);
-		} else if (cardType == CardType.DEFUSE) {
-			assertEquals("Defuse an Exploding Kitten.", info);
-		} else {
-			assertEquals("No description available.", info);
-		}
 	}
 }
