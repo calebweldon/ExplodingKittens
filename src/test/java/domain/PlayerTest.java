@@ -1,17 +1,10 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
-import ui.SwapHandCardView;
-
-import javax.smartcardio.Card;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class PlayerTest {
