@@ -202,4 +202,12 @@ public class DeckTest {
 
 		assertEquals(1, deck.getSize());
 	}
+
+	@Test
+	public void getDeckSize_AllCards() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, true);
+
+		assertEquals(MAX_DECK_SIZE, deck.getSize());
+	}
 }
