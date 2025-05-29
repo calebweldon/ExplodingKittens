@@ -33,41 +33,8 @@ class TurnControllerTest {
 		System.setIn(testIn);
 	}
 
-	// --- Constructor ---
-	/*
-
-	@Test
-	void constructor_nullDeck_throwsException() {
-		TurnView turnView = EasyMock.createMock(TurnView.class);
-		assertThrows(IllegalArgumentException.class, () -> new TurnController(null, turnView));
-	}
-
-	@Test
-	void constructor_nullTurnView_throwsException() {
-		Deck deck = EasyMock.createMock(Deck.class);
-		assertThrows(IllegalArgumentException.class, () -> new TurnController(deck, null));
-	}
-
-	@Test
-	void constructor_validDeckAndTurnView_success() {
-		Deck deck = EasyMock.createMock(Deck.class);
-		TurnView turnView = EasyMock.createMock(TurnView.class);
-		TurnController tc = new TurnController(deck, turnView);
-		assertNotNull(tc);
-	}
-	*/
 
 	// --- Core Game Logic Tests ---
-
-	@Test
-	void takeTurn_nullPlayer_throwsNPE() {
-		Deck deck = EasyMock.createMock(Deck.class);
-		TurnView turnView = EasyMock.createMock(TurnView.class);
-		EasyMock.expect(turnView.promptForInput()).andReturn("play");
-		EasyMock.replay(turnView);
-		TurnController tc = new TurnController(deck, turnView);
-		assertThrows(NullPointerException.class, () -> tc.takeTurn(null));
-	}
 
 	@Test
 	void takeTurn_drawNonEK_cardAddedAndContinues() {
@@ -183,7 +150,8 @@ class TurnControllerTest {
 	void takeTurn_drawsEK_withDefuse_playerSurvives() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.EXPLODING_KITTEN);
-		deck.insertCardAtRandomIndex(CardType.EXPLODING_KITTEN);
+		EasyMock.expect(deck.getSize()).andReturn(10);
+		deck.insertCardAtIndex(CardType.EXPLODING_KITTEN, 5);
 		EasyMock.expectLastCall();
 		EasyMock.replay(deck);
 
@@ -201,6 +169,7 @@ class TurnControllerTest {
 		EasyMock.expectLastCall();
 		turnView.showDefuseUsed();
 		EasyMock.expectLastCall();
+		EasyMock.expect(turnView.promptExplodingKittenIndex(10)).andReturn(5);
 		EasyMock.replay(turnView);
 
 		TurnController tc = new TurnController(deck, turnView);

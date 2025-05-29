@@ -53,9 +53,10 @@ public class TurnView {
 
 	public String promptForInput() {
 		while (true) {
-			System.out.print("Enter [play] or [draw]: ");
+			System.out.print("Enter [play], [draw], or [info]: ");
 			String input = scanner.nextLine().trim().toLowerCase();
-			if ("play".equals(input) || "draw".equals(input)) {
+			if ("play".equals(input) || "draw".equals(input) 
+				|| "info".equals(input)) {
 				return input;
 			}
 			System.out.println("Invalid input.");
@@ -94,6 +95,48 @@ public class TurnView {
 				}
 			} catch (NumberFormatException ignored) { }
 			System.out.println("Invalid index.");
+		}
+	}
+
+	public void showCardInfo(CardType type) {
+		switch (type) {
+			case EXPLODING_KITTEN:
+				System.out.println(
+					"Draw this and you're out—unless you defuse it."
+				);
+				break;
+			case DEFUSE:
+				System.out.println("Defuse an Exploding Kitten.");
+				break;
+			case SKIP:
+				System.out.println("Skip your turn. Next player goes.");
+				break;
+			case ATTACK:
+				System.out.println(
+					"End your turn without drawing. Next player takes 2 turns."
+				);
+				break;
+			default:
+				System.out.println("No description available.");
+				break;
+		}
+	}
+
+	public int promptExplodingKittenIndex(int deckSize) {
+		while (true) {
+			System.out.printf(
+				"Where do you want to put the Exploding Kitten back? (0-%d): ", 
+				deckSize
+			);
+			try {
+				int index = Integer.parseInt(scanner.nextLine());
+				if (index >= 0 && index <= deckSize) {
+					return index;
+				}
+				System.out.println("Invalid index. Try again.");
+			} catch (NumberFormatException e) {
+				System.out.println("Please enter a valid number.");
+			}
 		}
 	}
 }

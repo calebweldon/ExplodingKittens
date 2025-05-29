@@ -2,36 +2,53 @@ package domain;
 
 import java.security.SecureRandom;
 import ui.TurnView;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 // suppress deck warning
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-public final class TurnController {
+public final class TurnController implements SubjectDomain {
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck can be shared")
 	private final Deck deck;
 	private final TurnView turnView;
+	private final Map<CardType, CardController> cardControllers;
+	private final List<TurnObserver> observers = new ArrayList<>();
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", 
+		justification = "Player reference is intentionally stored for game state")
+	private Player currPlayer;
 
 	public TurnController(Deck deck, TurnView turnView) {
+		this(deck, turnView, new HashMap<>());
+	}
+
+	public TurnController(Deck deck, TurnView turnView, 
+		Map<CardType, CardController> cardControllers) {
 		if (deck == null) {
 			throw new IllegalArgumentException("Deck cannot be null");
 		}
 		if (turnView == null) {
 			throw new IllegalArgumentException("TurnView cannot be null");
 		}
+		if (cardControllers == null) {
+			throw new IllegalArgumentException("CardControllers cannot be null");
+		}
 		this.deck = deck;
 		this.turnView = turnView;
-		// TODO: Add CardController Map
-		// TODO: Add observers list
+		this.cardControllers = new HashMap<>(cardControllers);
 	}
 
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", 
+		justification = "Player reference is intentionally stored for game state")
 	public TurnResult takeTurn(Player player) {
-		boolean turnOver = false;
-		boolean eliminated = false;
-		boolean playerWon = false;
+		this.currPlayer = player;
+		notifyObservers();
+		
 		TurnResult specialAction = TurnResult.CONTINUE;
 
-		// TODO: Refactor loop condition
-		while (!turnOver) {
+		while (specialAction == TurnResult.CONTINUE) {
 			String input = promptForInput();
 			switch (input) {
 				case "play": {
@@ -42,11 +59,8 @@ public final class TurnController {
 					turnView.showPlayerHand(player.viewHand());
 					CardType cardType = promptCardChoice(player);
 					try {
-						playCard(player, cardType);
-						// Get action based on card played
-						specialAction = getCardAction(cardType);
-						// Playing any card ends the turn
-						turnOver = true;
+						specialAction = playCard(player, cardType);
+						// Loop will exit if specialAction != CONTINUE
 					} catch (IllegalArgumentException e) {
 						turnView.showInvalidCardPlay(e.getMessage());
 					}
@@ -56,9 +70,20 @@ public final class TurnController {
 					CardType drawn = drawCard();
 					turnView.showCardDrawn(drawn);
 
-					// TODO: add drawCard function to handle draw cases
+					// Use controller pattern for special draw cards
+					CardController controller = cardControllers.get(drawn);
+					if (controller instanceof DrawCardController) {
+						DrawCardController drawController = 
+							(DrawCardController) controller;
+						return drawController.handleCardDraw();
+					}
+					
+					// Handle cards without DrawCardController 
+					// (like EXPLODING_KITTEN)
 					if (drawn == CardType.EXPLODING_KITTEN) {
-						eliminated = !handleExplodingKitten(player);
+						if (!handleExplodingKitten(player)) {
+							return TurnResult.ELIMINATED;
+						}
 					} else {
 						try {
 							player.addCard(drawn);
@@ -68,27 +93,35 @@ public final class TurnController {
 							);
 						}
 					}
-					endPlayerTurn();
-					turnOver = true;
+					return specialAction;
+				}
+				case "info": {
+					System.out.println("=== CARD INFO ===");
+					System.out.println("Cxards in your hand:");
+					for (CardType cardType : player.viewHand().keySet()) {
+						int count = player.viewHand().get(cardType);
+						if (count > 0) {
+							System.out.printf(
+								"%s (%d): ", 
+								cardType, 
+								count
+							);
+							turnView.showCardInfo(cardType);
+						}
+					}
+					System.out.println("=================");
 					break;
 				}
-				// TODO: Add "get info" case
 				default:
 					turnView.showUnexpectedAction();
 			}
 		}
 
-		// TODO: return specialAction
-		if (eliminated) {
-			return TurnResult.ELIMINATED;
-		} else if (playerWon) {
-			return TurnResult.WON;
-		} else {
-			return specialAction;
-		}
+		return specialAction;
 	}
 
-	// TODO: Remove
+	// TODO: Remove - temporary fallback until all cards have controllers 
+	// (SkipCardController, AttackCardController)
 	private TurnResult getCardAction(CardType cardType) {
 		turnView.showCardPlayed(cardType);
 		switch (cardType) {
@@ -105,30 +138,22 @@ public final class TurnController {
 		return turnView.promptForInput();
 	}
 
-	// TODO: Call corresponding CardController handleAction()
-	public void playCard(Player player, CardType cardType) {
+	public TurnResult playCard(Player player, CardType cardType) {
+		// First, remove the card from player's hand
 		player.playCard(cardType);
-	}
-
-	// TODO: Remove
-	public String getCardInfo(CardType type) {
-		switch (type) {
-			case EXPLODING_KITTEN:
-				return "Draw this and you're out—unless you defuse it.";
-			case DEFUSE:
-				return "Defuse an Exploding Kitten.";
-			default:
-				return "No description available.";
+		
+		// Then, execute the card's special action if it has a controller
+		CardController controller = cardControllers.get(cardType);
+		if (controller instanceof ActionCardController) {
+			ActionCardController actionController = 
+				(ActionCardController) controller;
+			return actionController.handleCardAction();
 		}
-	}
-
-	public void endPlayerTurn() {
-		// placeholder for cleanup logic
-	}
-
-	// TODO: Remove?
-	public void endPrematurely() {
-		turnView.showTurnEndedPrematurely();
+		
+		// TODO: All cards should have controllers - remove this fallback 
+		// once SkipCardController and AttackCardController are added
+		// For cards without controllers (like SKIP, ATTACK), use legacy method temporarily
+		return getCardAction(cardType);
 	}
 
 	// TODO: Add Corresponding CardController handleDraw()
@@ -141,7 +166,11 @@ public final class TurnController {
 		if (player.viewHand().getOrDefault(CardType.DEFUSE, 0) > 0) {
 			turnView.showDefuseUsed();
 			player.removeCard(CardType.DEFUSE);
-			deck.insertCardAtRandomIndex(CardType.EXPLODING_KITTEN);
+			
+			// Let player choose where to put the exploding kitten back
+			int index = turnView.promptExplodingKittenIndex(deck.getSize());
+			deck.insertCardAtIndex(CardType.EXPLODING_KITTEN, index);
+			
 			return true;
 		}
 		turnView.showNoDefuseFound();
@@ -150,5 +179,20 @@ public final class TurnController {
 
 	private CardType promptCardChoice(Player player) {
 		return turnView.promptCardChoice(player);
+	}
+
+	// Observer pattern methods
+	public void registerObserver(TurnObserver controller) {
+		observers.add(controller);
+	}
+
+	public void unregisterObserver(TurnObserver controller) {
+		observers.remove(controller);
+	}
+
+	public void notifyObservers() {
+		for (TurnObserver observer : observers) {
+			observer.updatePlayer(currPlayer);
+		}
 	}
 }
