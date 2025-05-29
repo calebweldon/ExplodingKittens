@@ -1,8 +1,6 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -215,5 +213,61 @@ public class PlayerTest {
 		assertTrue(actualMessage.contains(expectedMessage));
 
 		EasyMock.verify(hand);
+	}
+
+	@Test
+	public void OnePlayerWithIdZero_getId_returnZero() {
+		Player player = new Player(1);
+
+		Integer expected = 1;
+		Integer actual = player.getId();
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void OnePlayerWithHandSizeOfZero_getHandSize_returnZero() {
+		Player player = new Player(0);
+
+		Integer expected = 0;
+		Integer actual = player.getHandSize();
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void OnePlayerWithHandSizeOfThree_getHandSize_returnThree() {
+		Player player = new Player(0);
+		player.addCard(CardType.ATTACK);
+		player.addCard(CardType.ATTACK);
+		player.addCard(CardType.SKIP);
+
+		Integer expected = 3;
+		Integer actual = player.getHandSize();
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void TwoPlayers_swapHandWith_swapsHandAndChecksSizes() {
+		Player playerOne = new Player(0);
+		playerOne.addCard(CardType.ATTACK);
+		playerOne.addCard(CardType.ATTACK);
+		playerOne.addCard(CardType.SKIP);
+
+		Player playerTwo = new Player(1);
+
+		playerOne.swapHandWith(playerTwo);
+
+		Integer actualPlayerOneHandSize = playerOne.getHandSize();
+		Integer expectedPlayerOneHandSize = 0;
+
+		Integer actualPlayerTwoHandSize = playerTwo.getHandSize();
+		Integer expectedPlayerTwoHandSize = 3;
+
+		assertEquals(expectedPlayerOneHandSize, actualPlayerOneHandSize);
+		assertEquals(expectedPlayerTwoHandSize, actualPlayerTwoHandSize);
+
+
 	}
 }
