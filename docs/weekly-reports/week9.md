@@ -53,13 +53,17 @@
 
 ### Team member: Benjamin Ye
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/44 
 
 ### PR done and approved
 - 
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/38
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/40
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/41
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/42
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/43
 
 
 ### Team member: Caleb Weldon
