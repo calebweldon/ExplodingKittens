@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
-public class TurnController implements SubjectDomain {
+public class TurnController implements TurnSubject {
 	private final List<TurnObserver> observers = new ArrayList<>();
 	private Player currPlayer;
 

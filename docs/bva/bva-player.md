@@ -60,3 +60,29 @@
 | Test Case 3 | Player w/ [TACO_CAT x2]; card = TACO_CAT | Player w/ [TACO_CAT]                   | :white_check_mark: |
 | Test Case 4 | Player w/ []; card = ATTACK              | Player w/ []; IllegalArgumentException | :white_check_mark: |
 
+
+## Method 4: ```public int getId()```
+### Step 4:
+##### All-combination or each-choice: Each-choice
+
+|             | System under test | Expected output 1 | Implemented?       |
+|-------------|-------------------|-------------------|--------------------|
+| Test Case 1 | Player.id = 1     | 1                 | :white_check_mark: |
+
+## Method 4: ```public int getHandSize()```
+### Step 4:
+##### All-combination or each-choice: Each-choice
+
+|             | System under test                                    | Expected output 1 | Implemented?        |
+|-------------|------------------------------------------------------|-------------------|---------------------|
+| Test Case 1 | Player has hand size of 0                            | 0                 | :white_check_mark:  |
+| Test Case 2 | Player has hand size of 3 with 2 different CardTypes | 3                 | :white_check_mark:  |
+
+
+## Method 4: ```public void swapHandWith(Player playerToSwapWith)```
+### Step 4:
+##### All-combination or each-choice: Each-choice
+
+|             | System under test                                             | Expected output 1               | Implemented?       |
+|-------------|---------------------------------------------------------------|---------------------------------|--------------------|
+| Test Case 1 | Two players, one with hand size of 0 and other with size of 3 | Players have reverse hand sizes | :white_check_mark: |
