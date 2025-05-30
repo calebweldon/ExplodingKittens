@@ -4,26 +4,48 @@ import domain.CardType;
 import domain.Player;
 import domain.TurnResult;
 import org.easymock.EasyMock;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import ui.ExplodiaCardView;
-
-import java.lang.reflect.Array;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExplodiaCardControllerTest {
+	private ExplodiaCardView cv;
+	private SecureRandom rand;
+	private List<CardController> cardControllers;
+
+	@BeforeEach
+	public void setUp() {
+		this.cv = EasyMock.createMock(ExplodiaCardView.class);
+		this.rand = EasyMock.createMock(SecureRandom.class);
+
+		AttackCardController c1 = EasyMock.createMock(AttackCardController.class);
+		SkipCardController c2 = EasyMock.createMock(SkipCardController.class);
+		FavorCardController c3 = EasyMock.createMock(FavorCardController.class);
+		BasicCardController c4 = EasyMock.createMock(BasicCardController.class);
+		FlipCardController c5 = EasyMock.createMock(FlipCardController.class);
+		ShuffleCardController c6 = EasyMock.createMock(ShuffleCardController.class);
+
+		SwapCardController c7 = EasyMock.createMock(SwapCardController.class);
+		EmbarrassCardController c8 = EasyMock.createMock(EmbarrassCardController.class);
+		RecycleCardController c9 = EasyMock.createMock(RecycleCardController.class);
+		SeeFutureCardController c10 = EasyMock.createMock(SeeFutureCardController.class);
+		AlterFutureCardController c11 = EasyMock.createMock(AlterFutureCardController.class);
+		this.cardControllers = new ArrayList<>(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11));
+	}
+
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2, 3})
 	public void handleExplodiaCardDraw_Continue(int numExplodia) {
 		Player player = EasyMock.createMock(Player.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
@@ -45,9 +67,6 @@ public class ExplodiaCardControllerTest {
 	public void handleExplodiaCardDraw_Won() {
 		int numExplodia = 5;
 		Player player = EasyMock.createMock(Player.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
@@ -65,123 +84,19 @@ public class ExplodiaCardControllerTest {
 		EasyMock.verify(cv, player, hand);
 	}
 
-	@Test
-	public void handleExplodiaCardAction_BecomesAttack() {
-		int index = 0;
-		int NUM_CONTROLLERS = 10;
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		AttackCardController controller = EasyMock.createMock(AttackCardController.class);
+	@ParameterizedTest
+	@ValueSource(ints = {0,1,2,3,4,5,6,7,8,9,10})
+	public void handleExplodiaCardAction_BecomesOtherCard(int index) {
+		int NUM_CONTROLLERS = 11;
+
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
-		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
 		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
-		EasyMock.expect(cardControllers.get(index)).andReturn(controller);
-		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.ATTACK);
+		ActionCardController controller = (ActionCardController) cardControllers.get(index);
+		EasyMock.expect(controller.handleCardAction()).andReturn(null);
 
-		EasyMock.replay(cardControllers, rand, cv, controller);
+		EasyMock.replay(rand, cv, controller);
 		explodiaCardController.handleCardAction();
-		EasyMock.verify(cardControllers, rand, cv, controller);
-	}
-
-	@Test
-	public void handleExplodiaCardAction_BecomesSkip() {
-		int index = 0;
-		int NUM_CONTROLLERS = 10;
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		SkipCardController controller = EasyMock.createMock(SkipCardController.class);
-		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
-
-		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
-		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
-		EasyMock.expect(cardControllers.get(index)).andReturn(controller);
-		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.SKIP);
-
-		EasyMock.replay(cardControllers, rand, cv, controller);
-		explodiaCardController.handleCardAction();
-		EasyMock.verify(cardControllers, rand, cv, controller);
-	}
-
-	@Test
-	public void handleExplodiaCardAction_BecomesFavor() {
-		int index = 0;
-		int NUM_CONTROLLERS = 10;
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		FavorCardController controller = EasyMock.createMock(FavorCardController.class);
-		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
-
-		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
-		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
-		EasyMock.expect(cardControllers.get(index)).andReturn(controller);
-		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
-
-		EasyMock.replay(cardControllers, rand, cv, controller);
-		explodiaCardController.handleCardAction();
-		EasyMock.verify(cardControllers, rand, cv, controller);
-	}
-
-	@Test
-	public void handleExplodiaCardAction_BecomesBasic() {
-		int index = 0;
-		int NUM_CONTROLLERS = 10;
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		BasicCardController controller = EasyMock.createMock(BasicCardController.class);
-		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
-
-		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
-		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
-		EasyMock.expect(cardControllers.get(index)).andReturn(controller);
-		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
-
-		EasyMock.replay(cardControllers, rand, cv, controller);
-		explodiaCardController.handleCardAction();
-		EasyMock.verify(cardControllers, rand, cv, controller);
-	}
-
-	@Test
-	public void handleExplodiaCardAction_BecomesFlip() {
-		int index = 0;
-		int NUM_CONTROLLERS = 10;
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		FlipCardController controller = EasyMock.createMock(FlipCardController.class);
-		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
-
-		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
-		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
-		EasyMock.expect(cardControllers.get(index)).andReturn(controller);
-		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
-
-		EasyMock.replay(cardControllers, rand, cv, controller);
-		explodiaCardController.handleCardAction();
-		EasyMock.verify(cardControllers, rand, cv, controller);
-	}
-
-	@Test
-	public void handleExplodiaCardAction_BecomesShuffle() {
-		int index = 0;
-		int NUM_CONTROLLERS = 10;
-		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
-		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
-		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
-		ShuffleCardController controller = EasyMock.createMock(ShuffleCardController.class);
-		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
-
-		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
-		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
-		EasyMock.expect(cardControllers.get(index)).andReturn(controller);
-		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
-
-		EasyMock.replay(cardControllers, rand, cv, controller);
-		explodiaCardController.handleCardAction();
-		EasyMock.verify(cardControllers, rand, cv, controller);
+		EasyMock.verify(rand, cv, controller);
 	}
 }
