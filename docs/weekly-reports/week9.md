@@ -31,19 +31,30 @@
 
 ### Team member: Eiko Reisz
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/57
 
 ### PR done and approved
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/42
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/45
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/56
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/6
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/38
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/40
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/41
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/43
+
 
 
 ### Team member: Samarth Arul
 #### PR created:
+-
+
 ### PR done and approved
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/6
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/61
+
 ### Other people's PR reviewed by you
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/45
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/59
@@ -62,6 +73,8 @@
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/41
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/42
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/43
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/56
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/61
 
 
 ### Team member: Caleb Weldon
@@ -75,6 +88,8 @@
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/38
 
 ### Other people's PR reviewed by you
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/61
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/56
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/45
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/42
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/6
