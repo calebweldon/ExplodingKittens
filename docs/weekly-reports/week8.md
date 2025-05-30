@@ -29,13 +29,17 @@
 
 ### Team member: Eiko Reisz
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/45
 
 ### PR done and approved
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
 
 ### Other people's PR reviewed by you
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/41
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/40
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/20
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/37
 
 
 ### Team member: Samarth Arul
@@ -46,29 +50,38 @@
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
 
 ### Other people's PR reviewed by you
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/45
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/35
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/31
 
 
 ### Team member: Benjamin Ye
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/39
 
 ### PR done and approved
 - 
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/41
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/40
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/37
 
 
 ### Team member: Caleb Weldon
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/41
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/40
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/43
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/38
 
 ### PR done and approved
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/20
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/37
 
 ### Other people's PR reviewed by you
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/45
 
