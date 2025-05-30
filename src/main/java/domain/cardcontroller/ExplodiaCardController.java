@@ -22,12 +22,14 @@ public class ExplodiaCardController implements CardController,
 	private Player player;
 	private static final int TOTAL_EXPLODIA = 5;
 
-	public ExplodiaCardController(ExplodiaCardView explodiaCardView, ArrayList<CardController> cardControllers) {
+	public ExplodiaCardController(ExplodiaCardView explodiaCardView,
+				List<CardController> cardControllers) {
 		this(explodiaCardView, cardControllers, new SecureRandom());
 	}
 
 	ExplodiaCardController(ExplodiaCardView explodiaCardView,
-						   List<CardController> cardControllers, SecureRandom rand) {
+				List<CardController> cardControllers,
+				SecureRandom rand) {
 		this.explodiaCardView = explodiaCardView;
 		this.cardControllers = cardControllers;
 		this.rand = rand;
@@ -55,7 +57,8 @@ public class ExplodiaCardController implements CardController,
 	@Override
 	public TurnResult handleCardAction() {
 		int index = rand.nextInt(this.cardControllers.size());
-		ActionCardController cardController = (ActionCardController) cardControllers.get(index);
+		ActionCardController cardController =
+				(ActionCardController) cardControllers.get(index);
 		return cardController.handleCardAction();
 	}
 
