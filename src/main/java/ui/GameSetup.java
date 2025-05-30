@@ -34,8 +34,11 @@ public class GameSetup {
 		TurnView turnView = new TurnView();
 		// TODO: Finish adding CardControllers
 		Map<CardType, CardController> cardControllers = new HashMap<>();
-		cardControllers.put(CardType.IMPLODING_FACEDOWN, new ImplodingFaceDownCardController(new ImplodingFaceDownCardView(), deck));
-		cardControllers.put(CardType.IMPLODING_FACEUP, new ImplodingFaceUpCardController(new ImplodingFaceUpCardView()));
+		cardControllers.put(CardType.IMPLODING_FACEDOWN,
+				new ImplodingFaceDownCardController(
+						new ImplodingFaceDownCardView(), deck));
+		cardControllers.put(CardType.IMPLODING_FACEUP,
+				new ImplodingFaceUpCardController(new ImplodingFaceUpCardView()));
 
 		TurnController turnController = new TurnController(deck, turnView, cardControllers);
 

@@ -106,21 +106,19 @@ public final class TurnController implements TurnSubject {
 	}
 
 	private TurnResult drawCardAction(CardType drawn) {
-		TurnResult specialAction = TurnResult.CONTINUE;
 		CardController controller = cardControllers.get(drawn);
 		if (controller instanceof DrawCardController) {
 			DrawCardController drawController =
 					(DrawCardController) controller;
-			specialAction = drawController.handleCardDraw();
+			// TODO: Handle adding to player hand if needed
+			return drawController.handleCardDraw();
 		}
-		if (specialAction == TurnResult.CONTINUE) {
-			try {
-				currPlayer.addCard(drawn);
-			} catch (IllegalArgumentException e) {
-				turnView.showCardCouldNotBeAdded(e.getMessage());
-			}
+		try {
+			currPlayer.addCard(drawn);
+		} catch (IllegalArgumentException e) {
+			turnView.showCardCouldNotBeAdded(e.getMessage());
 		}
-		return specialAction;
+		return TurnResult.CONTINUE;
 	}
 
 	private CardType drawCardFromDeck() {

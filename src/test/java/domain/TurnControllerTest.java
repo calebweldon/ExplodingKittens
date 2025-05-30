@@ -34,7 +34,6 @@ class TurnControllerTest {
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Player player = EasyMock.createMock(Player.class);
 
-
 		AttackCardController controller = EasyMock.createMock(AttackCardController.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
 		cardControllers.put(CardType.ATTACK, controller);
@@ -46,6 +45,30 @@ class TurnControllerTest {
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
 		player.addCard(CardType.ATTACK);
+
+		EasyMock.replay(deck, turnView, player, controller);
+		tc.takeTurn(player);
+
+		EasyMock.verify(deck, turnView, player, controller);
+	}
+
+	@Test
+	void playerDrawsCard_withHandleDraw() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Player player = EasyMock.createMock(Player.class);
+
+		ImplodingFaceDownCardController controller = EasyMock.createMock(ImplodingFaceDownCardController.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.IMPLODING_FACEDOWN, controller);
+
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+
+		player.showHand();
+		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.IMPLODING_FACEDOWN);
+		turnView.showCardDrawn(CardType.IMPLODING_FACEDOWN);
+		EasyMock.expect(controller.handleCardDraw()).andReturn(TurnResult.CONTINUE);
 
 		EasyMock.replay(deck, turnView, player, controller);
 		tc.takeTurn(player);
