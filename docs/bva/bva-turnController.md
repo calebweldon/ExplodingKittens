@@ -32,3 +32,26 @@
 | Test Case 6 | player ≠ null, user chooses "play", empty hand                                    | shows message, continues to next action | :white_check_mark: |
 | Test Case 7 | player ≠ null, user chooses "info", gets info of card                             | shows message, continues to next action | :white_check_mark: |
 
+
+## Method 2: `public TurnResult registerObserver(TurnObserver controller)`
+### Step 4:
+##### Each-choice
+|             | System under test | Expected Input | Expected output            | Implemented? |
+|-------------|-------------------|----------------|----------------------------|--------------|
+| Test Case 1 | observers = []    | TurnObserver   | observers = [TurnObserver] | :x:          |
+
+
+## Method 3: `public TurnResult unregisterObserver(TurnObserver controller)`
+### Step 4:
+##### Each-choice
+|             | System under test          | Expected Input | Expected output | Implemented? |
+|-------------|----------------------------|----------------|-----------------|--------------|
+| Test Case 1 | observers = [TurnObserver] | TurnObserver   | observers = []  | :x:          |
+
+
+## Method 4: `public TurnResult notifyObservers()`
+### Step 4:
+##### Each-choice
+|             | System under test          | Expected Input | Expected output | Implemented? |
+|-------------|----------------------------|----------------|-----------------|--------------|
+| Test Case 1 | observers = [TurnObserver] | player         | None            | :x:          |
