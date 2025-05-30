@@ -36,22 +36,22 @@
 ## Method 2: `public TurnResult registerObserver(TurnObserver controller)`
 ### Step 4:
 ##### Each-choice
-|             | System under test | Expected Input | Expected output            | Implemented? |
-|-------------|-------------------|----------------|----------------------------|--------------|
-| Test Case 1 | observers = []    | TurnObserver   | observers = [TurnObserver] | :x:          |
+|             | System under test | Expected Input | Expected output            | Implemented?       |
+|-------------|-------------------|----------------|----------------------------|--------------------|
+| Test Case 1 | observers = []    | TurnObserver   | observers = [TurnObserver] | :white_check_mark: |
 
 
 ## Method 3: `public TurnResult unregisterObserver(TurnObserver controller)`
 ### Step 4:
 ##### Each-choice
-|             | System under test          | Expected Input | Expected output | Implemented? |
-|-------------|----------------------------|----------------|-----------------|--------------|
-| Test Case 1 | observers = [TurnObserver] | TurnObserver   | observers = []  | :x:          |
+|             | System under test          | Expected Input | Expected output | Implemented?       |
+|-------------|----------------------------|----------------|-----------------|--------------------|
+| Test Case 1 | observers = [TurnObserver] | TurnObserver   | observers = []  | :white_check_mark: |
 
 
 ## Method 4: `public TurnResult notifyObservers()`
 ### Step 4:
 ##### Each-choice
-|             | System under test          | Expected Input | Expected output | Implemented? |
-|-------------|----------------------------|----------------|-----------------|--------------|
-| Test Case 1 | observers = [TurnObserver] | player         | None            | :x:          |
+|             | System under test          | Expected Input | Expected output | Implemented?       |
+|-------------|----------------------------|----------------|-----------------|--------------------|
+| Test Case 1 | observers = [TurnObserver] | player         | None            | :white_check_mark: |
