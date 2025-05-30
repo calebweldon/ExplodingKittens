@@ -20,7 +20,7 @@ public class DeckTest {
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Deck deck = new Deck(rand, false);
 
-		String expectedMessage = "Invalid index: " + invalidIndex;
+		String expectedMessage = String.format("Invalid index: %d", invalidIndex);
 		Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
 			deck.insertCardAtIndex(card, invalidIndex);
 		});
@@ -133,7 +133,7 @@ public class DeckTest {
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Deck deck = new Deck(rand, false);
 
-		String expectedMessage = "Invalid index: " + invalidIndex;
+		String expectedMessage = String.format("Invalid index: %d", invalidIndex);
 		Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
 			CardType card = deck.getCardAtIndex(invalidIndex);
 		});
