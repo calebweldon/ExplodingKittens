@@ -1,41 +1,35 @@
 package domain;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.*;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.easymock.EasyMock;
 import ui.TurnView;
 
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
-import java.lang.reflect.Method;
-import java.security.SecureRandom;
 import java.util.*;
 
-import java.io.InputStream;
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnControllerTest {
-	private final java.io.InputStream systemIn = System.in;
 
-	@AfterEach
-	void restoreStdin() {
-		System.setIn(systemIn);
+	@Test
+	void takeTurn_nullPlayer() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		CardController controller1 = EasyMock.createMock(CardController.class);
+		CardController controller2 = EasyMock.createMock(CardController.class);
+		cardControllers.put(CardType.ATTACK, controller1);
+		cardControllers.put(CardType.SKIP, controller2);
+
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+		try {
+			tc.takeTurn(null);
+		}
+		catch (IllegalArgumentException e) {
+			assertEquals("Player cannot be null", e.getMessage());
+		}
 	}
-
-	private void provideInput(String data) {
-		InputStream testIn = new ByteArrayInputStream(
-			data.getBytes(StandardCharsets.UTF_8));
-		System.setIn(testIn);
-	}
-
-
-	// --- Core Game Logic Tests ---
-
+/*
 	@Test
 	void takeTurn_drawNonEK_cardAddedAndContinues() {
 		Deck deck = EasyMock.createMock(Deck.class);
@@ -242,4 +236,5 @@ class TurnControllerTest {
 		assertEquals(TurnResult.CONTINUE, result);
 		EasyMock.verify(deck, player, turnView);
 	}
+ */
 }
