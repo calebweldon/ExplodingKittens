@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
 public class ExplodiaCardController implements CardController,
 		ActionCardController, DrawCardController, TurnObserver {
 	private final ExplodiaCardView explodiaCardView;
 	private final List<CardController> cardControllers;
 	private final SecureRandom rand;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
 	private Player player;
 	private static final int TOTAL_EXPLODIA = 5;
 
