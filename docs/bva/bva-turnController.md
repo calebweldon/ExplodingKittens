@@ -22,14 +22,13 @@
 ### Step 4:
 ##### Each-choice
 
-|             | System under test                                                                    | Expected output                         | Implemented? |
-|-------------|--------------------------------------------------------------------------------------|-----------------------------------------|--------------|
-| Test Case 1 | player = null                                                                        | IllegalArgumentException on entry       | :x:          |
-| Test Case 2 | player ≠ null, user chooses "draw", draws card without handleDraw()                  | card added to hand                      | :x:          |
-| Test Case 3 | player ≠ null, user chooses "draw", draws card with handleDraw() that isn't playable | draw handled and card not added to hand | :x:          |
-| Test Case 4 | player ≠ null, user chooses "draw", draws card with handleDraw() that is playable    | draw handled and card added to hand     | :x:          |
-| Test Case 5 | player ≠ null, user chooses "play", plays card without handleAction()                | shows error, continues to next action   | :x:          |
-| Test Case 6 | player ≠ null, user chooses "play", plays card with handleAction()                   | action handled, and card removed        | :x:          |
-| Test Case 7 | player ≠ null, user chooses "play", empty hand                                       | shows message, continues to next action | :x:          |
-| Test Case 8 | player ≠ null, user chooses "info", gets info of card                                | shows message, continues to next action | :x:          |
+|             | System under test                                                                 | Expected output                         | Implemented?       |
+|-------------|-----------------------------------------------------------------------------------|-----------------------------------------|--------------------|
+| Test Case 1 | player = null                                                                     | IllegalArgumentException on entry       | :white_check_mark: |
+| Test Case 2 | player ≠ null, user chooses "draw", draws card without handleDraw()               | card added to hand                      | :white_check_mark: |
+| Test Case 3 | player ≠ null, user chooses "draw", draws card with handleDraw() that is playable | draw handled                            | :white_check_mark: |
+| Test Case 4 | player ≠ null, user chooses "play", plays card without handleAction()             | shows error, continues to next action   | :x:                |
+| Test Case 5 | player ≠ null, user chooses "play", plays card with handleAction()                | action handled, and card removed        | :x:                |
+| Test Case 6 | player ≠ null, user chooses "play", empty hand                                    | shows message, continues to next action | :x:                |
+| Test Case 7 | player ≠ null, user chooses "info", gets info of card                             | shows message, continues to next action | :x:                |
 

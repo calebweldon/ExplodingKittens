@@ -75,6 +75,40 @@ class TurnControllerTest {
 
 		EasyMock.verify(deck, turnView, player, controller);
 	}
+
+	@Test
+	void playerPlaysCard_withoutHandleAction() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Player player = EasyMock.createMock(Player.class);
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+
+		ImplodingFaceDownCardController controller = EasyMock.createMock(ImplodingFaceDownCardController.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.IMPLODING_FACEDOWN, controller);
+
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+
+		// "play" phase
+		player.showHand();
+		EasyMock.expect(turnView.promptForInput()).andReturn("play");
+		EasyMock.expect(player.viewHand()).andReturn(hand);
+		EasyMock.expect(hand.isEmpty()).andReturn(false);
+		EasyMock.expect(turnView.promptCardChoice(player)).andReturn(CardType.IMPLODING_FACEDOWN);
+		player.playCard(CardType.IMPLODING_FACEDOWN);
+		turnView.showInvalidCardPlay("Unsupported card type: IMPLODING_FACEDOWN");
+
+		// "draw" phase
+		player.showHand();
+		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
+		turnView.showCardDrawn(CardType.ATTACK);
+		player.addCard(CardType.ATTACK);
+
+		EasyMock.replay(deck, turnView, player, controller);
+		tc.takeTurn(player);
+		EasyMock.verify(deck, turnView, player, controller);
+	}
 /*
 
 
