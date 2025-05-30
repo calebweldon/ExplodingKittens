@@ -74,4 +74,8 @@ public class Player {
 	public Map<CardType, Integer> viewHand() {
 		return new HashMap<>(this.hand);
 	}
+
+	public void showHand() {
+		// TODO: BVA + TDD + Implementation
+	}
 }
