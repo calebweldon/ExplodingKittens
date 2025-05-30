@@ -146,6 +146,26 @@ public class ExplodiaCardControllerTest {
 	}
 
 	@Test
+	public void handleExplodiaCardAction_BecomesFlip() {
+		int index = 0;
+		int NUM_CONTROLLERS = 10;
+		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
+		FlipCardController controller = EasyMock.createMock(FlipCardController.class);
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
+
+		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
+		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
+		EasyMock.expect(cardControllers.get(index)).andReturn(controller);
+		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
+
+		EasyMock.replay(cardControllers, rand, cv, controller);
+		explodiaCardController.handleCardAction();
+		EasyMock.verify(cardControllers, rand, cv, controller);
+	}
+
+	@Test
 	public void handleExplodiaCardAction_BecomesShuffle() {
 		int index = 0;
 		int NUM_CONTROLLERS = 10;
