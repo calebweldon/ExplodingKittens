@@ -34,7 +34,7 @@ public class ExplodiaCardControllerTest {
 		FlipCardController c5 = EasyMock.createMock(FlipCardController.class);
 		ShuffleCardController c6 = EasyMock.createMock(ShuffleCardController.class);
 
-		SwapCardController c7 = EasyMock.createMock(SwapCardController.class);
+		SwapHandCardController c7 = EasyMock.createMock(SwapHandCardController.class);
 		EmbarrassCardController c8 = EasyMock.createMock(EmbarrassCardController.class);
 		RecycleCardController c9 = EasyMock.createMock(RecycleCardController.class);
 		SeeFutureCardController c10 = EasyMock.createMock(SeeFutureCardController.class);

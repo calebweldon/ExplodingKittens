@@ -1,11 +1,17 @@
 package domain.cardcontroller;
 
 import domain.TurnResult;
+import ui.SkipCardView;
 
 public class SkipCardController implements CardController, ActionCardController {
-	@Override
+	private final SkipCardView view;
+
+	public SkipCardController(SkipCardView view) {
+		this.view = view;
+	}
+
 	public TurnResult handleCardAction() {
-		// TODO
-		return null;
+		view.actionMessage();
+		return TurnResult.SKIP;
 	}
 }

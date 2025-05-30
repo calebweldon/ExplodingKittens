@@ -1,5 +1,6 @@
 package domain;
 
+import domain.cardcontroller.SkipCardController;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import ui.SkipCardView;

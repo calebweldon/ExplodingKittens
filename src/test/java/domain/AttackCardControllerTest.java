@@ -1,5 +1,6 @@
 package domain;
 
+import domain.cardcontroller.AttackCardController;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import ui.AttackCardView;
