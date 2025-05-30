@@ -27,8 +27,8 @@
 | Test Case 1 | player = null                                                                     | IllegalArgumentException on entry       | :white_check_mark: |
 | Test Case 2 | player ≠ null, user chooses "draw", draws card without handleDraw()               | card added to hand                      | :white_check_mark: |
 | Test Case 3 | player ≠ null, user chooses "draw", draws card with handleDraw() that is playable | draw handled                            | :white_check_mark: |
-| Test Case 4 | player ≠ null, user chooses "play", plays card without handleAction()             | shows error, continues to next action   | :x:                |
-| Test Case 5 | player ≠ null, user chooses "play", plays card with handleAction()                | action handled, and card removed        | :x:                |
-| Test Case 6 | player ≠ null, user chooses "play", empty hand                                    | shows message, continues to next action | :x:                |
-| Test Case 7 | player ≠ null, user chooses "info", gets info of card                             | shows message, continues to next action | :x:                |
+| Test Case 4 | player ≠ null, user chooses "play", plays card without handleAction()             | shows error, continues to next action   | :white_check_mark: |
+| Test Case 5 | player ≠ null, user chooses "play", plays card with handleAction()                | action handled, and card removed        | :white_check_mark: |
+| Test Case 6 | player ≠ null, user chooses "play", empty hand                                    | shows message, continues to next action | :white_check_mark: |
+| Test Case 7 | player ≠ null, user chooses "info", gets info of card                             | shows message, continues to next action | :white_check_mark: |
 
