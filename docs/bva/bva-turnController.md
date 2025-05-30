@@ -1,31 +1,35 @@
 # BVA Analysis for TurnController
 
-## Method 2: `public TurnResult takeTurn(Player player)`
+## Method 1: `public TurnResult takeTurn(Player player)`
 ### Step 1-3 Results
-|        | Input              | (if more to consider for input) | Output                                    |
-|--------|--------------------|--------------------------------|-------------------------------------------|
-| Step 1 | player parameter   | any Player reference           | TurnResult enum value                     |
-|        | player actions     | "play" or "draw" commands      | (CONTINUE, SKIP, ATTACK, ELIMINATED, WON) |
-|        | game state         | card types, hand contents      |                                           |
-| Step 2 | player = null      |                                | NullPointerException on entry            |
-|        | draw EK, no defuse |                                | TurnResult.ELIMINATED                     |
-|        | draw EK, has defuse|                                | TurnResult.CONTINUE (defuse used)         |
-|        | play Skip card     |                                | TurnResult.SKIP                           |
-|        | play Attack card   |                                | TurnResult.ATTACK                         |
-| Step 3 | player ≠ null      |                                | enters turn loop, processes actions       |
-|        | draw non-EK card   |                                | TurnResult.CONTINUE                       |
-|        | play other cards   |                                | TurnResult.CONTINUE                       |
+|        | Input                            | (if more to consider for input)    | Output                              |
+|--------|----------------------------------|------------------------------------|-------------------------------------|
+| Step 1 | player parameter                 | any Player reference               | None                                |
+|        | player actions                   | "play", "draw", or "info" commands |                                     |
+|        | game state                       | card types, hand contents          |                                     |
+| Step 2 | draw card without handleDraw()   |                                    |                                     |
+|        | draw card with handleDraw()      |                                    |                                     |
+|        | play card without handleAction() |                                    |                                     |
+|        | play card with handleAction()    |                                    |                                     |
+|        | get info of card                 |                                    |                                     |
+|        | play card with empty hand        |                                    |                                     |
+|        | draw card with empty deck        | Deck will never be empty           |                                     |
+|        | player == null                   |                                    |
+| Step 3 | player ≠ null                    |                                    | enters turn loop, processes actions |
+|        | draw non-EK card                 |                                    |                                     |
+|        | play other cards                 |                                    |                                     |
 
 ### Step 4:
 ##### Each-choice
 
-|              | System under test                                           | Expected output                           | Implemented? |
-|--------------|--------------------------------------------------------------|-------------------------------------------|--------------|
-| Test Case 1  | player = null                                               | NullPointerException on entry            | ✅           |
-| Test Case 2  | player ≠ null, user chooses "draw", draws non-EK card      | card added to hand; returns CONTINUE     | ✅           |
-| Test Case 3  | player ≠ null, user chooses "draw", draws EK, no defuse    | returns ELIMINATED                        | ✅           |
-| Test Case 4  | player ≠ null, user chooses "draw", draws EK, has defuse   | defuse used, EK reinserted; returns CONTINUE | ✅       |
-| Test Case 5  | player ≠ null, user chooses "play", plays Skip card        | returns SKIP                              | ✅           |
-| Test Case 6  | player ≠ null, user chooses "play", plays Attack card      | returns ATTACK                            | ✅           |
-| Test Case 7  | player ≠ null, user chooses "play", empty hand             | shows message, continues to next action   | ✅           |
-| Test Case 8  | player ≠ null, user chooses "play", invalid card play     | shows error, continues to next action     | ✅           |
+|             | System under test                                                                    | Expected output                         | Implemented? |
+|-------------|--------------------------------------------------------------------------------------|-----------------------------------------|--------------|
+| Test Case 1 | player = null                                                                        | IllegalArgumentException on entry       | :x:          |
+| Test Case 2 | player ≠ null, user chooses "draw", draws card without handleDraw()                  | card added to hand                      | :x:          |
+| Test Case 3 | player ≠ null, user chooses "draw", draws card with handleDraw() that isn't playable | draw handled and card not added to hand | :x:          |
+| Test Case 4 | player ≠ null, user chooses "draw", draws card with handleDraw() that is playable    | draw handled and card added to hand     | :x:          |
+| Test Case 5 | player ≠ null, user chooses "play", plays card without handleAction()                | shows error, continues to next action   | :x:          |
+| Test Case 6 | player ≠ null, user chooses "play", plays card with handleAction()                   | action handled, and card removed        | :x:          |
+| Test Case 7 | player ≠ null, user chooses "play", empty hand                                       | shows message, continues to next action | :x:          |
+| Test Case 8 | player ≠ null, user chooses "info", gets info of card                                | shows message, continues to next action | :x:          |
+
