@@ -9,6 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import ui.ExplodiaCardView;
 
+import java.lang.reflect.Array;
+import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,10 +22,13 @@ public class ExplodiaCardControllerTest {
 	public void handleExplodiaCardDraw_Continue(int numExplodia) {
 		Player player = EasyMock.createMock(Player.class);
 		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
+		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
-		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv);
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
 		explodiaCardController.updatePlayer(player);
+		player.addCard(CardType.EXPLODIA);
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.get(CardType.EXPLODIA)).andReturn(numExplodia);
 
@@ -40,10 +46,13 @@ public class ExplodiaCardControllerTest {
 		int numExplodia = 5;
 		Player player = EasyMock.createMock(Player.class);
 		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
+		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
-		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv);
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
 		explodiaCardController.updatePlayer(player);
+		player.addCard(CardType.EXPLODIA);
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.get(CardType.EXPLODIA)).andReturn(numExplodia);
 
