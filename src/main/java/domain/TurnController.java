@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-// TODO: Go through and restrict access modifiers - most methods should be private
 public final class TurnController implements TurnSubject {
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck can be shared")
 	private final Deck deck;
@@ -128,8 +127,6 @@ public final class TurnController implements TurnSubject {
 		return turnView.promptCardChoice(this.currPlayer);
 	}
 
-	// TODO: Add BVA Analysis and unit tests for observer pattern methods
-	// Observer pattern methods
 	public void registerObserver(TurnObserver controller) {
 		observers.add(controller);
 	}
