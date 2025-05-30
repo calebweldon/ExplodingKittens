@@ -27,7 +27,7 @@ public class ExplodiaCardController implements CardController,
 	}
 
 	ExplodiaCardController(ExplodiaCardView explodiaCardView,
-						   ArrayList<CardController> cardControllers, SecureRandom rand) {
+						   List<CardController> cardControllers, SecureRandom rand) {
 		this.explodiaCardView = explodiaCardView;
 		this.cardControllers = cardControllers;
 		this.rand = rand;
