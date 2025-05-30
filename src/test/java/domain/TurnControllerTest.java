@@ -167,6 +167,36 @@ class TurnControllerTest {
 		tc.takeTurn(player);
 		EasyMock.verify(deck, turnView, player, controller, hand);
 	}
+
+	@Test
+	void playerGetsInfo() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Player player = EasyMock.createMock(Player.class);
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+
+		SkipCardController controller = EasyMock.createMock(SkipCardController.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.SKIP, controller);
+
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+
+		// "info" phase
+		player.showHand();
+		EasyMock.expect(turnView.promptForInput()).andReturn("info");
+		turnView.getInputForCardInfo(player);
+
+		// "draw" phase
+		player.showHand();
+		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
+		turnView.showCardDrawn(CardType.ATTACK);
+		player.addCard(CardType.ATTACK);
+
+		EasyMock.replay(deck, turnView, player, controller, hand);
+		tc.takeTurn(player);
+		EasyMock.verify(deck, turnView, player, controller, hand);
+	}
 /*
 
 
