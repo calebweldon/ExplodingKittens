@@ -40,7 +40,6 @@ public final class TurnController implements TurnSubject {
 			if (value instanceof TurnObserver) {
 				TurnObserver observer = (TurnObserver) value;
 				registerObserver(observer);
-				observers.add(observer);
 			}
 		}
 	}
@@ -143,5 +142,9 @@ public final class TurnController implements TurnSubject {
 		for (TurnObserver observer : observers) {
 			observer.updatePlayer(this.currPlayer);
 		}
+	}
+
+	int getObserverSize() {
+		return observers.size();
 	}
 }
