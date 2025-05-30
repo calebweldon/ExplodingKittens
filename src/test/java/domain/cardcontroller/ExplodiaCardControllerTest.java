@@ -64,4 +64,24 @@ public class ExplodiaCardControllerTest {
 		assertEquals(TurnResult.WON, result);
 		EasyMock.verify(cv, player, hand);
 	}
+
+	@Test
+	public void handleExplodiaCardAction_BecomesAttack() {
+		int index = 0;
+		int NUM_CONTROLLERS = 10;
+		ArrayList<CardController> cardControllers = EasyMock.createMock(ArrayList.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		ExplodiaCardView cv = EasyMock.createMock(ExplodiaCardView.class);
+		AttackCardController attackCardController = EasyMock.createMock(AttackCardController.class);
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
+
+		EasyMock.expect(cardControllers.size()).andReturn(NUM_CONTROLLERS);
+		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
+		EasyMock.expect(cardControllers.get(index)).andReturn(attackCardController);
+		EasyMock.expect(attackCardController.handleCardAction()).andReturn(TurnResult.ATTACK);
+
+		EasyMock.replay(cardControllers, rand, cv, attackCardController);
+		explodiaCardController.handleCardAction();
+		EasyMock.verify(cardControllers, rand, cv, attackCardController);
+	}
 }

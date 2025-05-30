@@ -54,8 +54,9 @@ public class ExplodiaCardController implements CardController,
 
 	@Override
 	public TurnResult handleCardAction() {
-		// TODO
-		return TurnResult.CONTINUE;
+		int index = rand.nextInt(this.cardControllers.size());
+		ActionCardController cardController = (ActionCardController) cardControllers.get(index);
+		return cardController.handleCardAction();
 	}
 
 }
