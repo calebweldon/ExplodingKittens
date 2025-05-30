@@ -16,10 +16,8 @@ class TurnControllerTest {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
-		CardController controller1 = EasyMock.createMock(CardController.class);
-		CardController controller2 = EasyMock.createMock(CardController.class);
-		cardControllers.put(CardType.ATTACK, controller1);
-		cardControllers.put(CardType.SKIP, controller2);
+		AttackCardController controller = EasyMock.createMock(AttackCardController.class);
+		cardControllers.put(CardType.ATTACK, controller);
 
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 		try {
@@ -29,32 +27,33 @@ class TurnControllerTest {
 			assertEquals("Player cannot be null", e.getMessage());
 		}
 	}
-/*
+
 	@Test
-	void takeTurn_drawNonEK_cardAddedAndContinues() {
+	void playerDrawsCard_noHandleDraw() {
 		Deck deck = EasyMock.createMock(Deck.class);
-		EasyMock.expect(deck.drawCard()).andReturn(CardType.DEFUSE);
-		EasyMock.replay(deck);
-
-		Map<CardType, Integer> hand = new HashMap<>();
-		Player player = EasyMock.createMock(Player.class);
-		EasyMock.expect(player.viewHand()).andReturn(hand).anyTimes();
-		player.addCard(CardType.DEFUSE);
-		EasyMock.expectLastCall();
-		EasyMock.replay(player);
-
 		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Player player = EasyMock.createMock(Player.class);
+
+
+		AttackCardController controller = EasyMock.createMock(AttackCardController.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.ATTACK, controller);
+
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+
+		player.showHand();
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
-		turnView.showCardDrawn(CardType.DEFUSE);
-		EasyMock.expectLastCall();
-		EasyMock.replay(turnView);
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
+		turnView.showCardDrawn(CardType.ATTACK);
+		player.addCard(CardType.ATTACK);
 
-		TurnController tc = new TurnController(deck, turnView);
-		TurnResult result = tc.takeTurn(player);
+		EasyMock.replay(deck, turnView, player, controller);
+		tc.takeTurn(player);
 
-		assertEquals(TurnResult.CONTINUE, result);
-		EasyMock.verify(deck, player, turnView);
+		EasyMock.verify(deck, turnView, player, controller);
 	}
+/*
+
 
 	@Test
 	void takeTurn_playSkipCard_returnsSkip() {
