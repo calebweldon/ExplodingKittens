@@ -44,14 +44,14 @@
 
 ### Team member: Samarth Arul
 #### PR created:
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
 
 ### PR done and approved
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/34
 
 ### Other people's PR reviewed by you
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/22
-- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/20
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/35
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/31
 
 
 ### Team member: Benjamin Ye
