@@ -33,7 +33,6 @@ public class ExplodiaCardController implements CardController,
 		this.explodiaCardView = explodiaCardView;
 		this.cardControllers = cardControllers;
 		this.rand = rand;
-
 	}
 
 	@Override
@@ -56,6 +55,7 @@ public class ExplodiaCardController implements CardController,
 
 	@Override
 	public TurnResult handleCardAction() {
+		explodiaCardView.actionMessage();
 		int index = rand.nextInt(this.cardControllers.size());
 		ActionCardController cardController =
 				(ActionCardController) cardControllers.get(index);

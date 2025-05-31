@@ -91,6 +91,7 @@ public class ExplodiaCardControllerTest {
 
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
+		cv.actionMessage();
 		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
 		ActionCardController controller = (ActionCardController) cardControllers.get(index);
 		EasyMock.expect(controller.handleCardAction()).andReturn(null);
