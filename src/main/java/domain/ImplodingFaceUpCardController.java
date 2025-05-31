@@ -7,7 +7,7 @@ import ui.ImplodingFaceUpCardView;
 public class ImplodingFaceUpCardController implements CardController, DrawCardController {
 	private final ImplodingFaceUpCardView view;
 
-	ImplodingFaceUpCardController(ImplodingFaceUpCardView view) {
+	public ImplodingFaceUpCardController(ImplodingFaceUpCardView view) {
 		this.view = view;
 	}
 
