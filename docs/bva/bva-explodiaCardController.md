@@ -23,7 +23,7 @@
 | Test Case 4  | BasicCardController         | TurnResult.CONTINUE | :white_check_mark: |
 | Test Case 5  | FlipCardController          | TurnResult.CONTINUE | :white_check_mark: |
 | Test Case 6  | ShuffleCardController       | TurnResult.CONTINUE | :white_check_mark: |
-| Test Case 7  | SwapCardController          | TurnResult.CONTINUE | :white_check_mark: |
+| Test Case 7  | SwapHandCardController      | TurnResult.CONTINUE | :white_check_mark: |
 | Test Case 8  | EmbarrassCardController     | TurnResult.CONTINUE | :white_check_mark: |
 | Test Case 9  | RecycleFutureCardController | TurnResult.CONTINUE | :white_check_mark: |
 | Test Case 10 | AlterFutureCardController   | TurnResult.CONTINUE | :white_check_mark: |
