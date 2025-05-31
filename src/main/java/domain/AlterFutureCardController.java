@@ -1,28 +1,36 @@
 package domain;
 
-import ui.TurnView;
+import ui.AlterFutureCardView;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared")
-public class AlterFutureCardController implements CardController {
+public class AlterFutureCardController implements CardController, ActionCardController {
 	private static final int NUM_CARDS_FROM_TOP = 3;
 
-	private final TurnView view;
+	private final AlterFutureCardView view;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared")
 	private final Deck deck;
 
-	public AlterFutureCardController(TurnView view, Deck deck) {
+	public AlterFutureCardController(AlterFutureCardView view, Deck deck) {
 		this.view = view;
 		this.deck = deck;
 	}
 
 	public TurnResult handleCardAction() {
-		CardType[] topCards = new CardType[NUM_CARDS_FROM_TOP];
+		int numCardsViewed = getNumCardsViewed();
+		CardType[] topCards = new CardType[numCardsViewed];
 		
-		for (int i = 0; i < NUM_CARDS_FROM_TOP; i++) {
+		for (int i = 0; i < numCardsViewed; i++) {
 			topCards[i] = deck.getCardAtIndex(i);
 		}
 
+		view.actionMessage();
+		view.displayTopCards(topCards);
 		return TurnResult.CONTINUE;
+	}
+
+	private int getNumCardsViewed() {
+		int deckSize = deck.getSize();
+		return (deckSize < NUM_CARDS_FROM_TOP) ? deckSize : NUM_CARDS_FROM_TOP;
 	}
 }
