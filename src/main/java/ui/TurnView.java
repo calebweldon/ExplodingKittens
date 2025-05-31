@@ -17,10 +17,6 @@ public class TurnView {
 		System.out.println("You have no cards to play.");
 	}
 
-	public void showPlayerHand(Map<CardType, Integer> hand) {
-		System.out.printf("Your hand: %s%n", hand);
-	}
-
 	public void showInvalidCardPlay(String errorMessage) {
 		System.out.printf("Invalid card play: %s%n", errorMessage);
 	}
@@ -37,19 +33,6 @@ public class TurnView {
 		System.out.println("Should not happen.");
 	}
 
-	public void showCardPlayed(CardType cardType) {
-		switch (cardType) {
-			case SKIP:
-				System.out.println("SKIP card played. Turn ends immediately.");
-				break;
-			case ATTACK:
-				System.out.println("ATTACK card played");
-				break;
-			default:
-				System.out.printf("Played card: %s%n", cardType);
-				break;
-		}
-	}
 
 	public String promptForInput() {
 		while (true) {
@@ -61,10 +44,6 @@ public class TurnView {
 			}
 			System.out.println("Invalid input.");
 		}
-	}
-
-	public void showTurnEndedPrematurely() {
-		System.out.println("Turn ended prematurely.");
 	}
 
 	public void showDefuseUsed() {
@@ -98,30 +77,6 @@ public class TurnView {
 		}
 	}
 
-	public void showCardInfo(CardType type) {
-		switch (type) {
-			case EXPLODING_KITTEN:
-				System.out.println(
-					"Draw this and you're out—unless you defuse it."
-				);
-				break;
-			case DEFUSE:
-				System.out.println("Defuse an Exploding Kitten.");
-				break;
-			case SKIP:
-				System.out.println("Skip your turn. Next player goes.");
-				break;
-			case ATTACK:
-				System.out.println(
-					"End your turn without drawing. Next player takes 2 turns."
-				);
-				break;
-			default:
-				System.out.println("No description available.");
-				break;
-		}
-	}
-
 	public int promptExplodingKittenIndex(int deckSize) {
 		while (true) {
 			System.out.printf(
@@ -138,5 +93,8 @@ public class TurnView {
 				System.out.println("Please enter a valid number.");
 			}
 		}
+	}
+
+	public void getInputForCardInfo(Player currPlayer) {
 	}
 }

@@ -1,12 +1,12 @@
 package ui;
 
-import domain.CardType;
-import domain.Deck;
-import domain.Player;
-import domain.TurnController;
+import domain.*;
+import domain.cardcontroller.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameSetup {
 	private final GameController gameController;
@@ -33,7 +33,15 @@ public class GameSetup {
 		deck.addSpecialCards(numPlayers - 1);
 
 		TurnView turnView = new TurnView();
-		TurnController turnController = new TurnController(deck, turnView);
+		// TODO: Finish adding CardControllers
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.IMPLODING_FACEDOWN,
+				new ImplodingFaceDownCardController(
+						new ImplodingFaceDownCardView(), deck));
+		cardControllers.put(CardType.IMPLODING_FACEUP,
+				new ImplodingFaceUpCardController(new ImplodingFaceUpCardView()));
+
+		TurnController turnController = new TurnController(deck, turnView, cardControllers);
 
 		this.gameController = new GameController(players, turnController, this.gameView);
 	}

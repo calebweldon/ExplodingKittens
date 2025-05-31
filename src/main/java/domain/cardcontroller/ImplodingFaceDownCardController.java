@@ -11,7 +11,7 @@ public class ImplodingFaceDownCardController implements CardController, DrawCard
 	private final ImplodingFaceDownCardView view;
 	private final Deck deck;
 
-	ImplodingFaceDownCardController(ImplodingFaceDownCardView view, Deck deck) {
+	public ImplodingFaceDownCardController(ImplodingFaceDownCardView view, Deck deck) {
 		this.view = view;
 		this.deck = deck;
 	}
