@@ -38,4 +38,34 @@ public class AlterFutureCardControllerTest {
 		assertEquals(expected, actual);
 		EasyMock.verify(deck, view);
 	}
+
+	@Test
+	public void handleAlterFutureCardAction_threeCardsReorder() {
+		CardType cardType1 = CardType.ATTACK;
+		CardType cardType2 = CardType.DEFUSE;
+		CardType cardType3 = CardType.EXPLODING_KITTEN;
+		Deck deck = EasyMock.createMock(Deck.class);
+		EasyMock.expect(deck.getSize()).andReturn(3);
+		EasyMock.expect(deck.drawCard()).andReturn(cardType1);
+		EasyMock.expect(deck.drawCard()).andReturn(cardType2);
+		EasyMock.expect(deck.drawCard()).andReturn(cardType3);
+		deck.insertCardAtIndex(cardType1, 0);
+        deck.insertCardAtIndex(cardType3, 1);
+		deck.insertCardAtIndex(cardType2, 2);
+		AlterFutureCardView view = EasyMock.createMock(AlterFutureCardView.class);
+		CardType[] topCards = {cardType1, cardType2, cardType3};
+		CardType[] reorderedCards = {cardType1, cardType3, cardType2};
+		view.actionMessage();
+		view.displayTopCards(topCards);
+		EasyMock.expect(view.getNewOrder(3)).andReturn(reorderedCards);
+		EasyMock.replay(deck, view);
+
+		AlterFutureCardController controller = new AlterFutureCardController(view, deck);
+
+		TurnResult expected = TurnResult.CONTINUE;
+		TurnResult actual = controller.handleCardAction();
+
+		assertEquals(expected, actual);
+		EasyMock.verify(deck, view);
+	}
 }
