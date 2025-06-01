@@ -27,7 +27,7 @@ public class AlterFutureCardControllerTest {
 		CardType[] reorderedCards = {cardType1, cardType2, cardType3};
 		view.actionMessage();
 		view.displayTopCards(topCards);
-		EasyMock.expect(view.getNewOrder(3)).andReturn(reorderedCards);
+		EasyMock.expect(view.promptForNewOrder(topCards)).andReturn(reorderedCards);
 		EasyMock.replay(deck, view);
 
 		AlterFutureCardController controller = new AlterFutureCardController(view, deck);
@@ -50,14 +50,14 @@ public class AlterFutureCardControllerTest {
 		EasyMock.expect(deck.drawCard()).andReturn(cardType2);
 		EasyMock.expect(deck.drawCard()).andReturn(cardType3);
 		deck.insertCardAtIndex(cardType1, 0);
-        deck.insertCardAtIndex(cardType3, 1);
+		deck.insertCardAtIndex(cardType3, 1);
 		deck.insertCardAtIndex(cardType2, 2);
 		AlterFutureCardView view = EasyMock.createMock(AlterFutureCardView.class);
 		CardType[] topCards = {cardType1, cardType2, cardType3};
 		CardType[] reorderedCards = {cardType1, cardType3, cardType2};
 		view.actionMessage();
 		view.displayTopCards(topCards);
-		EasyMock.expect(view.getNewOrder(3)).andReturn(reorderedCards);
+		EasyMock.expect(view.promptForNewOrder(topCards)).andReturn(reorderedCards);
 		EasyMock.replay(deck, view);
 
 		AlterFutureCardController controller = new AlterFutureCardController(view, deck);
@@ -84,7 +84,7 @@ public class AlterFutureCardControllerTest {
 		CardType[] reorderedCards = {cardType1, cardType2};
 		view.actionMessage();
 		view.displayTopCards(topCards);
-		EasyMock.expect(view.getNewOrder(2)).andReturn(reorderedCards);
+		EasyMock.expect(view.promptForNewOrder(topCards)).andReturn(reorderedCards);
 		EasyMock.replay(deck, view);
 
 		AlterFutureCardController controller = new AlterFutureCardController(view, deck);
