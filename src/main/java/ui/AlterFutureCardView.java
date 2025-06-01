@@ -19,4 +19,13 @@ public class AlterFutureCardView implements CardView {
 			count++;
 		}
 	}
+
+	public CardType[] getNewOrder(int numCards) {
+		CardType[] reorderedCards = {
+			CardType.ATTACK,
+			CardType.DEFUSE,
+			CardType.EXPLODING_KITTEN,
+		};
+		return reorderedCards;
+	}
 }

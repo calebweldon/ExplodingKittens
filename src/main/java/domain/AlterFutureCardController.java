@@ -21,11 +21,17 @@ public class AlterFutureCardController implements CardController, ActionCardCont
 		CardType[] topCards = new CardType[numCardsViewed];
 		
 		for (int i = 0; i < numCardsViewed; i++) {
-			topCards[i] = deck.getCardAtIndex(i);
+			topCards[i] = deck.drawCard();
 		}
 
 		view.actionMessage();
 		view.displayTopCards(topCards);
+		CardType[] reorderedCards = view.getNewOrder(numCardsViewed);
+
+		for (int i = 0; i < numCardsViewed; i++) {
+			deck.insertCardAtIndex(reorderedCards[i], i);
+		}
+
 		return TurnResult.CONTINUE;
 	}
 
