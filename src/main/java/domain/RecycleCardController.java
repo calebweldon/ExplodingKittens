@@ -12,7 +12,7 @@ public class RecycleCardController implements CardController, ActionCardControll
 
 	public RecycleCardController(RecycleCardView view) {
 		this.view = view;
-        this.lastCard = CardType.RECYCLE;
+		this.lastCard = CardType.RECYCLE;
 	}
 
 	public TurnResult handleCardAction() {

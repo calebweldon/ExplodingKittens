@@ -28,7 +28,7 @@ public class RecycleCardControllerTest {
 	}
 
 	@Test
-	public void handleDefuseCardAction_DefuseCard() {
+	public void handleRecycleCardAction_DefuseCard() {
 		RecycleCardView view = EasyMock.createMock(RecycleCardView.class);
 		view.actionMessage();
 		Player player = EasyMock.createMock(Player.class);
@@ -38,6 +38,25 @@ public class RecycleCardControllerTest {
 		RecycleCardController recycleCardController = new RecycleCardController(view);
 		recycleCardController.updatePlayer(player);
 		recycleCardController.updateLastPlayed(CardType.DEFUSE);
+
+		TurnResult expected = TurnResult.CONTINUE;
+		TurnResult actual = recycleCardController.handleCardAction();
+
+		assertEquals(expected, actual);
+		EasyMock.verify(view);
+	}
+
+	@Test
+	public void handleRecycleCardAction_RecycleCard() {
+		RecycleCardView view = EasyMock.createMock(RecycleCardView.class);
+		view.actionMessage();
+		Player player = EasyMock.createMock(Player.class);
+		player.addCard(CardType.RECYCLE);
+		EasyMock.replay(view, player);
+
+		RecycleCardController recycleCardController = new RecycleCardController(view);
+		recycleCardController.updatePlayer(player);
+		recycleCardController.updateLastPlayed(CardType.RECYCLE);
 
 		TurnResult expected = TurnResult.CONTINUE;
 		TurnResult actual = recycleCardController.handleCardAction();
