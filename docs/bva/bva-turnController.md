@@ -36,22 +36,46 @@
 ## Method 2: `public TurnResult registerObserver(TurnObserver controller)`
 ### Step 4:
 ##### Each-choice
-|             | System under test | Expected Input | Expected output            | Implemented?       |
-|-------------|-------------------|----------------|----------------------------|--------------------|
-| Test Case 1 | observers = []    | TurnObserver   | observers = [TurnObserver] | :white_check_mark: |
+|             | System under test     | Expected Input | Expected output                | Implemented?       |
+|-------------|-----------------------|----------------|--------------------------------|--------------------|
+| Test Case 1 | turnObservers = []    | TurnObserver   | turnObservers = [TurnObserver] | :white_check_mark: |
 
 
 ## Method 3: `public TurnResult unregisterObserver(TurnObserver controller)`
 ### Step 4:
 ##### Each-choice
-|             | System under test          | Expected Input | Expected output | Implemented?       |
-|-------------|----------------------------|----------------|-----------------|--------------------|
-| Test Case 1 | observers = [TurnObserver] | TurnObserver   | observers = []  | :white_check_mark: |
+|             | System under test              | Expected Input | Expected output     | Implemented?       |
+|-------------|--------------------------------|----------------|---------------------|--------------------|
+| Test Case 1 | turnObservers = [TurnObserver] | TurnObserver   | turnObservers = []  | :white_check_mark: |
 
 
-## Method 4: `public TurnResult notifyObservers()`
+## Method 4: `public TurnResult notifyTurnObservers()`
 ### Step 4:
 ##### Each-choice
-|             | System under test          | Expected Input | Expected output | Implemented?       |
-|-------------|----------------------------|----------------|-----------------|--------------------|
-| Test Case 1 | observers = [TurnObserver] | player         | None            | :white_check_mark: |
+|             | System under test              | Expected Input | Expected output | Implemented?       |
+|-------------|--------------------------------|----------------|-----------------|--------------------|
+| Test Case 1 | turnObservers = [TurnObserver] | player         | None            | :white_check_mark: |
+
+
+## Method 5: `public TurnResult registerObserver(LastPlayedObserver observer)`
+### Step 4:
+##### Each-choice
+|             | System under test           | Expected Input       | Expected output                            | Implemented?       |
+|-------------|-----------------------------|----------------------|--------------------------------------------|--------------------|
+| Test Case 1 | lastPlayedObservers = []    | LastPlayedObserver   | lastPlayedObservers = [LastPlayedObserver] | :white_check_mark: |
+
+
+## Method 6: `public TurnResult unregisterObserver(LastPlayedObserver observer)`
+### Step 4:
+##### Each-choice
+|             | System under test                          | Expected Input       | Expected output           | Implemented?       |
+|-------------|--------------------------------------------|----------------------|---------------------------|--------------------|
+| Test Case 1 | lastPlayedObservers = [LastPlayedObserver] | LastPlayedObserver   | lastPlayedObservers = []  | :white_check_mark: |
+
+
+## Method 7: `public TurnResult notifyLastPlayedObservers(CardType lastPlayed)`
+### Step 4:
+##### Each-choice
+|             | System under test                          | Expected Input | Expected output | Implemented?       |
+|-------------|--------------------------------------------|----------------|-----------------|--------------------|
+| Test Case 1 | lastPlayedObservers = [LastPlayedObserver] | CardType       | None            | :white_check_mark: |

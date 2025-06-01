@@ -18,7 +18,7 @@ public class RecycleCardControllerTest {
 
 		RecycleCardController recycleCardController = new RecycleCardController(view);
 		recycleCardController.updatePlayer(player);
-		recycleCardController.updateLastCard(CardType.ATTACK);
+		recycleCardController.updateLastPlayed(CardType.ATTACK);
 
 		TurnResult expected = TurnResult.CONTINUE;
 		TurnResult actual = recycleCardController.handleCardAction();

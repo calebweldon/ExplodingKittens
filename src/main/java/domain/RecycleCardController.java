@@ -4,7 +4,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import ui.RecycleCardView;
 
 public class RecycleCardController implements CardController, ActionCardController,
-		TurnObserver {
+		TurnObserver, LastPlayedObserver {
 	private final RecycleCardView view;
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "player must be shared")
 	private Player currentPlayer;
@@ -24,7 +24,7 @@ public class RecycleCardController implements CardController, ActionCardControll
 		this.currentPlayer = currentPlayer;
 	}
 
-	public void updateLastCard(CardType lastCard) {
-		this.lastCard = lastCard;
+	public void updateLastPlayed(CardType lastPlayed) {
+		this.lastCard = lastPlayed;
 	}
 }
