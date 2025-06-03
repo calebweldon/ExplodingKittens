@@ -49,6 +49,7 @@ public class AlterFutureCardView implements CardView {
 				numCards
 				);
 
+		loop:
 		while (true) {
 			String input = scanner.nextLine();
 
@@ -63,12 +64,12 @@ public class AlterFutureCardView implements CardView {
 					int index = Integer.parseInt(values[i]);
 					if (index < 1 || index > numCards) {
 						System.out.println(invalidCardMessage);
-						continue;
+						continue loop;
 					}
 					reorderedCards[i] = topCards[index - 1];
 				} catch (NumberFormatException e) {
 					System.out.println(invalidCardMessage);
-					continue;
+					continue loop;
 				}
 			}
 
