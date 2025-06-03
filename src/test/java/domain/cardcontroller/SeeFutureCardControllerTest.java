@@ -1,5 +1,8 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.CardType;
+import domain.Deck;
+import domain.TurnResult;
 import ui.GameView;
 import ui.SeeFutureCardView;
 

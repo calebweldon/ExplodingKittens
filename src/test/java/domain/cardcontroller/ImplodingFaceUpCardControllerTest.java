@@ -1,6 +1,7 @@
 
-package domain;
+package domain.cardcontroller;
 
+import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import ui.ImplodingFaceUpCardView;

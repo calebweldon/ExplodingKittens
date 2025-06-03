@@ -1,6 +1,8 @@
-package domain;
+package domain.cardcontroller;
 
-import ui.GameView;
+import domain.CardType;
+import domain.Deck;
+import domain.TurnResult;
 import ui.AlterFutureCardView;
 
 import org.easymock.EasyMock;

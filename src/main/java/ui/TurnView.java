@@ -95,4 +95,7 @@ public class TurnView {
 
 	public void getInputForCardInfo(Player currPlayer) {
 	}
+
+	public void reinsertExplodia() {
+	}
 }

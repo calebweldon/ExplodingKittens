@@ -1,5 +1,6 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.TurnResult;
 import ui.SkipCardView;
 
 public class SkipCardController implements CardController, ActionCardController {

@@ -1,5 +1,6 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.TurnResult;
 import ui.AttackCardView;
 
 public class AttackCardController implements CardController, ActionCardController {

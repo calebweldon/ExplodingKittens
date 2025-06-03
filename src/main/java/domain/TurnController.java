@@ -1,5 +1,8 @@
 package domain;
 
+import domain.cardcontroller.CardController;
+import domain.cardcontroller.DrawCardController;
+import domain.cardcontroller.ActionCardController;
 import ui.TurnView;
 import java.util.Map;
 import java.util.HashMap;
@@ -19,7 +22,7 @@ public final class TurnController implements TurnSubject {
 	private final List<TurnObserver> observers;
 
 	public TurnController (Deck deck, TurnView turnView,
-		Map<CardType, CardController> cardControllers) {
+				Map<CardType, CardController> cardControllers) {
 		if (deck == null) {
 			throw new IllegalArgumentException("Deck cannot be null");
 		}
@@ -97,8 +100,13 @@ public final class TurnController implements TurnSubject {
 		CardController controller = cardControllers.get(cardType);
 		if (controller instanceof ActionCardController) {
 			ActionCardController actionController =
-				(ActionCardController) controller;
-			return actionController.handleCardAction();
+					(ActionCardController) controller;
+			TurnResult result = actionController.handleCardAction();
+			if (result == TurnResult.ELIMINATED) {
+				turnView.reinsertExplodia();
+				reinsertExplodia();
+			}
+			return result;
 		}
 		throw new IllegalArgumentException("Unsupported card type: " + cardType);
 	}
@@ -125,6 +133,14 @@ public final class TurnController implements TurnSubject {
 
 	private CardType promptCardChoice() {
 		return turnView.promptCardChoice(this.currPlayer);
+	}
+
+	private void reinsertExplodia() {
+		Map<CardType, Integer> hand = currPlayer.viewHand();
+		int numExplodia = hand.getOrDefault(CardType.EXPLODIA, 0);
+		for (; numExplodia > 0; numExplodia--) {
+			deck.insertCardAtRandomIndex(CardType.EXPLODIA);
+		}
 	}
 
 	public void registerObserver(TurnObserver controller) {

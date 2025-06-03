@@ -1,7 +1,5 @@
 package ui;
 
-import domain.CardController;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
