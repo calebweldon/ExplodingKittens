@@ -1,17 +1,17 @@
 package domain;
 
-import ui.SeeFutureCardView;
+import ui.AlterFutureCardView;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-public class SeeFutureCardController implements CardController, ActionCardController {
+public class AlterFutureCardController implements CardController, ActionCardController {
 	private static final int NUM_CARDS_FROM_TOP = 3;
 
-	private final SeeFutureCardView view;
+	private final AlterFutureCardView view;
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared")
 	private final Deck deck;
 
-	public SeeFutureCardController(SeeFutureCardView view, Deck deck) {
+	public AlterFutureCardController(AlterFutureCardView view, Deck deck) {
 		this.view = view;
 		this.deck = deck;
 	}
@@ -21,11 +21,17 @@ public class SeeFutureCardController implements CardController, ActionCardContro
 		CardType[] topCards = new CardType[numCardsViewed];
 		
 		for (int i = 0; i < numCardsViewed; i++) {
-			topCards[i] = deck.getCardAtIndex(i);
+			topCards[i] = deck.drawCard();
 		}
 
 		view.actionMessage();
 		view.displayTopCards(topCards);
+		CardType[] reorderedCards = view.promptForNewOrder(topCards);
+
+		for (int i = 0; i < numCardsViewed; i++) {
+			deck.insertCardAtIndex(reorderedCards[i], i);
+		}
+
 		return TurnResult.CONTINUE;
 	}
 
