@@ -37,19 +37,22 @@ public class TurnView {
 	public void showCardCouldNotBeAdded(String errorMessage) {
 		final String turnViewCardCouldNotBeAdded =
 				labels.getString("turnViewCardCouldNotBeAdded");
-		String CardNotAddedMessage = MessageFormat.format(turnViewCardCouldNotBeAdded, errorMessage);
-		System.out.println(CardNotAddedMessage);
+		String cardNotAddedMessage =
+				MessageFormat.format(turnViewCardCouldNotBeAdded, errorMessage);
+		System.out.println(cardNotAddedMessage);
 	}
 
 	public void showUnexpectedAction() {
-		final String turnViewUnexpectedAction = labels.getString("turnViewUnexpectedAction");
+		final String turnViewUnexpectedAction =
+				labels.getString("turnViewUnexpectedAction");
 		System.out.println(turnViewUnexpectedAction);
 	}
 
 
 	public String promptForInput() {
 		while (true) {
-			final String turnViewPromptAction = labels.getString("turnViewPromptAction");
+			final String turnViewPromptAction =
+					labels.getString("turnViewPromptAction");
 			System.out.println(turnViewPromptAction);
 
 			String input = scanner.nextLine().trim().toLowerCase();
@@ -57,14 +60,15 @@ public class TurnView {
 				|| "info".equals(input)) {
 				return input;
 			}
-			final String turnViewInvalidInput = labels.getString("turnViewInvalidInput");
+			final String turnViewInvalidInput =
+					labels.getString("turnViewInvalidInput");
 			System.out.println(turnViewInvalidInput);
 		}
 	}
 
 	public void showDefuseUsed() {
-		final String turnViewInvalidInput = labels.getString("turnViewInvalidInput");
-		System.out.println("Defuse used. You're safe.");
+		final String turnViewShowDefuse = labels.getString("turnViewShowDefuse");
+		System.out.println(turnViewShowDefuse);
 	}
 
 	public void showNoDefuseFound() {
