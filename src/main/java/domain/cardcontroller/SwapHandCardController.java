@@ -9,12 +9,14 @@ import ui.SwapHandCardView;
 
 import java.util.List;
 
-@SuppressFBWarnings(value = "EI_EXPOSE_REP2",
-		justification = "currentPlayer and activePlayers must be shared")
 public class SwapHandCardController implements CardController, ActionCardController,
 		TurnObserver, ActivePlayersExcludingCurrentObserver {
 	private final SwapHandCardView view;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2",
+			justification = "currentPlayer must be shared")
 	private Player currentPlayer;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2",
+			justification = "active players must be shared")
 	private List<Player> activePlayersExcludingCurrent;
 
 	public SwapHandCardController(SwapHandCardView view) {
