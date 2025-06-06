@@ -42,7 +42,8 @@ public class GameSetup {
 		// TODO: Add Embarrass
 		// TODO: Add explodia - intakes list of card controllers
 		// TODO: Add Favor
-		// TODO: FLIP - can be done now
+		cardControllers.put(CardType.REVERSE,
+				new FlipCardController(new FlipCardView(), deck));
 		// TODO: Add GodCat - intakes map of card controllers
 		cardControllers.put(CardType.IMPLODING_FACEDOWN,
 				new ImplodingFaceDownCardController(
