@@ -1,16 +1,24 @@
 package ui;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class ImplodingFaceUpCardView implements CardView {
+	private final ResourceBundle labels;
+
+	public ImplodingFaceUpCardView() {
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
+	}
+
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("Will blow your head smoove off");
+		final String implodingInfo = labels.getString("implodingInfo");
+		System.out.println(implodingInfo);
 	}
 
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.println("The Imploding Kitten was drawn! You have been eliminated.");
+		final String implodingFaceUpActionMessage =
+				labels.getString("implodingFaceUpActionMessage");
+		System.out.println(implodingFaceUpActionMessage);
 	}
 }
