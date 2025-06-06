@@ -41,7 +41,6 @@ public class AlterFutureCardView implements CardView {
 		int numCards = topCards.length;
 		CardType[] reorderedCards = new CardType[numCards];
 
-		// TODO : Come back to embedded format
 		final String alterFuturePrompt = labels.getString("alterFuturePrompt");
 		String prompt = MessageFormat.format(alterFuturePrompt, numCards);
 		System.out.println(prompt);

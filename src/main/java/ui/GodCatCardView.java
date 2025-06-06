@@ -39,6 +39,7 @@ public class GodCatCardView {
 		final String godCatPromptForCardType = labels.getString("godCatPromptForCardType");
 		System.out.println(godCatPromptForCardType);
 
+		// TODO : May need to add/remove types depending on final amount
 		final String godCatCardSelection = labels.getString("godCatCardSelection");
 		final String godCatInvalidSelection = labels.getString("godCatInvalidSelection");
 
