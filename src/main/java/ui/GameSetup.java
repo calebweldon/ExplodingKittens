@@ -33,13 +33,31 @@ public class GameSetup {
 		deck.addSpecialCards(numPlayers - 1);
 
 		TurnView turnView = new TurnView();
-		// TODO: Finish adding CardControllers
 		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.ALTER_THE_FUTURE,
+				new AlterFutureCardController(new AlterFutureCardView(), deck));
+		cardControllers.put(CardType.ATTACK,
+				new AttackCardController(new AttackCardView()));
+		// TODO: Add Basic
+		// TODO: Add Embarrass
+		// TODO: Add explodia - intakes list of card controllers
+		// TODO: Add Favor
+		// TODO: FLIP - can be done now
+		// TODO: Add GodCat - intakes map of card controllers
 		cardControllers.put(CardType.IMPLODING_FACEDOWN,
 				new ImplodingFaceDownCardController(
 						new ImplodingFaceDownCardView(), deck));
 		cardControllers.put(CardType.IMPLODING_FACEUP,
 				new ImplodingFaceUpCardController(new ImplodingFaceUpCardView()));
+		// TODO: Add Recycle
+		cardControllers.put(CardType.SEE_THE_FUTURE,
+				new SeeFutureCardController(new SeeFutureCardView(), deck));
+		cardControllers.put(CardType.SHUFFLE,
+				new ShuffleCardController(new ShuffleCardView(), deck));
+		cardControllers.put(CardType.SKIP,
+				new SkipCardController(new SkipCardView()));
+		cardControllers.put(CardType.SWAP,
+				new SwapHandCardController(new SwapHandCardView()));
 
 		TurnController turnController = new TurnController(deck, turnView, cardControllers);
 

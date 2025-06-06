@@ -11,9 +11,9 @@ public class ShuffleCardController implements CardController, ActionCardControll
 	private final ShuffleCardView view;
 	private final Deck deck;
 
-	public ShuffleCardController(Deck deck, ShuffleCardView view) {
-		this.deck = deck;
+	public ShuffleCardController(ShuffleCardView view, Deck deck) {
 		this.view = view;
+		this.deck = deck;
 	}
 
 	public TurnResult handleCardAction() {
