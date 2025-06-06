@@ -2,49 +2,68 @@ package ui;
 
 import domain.CardType;
 import domain.Player;
-import java.util.Map;
+
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.nio.charset.StandardCharsets;
 
 public class TurnView {
-	private final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+	private final Scanner scanner;
+	private final ResourceBundle labels;
 
-	public TurnView() { }
+	public TurnView() {
+		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
+	}
 
 	public void showNoCardsMessage() {
-		System.out.println("You have no cards to play.");
+		final String turnViewNoCards = labels.getString("turnViewNoCards");
+		System.out.println(turnViewNoCards);
 	}
 
 	public void showInvalidCardPlay(String errorMessage) {
-		System.out.printf("Invalid card play: %s%n", errorMessage);
+		final String turnViewInvalidCard = labels.getString("turnViewInvalidCard");
+		String invalidCardMessage = MessageFormat.format(turnViewInvalidCard, errorMessage);
+		System.out.println(invalidCardMessage);
 	}
 
 	public void showCardDrawn(CardType drawn) {
-		System.out.printf("You drew: %s%n", drawn);
+		final String turnViewShowCardDrawn = labels.getString("turnViewShowCardDrawn");
+		String drawnCardMessage = MessageFormat.format(turnViewShowCardDrawn, drawn);
+		System.out.println(drawnCardMessage);
 	}
 
 	public void showCardCouldNotBeAdded(String errorMessage) {
-		System.out.printf("Card could not be added: %s%n", errorMessage);
+		final String turnViewCardCouldNotBeAdded =
+				labels.getString("turnViewCardCouldNotBeAdded");
+		String CardNotAddedMessage = MessageFormat.format(turnViewCardCouldNotBeAdded, errorMessage);
+		System.out.println(CardNotAddedMessage);
 	}
 
 	public void showUnexpectedAction() {
-		System.out.println("Should not happen.");
+		final String turnViewUnexpectedAction = labels.getString("turnViewUnexpectedAction");
+		System.out.println(turnViewUnexpectedAction);
 	}
 
 
 	public String promptForInput() {
 		while (true) {
-			System.out.print("Enter [play], [draw], or [info]: ");
+			final String turnViewPromptAction = labels.getString("turnViewPromptAction");
+			System.out.println(turnViewPromptAction);
+
 			String input = scanner.nextLine().trim().toLowerCase();
 			if ("play".equals(input) || "draw".equals(input) 
 				|| "info".equals(input)) {
 				return input;
 			}
-			System.out.println("Invalid input.");
+			final String turnViewInvalidInput = labels.getString("turnViewInvalidInput");
+			System.out.println(turnViewInvalidInput);
 		}
 	}
 
 	public void showDefuseUsed() {
+		final String turnViewInvalidInput = labels.getString("turnViewInvalidInput");
 		System.out.println("Defuse used. You're safe.");
 	}
 
