@@ -3,28 +3,29 @@ package ui;
 import domain.CardType;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class GodCatCardView {
 	private final Scanner scanner;
+	private final ResourceBundle labels;
 
 	public GodCatCardView () {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("The God Cat. Playing this card will allow it to " +
-				"transform into the card of your choice.");
+		final String godCatInfo = labels.getString("godCatInfo");
+		System.out.println(godCatInfo);
 	}
 
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.println("The God Cat has been played!");
+		final String godCatActionMessage = labels.getString("godCatActionMessage");
+		System.out.println(godCatActionMessage);
 	}
 
 	public CardType chooseController() {
-		// TODO: add locale
 		final int FAVOR = 3;
 		final int BASIC = 4;
 		final int REVERSE = 5;
@@ -34,9 +35,15 @@ public class GodCatCardView {
 		final int RECYCLE = 9;
 		final int ALTER = 10;
 		final int SEE = 11;
-		System.out.println("Please choose the card type:");
+
+		final String godCatPromptForCardType = labels.getString("godCatPromptForCardType");
+		System.out.println(godCatPromptForCardType);
+
+		final String godCatCardSelection = labels.getString("godCatCardSelection");
+		final String godCatInvalidSelection = labels.getString("godCatInvalidSelection");
+
 		while (true) {
-			System.out.println("1. Action \t 2. Skip \t 3. Favor \t 4. Basic ...");
+			System.out.println(godCatCardSelection);
 			int choice = scanner.nextInt();
 			switch (choice) {
 				case 1:
@@ -62,7 +69,7 @@ public class GodCatCardView {
 				case SEE:
 					return CardType.SEE_THE_FUTURE;
 				default:
-					System.out.println("Invalid choice. Please try again.");
+					System.out.println(godCatInvalidSelection);
 			}
 		}
 	}
