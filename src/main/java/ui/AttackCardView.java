@@ -1,15 +1,11 @@
 package ui;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class AttackCardView implements CardView {
-	private final Scanner scanner;
-	private ResourceBundle labels;
+	private final ResourceBundle labels;
 
 	public AttackCardView() {
-		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 

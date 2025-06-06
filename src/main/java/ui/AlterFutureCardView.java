@@ -10,7 +10,7 @@ import domain.CardType;
 
 public class AlterFutureCardView implements CardView {
 	private final Scanner scanner;
-	private ResourceBundle labels;
+	private final ResourceBundle labels;
 
 	public AlterFutureCardView() {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
