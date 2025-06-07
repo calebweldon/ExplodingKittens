@@ -79,8 +79,8 @@
 |-------------|----------------------------------------------------------------------|---------------------------|--------------------|
 | Test Case 1 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], -1      | IndexOutOfBoundsException | :white_check_mark: |
 | Test Case 2 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], INT_MAX | IndexOutOfBoundsException | :white_check_mark: |
-| Test Case 3 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE] 0        | CardType.SKIP             | :white_check_mark: |
-| Test Case 4 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE] 1        | CardType.EXPLODING_KITTEN | :white_check_mark: |
+| Test Case 3 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], 0       | CardType.SKIP             | :white_check_mark: |
+| Test Case 4 | [CardType.SKIP, CardType.EXPLODING_KITTEN, CardType.DEFUSE], 1       | CardType.EXPLODING_KITTEN | :white_check_mark: |
 
 
 ## Method 7: ```public CardType drawCardFromBottom()```
@@ -134,3 +134,19 @@
 |-------------|-------------------------------------|-----------------|--------------------|
 | Test Case 1 | Deck / CardType.IMPLODING_FACEUP    | -1              | :white_check_mark: |
 | Test Case 2 | Deck with CardType.IMPLODING_FACEUP | 0               | :white_check_mark: |
+
+
+## Method 10: ```public int getSize()```
+### Step 1-3 Results
+|        | input 1                                | Output     |
+|--------|----------------------------------------|------------|
+| Step 1 | Deck                                   | Number     |
+| Step 2 | collection                             | Collection |
+| Step 3 | Deck with 0 cards, Deck with all cards | 0, 56      |
+
+### Step 4:
+##### All-combination or each-choice: Each-Choice
+|             | System under test  | Expected output | Implemented? |
+|-------------|--------------------|-----------------|--------------|
+| Test Case 1 | Deck with 1 card   | 1               | :x:          |
+| Test Case 2 | Deck with 56 cards | 65              | :x:          |

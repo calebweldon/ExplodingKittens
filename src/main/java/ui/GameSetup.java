@@ -1,12 +1,12 @@
 package ui;
 
-import domain.CardType;
-import domain.Deck;
-import domain.Player;
-import domain.TurnController;
+import domain.*;
+import domain.cardcontroller.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameSetup {
 	private final GameController gameController;
@@ -21,17 +21,27 @@ public class GameSetup {
 
 		List<Player> players = new ArrayList<>(numPlayers);
 		for (int i = 0; i < numPlayers; i++) {
-			Player player = new Player();
+			int id = i + 1;
+			Player player = new Player(id);
 			for (int j = 0; j < HAND_SIZE - 1; j++) {
 				CardType card = deck.drawCard();
 				player.addCard(card);
 			}
 			player.addCard(CardType.DEFUSE);
-			players.add(new Player());
+			players.add(player);
 		}
 		deck.addSpecialCards(numPlayers - 1);
 
-		TurnController turnController = new TurnController(deck);
+		TurnView turnView = new TurnView();
+		// TODO: Finish adding CardControllers
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.IMPLODING_FACEDOWN,
+				new ImplodingFaceDownCardController(
+						new ImplodingFaceDownCardView(), deck));
+		cardControllers.put(CardType.IMPLODING_FACEUP,
+				new ImplodingFaceUpCardController(new ImplodingFaceUpCardView()));
+
+		TurnController turnController = new TurnController(deck, turnView, cardControllers);
 
 		this.gameController = new GameController(players, turnController, this.gameView);
 	}

@@ -133,7 +133,7 @@ public class Deck {
 		return deck.indexOf(CardType.IMPLODING_FACEUP);
 	}
 
-	int getSize() {
+	public int getSize() {
 		return deck.size();
 	}
 
