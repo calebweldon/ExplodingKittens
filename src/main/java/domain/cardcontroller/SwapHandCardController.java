@@ -42,4 +42,8 @@ public class SwapHandCardController implements CardController, ActionCardControl
 			(List<Player> activePlayersExcludingCurrent) {
 		this.activePlayersExcludingCurrent = activePlayersExcludingCurrent;
 	}
+
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }
