@@ -1,6 +1,7 @@
 package ui;
 
 import domain.CardType;
+
 import domain.Player;
 import domain.cardcontroller.CardController;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
