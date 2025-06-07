@@ -2,18 +2,24 @@ package ui;
 
 import domain.CardType;
 import domain.Player;
+import domain.cardcontroller.CardController;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.text.MessageFormat;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 import java.nio.charset.StandardCharsets;
 
 public class TurnView {
 	private final Scanner scanner;
 	private final ResourceBundle labels;
+	private static final int ROWLENGTH = 7;
 
-	public TurnView() {
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Access getInfo() method")
+	private final Map<CardType, CardController> cardControllers;
+
+	public TurnView(Map<CardType, CardController> cardControllers) {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.cardControllers = cardControllers;
 		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
@@ -48,12 +54,11 @@ public class TurnView {
 		System.out.println(turnViewUnexpectedAction);
 	}
 
-
 	public String promptForInput() {
 		while (true) {
 			final String turnViewPromptAction =
 					labels.getString("turnViewPromptAction");
-			System.out.println(turnViewPromptAction);
+			System.out.print(turnViewPromptAction);
 
 			String input = scanner.nextLine().trim().toLowerCase();
 			if ("play".equals(input) || "draw".equals(input) 
@@ -66,59 +71,62 @@ public class TurnView {
 		}
 	}
 
-	public void showDefuseUsed() {
-		final String turnViewShowDefuse = labels.getString("turnViewShowDefuse");
-		System.out.println(turnViewShowDefuse);
-	}
-
-	public void showNoDefuseFound() {
-		System.out.println("No defuse found. You're eliminated.");
-	}
-
 	public CardType promptCardChoice(Player player) {
-		CardType[] hand = player.viewHand().keySet().toArray(new CardType[0]);
+		Map<CardType, Integer> hand = player.viewHand();
+		List<CardType> cards = new ArrayList<> (hand.keySet());
 		while (true) {
-			System.out.println("Select a card to play:");
-			for (int i = 0; i < hand.length; i++) {
-				System.out.printf(
-					"[%d] %s (%d)%n",
-					i,
-					hand[i],
-					player.viewHand().get(hand[i])
-				);
-			}
+			System.out.print("Select a card to play:");
+			printCards(hand, cards);
 			System.out.print("Enter index: ");
 			try {
 				int idx = Integer.parseInt(scanner.nextLine());
-				if (idx >= 0 && idx < hand.length) {
-					return hand[idx];
+				if (idx >= 0 && idx < cards.size()) {
+					return cards.get(idx);
 				}
 			} catch (NumberFormatException ignored) { }
 			System.out.println("Invalid index.");
 		}
 	}
+	
+	public void displayHand(Player player) {
+		Map<CardType, Integer> hand = player.viewHand();
+		List<CardType> cards = new ArrayList<> (hand.keySet());
+		System.out.printf("%nYour hand: ");
+		printCards(hand, cards);
+	}
 
-	public int promptExplodingKittenIndex(int deckSize) {
-		while (true) {
-			System.out.printf(
-				"Where do you want to put the Exploding Kitten back? (0-%d): ", 
-				deckSize
-			);
-			try {
-				int index = Integer.parseInt(scanner.nextLine());
-				if (index >= 0 && index <= deckSize) {
-					return index;
-				}
-				System.out.println("Invalid index. Try again.");
-			} catch (NumberFormatException e) {
-				System.out.println("Please enter a valid number.");
+	private void printCards(Map<CardType, Integer> hand, List<CardType> cards) {
+		for (int i = 0; i < cards.size(); i++) {
+			CardType card = cards.get(i);
+			if (i % ROWLENGTH == 0) {
+				System.out.println();
 			}
+			System.out.printf("[%d] %s (%d)    ", i, card, hand.get(card));
+		}
+		System.out.println();
+	}
+
+	public void getCardInfo() {
+		System.out.print("Select card information:");
+		CardType[] cards = CardType.values();
+		for (int i = 0; i < CardType.values().length; i++) {
+			if (i % ROWLENGTH == 0) {
+				System.out.println();
+			}
+			System.out.printf("[%d] %s    ", i, cards[i]);
+		}
+		try {
+			System.out.printf("%nEnter index: ");
+			int idx = Integer.parseInt(scanner.nextLine());
+			CardType card = cards[idx];
+			CardController cardController = cardControllers.get(card);
+			cardController.getInfo();
+		} catch (NumberFormatException ignored) {
+			System.out.println("Invalid index.");
 		}
 	}
 
-	public void getInputForCardInfo(Player currPlayer) {
-	}
-
 	public void reinsertExplodia() {
+		System.out.println("Returning eliminated player's Explodia(s) to the deck");
 	}
 }

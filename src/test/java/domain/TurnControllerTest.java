@@ -41,7 +41,7 @@ class TurnControllerTest {
 
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
-		player.showHand();
+		turnView.displayHand(player);
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -65,7 +65,7 @@ class TurnControllerTest {
 
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
-		player.showHand();
+		turnView.displayHand(player);
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.IMPLODING_FACEDOWN);
 		turnView.showCardDrawn(CardType.IMPLODING_FACEDOWN);
@@ -91,7 +91,7 @@ class TurnControllerTest {
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
 		// "play" phase
-		player.showHand();
+		turnView.displayHand(player);
 		EasyMock.expect(turnView.promptForInput()).andReturn("play");
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.isEmpty()).andReturn(false);
@@ -100,7 +100,6 @@ class TurnControllerTest {
 		turnView.showInvalidCardPlay("Unsupported card type: IMPLODING_FACEDOWN");
 
 		// "draw" phase
-		player.showHand();
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -124,7 +123,7 @@ class TurnControllerTest {
 
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
-		player.showHand();
+		turnView.displayHand(player);
 		EasyMock.expect(turnView.promptForInput()).andReturn("play");
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.isEmpty()).andReturn(false);
@@ -151,14 +150,13 @@ class TurnControllerTest {
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
 		// "play" phase
-		player.showHand();
+		turnView.displayHand(player);
 		EasyMock.expect(turnView.promptForInput()).andReturn("play");
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.isEmpty()).andReturn(true);
 		turnView.showNoCardsMessage();
 
 		// "draw" phase
-		player.showHand();
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -183,12 +181,11 @@ class TurnControllerTest {
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
 		// "info" phase
-		player.showHand();
+		turnView.displayHand(player);
 		EasyMock.expect(turnView.promptForInput()).andReturn("info");
-		turnView.getInputForCardInfo(player);
+		turnView.getCardInfo();
 
 		// "draw" phase
-		player.showHand();
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -237,7 +234,7 @@ class TurnControllerTest {
 		controller.updatePlayer(player);
 
 		// "draw" phase
-		player.showHand();
+		turnView.displayHand(player);
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);

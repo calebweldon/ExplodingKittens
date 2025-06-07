@@ -57,8 +57,8 @@ public final class TurnController implements TurnSubject {
 
 		TurnResult specialAction = TurnResult.CONTINUE;
 
+		turnView.displayHand(currPlayer);
 		while (specialAction == TurnResult.CONTINUE) {
-			player.showHand();
 			String input = promptForInput();
 			switch (input) {
 				case "play": {
@@ -82,7 +82,7 @@ public final class TurnController implements TurnSubject {
 					return specialAction;
 				}
 				case "info": {
-					turnView.getInputForCardInfo(this.currPlayer);
+					turnView.getCardInfo();
 					break;
 				}
 				default:
