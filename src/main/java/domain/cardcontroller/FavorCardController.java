@@ -14,7 +14,16 @@ import java.util.stream.Collectors;
 public class FavorCardController implements CardController, ActionCardController,
 		TurnObserver, ActivePlayersExcludingCurrentObserver {
 	private final FavorCardView view;
+	@SuppressFBWarnings(
+		value = "EI_EXPOSE_REP2",
+		justification = "Trusted internal game context; Player reference is safe to share"
+	)
 	private Player currentPlayer;
+
+	@SuppressFBWarnings(
+		value = "EI_EXPOSE_REP2",
+		justification = "Trusted internal game context."
+	)
 	private List<Player> activePlayersExcludingCurrent;
 
 	public FavorCardController(FavorCardView view) {
@@ -55,11 +64,19 @@ public class FavorCardController implements CardController, ActionCardController
 	}
 
 	@Override
+	@SuppressFBWarnings(
+		value = "EI_EXPOSE_REP2",
+		justification = "Trusted internal game context; Player reference is safe to share"
+	)
 	public void updatePlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
 
 	@Override
+	@SuppressFBWarnings(
+		value = "EI_EXPOSE_REP2",
+		justification = "Trusted internal game context."
+	)
 	public void updateActivePlayersExcludingCurrent(
 			List<Player> activePlayersExcludingCurrent) {
 		this.activePlayersExcludingCurrent = activePlayersExcludingCurrent;

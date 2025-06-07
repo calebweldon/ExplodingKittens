@@ -18,7 +18,7 @@ public class FavorCardView implements CardView {
 
 	public void getInfo() {
 		// TODO: add locale
-		System.out.println("Choose a player to give you one of their cards (of their choosing)");
+		System.out.println("Choose a player to give you one of their cards - their choice");
 	}
 
 	public void actionMessage() {
