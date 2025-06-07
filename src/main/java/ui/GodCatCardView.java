@@ -56,7 +56,7 @@ public class GodCatCardView {
 				case BASIC:
 					return CardType.TACO_CAT;
 				case REVERSE:
-					return CardType.REVERSE;
+					return CardType.FLIP;
 				case SHUFFLE:
 					return CardType.SHUFFLE;
 				case SWAP:

@@ -3,7 +3,6 @@ package ui;
 import domain.*;
 import domain.cardcontroller.*;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +69,7 @@ public class GameSetup {
 		godCatMap.put(CardType.SKIP, skipController);
 		godCatMap.put(CardType.FAVOR, favorController);
 		godCatMap.put(CardType.TACO_CAT, basicController);
-		godCatMap.put(CardType.REVERSE, flipController);
+		godCatMap.put(CardType.FLIP, flipController);
 		godCatMap.put(CardType.SHUFFLE, shuffleController);
 		godCatMap.put(CardType.SWAP, swapController);
 		godCatMap.put(CardType.EMBARRASS, embarrassController);
@@ -95,7 +94,7 @@ public class GameSetup {
 		cardControllers.put(CardType.EXPLODING_KITTEN, explodingkittenController);
 		cardControllers.put(CardType.EXPLODIA, explodiaController);
 		cardControllers.put(CardType.FAVOR, favorController);
-		cardControllers.put(CardType.REVERSE, flipController);
+		cardControllers.put(CardType.FLIP, flipController);
 		cardControllers.put(CardType.GOD_CAT, godCatController);
 		cardControllers.put(CardType.IMPLODING_FACEDOWN, implodingDownController);
 		cardControllers.put(CardType.IMPLODING_FACEUP, implodingUpController);
