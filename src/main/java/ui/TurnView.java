@@ -72,46 +72,60 @@ public class TurnView {
 	}
 
 	public void showNoDefuseFound() {
-		System.out.println("No defuse found. You're eliminated.");
+		final String turnViewNoDefuse = labels.getString("turnViewNoDefuse");
+		System.out.println(turnViewNoDefuse);
 	}
 
 	public CardType promptCardChoice(Player player) {
 		CardType[] hand = player.viewHand().keySet().toArray(new CardType[0]);
+
+		final String turnViewSelectCard = labels.getString("turnViewSelectCard");
+		final String turnViewCardInHand = labels.getString("turnViewCardInHand");
+		final String turnViewEnterIndex = labels.getString("turnViewEnterIndex");
+		final String turnViewInvalidIndex = labels.getString("turnViewInvalidIndex");
+
 		while (true) {
-			System.out.println("Select a card to play:");
+			System.out.println(turnViewSelectCard);
 			for (int i = 0; i < hand.length; i++) {
-				System.out.printf(
-					"[%d] %s (%d)%n",
-					i,
-					hand[i],
-					player.viewHand().get(hand[i])
-				);
+				String cardInHand = MessageFormat.format
+						(turnViewCardInHand,
+								i,
+								hand[i],
+								player.viewHand().get(hand[i]));
+				System.out.println(cardInHand);
 			}
-			System.out.print("Enter index: ");
+			System.out.println(turnViewEnterIndex);
 			try {
 				int idx = Integer.parseInt(scanner.nextLine());
 				if (idx >= 0 && idx < hand.length) {
 					return hand[idx];
 				}
 			} catch (NumberFormatException ignored) { }
-			System.out.println("Invalid index.");
+			System.out.println(turnViewInvalidIndex);
 		}
 	}
 
 	public int promptExplodingKittenIndex(int deckSize) {
+
+		final String turnViewReinsertExplodingKitten = labels.getString
+				("turnViewReinsertExplodingKitten");
+		String reinsertExplodingKitten = MessageFormat.format
+				(turnViewReinsertExplodingKitten, deckSize);
+
+		final String turnViewInvalidIndex = labels.getString("turnViewInvalidIndex");
+		final String turnViewEnterValidNumber =
+				labels.getString("turnViewEnterValidNumber");
+
 		while (true) {
-			System.out.printf(
-				"Where do you want to put the Exploding Kitten back? (0-%d): ", 
-				deckSize
-			);
+			System.out.println(reinsertExplodingKitten);
 			try {
 				int index = Integer.parseInt(scanner.nextLine());
 				if (index >= 0 && index <= deckSize) {
 					return index;
 				}
-				System.out.println("Invalid index. Try again.");
+				System.out.println(turnViewInvalidIndex);
 			} catch (NumberFormatException e) {
-				System.out.println("Please enter a valid number.");
+				System.out.println(turnViewEnterValidNumber);
 			}
 		}
 	}
