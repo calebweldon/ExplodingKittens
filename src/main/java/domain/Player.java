@@ -29,9 +29,7 @@ public class Player {
 
 	public void playCard(CardType cardType) {
 		int removeCount = 1;
-		if (false
-				|| cardType == CardType.TACO_CAT
-				|| cardType == CardType.CATTERMELON
+		if (cardType == CardType.TACO_CAT || cardType == CardType.CATTERMELON
 				|| cardType == CardType.POTATO_CAT
 				|| cardType == CardType.BEARD_CAT
 				|| cardType == CardType.RAINBOW_RALPHING_CAT) {
@@ -42,7 +40,11 @@ public class Player {
 			String message = "You do not have enough cards to play.";
 			throw new IllegalArgumentException(message);
 		}
-		this.hand.put(cardType, count - removeCount);
+		if (count - removeCount == 0) {
+			this.hand.remove(cardType);
+		} else {
+			this.hand.put(cardType, count - removeCount);
+		}
 	}
 
 	public void removeCard(CardType cardType) {
@@ -73,9 +75,5 @@ public class Player {
 
 	public Map<CardType, Integer> viewHand() {
 		return new HashMap<>(this.hand);
-	}
-
-	public void showHand() {
-		// TODO: BVA + TDD + Implementation
 	}
 }
