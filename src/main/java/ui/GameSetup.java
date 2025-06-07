@@ -44,6 +44,8 @@ public class GameSetup {
 		CardController basicController = new BasicCardController();
 		// TODO: Update Embarrass
 		CardController embarrassController = new EmbarrassCardController();
+		// TODO: Update Exploding Kitten
+		CardController explodingkittenController = new ExplodingKittenCardController();
 		// TODO: Update Favor
 		CardController favorController = new FavorCardController();
 		CardController flipController = new FlipCardController(
@@ -90,6 +92,7 @@ public class GameSetup {
 		cardControllers.put(CardType.RAINBOW_RALPHING_CAT, basicController);
 		cardControllers.put(CardType.TACO_CAT, basicController);
 		cardControllers.put(CardType.EMBARRASS, embarrassController);
+		cardControllers.put(CardType.EXPLODING_KITTEN, explodingkittenController);
 		cardControllers.put(CardType.EXPLODIA, explodiaController);
 		cardControllers.put(CardType.FAVOR, favorController);
 		cardControllers.put(CardType.REVERSE, flipController);
