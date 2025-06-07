@@ -97,4 +97,10 @@ public class GameView {
 		System.out.println(gameOverMessage);
 	}
 
+	public void displayTurn(Player currPlayer) {
+		final String displayTurn = labels.getString("displayTurn");
+		String turnMessage = MessageFormat.format(
+				"\n{0} {1}", displayTurn, currPlayer.getId());
+		System.out.print(turnMessage);
+	}
 }

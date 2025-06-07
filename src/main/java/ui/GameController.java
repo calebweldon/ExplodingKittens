@@ -50,6 +50,7 @@ public class GameController implements ActivePlayersSubject {
 			notifyObservers();
 
 			while (remainingTurns > 0) {
+				gameView.displayTurn(currPlayer);
 				TurnResult result = playTurn(currPlayer);
 				remainingTurns--;
 
