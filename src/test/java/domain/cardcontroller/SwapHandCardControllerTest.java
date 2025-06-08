@@ -1,5 +1,8 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.CardType;
+import domain.Player;
+import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import ui.SwapHandCardView;

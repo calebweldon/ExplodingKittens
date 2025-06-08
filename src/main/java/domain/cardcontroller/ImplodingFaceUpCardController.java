@@ -1,5 +1,6 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.TurnResult;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import ui.ImplodingFaceUpCardView;
 

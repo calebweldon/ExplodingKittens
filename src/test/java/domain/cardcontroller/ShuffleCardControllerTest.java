@@ -1,5 +1,7 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.Deck;
+import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import ui.ShuffleCardView;

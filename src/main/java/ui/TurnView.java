@@ -11,8 +11,6 @@ public class TurnView {
 
 	public TurnView() { }
 
-	public void showTopCards(CardType[] topCards) { }
-
 	public void showNoCardsMessage() {
 		System.out.println("You have no cards to play.");
 	}
@@ -96,5 +94,8 @@ public class TurnView {
 	}
 
 	public void getInputForCardInfo(Player currPlayer) {
+	}
+
+	public void reinsertExplodia() {
 	}
 }

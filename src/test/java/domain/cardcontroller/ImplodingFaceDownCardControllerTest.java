@@ -1,6 +1,9 @@
 
-package domain;
+package domain.cardcontroller;
 
+import domain.CardType;
+import domain.Deck;
+import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import ui.ImplodingFaceDownCardView;
@@ -24,6 +27,6 @@ public class ImplodingFaceDownCardControllerTest {
 		TurnResult result = implodingFaceDownCardController.handleCardDraw();
 
 		assertEquals(TurnResult.CONTINUE, result);
-		EasyMock.verify(deck);
+		EasyMock.verify(deck, cv);
 	}
 }

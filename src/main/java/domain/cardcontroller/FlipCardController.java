@@ -1,5 +1,7 @@
-package domain;
+package domain.cardcontroller;
 
+import domain.Deck;
+import domain.TurnResult;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared")

@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeckTest {
 	public static final int INT_MAX = 2147483647;
+	public static final int MAX_DECK_SIZE = 65;
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, INT_MAX})
@@ -189,5 +190,24 @@ public class DeckTest {
 		deck.insertCardAtIndex(imploding, 0);
 
 		assertEquals(0, deck.getImplodingIndex());
+	}
+
+	@Test
+	public void getDeckSize_OneCard() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, false);
+		CardType imploding = CardType.IMPLODING_FACEUP;
+
+		deck.insertCardAtIndex(imploding, 0);
+
+		assertEquals(1, deck.getSize());
+	}
+
+	@Test
+	public void getDeckSize_AllCards() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, true);
+
+		assertEquals(MAX_DECK_SIZE, deck.getSize());
 	}
 }
