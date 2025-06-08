@@ -1,10 +1,13 @@
-package domain;
+package domain.cardcontroller;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import domain.CardType;
+import domain.Player;
+import domain.TurnResult;
 import ui.RecycleCardView;
 
 public class RecycleCardControllerTest {

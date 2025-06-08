@@ -1,7 +1,13 @@
-package domain;
+package domain.cardcontroller;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import ui.RecycleCardView;
+import domain.TurnResult;
+import domain.Player;
+import domain.CardType;
+import domain.TurnObserver;
+import domain.LastPlayedObserver;
 
 public class RecycleCardController implements CardController, ActionCardController,
 		TurnObserver, LastPlayedObserver {
