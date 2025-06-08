@@ -103,7 +103,7 @@ class TurnControllerTest {
 		EasyMock.expect(hand.isEmpty()).andReturn(false);
 		EasyMock.expect(turnView.promptCardChoice(player)).andReturn(CardType.IMPLODING_FACEDOWN);
 		player.playCard(CardType.IMPLODING_FACEDOWN);
-		turnView.showInvalidCardPlay("Unsupported card type: IMPLODING_FACEDOWN");
+		turnView.showInvalidCardPlay(CardType.IMPLODING_FACEDOWN);
 
 		// "draw" phase
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");

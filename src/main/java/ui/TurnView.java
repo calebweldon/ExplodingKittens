@@ -29,9 +29,9 @@ public class TurnView {
 		System.out.println(turnViewNoCards);
 	}
 
-	public void showInvalidCardPlay(String errorMessage) {
+	public void showInvalidCardPlay(CardType playedCard) {
 		final String turnViewInvalidCard = labels.getString("turnViewInvalidCard");
-		String invalidCardMessage = MessageFormat.format(turnViewInvalidCard, errorMessage);
+		String invalidCardMessage = MessageFormat.format(turnViewInvalidCard, playedCard);
 		System.out.println(invalidCardMessage);
 	}
 
@@ -41,11 +41,11 @@ public class TurnView {
 		System.out.println(drawnCardMessage);
 	}
 
-	public void showCardCouldNotBeAdded(String errorMessage) {
+	public void showCardCouldNotBeAdded(CardType drawn) {
 		final String turnViewCardCouldNotBeAdded =
 				labels.getString("turnViewCardCouldNotBeAdded");
 		String cardNotAddedMessage =
-				MessageFormat.format(turnViewCardCouldNotBeAdded, errorMessage);
+				MessageFormat.format(turnViewCardCouldNotBeAdded, drawn);
 		System.out.println(cardNotAddedMessage);
 	}
 

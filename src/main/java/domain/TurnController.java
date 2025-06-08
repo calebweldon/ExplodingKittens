@@ -73,7 +73,7 @@ public final class TurnController implements TurnSubject {
 						this.currPlayer.playCard(cardType);
 						specialAction = playCardAction(cardType);
 					} catch (IllegalArgumentException e) {
-						turnView.showInvalidCardPlay(e.getMessage());
+						turnView.showInvalidCardPlay(cardType);
 					}
 					break;
 				}
@@ -124,7 +124,7 @@ public final class TurnController implements TurnSubject {
 		try {
 			currPlayer.addCard(drawn);
 		} catch (IllegalArgumentException e) {
-			turnView.showCardCouldNotBeAdded(e.getMessage());
+			turnView.showCardCouldNotBeAdded(drawn);
 		}
 		return TurnResult.CONTINUE;
 	}
