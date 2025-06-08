@@ -75,24 +75,35 @@ public class TurnView {
 	public CardType promptCardChoice(Player player) {
 		Map<CardType, Integer> hand = player.viewHand();
 		List<CardType> cards = new ArrayList<> (hand.keySet());
+
+		final String turnViewPromptForCard =
+				labels.getString("turnViewPromptForCard");
+		final String turnViewPromptForIndex =
+				labels.getString("turnViewPromptForIndex");
+		final String turnViewInvalidIndex =
+				labels.getString("turnViewInvalidIndex");
+
 		while (true) {
-			System.out.print("Select a card to play:");
+			System.out.println(turnViewPromptForCard);
 			printCards(hand, cards);
-			System.out.print("Enter index: ");
+			System.out.print(turnViewPromptForIndex);
 			try {
 				int idx = Integer.parseInt(scanner.nextLine());
 				if (idx >= 0 && idx < cards.size()) {
 					return cards.get(idx);
 				}
 			} catch (NumberFormatException ignored) { }
-			System.out.println("Invalid index.");
+			System.out.println(turnViewInvalidIndex);
 		}
 	}
 	
 	public void displayHand(Player player) {
 		Map<CardType, Integer> hand = player.viewHand();
 		List<CardType> cards = new ArrayList<> (hand.keySet());
-		System.out.printf("%nYour hand: ");
+
+		final String turnViewYourHand =
+				labels.getString("turnViewYourHand");
+		System.out.println(turnViewYourHand);
 		printCards(hand, cards);
 	}
 
@@ -102,38 +113,55 @@ public class TurnView {
 			if (i % ROWLENGTH == 0) {
 				System.out.println();
 			}
-			System.out.printf("[%d] %s (%d)    ", i, card, hand.get(card));
+			final String cardInfo = MessageFormat.format
+					("[{0}] {1} ({2})", i, card, hand.get(card));
+			System.out.println(cardInfo);
 		}
 		System.out.println();
 	}
 
 	public void getCardInfo() {
-		System.out.print("Select card information:");
+		final String turnViewSelectCardInfo =
+				labels.getString("turnViewSelectCardInfo");
+		System.out.print(turnViewSelectCardInfo);
+
+		final String turnViewPromptForIndex =
+				labels.getString("turnViewPromptForIndex");
+		final String turnViewInvalidIndex =
+				labels.getString("turnViewInvalidIndex");
+
 		CardType[] cards = CardType.values();
 		for (int i = 0; i < CardType.values().length; i++) {
 			if (i % ROWLENGTH == 0) {
 				System.out.println();
 			}
-			System.out.printf("[%d] %s    ", i, cards[i]);
+			final String cardInfo = MessageFormat.format("[{0}] {1}    ", i, cards[i]);
+			System.out.printf(cardInfo);
 		}
 		try {
-			System.out.printf("%nEnter index: ");
+			System.out.print(turnViewPromptForIndex);
 			int idx = Integer.parseInt(scanner.nextLine());
 			CardType card = cards[idx];
 			CardController cardController = cardControllers.get(card);
 			cardController.getInfo();
 		} catch (NumberFormatException ignored) {
-			System.out.println("Invalid index.");
+			System.out.println(turnViewInvalidIndex);
 		}
 	}
 
 	public void reinsertExplodia() {
-		System.out.println("Returning eliminated player's Explodia(s) to the deck");
+		final String turnViewReinsertExplodia =
+				labels.getString("turnViewReinsertExplodia");
+		System.out.println(turnViewReinsertExplodia);
 	}
 
 	public void showImplodingIndex(int implodingIndex) {
 		if (implodingIndex != -1) {
-			System.out.printf("The Imploding Kitten is at index: %d%n", implodingIndex);
+			final String turnViewShowImplodingIndex =
+					labels.getString("turnViewShowImplodingIndex");
+			final String implodingIndexMsg = MessageFormat.format
+					(turnViewShowImplodingIndex, implodingIndex);
+			System.out.println(implodingIndexMsg);
 		}
 	}
 }
