@@ -16,7 +16,7 @@ public class Deck {
 	public final static int NUMBER_OF_ATTACK = 4;
 	public final static int NUMBER_OF_SHUFFLE = 4;
 	public final static int NUMBER_OF_REVERSE = 4;
-	public final static int NUMBER_OF_DRAW_BOTTOM = 4;
+	public final static int NUMBER_OF_SWAP = 4;
 	public final static int NUMBER_OF_EMBARRASS = 4;
 	public final static int NUMBER_OF_RECYCLE = 4;
 	public final static int NUMBER_OF_SEE = 5;
@@ -63,8 +63,8 @@ public class Deck {
 		for (int i = 0; i < NUMBER_OF_REVERSE; i++) {
 			deck.add(CardType.REVERSE);
 		}
-		for (int i = 0; i < NUMBER_OF_DRAW_BOTTOM; i++) {
-			deck.add(CardType.DRAW_FROM_BOTTOM);
+		for (int i = 0; i < NUMBER_OF_SWAP; i++) {
+			deck.add(CardType.SWAP);
 		}
 		for (int i = 0; i < NUMBER_OF_EMBARRASS; i++) {
 			deck.add(CardType.EMBARRASS);
