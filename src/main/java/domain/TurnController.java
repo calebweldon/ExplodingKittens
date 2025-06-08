@@ -57,9 +57,9 @@ public final class TurnController implements TurnSubject {
 
 		TurnResult specialAction = TurnResult.CONTINUE;
 
-		turnView.displayHand(currPlayer);
 		int implodingIndex = deck.getImplodingIndex();
 		turnView.showImplodingIndex(implodingIndex);
+		turnView.displayHand(currPlayer);
 		while (specialAction == TurnResult.CONTINUE) {
 			String input = promptForInput();
 			switch (input) {
