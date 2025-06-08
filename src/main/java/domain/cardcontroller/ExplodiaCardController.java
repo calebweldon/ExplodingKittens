@@ -8,10 +8,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import ui.ExplodiaCardView;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class ExplodiaCardController implements CardController,
 		ActionCardController, DrawCardController, TurnObserver {
@@ -20,7 +18,7 @@ public class ExplodiaCardController implements CardController,
 	private final SecureRandom rand;
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
 	private Player player;
-	private static final int TOTAL_EXPLODIA = 5;
+	private static final int TOTAL_EXPLODIA = 1;
 
 	public ExplodiaCardController(ExplodiaCardView view,
 				List<CardController> cardControllers) {
@@ -45,12 +43,12 @@ public class ExplodiaCardController implements CardController,
 		if (player == null) {
 			throw new IllegalStateException("Player not set");
 		}
-		player.addCard(CardType.EXPLODIA);
 		Map<CardType, Integer> hand = player.viewHand();
-		int numExplodia = hand.get(CardType.EXPLODIA);
-
+		int numExplodia = hand.getOrDefault(CardType.EXPLODIA, 0);
 		view.drawMessage(numExplodia);
-		return numExplodia == TOTAL_EXPLODIA ? TurnResult.WON : TurnResult.CONTINUE;
+		player.addCard(CardType.EXPLODIA);
+
+		return numExplodia + 1 >= TOTAL_EXPLODIA ? TurnResult.WON : TurnResult.CONTINUE;
 	}
 
 	@Override

@@ -26,10 +26,10 @@ public class ExplodiaCardView {
 
 	public void drawMessage(int numExplodia) {
 		final String explodiaDrawDefault = labels.getString("explodiaDrawDefault");
-		final String explodiaDrawOne = labels.getString("explodiaDrawOne");
-		final String explodiaDrawTwo = labels.getString("explodiaDrawTwo");
-		final String explodiaDrawThree = labels.getString("explodiaDrawThree");
-		final String explodiaDrawFour = labels.getString("explodiaDrawFour");
+		final String explodiaDrawOne = labels.getString("explodiaDrawSecond");
+		final String explodiaDrawTwo = labels.getString("explodiaDrawThird");
+		final String explodiaDrawThree = labels.getString("explodiaDrawFourth");
+		final String explodiaDrawFour = labels.getString("explodiaDrawFifth");
 
 		switch (numExplodia) {
 			case 1:
