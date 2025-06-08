@@ -18,7 +18,7 @@ public class ExplodiaCardController implements CardController,
 	private final SecureRandom rand;
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
 	private Player player;
-	private static final int TOTAL_EXPLODIA = 1;
+	private static final int TOTAL_EXPLODIA = 5;
 
 	public ExplodiaCardController(ExplodiaCardView view,
 				List<CardController> cardControllers) {
