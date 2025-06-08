@@ -1,33 +1,44 @@
 package ui;
 
 import java.nio.charset.StandardCharsets;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class ImplodingFaceDownCardView implements CardView {
 	private final Scanner scanner;
+	private final ResourceBundle labels;
 
 	public ImplodingFaceDownCardView() {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("Will blow your head smoove off");
+		final String implodingInfo = labels.getString("implodingInfo");
+		System.out.println(implodingInfo);
 	}
 
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.println("Tremble! The Imploding Kitten has been drawn!");
+		final String implodingFaceDownActionMessage =
+				labels.getString("implodingFaceDownActionMessage");
+		System.out.println(implodingFaceDownActionMessage);
 	}
 
 	public int getIndex(int size) {
-		// TODO: add locale
+		final String implodingFaceDownIndexSelection =
+				labels.getString("implodingFaceDownIndexSelection");
+		String indexPrompt = MessageFormat.format(implodingFaceDownIndexSelection, size);
+
+		final String implodingFaceDownInvalidIndex =
+				labels.getString("implodingFaceDownInvalidIndex");
+
 		while (true) {
-			System.out.printf("Choose and index between 0 and %d: ", size);
+			System.out.println(indexPrompt);
 			try {
 				return scanner.nextInt();
 			} catch (Exception E) {
-				System.out.println("Invalid index. Try again.");
+				System.out.println(implodingFaceDownInvalidIndex);
 			}
 		}
 	}

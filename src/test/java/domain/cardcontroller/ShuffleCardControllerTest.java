@@ -14,7 +14,7 @@ public class ShuffleCardControllerTest {
 		Deck deck = EasyMock.createMock(Deck.class);
 		ShuffleCardView cv = EasyMock.createMock(ShuffleCardView.class);
 		TurnResult expected = TurnResult.CONTINUE;
-		ShuffleCardController shuffleCardController = new ShuffleCardController(deck, cv);
+		ShuffleCardController shuffleCardController = new ShuffleCardController(cv, deck);
 
 		deck.shuffleDeck();
 		cv.actionMessage();

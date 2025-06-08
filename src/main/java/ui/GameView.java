@@ -91,6 +91,10 @@ public class GameView {
 		System.out.println(gameStarting);
 	}
 
-	public void announceGameEnd(Player winner) { }
+	public void announceGameEnd(Player winner) {
+		final String announceWinner = labels.getString("announceWinner");
+		String gameOverMessage = MessageFormat.format("{0} {1}", announceWinner, winner);
+		System.out.println(gameOverMessage);
+	}
 
 }
