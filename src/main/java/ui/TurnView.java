@@ -130,4 +130,10 @@ public class TurnView {
 	public void reinsertExplodia() {
 		System.out.println("Returning eliminated player's Explodia(s) to the deck");
 	}
+
+	public void showImplodingIndex(int implodingIndex) {
+		if (implodingIndex != -1) {
+			System.out.printf("The Imploding Kitten is at index: %d%n", implodingIndex);
+		}
+	}
 }
