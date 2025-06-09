@@ -13,8 +13,8 @@ public class GameSetup {
 	private final GameView gameView;
 	public static final int HAND_SIZE = 8;
 
-	public GameSetup() {
-		this.gameView = new GameView();
+	public GameSetup(GameView view) {
+		this.gameView = view;
 		this.gameView.chooseLanguage();
 		int numPlayers = this.gameView.chooseNumPlayers();
 		Deck deck = new Deck();
