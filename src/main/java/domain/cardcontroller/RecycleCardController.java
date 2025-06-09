@@ -36,6 +36,6 @@ public class RecycleCardController implements CardController, ActionCardControll
 	}
 
 	public void getInfo() {
-		// TODO
+		this.view.getInfo();
 	}
 }
