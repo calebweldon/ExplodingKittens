@@ -209,7 +209,7 @@ class TurnControllerTest {
 	}
 
 	@Test
-	void registerObserver() {
+	void registerTurnObserver() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
@@ -217,11 +217,11 @@ class TurnControllerTest {
 		cardControllers.put(CardType.SWAP, controller);
 
 		TurnController turnController = new TurnController(deck, turnView, cardControllers);
-		assertEquals(1, turnController.getObserverSize());
+		assertEquals(1, turnController.getTurnObserverSize());
 	}
 
 	@Test
-	void unregisterObserver() {
+	void unregisterTurnObserver() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
@@ -229,13 +229,13 @@ class TurnControllerTest {
 		cardControllers.put(CardType.SWAP, controller);
 
 		TurnController turnController = new TurnController(deck, turnView, cardControllers);
-		assertEquals(1, turnController.getObserverSize());
+		assertEquals(1, turnController.getTurnObserverSize());
 		turnController.unregisterObserver(controller);
-		assertEquals(0, turnController.getObserverSize());
+		assertEquals(0, turnController.getTurnObserverSize());
 	}
 
 	@Test
-	void notifyObservers() {
+	void notifyTurnObservers() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
@@ -259,6 +259,19 @@ class TurnControllerTest {
 		turnController.takeTurn(player);
 
 		EasyMock.verify(deck, turnView, player, controller);
+	}
 
+	@Test
+	void unregisterLastPlayedObservers() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		RecycleCardController controller = EasyMock.createMock(RecycleCardController.class);
+		cardControllers.put(CardType.RECYCLE, controller);
+
+		TurnController turnController = new TurnController(deck, turnView, cardControllers);
+		assertEquals(1, turnController.getLastPlayedObserverSize());
+		turnController.unregisterObserver(controller);
+		assertEquals(0, turnController.getLastPlayedObserverSize());
 	}
 }

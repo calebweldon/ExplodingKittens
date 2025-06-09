@@ -49,8 +49,8 @@ public class GameSetup {
 				new ImplodingFaceDownCardView(), deck);
 		CardController implodingUpController = new ImplodingFaceUpCardController(
 				new ImplodingFaceUpCardView());
-		// TODO: Update Recycle
-		CardController recycleController = new RecycleCardController();
+		CardController recycleController = new RecycleCardController(
+				new RecycleCardView());
 		CardController seeController = new SeeFutureCardController(
 				new SeeFutureCardView(), deck);
 		CardController shuffleController = new ShuffleCardController(
