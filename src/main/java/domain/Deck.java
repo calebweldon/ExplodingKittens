@@ -146,5 +146,4 @@ public class Deck {
 			throw new IndexOutOfBoundsException("Invalid index: " + index);
 		}
 	}
-
 }

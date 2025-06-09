@@ -3,18 +3,15 @@ package ui;
 import domain.*;
 import domain.cardcontroller.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameSetup {
 	private final GameController gameController;
 	private final GameView gameView;
 	public static final int HAND_SIZE = 8;
 
-	public GameSetup() {
-		this.gameView = new GameView();
+	public GameSetup(GameView view) {
+		this.gameView = view;
 		this.gameView.chooseLanguage();
 		int numPlayers = this.gameView.chooseNumPlayers();
 		Deck deck = new Deck();
@@ -113,5 +110,15 @@ public class GameSetup {
 
 	public void runGame() {
 		this.gameController.startGame();
+	}
+
+	// For Integration Feature Test - Game Setup
+	public LinkedList<PlayerTurn> getPlayerTurns() {
+		return this.gameController.getPlayerTurns();
+	}
+
+	// For Integration Feature Test - Game Setup
+	public int getCardCount(CardType cardType) {
+		return this.gameController.getCardCount(cardType);
 	}
 }

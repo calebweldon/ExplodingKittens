@@ -188,4 +188,9 @@ public final class TurnController implements TurnSubject,
 	int getLastPlayedObserverSize() {
 		return lastPlayedObservers.size();
 	}
+
+	// For Integration Feature Test - Game Setup
+	public int getCardCount(CardType cardType) {
+		return this.deck.getCardCount(cardType);
+	}
 }
