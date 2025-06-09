@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 public class Player {
 	private int id;
 	private Map<CardType, Integer> hand;
-    private SecureRandom random;
+	private SecureRandom random;
 
 	public Player(int id) {
 		this.id = id;
@@ -85,8 +85,8 @@ public class Player {
 		if (this.hand.isEmpty()) {
 			throw new IllegalStateException("no cards");
 		}
-        Set<CardType> keys = this.hand.keySet();
-        CardType[] keysArray = keys.toArray(new CardType[0]);
+		Set<CardType> keys = this.hand.keySet();
+		CardType[] keysArray = keys.toArray(new CardType[0]);
 		int randomIndex = random.nextInt(keysArray.length);
 
 		CardType randomCard = keysArray[randomIndex];
