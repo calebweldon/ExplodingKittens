@@ -8,4 +8,8 @@ public class RecycleCardController implements CardController, ActionCardControll
 		// TODO
 		return null;
 	}
+
+	public void getInfo() {
+		// TODO
+	}
 }

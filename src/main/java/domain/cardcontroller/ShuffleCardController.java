@@ -21,4 +21,8 @@ public class ShuffleCardController implements CardController, ActionCardControll
 		view.actionMessage();
 		return TurnResult.CONTINUE;
 	}
+
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }

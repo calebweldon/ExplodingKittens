@@ -8,4 +8,8 @@ public class BasicCardController implements CardController, ActionCardController
 		// TODO
 		return null;
 	}
+
+	public void getInfo() {
+		// TODO
+	}
 }

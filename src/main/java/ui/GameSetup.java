@@ -29,7 +29,6 @@ public class GameSetup {
 		}
 		deck.addSpecialCards(numPlayers - 1);
 
-		TurnView turnView = new TurnView();
 		Map<CardType, CardController> cardControllers = new HashMap<>();
 
 		CardController alterController = new AlterFutureCardController(
@@ -102,6 +101,7 @@ public class GameSetup {
 		cardControllers.put(CardType.SWAP, swapController);
 
 
+		TurnView turnView = new TurnView(cardControllers);
 		TurnController turnController = new TurnController(deck, turnView, cardControllers);
 
 		this.gameController = new GameController(
