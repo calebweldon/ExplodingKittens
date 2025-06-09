@@ -95,4 +95,4 @@
 |-------------|---------------------------------|-----------------------|--------------------|
 | Test Case 1 | Player has 1 card of cardType   | CardType              | :white_check_mark: |
 | Test Case 2 | Player has >1 card              | Soem random card      | :white_check_mark: |
-| Test Case 3 | Player has no cards             | IllegalStateException | :x: |
+| Test Case 3 | Player has no cards             | IllegalStateException | :white_check_mark: |
