@@ -1,3 +1,5 @@
 package domain.cardcontroller;
 
-public interface CardController { }
+public interface CardController {
+	public void getInfo();
+}

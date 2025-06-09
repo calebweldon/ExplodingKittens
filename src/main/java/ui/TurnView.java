@@ -1,19 +1,26 @@
 package ui;
 
 import domain.CardType;
+
 import domain.Player;
+import domain.cardcontroller.CardController;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.text.MessageFormat;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 import java.nio.charset.StandardCharsets;
 
 public class TurnView {
 	private final Scanner scanner;
 	private final ResourceBundle labels;
+	private static final int ROWLENGTH = 7;
 
-	public TurnView() {
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Access getInfo() method")
+	private final Map<CardType, CardController> cardControllers;
+
+	public TurnView(Map<CardType, CardController> cardControllers) {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.cardControllers = cardControllers;
 		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
@@ -22,9 +29,9 @@ public class TurnView {
 		System.out.println(turnViewNoCards);
 	}
 
-	public void showInvalidCardPlay(String errorMessage) {
+	public void showInvalidCardPlay(CardType playedCard) {
 		final String turnViewInvalidCard = labels.getString("turnViewInvalidCard");
-		String invalidCardMessage = MessageFormat.format(turnViewInvalidCard, errorMessage);
+		String invalidCardMessage = MessageFormat.format(turnViewInvalidCard, playedCard);
 		System.out.println(invalidCardMessage);
 	}
 
@@ -34,11 +41,11 @@ public class TurnView {
 		System.out.println(drawnCardMessage);
 	}
 
-	public void showCardCouldNotBeAdded(String errorMessage) {
+	public void showCardCouldNotBeAdded(CardType drawn) {
 		final String turnViewCardCouldNotBeAdded =
 				labels.getString("turnViewCardCouldNotBeAdded");
 		String cardNotAddedMessage =
-				MessageFormat.format(turnViewCardCouldNotBeAdded, errorMessage);
+				MessageFormat.format(turnViewCardCouldNotBeAdded, drawn);
 		System.out.println(cardNotAddedMessage);
 	}
 
@@ -48,12 +55,11 @@ public class TurnView {
 		System.out.println(turnViewUnexpectedAction);
 	}
 
-
 	public String promptForInput() {
 		while (true) {
 			final String turnViewPromptAction =
 					labels.getString("turnViewPromptAction");
-			System.out.println(turnViewPromptAction);
+			System.out.print(turnViewPromptAction);
 
 			String input = scanner.nextLine().trim().toLowerCase();
 			if ("play".equals(input) || "draw".equals(input) 
@@ -66,73 +72,96 @@ public class TurnView {
 		}
 	}
 
-	public void showDefuseUsed() {
-		final String turnViewShowDefuse = labels.getString("turnViewShowDefuse");
-		System.out.println(turnViewShowDefuse);
-	}
-
-	public void showNoDefuseFound() {
-		final String turnViewNoDefuse = labels.getString("turnViewNoDefuse");
-		System.out.println(turnViewNoDefuse);
-	}
-
 	public CardType promptCardChoice(Player player) {
-		CardType[] hand = player.viewHand().keySet().toArray(new CardType[0]);
+		Map<CardType, Integer> hand = player.viewHand();
+		List<CardType> cards = new ArrayList<> (hand.keySet());
 
-		final String turnViewSelectCard = labels.getString("turnViewSelectCard");
-		final String turnViewCardInHand = labels.getString("turnViewCardInHand");
-		final String turnViewEnterIndex = labels.getString("turnViewEnterIndex");
-		final String turnViewInvalidIndex = labels.getString("turnViewInvalidIndex");
+		final String turnViewPromptForCard =
+				labels.getString("turnViewPromptForCard");
+		final String turnViewPromptForIndex =
+				labels.getString("turnViewPromptForIndex");
+		final String turnViewInvalidIndex =
+				labels.getString("turnViewInvalidIndex");
 
 		while (true) {
-			System.out.println(turnViewSelectCard);
-			for (int i = 0; i < hand.length; i++) {
-				String cardInHand = MessageFormat.format
-						(turnViewCardInHand,
-								i,
-								hand[i],
-								player.viewHand().get(hand[i]));
-				System.out.println(cardInHand);
-			}
-			System.out.println(turnViewEnterIndex);
+			System.out.println(turnViewPromptForCard);
+			printCards(hand, cards);
+			System.out.print(turnViewPromptForIndex);
 			try {
 				int idx = Integer.parseInt(scanner.nextLine());
-				if (idx >= 0 && idx < hand.length) {
-					return hand[idx];
+				if (idx >= 0 && idx < cards.size()) {
+					return cards.get(idx);
 				}
 			} catch (NumberFormatException ignored) { }
 			System.out.println(turnViewInvalidIndex);
 		}
 	}
+	
+	public void displayHand(Player player) {
+		Map<CardType, Integer> hand = player.viewHand();
+		List<CardType> cards = new ArrayList<> (hand.keySet());
 
-	public int promptExplodingKittenIndex(int deckSize) {
+		final String turnViewYourHand =
+				labels.getString("turnViewYourHand");
+		System.out.println(turnViewYourHand);
+		printCards(hand, cards);
+	}
 
-		final String turnViewReinsertExplodingKitten = labels.getString
-				("turnViewReinsertExplodingKitten");
-		String reinsertExplodingKitten = MessageFormat.format
-				(turnViewReinsertExplodingKitten, deckSize);
-
-		final String turnViewInvalidIndex = labels.getString("turnViewInvalidIndex");
-		final String turnViewEnterValidNumber =
-				labels.getString("turnViewEnterValidNumber");
-
-		while (true) {
-			System.out.println(reinsertExplodingKitten);
-			try {
-				int index = Integer.parseInt(scanner.nextLine());
-				if (index >= 0 && index <= deckSize) {
-					return index;
-				}
-				System.out.println(turnViewInvalidIndex);
-			} catch (NumberFormatException e) {
-				System.out.println(turnViewEnterValidNumber);
+	private void printCards(Map<CardType, Integer> hand, List<CardType> cards) {
+		for (int i = 0; i < cards.size(); i++) {
+			CardType card = cards.get(i);
+			if (i % ROWLENGTH == 0) {
+				System.out.println();
 			}
+			final String cardInfo = MessageFormat.format
+					("[{0}] {1} ({2})", i, card, hand.get(card));
+			System.out.println(cardInfo);
+		}
+		System.out.println();
+	}
+
+	public void getCardInfo() {
+		final String turnViewSelectCardInfo =
+				labels.getString("turnViewSelectCardInfo");
+		System.out.print(turnViewSelectCardInfo);
+
+		final String turnViewPromptForIndex =
+				labels.getString("turnViewPromptForIndex");
+		final String turnViewInvalidIndex =
+				labels.getString("turnViewInvalidIndex");
+
+		CardType[] cards = CardType.values();
+		for (int i = 0; i < CardType.values().length; i++) {
+			if (i % ROWLENGTH == 0) {
+				System.out.println();
+			}
+			final String cardInfo = MessageFormat.format("[{0}] {1}    ", i, cards[i]);
+			System.out.printf(cardInfo);
+		}
+		try {
+			System.out.print(turnViewPromptForIndex);
+			int idx = Integer.parseInt(scanner.nextLine());
+			CardType card = cards[idx];
+			CardController cardController = cardControllers.get(card);
+			cardController.getInfo();
+		} catch (NumberFormatException ignored) {
+			System.out.println(turnViewInvalidIndex);
 		}
 	}
 
-	public void getInputForCardInfo(Player currPlayer) {
+	public void reinsertExplodia() {
+		final String turnViewReinsertExplodia =
+				labels.getString("turnViewReinsertExplodia");
+		System.out.println(turnViewReinsertExplodia);
 	}
 
-	public void reinsertExplodia() {
+	public void showImplodingIndex(int implodingIndex) {
+		if (implodingIndex != -1) {
+			final String turnViewShowImplodingIndex =
+					labels.getString("turnViewShowImplodingIndex");
+			final String implodingIndexMsg = MessageFormat.format
+					(turnViewShowImplodingIndex, implodingIndex);
+			System.out.println(implodingIndexMsg);
+		}
 	}
 }

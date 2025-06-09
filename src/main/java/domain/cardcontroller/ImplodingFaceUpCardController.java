@@ -15,4 +15,8 @@ public class ImplodingFaceUpCardController implements CardController, DrawCardCo
 		view.actionMessage();
 		return TurnResult.ELIMINATED;
 	}
+
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }

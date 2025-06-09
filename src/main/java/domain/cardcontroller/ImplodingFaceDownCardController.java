@@ -22,4 +22,8 @@ public class ImplodingFaceDownCardController implements CardController, DrawCard
 		deck.insertCardAtIndex(CardType.IMPLODING_FACEUP, index);
 		return TurnResult.CONTINUE;
 	}
+
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }

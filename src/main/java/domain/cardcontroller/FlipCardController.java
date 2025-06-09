@@ -20,4 +20,8 @@ public class FlipCardController implements CardController, ActionCardController 
 		deck.flipDeck();
 		return TurnResult.CONTINUE;
 	}
+
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }

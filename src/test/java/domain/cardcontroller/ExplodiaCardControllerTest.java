@@ -33,7 +33,6 @@ public class ExplodiaCardControllerTest {
 		BasicCardController c4 = EasyMock.createMock(BasicCardController.class);
 		FlipCardController c5 = EasyMock.createMock(FlipCardController.class);
 		ShuffleCardController c6 = EasyMock.createMock(ShuffleCardController.class);
-
 		SwapHandCardController c7 = EasyMock.createMock(SwapHandCardController.class);
 		EmbarrassCardController c8 = EasyMock.createMock(EmbarrassCardController.class);
 		RecycleCardController c9 = EasyMock.createMock(RecycleCardController.class);
@@ -52,7 +51,7 @@ public class ExplodiaCardControllerTest {
 		explodiaCardController.updatePlayer(player);
 		player.addCard(CardType.EXPLODIA);
 		EasyMock.expect(player.viewHand()).andReturn(hand);
-		EasyMock.expect(hand.get(CardType.EXPLODIA)).andReturn(numExplodia);
+		EasyMock.expect(hand.getOrDefault(CardType.EXPLODIA,0)).andReturn(numExplodia);
 
 		cv.drawMessage(numExplodia);
 		EasyMock.replay(cv, player, hand);
@@ -73,7 +72,7 @@ public class ExplodiaCardControllerTest {
 		explodiaCardController.updatePlayer(player);
 		player.addCard(CardType.EXPLODIA);
 		EasyMock.expect(player.viewHand()).andReturn(hand);
-		EasyMock.expect(hand.get(CardType.EXPLODIA)).andReturn(numExplodia);
+		EasyMock.expect(hand.getOrDefault(CardType.EXPLODIA, 0)).andReturn(numExplodia);
 
 		cv.drawMessage(numExplodia);
 		EasyMock.replay(cv, player, hand);

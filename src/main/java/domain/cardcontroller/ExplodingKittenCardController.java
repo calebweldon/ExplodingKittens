@@ -8,4 +8,8 @@ public class ExplodingKittenCardController implements CardController, ActionCard
 		// TODO
 		return null;
 	}
+
+	public void getInfo() {
+		// TODO
+	}
 }
