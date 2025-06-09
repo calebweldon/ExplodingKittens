@@ -61,7 +61,7 @@ public class Deck {
 			deck.add(CardType.SHUFFLE);
 		}
 		for (int i = 0; i < NUMBER_OF_REVERSE; i++) {
-			deck.add(CardType.REVERSE);
+			deck.add(CardType.FLIP);
 		}
 		for (int i = 0; i < NUMBER_OF_SWAP; i++) {
 			deck.add(CardType.SWAP);
