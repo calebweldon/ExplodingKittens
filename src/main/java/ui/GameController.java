@@ -129,8 +129,8 @@ public class GameController implements ActivePlayersSubject {
 	}
 
 	// For Integration Feature Test - Game Setup
-	public Integer getNumExplodingKittens() {
-		return turnController.getNumExplodingKittens();
+	int getCardCount(CardType cardType) {
+		return turnController.getCardCount(cardType);
 	}
 
 }

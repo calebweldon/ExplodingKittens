@@ -54,7 +54,7 @@ public class GameSetupSteps {
 			correctNumExplodingKittens -= numExplodingKittens;
 		}
 
-		correctNumExplodingKittens -= gameSetup.getNumExplodingKittens();
+		correctNumExplodingKittens -= gameSetup.getCardCount(CardType.EXPLODING_KITTEN);
 		assertEquals(correctNumExplodingKittens, 0);
 	}
 }

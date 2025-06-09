@@ -146,10 +146,4 @@ public class Deck {
 			throw new IndexOutOfBoundsException("Invalid index: " + index);
 		}
 	}
-
-	// For Integration Feature Test - Game Setup
-	public Integer getNumExplodingKittens() {
-		return Collections.frequency(deck, CardType.EXPLODING_KITTEN);
-	}
-
 }

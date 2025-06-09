@@ -164,7 +164,7 @@ public final class TurnController implements TurnSubject {
 	}
 
 	// For Integration Feature Test - Game Setup
-	public Integer getNumExplodingKittens() {
-		return this.deck.getNumExplodingKittens();
+	public int getCardCount(CardType cardType) {
+		return this.deck.getCardCount(cardType);
 	}
 }

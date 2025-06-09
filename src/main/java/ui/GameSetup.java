@@ -118,7 +118,7 @@ public class GameSetup {
 	}
 
 	// For Integration Feature Test - Game Setup
-	public Integer getNumExplodingKittens() {
-		return this.gameController.getNumExplodingKittens();
+	public int getCardCount(CardType cardType) {
+		return this.gameController.getCardCount(cardType);
 	}
 }
