@@ -93,6 +93,6 @@
 
 |             | System under test               | Expected output 1     | Implemented?       |
 |-------------|---------------------------------|-----------------------|--------------------|
-| Test Case 1 | Player has 1 card of cardType   | CardType              | :x: |
+| Test Case 1 | Player has 1 card of cardType   | CardType              | :white_check_mark: |
 | Test Case 2 | Player has >1 card              | Soem random card      | :x: |
 | Test Case 3 | Player has no cards             | IllegalStateException | :x: |

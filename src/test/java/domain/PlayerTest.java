@@ -6,6 +6,8 @@ import org.easymock.EasyMock;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
+import java.util.Set;
+import java.security.SecureRandom;
 
 public class PlayerTest {
 	
@@ -267,7 +269,28 @@ public class PlayerTest {
 
 		assertEquals(expectedPlayerOneHandSize, actualPlayerOneHandSize);
 		assertEquals(expectedPlayerTwoHandSize, actualPlayerTwoHandSize);
-
-
 	}
+
+    @Test
+    public void takeRandomCard_oneCard_returnsThatCard() {
+        Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+        SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+        Set<CardType> keys = EasyMock.createMock(Set.class);
+        CardType[] keysArray = {CardType.ATTACK};
+
+        EasyMock.expect(hand.isEmpty()).andReturn(false);
+        EasyMock.expect(hand.keySet()).andReturn(keys);
+        EasyMock.expect(keys.toArray(new CardType[0])).andReturn(keysArray);
+        EasyMock.expect(keys.size()).andReturn(1);
+        EasyMock.expect(rand.nextInt(1)).andReturn(0);
+        EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
+        EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+        EasyMock.replay(hand, keys, rand);
+
+        Player player = new Player(hand, rand);
+        CardType card = player.takeRandomCard();
+
+        assertEquals(CardType.ATTACK, card);
+        EasyMock.verify(hand);
+    }
 }
