@@ -4,21 +4,27 @@ import domain.Deck;
 import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+import ui.AttackCardView;
+import ui.FlipCardView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FlipCardControllerTest {
 	@Test
 	public void handleFlipCardAction() {
+		FlipCardView view = EasyMock.createMock(FlipCardView.class);
+		view.actionMessage();
+
 		Deck deck = EasyMock.createMock(Deck.class);
-		TurnResult expected = TurnResult.CONTINUE;
 		deck.flipDeck();
-		EasyMock.replay(deck);
 
-		FlipCardController flipCardController = new FlipCardController(deck);
-		TurnResult result = flipCardController.handleCardAction();
+		EasyMock.replay(view, deck);
 
-		assertEquals(expected, result);
-		EasyMock.verify(deck);
+		FlipCardController flipCardController = new FlipCardController(view, deck);
+		TurnResult expected = TurnResult.CONTINUE;
+		TurnResult actual = flipCardController.handleCardAction();
+
+		assertEquals(expected, actual);
+		EasyMock.verify(view, deck);
 	}
 }

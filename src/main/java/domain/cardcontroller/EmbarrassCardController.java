@@ -8,4 +8,8 @@ public class EmbarrassCardController implements CardController, ActionCardContro
 		// TODO
 		return null;
 	}
+
+	public void getInfo() {
+		// TODO
+	}
 }

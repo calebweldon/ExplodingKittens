@@ -1,44 +1,51 @@
 package ui;
 
+import java.util.ResourceBundle;
+
 public class ExplodiaCardView {
 	private static final int THREE_EXPLODIA = 3;
 	private static final int FOUR_EXPLODIA = 4;
+	private final ResourceBundle labels;
+
+	ExplodiaCardView() {
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
+	}
 
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("An ancient mysterious card. Try collecting all 5 pieces");
-		System.out.println("May have unintended side-effects if played");
+		final String explodiaInfoFirst = labels.getString("explodiaInfoFirst");
+		final String explodiaInfoSecond = labels.getString("explodiaInfoSecond");
+
+		System.out.println(explodiaInfoFirst);
+		System.out.println(explodiaInfoSecond);
 	}
 
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.println("A piece of Explodia has been played! " +
-				"Something random will happen!");
+		final String explodiaActionMessage = labels.getString("explodiaActionMessage");
+		System.out.println(explodiaActionMessage);
 	}
 
 	public void drawMessage(int numExplodia) {
-		// TODO: add locale
+		final String explodiaDrawDefault = labels.getString("explodiaDrawDefault");
+		final String explodiaDrawOne = labels.getString("explodiaDrawSecond");
+		final String explodiaDrawTwo = labels.getString("explodiaDrawThird");
+		final String explodiaDrawThree = labels.getString("explodiaDrawFourth");
+		final String explodiaDrawFour = labels.getString("explodiaDrawFifth");
+
 		switch (numExplodia) {
 			case 1:
-				System.out.println("Another piece of Explodia has been drawn. " +
-						"The cards resonate softly.");
+				System.out.println(explodiaDrawOne);
 				break;
 			case 2:
-				System.out.println("Another piece of Explodia has been drawn. " +
-						"The cards are drawn to each other.");
+				System.out.println(explodiaDrawTwo);
 				break;
 			case THREE_EXPLODIA:
-				System.out.println("Another piece of Explodia has been drawn. " +
-						"The cards begin to glow ominously.");
+				System.out.println(explodiaDrawThree);
 				break;
 			case FOUR_EXPLODIA:
-				System.out.print("The final piece of Explodia has been drawn. ");
-				System.out.println("A blinding flash erupts" +
-						"—the ritual is complete.");
+				System.out.println(explodiaDrawFour);
 				break;
 			default:
-				System.out.println("A piece of Explodia has been drawn. " +
-						"Nothing happens.");
+				System.out.println(explodiaDrawDefault);
 		}
 	}
 

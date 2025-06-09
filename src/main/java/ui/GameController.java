@@ -1,6 +1,7 @@
 package ui;
 
 import domain.*;
+import domain.cardcontroller.CardController;
 
 import java.util.*;
 
@@ -9,9 +10,10 @@ public class GameController implements ActivePlayersSubject {
 	private final TurnController turnController;
 	private final GameView gameView;
 	private final List<Player> activePlayersExcludingCurrent;
-	private final List<ActivePlayersExcludingCurrentObserver> observers = new ArrayList<>();
+	private final List<ActivePlayersExcludingCurrentObserver> observers;
 
-	GameController(List<Player> players, TurnController turnController, GameView gameView) {
+	GameController(List<Player> players, TurnController turnController, GameView gameView,
+				Map<CardType, CardController> cardControllers) {
 		this.playerTurns = new LinkedList<>();
 		for (Player p : players) {
 			playerTurns.add(new PlayerTurn(p, 1));
@@ -20,6 +22,16 @@ public class GameController implements ActivePlayersSubject {
 		this.turnController = turnController;
 		this.gameView = gameView;
 		this.activePlayersExcludingCurrent = players;
+
+		this.observers = new ArrayList<>();
+		for (Map.Entry<CardType, CardController> entry : cardControllers.entrySet()) {
+			CardController value = entry.getValue();
+			if (value instanceof ActivePlayersExcludingCurrentObserver) {
+				ActivePlayersExcludingCurrentObserver observer =
+						(ActivePlayersExcludingCurrentObserver) value;
+				registerObserver(observer);
+			}
+		}
 	}
 
 	public void startGame() {
@@ -38,6 +50,7 @@ public class GameController implements ActivePlayersSubject {
 			notifyObservers();
 
 			while (remainingTurns > 0) {
+				gameView.displayTurn(currPlayer);
 				TurnResult result = playTurn(currPlayer);
 				remainingTurns--;
 

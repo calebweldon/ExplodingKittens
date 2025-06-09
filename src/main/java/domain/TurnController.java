@@ -64,8 +64,10 @@ public final class TurnController implements TurnSubject,
 
 		TurnResult specialAction = TurnResult.CONTINUE;
 
+		int implodingIndex = deck.getImplodingIndex();
+		turnView.showImplodingIndex(implodingIndex);
+		turnView.displayHand(currPlayer);
 		while (specialAction == TurnResult.CONTINUE) {
-			player.showHand();
 			String input = promptForInput();
 			switch (input) {
 				case "play": {
@@ -79,7 +81,7 @@ public final class TurnController implements TurnSubject,
 						specialAction = playCardAction(cardType);
 						notifyLastPlayedObservers(cardType);
 					} catch (IllegalArgumentException e) {
-						turnView.showInvalidCardPlay(e.getMessage());
+						turnView.showInvalidCardPlay(cardType);
 					}
 					break;
 				}
@@ -90,7 +92,7 @@ public final class TurnController implements TurnSubject,
 					return specialAction;
 				}
 				case "info": {
-					turnView.getInputForCardInfo(this.currPlayer);
+					turnView.getCardInfo();
 					break;
 				}
 				default:
@@ -130,7 +132,7 @@ public final class TurnController implements TurnSubject,
 		try {
 			currPlayer.addCard(drawn);
 		} catch (IllegalArgumentException e) {
-			turnView.showCardCouldNotBeAdded(e.getMessage());
+			turnView.showCardCouldNotBeAdded(drawn);
 		}
 		return TurnResult.CONTINUE;
 	}

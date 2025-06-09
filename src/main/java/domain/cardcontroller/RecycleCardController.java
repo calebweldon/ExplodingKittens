@@ -34,4 +34,8 @@ public class RecycleCardController implements CardController, ActionCardControll
 	public void updateLastPlayed(CardType lastPlayed) {
 		this.lastCard = lastPlayed;
 	}
+
+	public void getInfo() {
+		// TODO
+	}
 }

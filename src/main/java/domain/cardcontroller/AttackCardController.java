@@ -14,4 +14,8 @@ public class AttackCardController implements CardController, ActionCardControlle
 		view.actionMessage();
 		return TurnResult.ATTACK;
 	}
+
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }
