@@ -4,8 +4,11 @@ Feature: Game Setup
 
   Scenario Outline: All Possible Number of Players
     Given a new game is started with <numberOfPlayers> players
-    Then each player starts with the correct hand
+    Then deck and player hands are correctly initialized
 
     Examples:
       |numberOfPlayers |
       |2               |
+      |3               |
+      |4               |
+      |5               |

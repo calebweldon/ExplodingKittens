@@ -3,10 +3,7 @@ package ui;
 import domain.*;
 import domain.cardcontroller.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameSetup {
 	private final GameController gameController;
@@ -113,5 +110,15 @@ public class GameSetup {
 
 	public void runGame() {
 		this.gameController.startGame();
+	}
+
+	// For Integration Feature Test - Game Setup
+	public LinkedList<PlayerTurn> getPlayerTurns() {
+		return this.gameController.getPlayerTurns();
+	}
+
+	// For Integration Feature Test - Game Setup
+	public Integer getNumExplodingKittens() {
+		return this.gameController.getNumExplodingKittens();
 	}
 }

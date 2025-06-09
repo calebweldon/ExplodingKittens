@@ -147,4 +147,9 @@ public class Deck {
 		}
 	}
 
+	// For Integration Feature Test - Game Setup
+	public Integer getNumExplodingKittens() {
+		return Collections.frequency(deck, CardType.EXPLODING_KITTEN);
+	}
+
 }

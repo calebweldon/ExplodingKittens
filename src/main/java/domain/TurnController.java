@@ -160,4 +160,9 @@ public final class TurnController implements TurnSubject {
 	int getObserverSize() {
 		return observers.size();
 	}
+
+	// For Integration Feature Test - Game Setup
+	public Integer getNumExplodingKittens() {
+		return this.deck.getNumExplodingKittens();
+	}
 }

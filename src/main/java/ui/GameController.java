@@ -121,4 +121,15 @@ public class GameController implements ActivePlayersSubject {
 			observer.updateActivePlayersExcludingCurrent(activePlayersExcludingCurrent);
 		}
 	}
+
+	// For Integration Feature Test - Game Setup
+	public LinkedList<PlayerTurn> getPlayerTurns() {
+		return new LinkedList<>(this.playerTurns);
+	}
+
+	// For Integration Feature Test - Game Setup
+	public Integer getNumExplodingKittens() {
+		return turnController.getNumExplodingKittens();
+	}
+
 }
