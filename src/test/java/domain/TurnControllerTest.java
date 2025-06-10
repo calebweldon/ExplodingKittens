@@ -170,6 +170,42 @@ class TurnControllerTest {
 	}
 
 	@Test
+	void playerPlaysExplodia_explodes() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Player player = EasyMock.createMock(Player.class);
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+
+		ExplodiaCardController controller = EasyMock.createMock(ExplodiaCardController.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.EXPLODIA, controller);
+
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+		controller.updatePlayer(player);
+
+		// "play" phase
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
+		EasyMock.expect(turnView.promptForInput()).andReturn("play");
+		EasyMock.expect(player.viewHand()).andReturn(hand);
+		EasyMock.expect(hand.isEmpty()).andReturn(false);
+		EasyMock.expect(turnView.promptCardChoice(player)).andReturn(CardType.EXPLODIA);
+		player.playCard(CardType.EXPLODIA);
+		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.ELIMINATED);
+
+		// oops! we blew up
+		turnView.reinsertExplodia();
+		EasyMock.expect(player.viewHand()).andReturn(hand);
+		EasyMock.expect(hand.getOrDefault(CardType.EXPLODIA, 0)).andReturn(1);
+		deck.insertCardAtRandomIndex(CardType.EXPLODIA);
+
+		EasyMock.replay(deck, turnView, player, controller, hand);
+		tc.takeTurn(player);
+		EasyMock.verify(deck, turnView, player, controller, hand);
+	}
+
+	@Test
 	void playerPlaysCard_withNoCards() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
