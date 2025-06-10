@@ -14,4 +14,8 @@ public class SkipCardController implements CardController, ActionCardController 
 		view.actionMessage();
 		return TurnResult.SKIP;
 	}
+
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }

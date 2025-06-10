@@ -7,7 +7,6 @@ import domain.TurnObserver;
 import domain.TurnResult;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import ui.ExplodingKittenView;
-
 import java.util.Map;
 
 public class ExplodingKittenCardController implements CardController, 

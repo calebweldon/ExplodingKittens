@@ -41,7 +41,9 @@ class TurnControllerTest {
 
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
-		player.showHand();
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -65,7 +67,9 @@ class TurnControllerTest {
 
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
-		player.showHand();
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.IMPLODING_FACEDOWN);
 		turnView.showCardDrawn(CardType.IMPLODING_FACEDOWN);
@@ -91,16 +95,17 @@ class TurnControllerTest {
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
 		// "play" phase
-		player.showHand();
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
 		EasyMock.expect(turnView.promptForInput()).andReturn("play");
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.isEmpty()).andReturn(false);
 		EasyMock.expect(turnView.promptCardChoice(player)).andReturn(CardType.IMPLODING_FACEDOWN);
 		player.playCard(CardType.IMPLODING_FACEDOWN);
-		turnView.showInvalidCardPlay("Unsupported card type: IMPLODING_FACEDOWN");
+		turnView.showInvalidCardPlay(CardType.IMPLODING_FACEDOWN);
 
 		// "draw" phase
-		player.showHand();
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -124,7 +129,9 @@ class TurnControllerTest {
 
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
-		player.showHand();
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
 		EasyMock.expect(turnView.promptForInput()).andReturn("play");
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.isEmpty()).andReturn(false);
@@ -151,14 +158,15 @@ class TurnControllerTest {
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
 		// "play" phase
-		player.showHand();
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
 		EasyMock.expect(turnView.promptForInput()).andReturn("play");
 		EasyMock.expect(player.viewHand()).andReturn(hand);
 		EasyMock.expect(hand.isEmpty()).andReturn(true);
 		turnView.showNoCardsMessage();
 
 		// "draw" phase
-		player.showHand();
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -183,12 +191,13 @@ class TurnControllerTest {
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
 		// "info" phase
-		player.showHand();
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
 		EasyMock.expect(turnView.promptForInput()).andReturn("info");
-		turnView.getInputForCardInfo(player);
+		turnView.getCardInfo();
 
 		// "draw" phase
-		player.showHand();
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -200,7 +209,7 @@ class TurnControllerTest {
 	}
 
 	@Test
-	void registerObserver() {
+	void registerTurnObserver() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
@@ -208,11 +217,11 @@ class TurnControllerTest {
 		cardControllers.put(CardType.SWAP, controller);
 
 		TurnController turnController = new TurnController(deck, turnView, cardControllers);
-		assertEquals(1, turnController.getObserverSize());
+		assertEquals(1, turnController.getTurnObserverSize());
 	}
 
 	@Test
-	void unregisterObserver() {
+	void unregisterTurnObserver() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
@@ -220,13 +229,13 @@ class TurnControllerTest {
 		cardControllers.put(CardType.SWAP, controller);
 
 		TurnController turnController = new TurnController(deck, turnView, cardControllers);
-		assertEquals(1, turnController.getObserverSize());
+		assertEquals(1, turnController.getTurnObserverSize());
 		turnController.unregisterObserver(controller);
-		assertEquals(0, turnController.getObserverSize());
+		assertEquals(0, turnController.getTurnObserverSize());
 	}
 
 	@Test
-	void notifyObservers() {
+	void notifyTurnObservers() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
@@ -237,7 +246,9 @@ class TurnControllerTest {
 		controller.updatePlayer(player);
 
 		// "draw" phase
-		player.showHand();
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
 		turnView.showCardDrawn(CardType.ATTACK);
@@ -248,6 +259,19 @@ class TurnControllerTest {
 		turnController.takeTurn(player);
 
 		EasyMock.verify(deck, turnView, player, controller);
+	}
 
+	@Test
+	void unregisterLastPlayedObservers() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		RecycleCardController controller = EasyMock.createMock(RecycleCardController.class);
+		cardControllers.put(CardType.RECYCLE, controller);
+
+		TurnController turnController = new TurnController(deck, turnView, cardControllers);
+		assertEquals(1, turnController.getLastPlayedObserverSize());
+		turnController.unregisterObserver(controller);
+		assertEquals(0, turnController.getLastPlayedObserverSize());
 	}
 }

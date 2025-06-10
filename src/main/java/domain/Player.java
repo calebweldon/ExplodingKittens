@@ -2,11 +2,14 @@ package domain;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
+import java.security.SecureRandom;
 
 
 public class Player {
 	private int id;
 	private Map<CardType, Integer> hand;
+	private SecureRandom random;
 
 	public Player(int id) {
 		this.id = id;
@@ -16,6 +19,11 @@ public class Player {
 	// Package private for testing
 	Player(Map<CardType, Integer> hand) {
 		this.hand = hand;
+	}
+
+	Player(Map<CardType, Integer> hand, SecureRandom random) {
+		this.hand = hand;
+		this.random = random;
 	}
 
 	public void addCard(CardType cardType) {
@@ -29,9 +37,7 @@ public class Player {
 
 	public void playCard(CardType cardType) {
 		int removeCount = 1;
-		if (false
-				|| cardType == CardType.TACO_CAT
-				|| cardType == CardType.CATTERMELON
+		if (cardType == CardType.TACO_CAT || cardType == CardType.CATTERMELON
 				|| cardType == CardType.POTATO_CAT
 				|| cardType == CardType.BEARD_CAT
 				|| cardType == CardType.RAINBOW_RALPHING_CAT) {
@@ -42,7 +48,11 @@ public class Player {
 			String message = "You do not have enough cards to play.";
 			throw new IllegalArgumentException(message);
 		}
-		this.hand.put(cardType, count - removeCount);
+		if (count - removeCount == 0) {
+			this.hand.remove(cardType);
+		} else {
+			this.hand.put(cardType, count - removeCount);
+		}
 	}
 
 	public void removeCard(CardType cardType) {
@@ -71,11 +81,20 @@ public class Player {
 		playerToSwapWith.hand = temp;
 	}
 
-	public Map<CardType, Integer> viewHand() {
-		return new HashMap<>(this.hand);
+	public CardType takeRandomCard() {
+		if (this.hand.isEmpty()) {
+			throw new IllegalStateException("no cards");
+		}
+		Set<CardType> keys = this.hand.keySet();
+		CardType[] keysArray = keys.toArray(new CardType[0]);
+		int randomIndex = random.nextInt(keysArray.length);
+
+		CardType randomCard = keysArray[randomIndex];
+		removeCard(randomCard);
+		return randomCard;
 	}
 
-	public void showHand() {
-		// TODO: BVA + TDD + Implementation
+	public Map<CardType, Integer> viewHand() {
+		return new HashMap<>(this.hand);
 	}
 }

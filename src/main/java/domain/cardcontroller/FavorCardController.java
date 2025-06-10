@@ -81,4 +81,8 @@ public class FavorCardController implements CardController, ActionCardController
 			List<Player> activePlayersExcludingCurrent) {
 		this.activePlayersExcludingCurrent = activePlayersExcludingCurrent;
 	}
+
+	public void getInfo() {
+		// TODO
+	}
 }
