@@ -2,11 +2,14 @@ package domain;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
+import java.security.SecureRandom;
 
 
 public class Player {
 	private int id;
 	private Map<CardType, Integer> hand;
+	private SecureRandom random;
 
 	public Player(int id) {
 		this.id = id;
@@ -16,6 +19,11 @@ public class Player {
 	// Package private for testing
 	Player(Map<CardType, Integer> hand) {
 		this.hand = hand;
+	}
+
+	Player(Map<CardType, Integer> hand, SecureRandom random) {
+		this.hand = hand;
+		this.random = random;
 	}
 
 	public void addCard(CardType cardType) {
@@ -71,6 +79,19 @@ public class Player {
 		Map<CardType, Integer> temp = new HashMap<>(this.hand);
 		this.hand = new HashMap<>(playerToSwapWith.hand);
 		playerToSwapWith.hand = temp;
+	}
+
+	public CardType takeRandomCard() {
+		if (this.hand.isEmpty()) {
+			throw new IllegalStateException("no cards");
+		}
+		Set<CardType> keys = this.hand.keySet();
+		CardType[] keysArray = keys.toArray(new CardType[0]);
+		int randomIndex = random.nextInt(keysArray.length);
+
+		CardType randomCard = keysArray[randomIndex];
+		removeCard(randomCard);
+		return randomCard;
 	}
 
 	public Map<CardType, Integer> viewHand() {

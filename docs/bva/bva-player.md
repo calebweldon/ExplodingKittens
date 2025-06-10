@@ -69,7 +69,7 @@
 |-------------|-------------------|-------------------|--------------------|
 | Test Case 1 | Player.id = 1     | 1                 | :white_check_mark: |
 
-## Method 4: ```public int getHandSize()```
+## Method 5: ```public int getHandSize()```
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
@@ -79,10 +79,20 @@
 | Test Case 2 | Player has hand size of 3 with 2 different CardTypes | 3                 | :white_check_mark:  |
 
 
-## Method 4: ```public void swapHandWith(Player playerToSwapWith)```
+## Method 6: ```public void swapHandWith(Player playerToSwapWith)```
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
 |             | System under test                                             | Expected output 1               | Implemented?       |
 |-------------|---------------------------------------------------------------|---------------------------------|--------------------|
 | Test Case 1 | Two players, one with hand size of 0 and other with size of 3 | Players have reverse hand sizes | :white_check_mark: |
+
+## Method 7: ```public CardType takeRandomCard()```
+### Step 4:
+##### All-combination or each-choice: Each-choice
+
+|             | System under test               | Expected output 1     | Implemented?       |
+|-------------|---------------------------------|-----------------------|--------------------|
+| Test Case 1 | Player has 1 card of cardType   | CardType              | :white_check_mark: |
+| Test Case 2 | Player has >1 card              | Soem random card      | :white_check_mark: |
+| Test Case 3 | Player has no cards             | IllegalStateException | :white_check_mark: |
