@@ -293,6 +293,45 @@ class TurnControllerTest {
 	}
 
 	@Test
+	void notifyLastPlayedObservers() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		Player player = EasyMock.createMock(Player.class);
+		RecycleCardController controller = EasyMock.createMock(RecycleCardController.class);
+		cardControllers.put(CardType.RECYCLE, controller);
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+
+		controller.updatePlayer(player);
+
+		// "play" phase
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
+		EasyMock.expect(turnView.promptForInput()).andReturn("play");
+		EasyMock.expect(player.viewHand()).andReturn(hand);
+		EasyMock.expect(hand.isEmpty()).andReturn(false);
+		EasyMock.expect(turnView.promptCardChoice(player)).andReturn(CardType.RECYCLE);
+		controller.updateLastPlayed(CardType.RECYCLE);
+		player.playCard(CardType.RECYCLE);
+		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
+		controller.updateLastPlayed(CardType.RECYCLE);
+
+		// "draw" phase
+		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
+		turnView.showCardDrawn(CardType.ATTACK);
+		player.addCard(CardType.ATTACK);
+
+		EasyMock.replay(deck, turnView, player, controller, hand);
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+		tc.registerObserver((LastPlayedObserver)controller);
+		tc.takeTurn(player);
+		EasyMock.verify(deck, turnView, player, controller, hand);
+
+	}
+
+	@Test
 	void unregisterLastPlayedObservers() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);

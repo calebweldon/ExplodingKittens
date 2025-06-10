@@ -130,7 +130,7 @@ public final class TurnController implements TurnSubject,
 			updateLastPlayedIfDefused(drawn, result);
 			return result;
 		}
-        currPlayer.addCard(drawn);
+		currPlayer.addCard(drawn);
 		return TurnResult.CONTINUE;
 	}
 
