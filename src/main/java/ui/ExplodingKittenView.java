@@ -1,6 +1,7 @@
 package ui;
 
 import java.nio.charset.StandardCharsets;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -38,13 +39,14 @@ public class ExplodingKittenView implements CardView {
 	}
 
 	public int promptExplodingKittenIndex(int deckSize) {
-		final String explodingKittenGetIndex = labels.getString("explodingKittenGetIndex");
+		final String explodingKittenGetIndex =
+				MessageFormat.format(labels.getString("explodingKittenGetIndex"),deckSize);
 		final String explodingKittenInvalidIndex =
 				labels.getString("explodingKittenInvalidIndex");
 		final String explodingKittenInvalidInput =
 				labels.getString("explodingKittenInvalidInput");
 		while (true) {
-			System.out.printf(explodingKittenGetIndex, deckSize);
+			System.out.printf(explodingKittenGetIndex);
 			try {
 				int index = Integer.parseInt(scanner.nextLine());
 				if (index >= 0 && index <= deckSize) {
