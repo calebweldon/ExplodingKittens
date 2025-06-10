@@ -340,4 +340,18 @@ public class PlayerTest {
 
 		EasyMock.verify(hand);
 	}
+
+	// Not using mocks because using copy constructor internally
+	@Test
+	public void viewHand_returnsHand() {
+		Map<CardType, Integer> hand = new java.util.HashMap<>();
+		hand.put(CardType.ATTACK, 2);
+		hand.put(CardType.SKIP, 1);
+
+		Player player = new Player(hand);
+		Map<CardType, Integer> actualHand = player.viewHand();
+
+		assertEquals(2, actualHand.getOrDefault(CardType.ATTACK, 0));
+		assertEquals(1, actualHand.getOrDefault(CardType.SKIP, 0));
+	}
 }
