@@ -39,8 +39,8 @@ public class ExplodingKittenView implements CardView {
 	}
 
 	public int promptExplodingKittenIndex(int deckSize) {
-		final String explodingKittenGetIndex =
-				MessageFormat.format(labels.getString("explodingKittenGetIndex"),deckSize);
+		final String explodingKittenGetIndex = MessageFormat.format(
+				labels.getString("explodingKittenGetIndex"), deckSize);
 		final String explodingKittenInvalidIndex =
 				labels.getString("explodingKittenInvalidIndex");
 		final String explodingKittenInvalidInput =
