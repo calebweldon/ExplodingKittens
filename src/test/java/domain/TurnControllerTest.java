@@ -274,4 +274,34 @@ class TurnControllerTest {
 		turnController.unregisterObserver(controller);
 		assertEquals(0, turnController.getLastPlayedObserverSize());
 	}
+
+	@Test
+	void constructor_withNullDeck_throwsException() {
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			new TurnController(null, turnView, cardControllers);
+		});
+		assertEquals("Deck cannot be null", exception.getMessage());
+	}
+
+	@Test
+	void constructor_withNullTurnView_throwsException() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			new TurnController(deck, null, cardControllers);
+		});
+		assertEquals("TurnView cannot be null", exception.getMessage());
+	}
+
+	@Test
+	void constructor_withNullCardControllers_throwsException() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			new TurnController(deck, turnView, null);
+		});
+		assertEquals("CardControllers cannot be null", exception.getMessage());
+	}
 }
