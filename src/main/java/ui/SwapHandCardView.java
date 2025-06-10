@@ -5,35 +5,43 @@ import domain.Player;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class SwapHandCardView implements CardView {
 	private final Scanner scanner;
+	private final ResourceBundle labels;
 
 	public SwapHandCardView() {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("Lets you choose a player to swap hands with");
+		final String swapHandInfo = labels.getString("swapHandInfo");
+		System.out.println(swapHandInfo);
 	}
 
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.print("Enter the ID of the player you want to swap with: ");
+		final String swapHandActionMessage = labels.getString("swapHandActionMessage");
+		System.out.println(swapHandActionMessage);
 	}
 
 	public Player promptForPlayerToSwapWith(List<Player> activePlayersExceptCurrent) {
-		// TODO: add locale
+		final String swapHandPlayerHandSize = labels.getString("swapHandPlayerHandSize");
 
 		for (Player player : activePlayersExceptCurrent) {
 			int playerId = player.getId();
 			int handSize = player.getHandSize();
 			String playerAndHandSizeMessage = MessageFormat.format(
-					"Player {0} has {1} card(s)", playerId, handSize);
+					swapHandPlayerHandSize, playerId, handSize);
 			System.out.println(playerAndHandSizeMessage);
 		}
+
+		final String swapHandPlayerChosen = labels.getString("swapHandPlayerChosen");
+		final String swapHandInvalidId = labels.getString("swapHandInvalidId");
+		final String swapHandInvalidPlayerChosen =
+				labels.getString("swapHandInvalidPlayerChosen");
 
 		while (true) {
 			try {
@@ -42,15 +50,15 @@ public class SwapHandCardView implements CardView {
 				for (Player player : activePlayersExceptCurrent) {
 					if (player.getId() == userInput) {
 						String playerChosenMessage = MessageFormat.format(
-								"Player {0} chosen", userInput);
+								swapHandPlayerChosen, userInput);
 						System.out.println(playerChosenMessage);
 						return player;
 					}
 				}
 
-				System.out.println("Invalid ID. Please try again.");
+				System.out.println(swapHandInvalidId);
 			} catch (NumberFormatException e) {
-				System.out.println("Please enter a valid number.");
+				System.out.println(swapHandInvalidPlayerChosen);
 			}
 		}
 	}

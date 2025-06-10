@@ -6,6 +6,8 @@ import org.easymock.EasyMock;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
+import java.util.Set;
+import java.security.SecureRandom;
 
 public class PlayerTest {
 	
@@ -72,7 +74,7 @@ public class PlayerTest {
 	public void playCard_oneCard_succeeds() {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(1);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -87,7 +89,7 @@ public class PlayerTest {
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(2);
 		EasyMock.expect(hand.put(CardType.ATTACK, 1)).andReturn(2);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(1);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -101,7 +103,7 @@ public class PlayerTest {
 	public void playCard_multipleBasicKitten_succeeds() {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(2);
-		EasyMock.expect(hand.put(CardType.TACO_CAT, 0)).andReturn(2);
+		EasyMock.expect(hand.remove(CardType.TACO_CAT)).andReturn(1);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -267,7 +269,72 @@ public class PlayerTest {
 
 		assertEquals(expectedPlayerOneHandSize, actualPlayerOneHandSize);
 		assertEquals(expectedPlayerTwoHandSize, actualPlayerTwoHandSize);
+	}
 
+	@Test
+	public void takeRandomCard_oneCard_returnsThatCard() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Set<CardType> keys = EasyMock.createMock(Set.class);
+		CardType[] keysArray = {CardType.ATTACK};
 
+		EasyMock.expect(hand.isEmpty()).andReturn(false);
+		EasyMock.expect(hand.keySet()).andReturn(keys);
+		EasyMock.expect(keys.toArray(new CardType[0])).andReturn(keysArray);
+		EasyMock.expect(keys.size()).andReturn(1);
+		EasyMock.expect(rand.nextInt(1)).andReturn(0);
+		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.replay(hand, keys, rand);
+
+		Player player = new Player(hand, rand);
+		CardType card = player.takeRandomCard();
+
+		assertEquals(CardType.ATTACK, card);
+		EasyMock.verify(hand);
+	}
+
+	@Test
+	public void takeRandomCard_twoCards_returnsRandomCard() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Set<CardType> keys = EasyMock.createMock(Set.class);
+		CardType[] keysArray = {CardType.ATTACK, CardType.SKIP};
+
+		EasyMock.expect(hand.isEmpty()).andReturn(false);
+		EasyMock.expect(hand.keySet()).andReturn(keys);
+		EasyMock.expect(keys.toArray(new CardType[0])).andReturn(keysArray);
+		EasyMock.expect(keys.size()).andReturn(2);
+		EasyMock.expect(rand.nextInt(2)).andReturn(0);
+		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.replay(hand, keys, rand);
+
+		Player player = new Player(hand, rand);
+		CardType card = player.takeRandomCard();
+
+		assertEquals(CardType.ATTACK, card);
+		EasyMock.verify(hand);
+	}
+
+	@Test
+	public void takeRandomCard_emptyHand_throwsException() {
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		EasyMock.expect(hand.isEmpty()).andReturn(true);
+		EasyMock.replay(hand, rand);
+
+		Player player = new Player(hand, rand);
+
+		Exception exception = assertThrows(IllegalStateException.class, () -> {
+			player.takeRandomCard();
+		});
+
+		String expectedMessage = "no cards";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+
+		EasyMock.verify(hand);
 	}
 }

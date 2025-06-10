@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-public final class TurnController implements TurnSubject {
+public final class TurnController implements TurnSubject,
+		LastPlayedSubject {
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck can be shared")
 	private final Deck deck;
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2",
@@ -19,7 +20,8 @@ public final class TurnController implements TurnSubject {
 	private Player currPlayer = null;
 	private final TurnView turnView;
 	private final Map<CardType, CardController> cardControllers;
-	private final List<TurnObserver> observers;
+	private final List<TurnObserver> turnObservers;
+	private final List<LastPlayedObserver> lastPlayedObservers;
 
 	public TurnController (Deck deck, TurnView turnView,
 				Map<CardType, CardController> cardControllers) {
@@ -36,11 +38,16 @@ public final class TurnController implements TurnSubject {
 		this.turnView = turnView;
 		this.cardControllers = new HashMap<>(cardControllers);
 
-		this.observers = new ArrayList<>();
+		this.turnObservers = new ArrayList<>();
+		this.lastPlayedObservers = new ArrayList<>();
 		for (Map.Entry<CardType, CardController> entry : cardControllers.entrySet()) {
 			CardController value = entry.getValue();
 			if (value instanceof TurnObserver) {
 				TurnObserver observer = (TurnObserver) value;
+				registerObserver(observer);
+			}
+			if (value instanceof LastPlayedObserver) {
+				LastPlayedObserver observer = (LastPlayedObserver) value;
 				registerObserver(observer);
 			}
 		}
@@ -52,13 +59,15 @@ public final class TurnController implements TurnSubject {
 		}
 		if (this.currPlayer != player) {
 			this.currPlayer = player;
-			notifyObservers();
+			notifyTurnObservers();
 		}
 
 		TurnResult specialAction = TurnResult.CONTINUE;
 
+		int implodingIndex = deck.getImplodingIndex();
+		turnView.showImplodingIndex(implodingIndex);
+		turnView.displayHand(currPlayer);
 		while (specialAction == TurnResult.CONTINUE) {
-			player.showHand();
 			String input = promptForInput();
 			switch (input) {
 				case "play": {
@@ -70,8 +79,9 @@ public final class TurnController implements TurnSubject {
 					try {
 						this.currPlayer.playCard(cardType);
 						specialAction = playCardAction(cardType);
+						notifyLastPlayedObservers(cardType);
 					} catch (IllegalArgumentException e) {
-						turnView.showInvalidCardPlay(e.getMessage());
+						turnView.showInvalidCardPlay(cardType);
 					}
 					break;
 				}
@@ -82,7 +92,7 @@ public final class TurnController implements TurnSubject {
 					return specialAction;
 				}
 				case "info": {
-					turnView.getInputForCardInfo(this.currPlayer);
+					turnView.getCardInfo();
 					break;
 				}
 				default:
@@ -122,7 +132,7 @@ public final class TurnController implements TurnSubject {
 		try {
 			currPlayer.addCard(drawn);
 		} catch (IllegalArgumentException e) {
-			turnView.showCardCouldNotBeAdded(e.getMessage());
+			turnView.showCardCouldNotBeAdded(drawn);
 		}
 		return TurnResult.CONTINUE;
 	}
@@ -144,20 +154,43 @@ public final class TurnController implements TurnSubject {
 	}
 
 	public void registerObserver(TurnObserver controller) {
-		observers.add(controller);
+		turnObservers.add(controller);
 	}
 
 	public void unregisterObserver(TurnObserver controller) {
-		observers.remove(controller);
+		turnObservers.remove(controller);
 	}
 
-	public void notifyObservers() {
-		for (TurnObserver observer : observers) {
+	public void notifyTurnObservers() {
+		for (TurnObserver observer : turnObservers) {
 			observer.updatePlayer(this.currPlayer);
 		}
 	}
 
-	int getObserverSize() {
-		return observers.size();
+	int getTurnObserverSize() {
+		return turnObservers.size();
+	}
+
+	public void registerObserver(LastPlayedObserver observer) {
+		lastPlayedObservers.add(observer);
+	}
+
+	public void unregisterObserver(LastPlayedObserver observer) {
+		lastPlayedObservers.remove(observer);
+	}
+
+	public void notifyLastPlayedObservers(CardType lastPlayed) {
+		for (LastPlayedObserver observer : lastPlayedObservers) {
+			observer.updateLastPlayed(lastPlayed);
+		}
+	}
+
+	int getLastPlayedObserverSize() {
+		return lastPlayedObservers.size();
+	}
+
+	// For Integration Feature Test - Game Setup
+	public int getCardCount(CardType cardType) {
+		return this.deck.getCardCount(cardType);
 	}
 }

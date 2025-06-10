@@ -1,21 +1,23 @@
 package ui;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class SkipCardView implements CardView {
-	private final Scanner scanner;
+	private final ResourceBundle labels;
 
-	public SkipCardView() { this.scanner = new Scanner(System.in, StandardCharsets.UTF_8); }
+	public SkipCardView() {
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
+	}
 
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("Immediately ends one remaining turn of the player" +
-				"without drawing a card");
+		final String skipInfo = labels.getString("skipInfo");
+		System.out.println(skipInfo);
 	}
 
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.println("Skip card played!");
+		final String skipActionMessage = labels.getString("skipActionMessage");
+		System.out.println(skipActionMessage);
 	}
 }

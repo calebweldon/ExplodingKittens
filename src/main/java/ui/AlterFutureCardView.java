@@ -2,30 +2,37 @@ package ui;
 
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import domain.CardType;
 
 public class AlterFutureCardView implements CardView {
 	private final Scanner scanner;
+	private final ResourceBundle labels;
 
 	public AlterFutureCardView() {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
 	public void getInfo() {
-		System.out.println("Pick the order of the top three cards of the deck.");
+		final String alterFutureInfo = labels.getString("alterFutureInfo");
+		System.out.println(alterFutureInfo);
 	}
 
 	public void actionMessage() {
-		System.out.println("You peek at the top of the deck in order.");
+		final String alterFutureActionMessage =
+				labels.getString("alterFutureActionMessage");
+		System.out.println(alterFutureActionMessage);
 	}
 
 	public void displayTopCards(CardType[] topCards) {
 		int count = 1;
 		for (CardType card : topCards) {
 			String cardString = MessageFormat.format("{0}: {1}", count, card);
-			System.out.println(card);
+			System.out.println(cardString);
 			count++;
 		}
 	}
@@ -34,20 +41,16 @@ public class AlterFutureCardView implements CardView {
 		int numCards = topCards.length;
 		CardType[] reorderedCards = new CardType[numCards];
 
-		String prompt = MessageFormat.format(
-				"Please enter the new order of cards 1 to {0}, spaces-separated: ",
-				numCards
-				);
+		final String alterFuturePrompt = labels.getString("alterFuturePrompt");
+		String prompt = MessageFormat.format(alterFuturePrompt, numCards);
 		System.out.println(prompt);
 
-		String invalidCountMessage = MessageFormat.format(
-				"You must enter exactly {0} values. Please try again.",
-				numCards
-				);
-		String invalidCardMessage = MessageFormat.format(
-				"Invalid card index. Please enter values between 1 and {0}.",
-				numCards
-				);
+		final String alterFutureInvalidCount = labels.getString("alterFutureInvalidCount");
+		String invalidCountMessage = MessageFormat.format(alterFutureInvalidCount,
+				numCards);
+
+		final String alterFutureInvalidCard = labels.getString("alterFutureInvalidCard");
+		String invalidCardMessage = MessageFormat.format(alterFutureInvalidCard, numCards);
 
 		loop:
 		while (true) {

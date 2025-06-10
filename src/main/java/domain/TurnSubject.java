@@ -1,7 +1,7 @@
 package domain;
 
 public interface TurnSubject {
-	public void notifyObservers();
+	public void notifyTurnObservers();
 
 	public void registerObserver(TurnObserver observer);
 

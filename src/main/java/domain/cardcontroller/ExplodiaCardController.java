@@ -8,29 +8,27 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import ui.ExplodiaCardView;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class ExplodiaCardController implements CardController,
 		ActionCardController, DrawCardController, TurnObserver {
-	private final ExplodiaCardView explodiaCardView;
+	private final ExplodiaCardView view;
 	private final List<CardController> cardControllers;
 	private final SecureRandom rand;
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player must be shared")
 	private Player player;
 	private static final int TOTAL_EXPLODIA = 5;
 
-	public ExplodiaCardController(ExplodiaCardView explodiaCardView,
+	public ExplodiaCardController(ExplodiaCardView view,
 				List<CardController> cardControllers) {
-		this(explodiaCardView, cardControllers, new SecureRandom());
+		this(view, cardControllers, new SecureRandom());
 	}
 
-	ExplodiaCardController(ExplodiaCardView explodiaCardView,
+	ExplodiaCardController(ExplodiaCardView view,
 				List<CardController> cardControllers,
 				SecureRandom rand) {
-		this.explodiaCardView = explodiaCardView;
+		this.view = view;
 		this.cardControllers = cardControllers;
 		this.rand = rand;
 	}
@@ -45,21 +43,25 @@ public class ExplodiaCardController implements CardController,
 		if (player == null) {
 			throw new IllegalStateException("Player not set");
 		}
-		player.addCard(CardType.EXPLODIA);
 		Map<CardType, Integer> hand = player.viewHand();
-		int numExplodia = hand.get(CardType.EXPLODIA);
+		int numExplodia = hand.getOrDefault(CardType.EXPLODIA, 0);
+		view.drawMessage(numExplodia);
+		player.addCard(CardType.EXPLODIA);
 
-		explodiaCardView.drawMessage(numExplodia);
-		return numExplodia == TOTAL_EXPLODIA ? TurnResult.WON : TurnResult.CONTINUE;
+		return numExplodia + 1 >= TOTAL_EXPLODIA ? TurnResult.WON : TurnResult.CONTINUE;
 	}
 
 	@Override
 	public TurnResult handleCardAction() {
-		explodiaCardView.actionMessage();
+		view.actionMessage();
 		int index = rand.nextInt(this.cardControllers.size());
 		ActionCardController cardController =
 				(ActionCardController) cardControllers.get(index);
 		return cardController.handleCardAction();
 	}
 
+	@Override
+	public void getInfo() {
+		this.view.getInfo();
+	}
 }
