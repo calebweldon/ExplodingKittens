@@ -24,4 +24,16 @@ public class ShuffleCardControllerTest {
 		assertEquals(expected, result);
 		EasyMock.verify(deck, cv);
 	}
+
+	@Test
+	public void getInfo_shuffleCardController() {
+		ShuffleCardView cv = EasyMock.createMock(ShuffleCardView.class);
+		cv.getInfo();
+		EasyMock.replay(cv);
+
+		ShuffleCardController shuffleCardController = new ShuffleCardController(cv, null);
+		shuffleCardController.getInfo();
+
+		EasyMock.verify(cv);
+	}
 }

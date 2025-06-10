@@ -67,4 +67,16 @@ public class RecycleCardControllerTest {
 		assertEquals(expected, actual);
 		EasyMock.verify(view);
 	}
+
+	@Test
+	public void getInfo_recycleCardController() {
+		RecycleCardView view = EasyMock.createMock(RecycleCardView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		RecycleCardController controller = new RecycleCardController(view);
+		controller.getInfo();
+
+		EasyMock.verify(view);
+	}
 }

@@ -23,4 +23,16 @@ public class SkipCardControllerTest {
 		assertEquals(expected, actual);
 		EasyMock.verify(view);
 	}
+
+	@Test
+	public void getInfo_skipCardController() {
+		SkipCardView view = EasyMock.createMock(SkipCardView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		SkipCardController skipCardController = new SkipCardController(view);
+		skipCardController.getInfo();
+
+		EasyMock.verify(view);
+	}
 }
