@@ -31,7 +31,7 @@ TurnObserver {
 		}
 
 		view.actionMessage();
-		try{
+		try {
 			currentPlayer.removeCard(CardType.DEFUSE);
 			view.showDefuseUsed();
 
@@ -49,5 +49,9 @@ TurnObserver {
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Safe to share")
 	public void updatePlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
+	}
+
+	public void getInfo(){
+		view.getInfo();
 	}
 } 
