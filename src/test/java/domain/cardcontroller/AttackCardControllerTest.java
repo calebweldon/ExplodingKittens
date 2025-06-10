@@ -22,4 +22,16 @@ public class AttackCardControllerTest {
 		assertEquals(expected, actual);
 		EasyMock.verify(view);
 	}
+
+	@Test
+	public void getInfo_attackCardController() {
+		AttackCardView view = EasyMock.createMock(AttackCardView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		AttackCardController attackCardController = new AttackCardController(view);
+		attackCardController.getInfo();
+
+		EasyMock.verify(view);
+	}
 }
