@@ -1,11 +1,11 @@
 # Week 8
 
 # Part 1. Team Planning of the Week :ledger:
-**Date**: 5/29/2025
+**Date**: 6/5/2025
 
 **Items Planned**:
 1. Ensure BVA is fully covered
-2. Implement i8n to all views
+2. Implement i18n to all views
 3. integration testing on 2 features
 4. full mutation testing
 5. full code coverage
@@ -35,13 +35,21 @@
 
 ### Team member: Eiko Reisz
 #### PR created:
-- 
+- N/A
 
 ### PR done and approved
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/69 *adopted
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/62
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/61
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/57
 
 ### Other people's PR reviewed by you
-- 
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/72
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/70
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/67
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/65
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/60
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/44
 
 ### Team member: Samarth Arul
 #### PR created:
