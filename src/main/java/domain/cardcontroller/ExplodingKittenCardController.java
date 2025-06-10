@@ -31,23 +31,15 @@ TurnObserver {
 		}
 
 		view.actionMessage();
-
-		// Check if player has defuse card
-		Map<CardType, Integer> hand = currentPlayer.viewHand();
-		int defuseCount = hand.getOrDefault(CardType.DEFUSE, 0);
-		
-		if (defuseCount > 0) {
-			// Player survives - use defuse
+		try{
 			currentPlayer.removeCard(CardType.DEFUSE);
 			view.showDefuseUsed();
 
-			// Let player choose where to put exploding kitten back
 			int insertIndex = view.promptExplodingKittenIndex(deck.getSize());
 			deck.insertCardAtIndex(CardType.EXPLODING_KITTEN, insertIndex);
 
 			return TurnResult.CONTINUE;
-		} else {
-			// Player eliminated
+		} catch (IllegalArgumentException e) {
 			view.showNoDefuseFound();
 			return TurnResult.ELIMINATED;
 		}
