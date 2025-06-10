@@ -45,8 +45,8 @@ public class GameSetup {
 		CardController embarrassController = new EmbarrassCardController();
 		CardController explodingkittenController = new ExplodingKittenCardController(
 				new ExplodingKittenView(), deck);
-		// TODO: Update Favor
-		CardController favorController = new FavorCardController();
+		CardController favorController = new FavorCardController(
+				new FavorCardView());
 		CardController flipController = new FlipCardController(
 				new FlipCardView(), deck);
 		CardController implodingDownController = new ImplodingFaceDownCardController(
