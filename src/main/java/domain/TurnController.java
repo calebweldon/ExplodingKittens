@@ -155,7 +155,7 @@ public final class TurnController implements TurnSubject,
 	}
 
 	private void updateLastPlayedIfDefused(CardType drawn, TurnResult result) {
-		if(result == TurnResult.CONTINUE && drawn == CardType.EXPLODING_KITTEN) {
+		if (result == TurnResult.CONTINUE && drawn == CardType.EXPLODING_KITTEN) {
 			notifyLastPlayedObservers(CardType.DEFUSE);
 		}
 	}

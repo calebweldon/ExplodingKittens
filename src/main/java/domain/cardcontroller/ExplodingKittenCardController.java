@@ -10,8 +10,7 @@ import ui.ExplodingKittenView;
 import java.util.Map;
 
 public class ExplodingKittenCardController implements CardController, 
-DrawCardController, 
-TurnObserver {
+		DrawCardController, TurnObserver {
 	private final ExplodingKittenView view;
 	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Deck must be shared")
 	private final Deck deck;
@@ -50,7 +49,8 @@ TurnObserver {
 		this.currentPlayer = currentPlayer;
 	}
 
-	public void getInfo(){
+	@Override
+	public void getInfo() {
 		view.getInfo();
 	}
-} 
+}
