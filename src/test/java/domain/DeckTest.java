@@ -210,4 +210,24 @@ public class DeckTest {
 
 		assertEquals(MAX_DECK_SIZE, deck.getSize());
 	}
+
+	// integration test, since flipDeck is not unit testable
+	@Test
+	public void flipDeck() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, true);
+		int originalSize = deck.getSize();
+		CardType[] originalDeck = new CardType[originalSize];
+		for (int i = 0; i < originalSize; i++) {
+			originalDeck[i] = deck.getCardAtIndex(i);
+		}
+
+		deck.flipDeck();
+
+		int flippedSize = deck.getSize();
+		assertEquals(originalSize, flippedSize);
+		for (int i = 0; i < flippedSize; i++) {
+			assertEquals(originalDeck[flippedSize - 1 - i], deck.getCardAtIndex(i));
+		}
+	}
 }
