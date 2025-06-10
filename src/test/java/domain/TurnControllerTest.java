@@ -178,6 +178,37 @@ class TurnControllerTest {
 	}
 
 	@Test
+	void playerInvalidInput() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Player player = EasyMock.createMock(Player.class);
+		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
+
+		SkipCardController controller = EasyMock.createMock(SkipCardController.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+
+		// User inputs an invalid command
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
+		EasyMock.expect(turnView.promptForInput()).andReturn("sdddjdkfjfkj");
+		turnView.showUnexpectedAction();
+		
+		// "draw" phase
+		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.ATTACK);
+		turnView.showCardDrawn(CardType.ATTACK);
+		player.addCard(CardType.ATTACK);
+
+		EasyMock.replay(deck, turnView, player, controller, hand);
+		tc.takeTurn(player);
+		EasyMock.verify(deck, turnView, player, controller, hand);
+		
+	}
+
+	@Test
 	void playerGetsInfo() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
@@ -303,5 +334,19 @@ class TurnControllerTest {
 			new TurnController(deck, turnView, null);
 		});
 		assertEquals("CardControllers cannot be null", exception.getMessage());
+	}
+
+	@Test
+	void getCardCount_runs() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		TurnController turnController = new TurnController(deck, turnView, cardControllers);
+
+		EasyMock.expect(deck.getCardCount(CardType.ATTACK)).andReturn(10);
+		EasyMock.replay(deck, turnView);
+
+		int count = turnController.getCardCount(CardType.ATTACK);
+		assertTrue(count == 10);
 	}
 }
