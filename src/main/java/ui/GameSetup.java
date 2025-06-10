@@ -35,8 +35,12 @@ public class GameSetup {
 				new AlterFutureCardView(), deck);
 		CardController attackController = new AttackCardController(
 				new AttackCardView());
-		// TODO: Update Basic
-		CardController basicController = new BasicCardController();
+		CardController beardCatController = new BasicCardController(
+				new BasicCardView(CardType.BEARD_CAT),
+				CardType.BEARD_CAT);
+		CardController cattermelonController = new BasicCardController(
+				new BasicCardView(CardType.CATTERMELON),
+				CardType.CATTERMELON);
 		// TODO: Update Embarrass
 		CardController embarrassController = new EmbarrassCardController();
 		// TODO: Update Exploding Kitten
@@ -49,6 +53,12 @@ public class GameSetup {
 				new ImplodingFaceDownCardView(), deck);
 		CardController implodingUpController = new ImplodingFaceUpCardController(
 				new ImplodingFaceUpCardView());
+		CardController potatoCatController = new BasicCardController(
+				new BasicCardView(CardType.POTATO_CAT),
+				CardType.POTATO_CAT);
+		CardController rainbowRalphingCatController = new BasicCardController(
+				new BasicCardView(CardType.RAINBOW_RALPHING_CAT),
+				CardType.RAINBOW_RALPHING_CAT);
 		CardController recycleController = new RecycleCardController(
 				new RecycleCardView());
 		CardController seeController = new SeeFutureCardController(
@@ -59,12 +69,19 @@ public class GameSetup {
 				new SkipCardView());
 		CardController swapController = new SwapHandCardController(
 				new SwapHandCardView());
+		CardController tacoCatController = new BasicCardController(
+				new BasicCardView(CardType.TACO_CAT),
+				CardType.TACO_CAT);
 
 		Map<CardType, CardController> godCatMap = new HashMap<>();
 		godCatMap.put(CardType.ATTACK, attackController);
 		godCatMap.put(CardType.SKIP, skipController);
 		godCatMap.put(CardType.FAVOR, favorController);
-		godCatMap.put(CardType.TACO_CAT, basicController);
+		godCatMap.put(CardType.TACO_CAT, tacoCatController);
+		godCatMap.put(CardType.CATTERMELON, cattermelonController);
+		godCatMap.put(CardType.POTATO_CAT, potatoCatController);
+		godCatMap.put(CardType.BEARD_CAT, beardCatController);
+		godCatMap.put(CardType.RAINBOW_RALPHING_CAT, rainbowRalphingCatController);
 		godCatMap.put(CardType.FLIP, flipController);
 		godCatMap.put(CardType.SHUFFLE, shuffleController);
 		godCatMap.put(CardType.SWAP, swapController);
@@ -81,11 +98,11 @@ public class GameSetup {
 
 		cardControllers.put(CardType.ALTER_THE_FUTURE, alterController);
 		cardControllers.put(CardType.ATTACK, attackController);
-		cardControllers.put(CardType.BEARD_CAT, basicController);
-		cardControllers.put(CardType.CATTERMELON, basicController);
-		cardControllers.put(CardType.POTATO_CAT, basicController);
-		cardControllers.put(CardType.RAINBOW_RALPHING_CAT, basicController);
-		cardControllers.put(CardType.TACO_CAT, basicController);
+		cardControllers.put(CardType.BEARD_CAT, beardCatController);
+		cardControllers.put(CardType.CATTERMELON, cattermelonController);
+		cardControllers.put(CardType.POTATO_CAT, potatoCatController);
+		cardControllers.put(CardType.RAINBOW_RALPHING_CAT, rainbowRalphingCatController);
+		cardControllers.put(CardType.TACO_CAT, tacoCatController);
 		cardControllers.put(CardType.EMBARRASS, embarrassController);
 		cardControllers.put(CardType.EXPLODING_KITTEN, explodingkittenController);
 		cardControllers.put(CardType.EXPLODIA, explodiaController);
