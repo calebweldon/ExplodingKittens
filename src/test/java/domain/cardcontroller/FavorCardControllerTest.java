@@ -148,4 +148,16 @@ public class FavorCardControllerTest {
 		
 		EasyMock.verify(view);
 	}
+
+	@Test
+	public void getInfo_FavorCardController() {
+		FavorCardView view = EasyMock.createMock(FavorCardView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		FavorCardController controller = new FavorCardController(view);
+		controller.getInfo();
+
+		EasyMock.verify(view);
+	}
 } 

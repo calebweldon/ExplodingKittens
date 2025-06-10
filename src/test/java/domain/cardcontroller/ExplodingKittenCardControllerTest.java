@@ -113,4 +113,16 @@ public class ExplodingKittenCardControllerTest {
 		assertEquals(TurnResult.CONTINUE, result);
 		EasyMock.verify(view, deck, player, hand);
 	}
+
+	@Test
+	public void getInfo_explodingKittenCardController() {
+		ExplodingKittenView view = EasyMock.createMock(ExplodingKittenView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		ExplodingKittenCardController controller = new ExplodingKittenCardController(view, null);
+		controller.getInfo();
+
+		EasyMock.verify(view);
+	}
 } 
