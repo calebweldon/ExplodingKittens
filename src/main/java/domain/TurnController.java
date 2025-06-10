@@ -126,8 +126,9 @@ public final class TurnController implements TurnSubject,
 		if (controller instanceof DrawCardController) {
 			DrawCardController drawController =
 					(DrawCardController) controller;
-			// TODO: Handle adding to player hand if needed
-			return drawController.handleCardDraw();
+			TurnResult result = drawController.handleCardDraw();
+			updateLastPlayedIfDefused(drawn, result);
+			return result;
 		}
 		try {
 			currPlayer.addCard(drawn);
@@ -150,6 +151,12 @@ public final class TurnController implements TurnSubject,
 		int numExplodia = hand.getOrDefault(CardType.EXPLODIA, 0);
 		for (; numExplodia > 0; numExplodia--) {
 			deck.insertCardAtRandomIndex(CardType.EXPLODIA);
+		}
+	}
+
+	private void updateLastPlayedIfDefused(CardType drawn, TurnResult result) {
+		if(result == TurnResult.CONTINUE && drawn == CardType.EXPLODING_KITTEN) {
+			notifyLastPlayedObservers(CardType.DEFUSE);
 		}
 	}
 
