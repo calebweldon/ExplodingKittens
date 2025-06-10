@@ -7,97 +7,121 @@ import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class FavorCardView implements CardView {
 	private final Scanner scanner;
+	private final ResourceBundle labels;
 
 	public FavorCardView() {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("Choose a player to give you one of their cards - their choice");
+		final String favorInfo = labels.getString("favorInfo");
+		System.out.println(favorInfo);
 	}
 
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.println("Favor card has been played!");
+		final String favorActionMessage = labels.getString("favorActionMessage");
+		System.out.println(favorActionMessage);
 	}
 
 	public void printNoCardsToGive() {
-		System.out.println("No other players have cards to give!");
+		final String favorNoCardsToGive = labels.getString("favorNoCardsToGive");
+		System.out.println(favorNoCardsToGive);
 	}
 
 	public void printNoCardGivenMessage() {
-		System.out.println("No card was given.");
+		final String favorNoCardGiven = labels.getString("favorNoCardGiven");
+		System.out.println(favorNoCardGiven);
 	}
 
 	public Player promptForTargetPlayer(List<Player> activePlayersExceptCurrent) {
-		// TODO: add locale
-		System.out.println("Choose a player to give you a card:");
+		final String favorPromptForPlayer = labels.getString("favorPromptForPlayer");
+		System.out.println(favorPromptForPlayer);
+
+		final String favorPlayerHandSizeMessage = labels.getString
+				("favorPlayerHandSizeMessage");
 
 		for (Player player : activePlayersExceptCurrent) {
 			int playerId = player.getId();
 			int handSize = player.getHandSize();
 			String playerAndHandSizeMessage = MessageFormat.format(
-					"Player {0} has {1} card(s)", playerId, handSize);
+					favorPlayerHandSizeMessage, playerId, handSize);
 			System.out.println(playerAndHandSizeMessage);
 		}
 
+		final String favorEnterId = labels.getString("favorEnterId");
+		final String favorPlayerChosen = labels.getString("favorPlayerChosen");
+		final String favorInvalidId = labels.getString("favorInvalidId");
+		final String favorPromptForNum = labels.getString("favorPromptForNum");
+
 		while (true) {
-			System.out.print("Enter the ID of the player: ");
+			System.out.print(favorEnterId);
 			try {
 				int userInput = Integer.parseInt(scanner.nextLine());
 
 				for (Player player : activePlayersExceptCurrent) {
 					if (player.getId() == userInput) {
 						String playerChosenMessage = MessageFormat.format(
-								"Player {0} chosen", userInput);
+								favorPlayerChosen, userInput);
 						System.out.println(playerChosenMessage);
 						return player;
 					}
 				}
 
-				System.out.println("Invalid ID. Please try again.");
+				System.out.println(favorInvalidId);
 			} catch (NumberFormatException e) {
-				System.out.println("Please enter a valid number.");
+				System.out.println(favorPromptForNum);
 			}
 		}
 	}
 
 	public CardType promptTargetPlayerForCard(Player targetPlayer) {
-		// TODO: add locale
 		Map<CardType, Integer> hand = targetPlayer.viewHand();
-		
+
+		final String favorPlayerNoCardsToGive = labels.getString
+				("favorPlayerNoCardsToGive");
+		final String favorPlayerChooseCardToGive = labels.getString
+				("favorPlayerChooseCardToGive");
+		final String favorDisplayCards = labels.getString("favorDisplayCards");
+
 		if (hand.isEmpty()) {
 			System.out.println(MessageFormat.format(
-					"Player {0} has no cards to give!", targetPlayer.getId()));
+					favorPlayerNoCardsToGive, targetPlayer.getId()));
 			return null;
 		}
 
 		System.out.println(MessageFormat.format(
-				"Player {0}, choose a card to give:", targetPlayer.getId()));
+				favorPlayerChooseCardToGive, targetPlayer.getId()));
 
-		// Display available cards
 		int index = 1;
 		for (Map.Entry<CardType, Integer> entry : hand.entrySet()) {
 			if (entry.getValue() > 0) {
 				System.out.println(MessageFormat.format(
-						"{0}. {1} (you have {2})", 
+						favorDisplayCards,
 						index, entry.getKey(), entry.getValue()));
 				index++;
 			}
 		}
 
+		final String favorPromptNumCardsToGive = labels.getString
+				("favorPromptNumCardsToGive");
+		final String favorInvalidChoice = labels.getString("favorInvalidChoice");
+		final String favorPlayerGives = labels.getString("favorPlayerGives");
+		final String favorPromptForNum = labels.getString("favorPromptForNum");
+
+
 		while (true) {
-			System.out.print("Enter the number of the card to give: ");
+			System.out.print(favorPromptNumCardsToGive);
 			try {
 				int choice = Integer.parseInt(scanner.nextLine());
 				
 				if (choice < 1 || choice > hand.size()) {
-					System.out.println("Invalid choice. Please try again.");
+					System.out.println(favorInvalidChoice);
 					continue;
 				}
 
@@ -106,7 +130,7 @@ public class FavorCardView implements CardView {
 					if (entry.getValue() > 0) {
 						if (currentIndex == choice) {
 							System.out.println(MessageFormat.format(
-									"Player {0} gives {1}", 
+									favorPlayerGives,
 									targetPlayer.getId(), 
 									entry.getKey()));
 							return entry.getKey();
@@ -115,7 +139,7 @@ public class FavorCardView implements CardView {
 					}
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("Please enter a valid number.");
+				System.out.println(favorPromptForNum);
 			}
 		}
 	}
