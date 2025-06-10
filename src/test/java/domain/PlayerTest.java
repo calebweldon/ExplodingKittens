@@ -1,6 +1,8 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.easymock.EasyMock;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -132,16 +134,17 @@ public class PlayerTest {
 		EasyMock.verify(hand);
 	}
 
-	@Test
-	public void playCard_oneBasicKitten_throwsException() {
+	@ParameterizedTest
+	@EnumSource(value = CardType.class, names = {"BEARD_CAT", "CATTERMELON", "POTATO_CAT", "RAINBOW_RALPHING_CAT", "TACO_CAT"})
+	public void playCard_oneBasicKitten_throwsException(CardType cardType) {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
-		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(1);
+		EasyMock.expect(hand.getOrDefault(cardType, 0)).andReturn(1);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
 
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			player.playCard(CardType.TACO_CAT);
+			player.playCard(cardType);
 		});
 
 		String expectedMessage = "You do not have enough cards to play.";
