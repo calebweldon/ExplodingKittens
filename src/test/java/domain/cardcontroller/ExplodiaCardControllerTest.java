@@ -102,6 +102,11 @@ public class ExplodiaCardControllerTest {
 	}
 
 	@Test
+	public void publicExplodiaConstructor_doesntCrash() {
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers);
+	}
+
+	@Test
 	public void handleExplodiaCardDraw_NullPlayer() {
 		EasyMock.replay(cv, rand);
 		
