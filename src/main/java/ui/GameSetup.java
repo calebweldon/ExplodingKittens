@@ -43,8 +43,8 @@ public class GameSetup {
 				CardType.CATTERMELON);
 		// TODO: Update Embarrass
 		CardController embarrassController = new EmbarrassCardController();
-		// TODO: Update Exploding Kitten
-		CardController explodingkittenController = new ExplodingKittenCardController();
+		CardController explodingkittenController = new ExplodingKittenCardController(
+				new ExplodingKittenView(), deck);
 		CardController favorController = new FavorCardController(
 				new FavorCardView());
 		CardController flipController = new FlipCardController(

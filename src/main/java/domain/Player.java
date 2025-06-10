@@ -60,7 +60,11 @@ public class Player {
 		if (count < 1) {
 			throw new IllegalArgumentException("Not enough cards to remove.");
 		}
-		this.hand.put(cardType, count - 1);
+		if (count == 1) {
+			this.hand.remove(cardType);
+		} else {
+			this.hand.put(cardType, count - 1);
+		}
 	}
 
 	public int getId() {
