@@ -76,6 +76,18 @@ public class SwapHandCardControllerTest {
 	}
 
 	@Test
+	public void UnitTest_getInfo_SwapHandCardController() {
+		SwapHandCardView view = EasyMock.createMock(SwapHandCardView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		SwapHandCardController controller = new SwapHandCardController(view);
+		controller.getInfo();
+
+		EasyMock.verify(view);
+	}
+
+	@Test
 	public void IntegrationTest_TwoActivePlayersExcludingCurrentWithDiffHandSizes_handSwapped() {
 
 		Player playerOne = new Player(1);
