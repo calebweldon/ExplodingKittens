@@ -82,6 +82,31 @@ class TurnControllerTest {
 	}
 
 	@Test
+	void playerDrawsExplodingKitten_withDefuse() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		TurnView turnView = EasyMock.createMock(TurnView.class);
+		Player player = EasyMock.createMock(Player.class);
+		ExplodingKittenCardController controller = EasyMock.createMock(ExplodingKittenCardController.class);
+		Map<CardType, CardController> cardControllers = new HashMap<>();
+		cardControllers.put(CardType.EXPLODING_KITTEN, controller);
+		TurnController tc = new TurnController(deck, turnView, cardControllers);
+
+		controller.updatePlayer(player);
+
+		turnView.displayHand(player);
+		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
+		turnView.showImplodingIndex(-1);
+		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
+		EasyMock.expect(deck.drawCard()).andReturn(CardType.EXPLODING_KITTEN);
+		turnView.showCardDrawn(CardType.EXPLODING_KITTEN);
+		EasyMock.expect(controller.handleCardDraw()).andReturn(TurnResult.CONTINUE);
+
+		EasyMock.replay(deck, turnView, player, controller);
+		tc.takeTurn(player);
+		EasyMock.verify(deck, turnView, player, controller);
+	}
+
+	@Test
 	void playerPlaysCard_withoutHandleAction() {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
