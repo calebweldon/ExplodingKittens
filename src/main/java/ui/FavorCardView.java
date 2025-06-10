@@ -26,6 +26,14 @@ public class FavorCardView implements CardView {
 		System.out.println("Favor card has been played!");
 	}
 
+	public void printNoCardsToGive() {
+		System.out.println("No other players have cards to give!");
+	}
+
+	public void printNoCardGivenMessage() {
+		System.out.println("No card was given.");
+	}
+
 	public Player promptForTargetPlayer(List<Player> activePlayersExceptCurrent) {
 		// TODO: add locale
 		System.out.println("Choose a player to give you a card:");
@@ -93,7 +101,6 @@ public class FavorCardView implements CardView {
 					continue;
 				}
 
-				// Convert choice back to CardType
 				int currentIndex = 1;
 				for (Map.Entry<CardType, Integer> entry : hand.entrySet()) {
 					if (entry.getValue() > 0) {

@@ -34,29 +34,24 @@ public class FavorCardController implements CardController, ActionCardController
 	public TurnResult handleCardAction() {
 		view.actionMessage();
 
-		// Filter players who have cards to give
 		List<Player> playersWithCards = activePlayersExcludingCurrent.stream()
 				.filter(player -> player.getHandSize() > 0)
 				.collect(Collectors.toList());
 
 		if (playersWithCards.isEmpty()) {
-			System.out.println("No other players have cards to give!");
+			view.printNoCardsToGive();
 			return TurnResult.CONTINUE;
 		}
 
-		// Current player chooses target player
 		Player targetPlayer = view.promptForTargetPlayer(playersWithCards);
 
-		// Target player chooses which card to give
 		CardType cardToGive = view.promptTargetPlayerForCard(targetPlayer);
 
 		if (cardToGive == null) {
-			// Should not happen due to filtering, but safety check
-			System.out.println("No card was given.");
+			view.printNoCardGivenMessage();
 			return TurnResult.CONTINUE;
 		}
 
-		// Transfer the card
 		targetPlayer.removeCard(cardToGive);
 		currentPlayer.addCard(cardToGive);
 
