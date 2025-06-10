@@ -1,54 +1,58 @@
 package ui;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class ExplodingKittenView implements CardView {
 	private final Scanner scanner;
+	private final ResourceBundle labels;
 
 	public ExplodingKittenView() {
 		this.scanner = new Scanner(System.in, StandardCharsets.UTF_8);
+		this.labels = ResourceBundle.getBundle("labels", LocaleContext.getLocale());
 	}
 
 	@Override
 	public void getInfo() {
-		// TODO: add locale
-		System.out.println("EXPLODING KITTEN!!!");
-		System.out.println("If you draw this card, you explode and are out of the game.");
-		System.out.println("Unless you have a Defuse card!");
+		final String explodingKittenInfo = labels.getString("explodingKittenInfo");
+		System.out.println(explodingKittenInfo);
 	}
 
 	@Override
 	public void actionMessage() {
-		// TODO: add locale
-		System.out.println("You drew an Exploding Kitten!");
+		final String explodingKittenActionMessage =
+				labels.getString("explodingKittenActionMessage");
+		System.out.println(explodingKittenActionMessage);
 	}
 
 	public void showDefuseUsed() {
-		// TODO: add locale
-		System.out.println("Defuse used. You're safe.");
+		final String explodingKittenDefuseUsed =
+				labels.getString("explodingKittenDefuseUsed");
+		System.out.println(explodingKittenDefuseUsed);
 	}
 
 	public void showNoDefuseFound() {
-		// TODO: add locale
-		System.out.println("No defuse found. Eliminated.");
+		final String explodingKittenNoDefuse = labels.getString("explodingKittenNoDefuse");
+		System.out.println(explodingKittenNoDefuse);
 	}
 
 	public int promptExplodingKittenIndex(int deckSize) {
-		// TODO: add locale
+		final String explodingKittenGetIndex = labels.getString("explodingKittenGetIndex");
+		final String explodingKittenInvalidIndex =
+				labels.getString("explodingKittenInvalidIndex");
+		final String explodingKittenInvalidInput =
+				labels.getString("explodingKittenInvalidInput");
 		while (true) {
-			System.out.printf(
-				"Where do you want to put the Exploding Kitten back? (0-%d): ", 
-				deckSize
-			);
+			System.out.printf(explodingKittenGetIndex, deckSize);
 			try {
 				int index = Integer.parseInt(scanner.nextLine());
 				if (index >= 0 && index <= deckSize) {
 					return index;
 				}
-				System.out.println("Invalid index. Try again.");
+				System.out.println(explodingKittenInvalidIndex);
 			} catch (NumberFormatException e) {
-				System.out.println("Please enter a valid number.");
+				System.out.println(explodingKittenInvalidInput);
 			}
 		}
 	}
