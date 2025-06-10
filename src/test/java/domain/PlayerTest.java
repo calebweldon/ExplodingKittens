@@ -156,7 +156,7 @@ public class PlayerTest {
 	public void removeCard_oneCard_succeeds() {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -171,7 +171,7 @@ public class PlayerTest {
 		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(2);
 		EasyMock.expect(hand.put(CardType.TACO_CAT, 1)).andReturn(2);
 		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.TACO_CAT, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.TACO_CAT)).andReturn(0);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -187,7 +187,7 @@ public class PlayerTest {
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(2);
 		EasyMock.expect(hand.put(CardType.ATTACK, 1)).andReturn(2);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -284,7 +284,7 @@ public class PlayerTest {
 		EasyMock.expect(keys.size()).andReturn(1);
 		EasyMock.expect(rand.nextInt(1)).andReturn(0);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand, keys, rand);
 
 		Player player = new Player(hand, rand);
@@ -307,7 +307,7 @@ public class PlayerTest {
 		EasyMock.expect(keys.size()).andReturn(2);
 		EasyMock.expect(rand.nextInt(2)).andReturn(0);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand, keys, rand);
 
 		Player player = new Player(hand, rand);
