@@ -10,6 +10,7 @@ import ui.ExplodingKittenView;
 
 import java.util.Map;
 
+import static org.easymock.EasyMock.expectLastCall;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -47,8 +48,6 @@ public class ExplodingKittenCardControllerTest {
 
 		// Set up expectations
 		view.actionMessage();
-		EasyMock.expect(player.viewHand()).andReturn(hand);
-		EasyMock.expect(hand.getOrDefault(CardType.DEFUSE, 0)).andReturn(1); // Player has defuse
 		player.removeCard(CardType.DEFUSE);
 		view.showDefuseUsed();
 		EasyMock.expect(deck.getSize()).andReturn(5);
@@ -76,8 +75,8 @@ public class ExplodingKittenCardControllerTest {
 
 		// Set up expectations
 		view.actionMessage();
-		EasyMock.expect(player.viewHand()).andReturn(hand);
-		EasyMock.expect(hand.getOrDefault(CardType.DEFUSE, 0)).andReturn(0); // Player has no defuse
+		player.removeCard(CardType.DEFUSE);
+		expectLastCall().andThrow(new IllegalArgumentException("Not enough cards to remove.")); // Player has no defuse
 		view.showNoDefuseFound();
 
 		EasyMock.replay(view, deck, player, hand);
@@ -101,8 +100,6 @@ public class ExplodingKittenCardControllerTest {
 
 		// Set up expectations
 		view.actionMessage();
-		EasyMock.expect(player.viewHand()).andReturn(hand);
-		EasyMock.expect(hand.getOrDefault(CardType.DEFUSE, 0)).andReturn(1); // Player has defuse
 		player.removeCard(CardType.DEFUSE);
 		view.showDefuseUsed();
 		EasyMock.expect(deck.getSize()).andReturn(0); // Empty deck
