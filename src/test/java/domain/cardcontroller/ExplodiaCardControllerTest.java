@@ -15,8 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExplodiaCardControllerTest {
 	private ExplodiaCardView cv;
@@ -104,6 +103,7 @@ public class ExplodiaCardControllerTest {
 	@Test
 	public void publicExplodiaConstructor_doesntCrash() {
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers);
+		assertNotNull(explodiaCardController);
 	}
 
 	@Test
