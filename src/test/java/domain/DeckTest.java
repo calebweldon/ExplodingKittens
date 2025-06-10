@@ -230,4 +230,10 @@ public class DeckTest {
 			assertEquals(originalDeck[flippedSize - 1 - i], deck.getCardAtIndex(i));
 		}
 	}
+
+	@Test
+	public void publicConstructor_doesntCrash() {
+		Deck deck = new Deck();
+		assertNotNull(deck);
+	}
 }
