@@ -103,15 +103,26 @@ public class ExplodiaCardControllerTest {
 
 	@Test
 	public void handleExplodiaCardDraw_NullPlayer() {
+		EasyMock.replay(cv, rand);
+		
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 		explodiaCardController.updatePlayer(null);
-		EasyMock.replay(cv);
-		
 		Exception exception = assertThrows(IllegalStateException.class, () -> {
 			explodiaCardController.handleCardDraw();
 		});
 		assertEquals("Player not set", exception.getMessage());
 
-		EasyMock.verify(cv);
+		EasyMock.verify(cv, rand);
+	}
+
+	@Test
+	public void getInfo_ExplodiaCardController() {
+		cv.getInfo();
+		EasyMock.replay(cv, rand);
+
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
+		explodiaCardController.getInfo();
+
+		EasyMock.verify(cv, rand);
 	}
 }
