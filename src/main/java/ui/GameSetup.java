@@ -41,8 +41,6 @@ public class GameSetup {
 		CardController cattermelonController = new BasicCardController(
 				new BasicCardView(CardType.CATTERMELON),
 				CardType.CATTERMELON);
-		// TODO: Update Embarrass
-		CardController embarrassController = new EmbarrassCardController();
 		CardController explodingkittenController = new ExplodingKittenCardController(
 				new ExplodingKittenView(), deck);
 		CardController favorController = new FavorCardController(
@@ -85,7 +83,6 @@ public class GameSetup {
 		godCatMap.put(CardType.FLIP, flipController);
 		godCatMap.put(CardType.SHUFFLE, shuffleController);
 		godCatMap.put(CardType.SWAP, swapController);
-		godCatMap.put(CardType.EMBARRASS, embarrassController);
 		godCatMap.put(CardType.RECYCLE, recycleController);
 		godCatMap.put(CardType.ALTER_THE_FUTURE, alterController);
 		godCatMap.put(CardType.SEE_THE_FUTURE, seeController);
@@ -103,7 +100,6 @@ public class GameSetup {
 		cardControllers.put(CardType.POTATO_CAT, potatoCatController);
 		cardControllers.put(CardType.RAINBOW_RALPHING_CAT, rainbowRalphingCatController);
 		cardControllers.put(CardType.TACO_CAT, tacoCatController);
-		cardControllers.put(CardType.EMBARRASS, embarrassController);
 		cardControllers.put(CardType.EXPLODING_KITTEN, explodingkittenController);
 		cardControllers.put(CardType.EXPLODIA, explodiaController);
 		cardControllers.put(CardType.FAVOR, favorController);

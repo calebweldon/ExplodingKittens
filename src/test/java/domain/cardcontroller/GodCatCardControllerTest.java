@@ -11,7 +11,7 @@ import java.util.*;
 public class GodCatCardControllerTest {
 	@ParameterizedTest
 	@EnumSource(value = CardType.class, names = {"ATTACK", "SKIP", "FAVOR", "TACO_CAT", "FLIP", "SHUFFLE", "SWAP",
-			"EMBARRASS", "RECYCLE", "ALTER_THE_FUTURE", "SEE_THE_FUTURE"})
+			"RECYCLE", "ALTER_THE_FUTURE", "SEE_THE_FUTURE"})
 	public void handleGodCatCardAction_BecomesOtherCard(CardType card) {
 		GodCatCardView cv = EasyMock.createMock(GodCatCardView.class);
 
@@ -23,7 +23,6 @@ public class GodCatCardControllerTest {
 		cardControllers.put(CardType.FLIP, EasyMock.createMock(FlipCardController.class));
 		cardControllers.put(CardType.SHUFFLE, EasyMock.createMock(ShuffleCardController.class));
 		cardControllers.put(CardType.SWAP, EasyMock.createMock(SwapHandCardController.class));
-		cardControllers.put(CardType.EMBARRASS, EasyMock.createMock(EmbarrassCardController.class));
 		cardControllers.put(CardType.RECYCLE, EasyMock.createMock(RecycleCardController.class));
 		cardControllers.put(CardType.ALTER_THE_FUTURE, EasyMock.createMock(SeeFutureCardController.class));
 		cardControllers.put(CardType.SEE_THE_FUTURE, EasyMock.createMock(AlterFutureCardController.class));

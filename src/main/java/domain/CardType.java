@@ -20,7 +20,6 @@ public enum CardType {
 	DRAW_FROM_BOTTOM,
 	FLIP,
 	EXPLODIA,
-	EMBARRASS,
 	RECYCLE,
 	SWAP
 }

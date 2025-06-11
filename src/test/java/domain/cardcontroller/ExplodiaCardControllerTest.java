@@ -34,11 +34,10 @@ public class ExplodiaCardControllerTest {
 		FlipCardController c5 = EasyMock.createMock(FlipCardController.class);
 		ShuffleCardController c6 = EasyMock.createMock(ShuffleCardController.class);
 		SwapHandCardController c7 = EasyMock.createMock(SwapHandCardController.class);
-		EmbarrassCardController c8 = EasyMock.createMock(EmbarrassCardController.class);
-		RecycleCardController c9 = EasyMock.createMock(RecycleCardController.class);
-		SeeFutureCardController c10 = EasyMock.createMock(SeeFutureCardController.class);
-		AlterFutureCardController c11 = EasyMock.createMock(AlterFutureCardController.class);
-		this.cardControllers = new ArrayList<>(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11));
+		RecycleCardController c8 = EasyMock.createMock(RecycleCardController.class);
+		SeeFutureCardController c9 = EasyMock.createMock(SeeFutureCardController.class);
+		AlterFutureCardController c10 = EasyMock.createMock(AlterFutureCardController.class);
+		this.cardControllers = new ArrayList<>(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10));
 	}
 
 	@ParameterizedTest
@@ -84,9 +83,9 @@ public class ExplodiaCardControllerTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0,1,2,3,4,5,6,7,8,9,10})
+	@ValueSource(ints = {0,1,2,3,4,5,6,7,8,9})
 	public void handleExplodiaCardAction_BecomesOtherCard(int index) {
-		int NUM_CONTROLLERS = 11;
+		int NUM_CONTROLLERS = 10;
 
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
