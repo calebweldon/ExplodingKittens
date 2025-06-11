@@ -139,15 +139,21 @@ public class TurnView {
 			final String cardInfo = MessageFormat.format("[{0}] {1}    ", i, cards[i]);
 			System.out.print(cardInfo);
 		}
-		try {
-			System.out.println();
-			System.out.print(turnViewPromptForIndex);
-			int idx = Integer.parseInt(scanner.nextLine());
-			CardType card = cards[idx];
-			CardController cardController = cardControllers.get(card);
-			cardController.getInfo();
-		} catch (NumberFormatException ignored) {
-			System.out.println(turnViewInvalidIndex);
+		while (true) {
+			try {
+				System.out.println();
+				System.out.print(turnViewPromptForIndex);
+				int idx = Integer.parseInt(scanner.nextLine());
+				if (idx < 0 || idx >= cards.length) {
+					throw new NumberFormatException();
+				}
+				CardType card = cards[idx];
+				CardController cardController = cardControllers.get(card);
+				cardController.getInfo();
+				return;
+			} catch (NumberFormatException ignored) {
+				System.out.print(turnViewInvalidIndex);
+			}
 		}
 	}
 
