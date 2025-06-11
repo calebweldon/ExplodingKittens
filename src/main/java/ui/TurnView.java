@@ -64,6 +64,7 @@ public class TurnView {
 			String input = scanner.nextLine().trim().toLowerCase();
 			if ("play".equals(input) || "draw".equals(input) 
 				|| "info".equals(input)) {
+				System.out.println();
 				return input;
 			}
 			final String turnViewInvalidInput =
@@ -84,7 +85,7 @@ public class TurnView {
 				labels.getString("turnViewInvalidIndex");
 
 		while (true) {
-			System.out.println(turnViewPromptForCard);
+			System.out.print(turnViewPromptForCard);
 			printCards(hand, cards);
 			System.out.print(turnViewPromptForIndex);
 			try {
@@ -103,7 +104,7 @@ public class TurnView {
 
 		final String turnViewYourHand =
 				labels.getString("turnViewYourHand");
-		System.out.println(turnViewYourHand);
+		System.out.print(turnViewYourHand);
 		printCards(hand, cards);
 	}
 
@@ -136,9 +137,10 @@ public class TurnView {
 				System.out.println();
 			}
 			final String cardInfo = MessageFormat.format("[{0}] {1}    ", i, cards[i]);
-			System.out.printf(cardInfo);
+			System.out.print(cardInfo);
 		}
 		try {
+			System.out.println();
 			System.out.print(turnViewPromptForIndex);
 			int idx = Integer.parseInt(scanner.nextLine());
 			CardType card = cards[idx];
