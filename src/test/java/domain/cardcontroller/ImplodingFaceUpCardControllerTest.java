@@ -21,4 +21,16 @@ public class ImplodingFaceUpCardControllerTest {
 		assertEquals(TurnResult.ELIMINATED, result);
 		EasyMock.verify(cv);
 	}
+
+	@Test
+	public void getInfo_implodingFaceUpCardController() {
+		ImplodingFaceUpCardView cv = EasyMock.createMock(ImplodingFaceUpCardView.class);
+		cv.getInfo();
+		EasyMock.replay(cv);
+
+		ImplodingFaceUpCardController implodingFaceUpCardController = new ImplodingFaceUpCardController(cv);
+		implodingFaceUpCardController.getInfo();
+
+		EasyMock.verify(cv);
+	}
 }

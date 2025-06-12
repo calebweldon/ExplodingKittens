@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExplodiaCardControllerTest {
 	private ExplodiaCardView cv;
@@ -98,5 +98,36 @@ public class ExplodiaCardControllerTest {
 		EasyMock.replay(rand, cv, controller);
 		explodiaCardController.handleCardAction();
 		EasyMock.verify(rand, cv, controller);
+	}
+
+	@Test
+	public void publicExplodiaConstructor_doesntCrash() {
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers);
+		assertNotNull(explodiaCardController);
+	}
+
+	@Test
+	public void handleExplodiaCardDraw_NullPlayer() {
+		EasyMock.replay(cv, rand);
+		
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
+		explodiaCardController.updatePlayer(null);
+		Exception exception = assertThrows(IllegalStateException.class, () -> {
+			explodiaCardController.handleCardDraw();
+		});
+		assertEquals("Player not set", exception.getMessage());
+
+		EasyMock.verify(cv, rand);
+	}
+
+	@Test
+	public void getInfo_ExplodiaCardController() {
+		cv.getInfo();
+		EasyMock.replay(cv, rand);
+
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
+		explodiaCardController.getInfo();
+
+		EasyMock.verify(cv, rand);
 	}
 }

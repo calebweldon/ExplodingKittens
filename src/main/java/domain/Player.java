@@ -37,10 +37,7 @@ public class Player {
 
 	public void playCard(CardType cardType) {
 		int removeCount = 1;
-		if (cardType == CardType.TACO_CAT || cardType == CardType.CATTERMELON
-				|| cardType == CardType.POTATO_CAT
-				|| cardType == CardType.BEARD_CAT
-				|| cardType == CardType.RAINBOW_RALPHING_CAT) {
+		if (isBasicCard(cardType)) {
 			removeCount = 2;
 		}
 		int count = this.hand.getOrDefault(cardType, 0);
@@ -53,6 +50,13 @@ public class Player {
 		} else {
 			this.hand.put(cardType, count - removeCount);
 		}
+	}
+
+	private boolean isBasicCard(CardType cardType) {
+		return cardType == CardType.TACO_CAT || cardType == CardType.CATTERMELON
+				|| cardType == CardType.POTATO_CAT
+				|| cardType == CardType.BEARD_CAT
+				|| cardType == CardType.RAINBOW_RALPHING_CAT;
 	}
 
 	public void removeCard(CardType cardType) {
