@@ -2,6 +2,7 @@ package domain.cardcontroller;
 
 import domain.CardType;
 import org.easymock.EasyMock;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import ui.GodCatCardView;
@@ -37,5 +38,17 @@ public class GodCatCardControllerTest {
 		EasyMock.replay(cv, controller);
 		godCatCardController.handleCardAction();
 		EasyMock.verify(cv, controller);
+	}
+
+	@Test
+	public void getInfo_godCatCardController() {
+		GodCatCardView cv = EasyMock.createMock(GodCatCardView.class);
+		cv.getInfo();
+		EasyMock.replay(cv);
+
+		GodCatCardController godCatCardController = new GodCatCardController(cv, null);
+		godCatCardController.getInfo();
+
+		EasyMock.verify(cv);
 	}
 }

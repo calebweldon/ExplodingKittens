@@ -27,4 +27,16 @@ public class FlipCardControllerTest {
 		assertEquals(expected, actual);
 		EasyMock.verify(view, deck);
 	}
+
+	@Test
+	public void getInfo_flipCardController() {
+		FlipCardView view = EasyMock.createMock(FlipCardView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		FlipCardController flipCardController = new FlipCardController(view, null);
+		flipCardController.getInfo();
+
+		EasyMock.verify(view);
+	}
 }

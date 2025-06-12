@@ -124,4 +124,17 @@ public class AlterFutureCardControllerTest {
 		assertEquals(expected, actual);
 		EasyMock.verify(deck, view);
 	}
+
+	@Test
+	public void getInfo_alterFutureCardController() {
+		Deck deck = EasyMock.createMock(Deck.class);
+		AlterFutureCardView view = EasyMock.createMock(AlterFutureCardView.class);
+		view.getInfo();
+		EasyMock.replay(view, deck);
+
+		AlterFutureCardController controller = new AlterFutureCardController(view, deck);
+		controller.getInfo();
+
+		EasyMock.verify(view, deck);
+	}
 }
