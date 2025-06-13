@@ -40,7 +40,7 @@ public class AlterFutureCardController implements CardController, ActionCardCont
 
 	private int getNumCardsViewed() {
 		int deckSize = deck.getSize();
-		return (deckSize < NUM_CARDS_FROM_TOP) ? deckSize : NUM_CARDS_FROM_TOP;
+		return Math.min(deckSize, NUM_CARDS_FROM_TOP);
 	}
 
 	public void getInfo() {
