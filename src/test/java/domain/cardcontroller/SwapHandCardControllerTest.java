@@ -89,7 +89,7 @@ public class SwapHandCardControllerTest {
 	}
 
 	@Test
-	public void IntegrationTest_TwoActivePlayersExcludingCurrentWithDiffHandSizes_handSwapped() {
+	public void integrationTest_TwoActivePlayersExcludingCurrentWithDiffHandSizes_handSwapped() {
 		Player playerOne = new Player(1);
 		Player playerTwo = new Player(2);
 		Player currentPlayer = new Player(3);

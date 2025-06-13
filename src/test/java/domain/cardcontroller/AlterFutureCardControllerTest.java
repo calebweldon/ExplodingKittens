@@ -146,7 +146,7 @@ public class AlterFutureCardControllerTest {
 	}
 
 	@Test
-	public void IntegrationTest_alterFuture_threeCardsPartialReorder() {
+	public void integrationTest_alterFuture_threeCardsPartialReorder() {
 		Deck deck = new Deck();
 
 		CardType firstCard = deck.getCardAtIndex(0);
@@ -182,6 +182,5 @@ public class AlterFutureCardControllerTest {
 		assertEquals(expectedThirdCard, actualThirdCard);
 
 		EasyMock.verify(view);
-
 	}
 }

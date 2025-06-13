@@ -120,7 +120,7 @@ public class FavorCardControllerTest {
 	}
 
 	@Test
-	public void IntegrationTest_FavorCardFlow_TransfersCardBetweenPlayers() {
+	public void integrationTest_FavorCardFlow_TransfersCardBetweenPlayers() {
 		Player currentPlayer = new Player(1);
 		Player otherPlayer = new Player(2);
 
