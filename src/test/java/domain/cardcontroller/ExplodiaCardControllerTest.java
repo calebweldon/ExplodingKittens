@@ -64,7 +64,7 @@ public class ExplodiaCardControllerTest {
 
 	@Test
 	public void handleExplodiaCardDraw_Won() {
-		int numExplodia = 5;
+		int numExplodia = 4;
 		Player player = EasyMock.createMock(Player.class);
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
@@ -93,10 +93,11 @@ public class ExplodiaCardControllerTest {
 		cv.actionMessage();
 		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
 		ActionCardController controller = (ActionCardController) cardControllers.get(index);
-		EasyMock.expect(controller.handleCardAction()).andReturn(null);
+		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
 
 		EasyMock.replay(rand, cv, controller);
-		explodiaCardController.handleCardAction();
+		// Assert to ensure Null return mutation killed
+		assertEquals(TurnResult.CONTINUE, explodiaCardController.handleCardAction());
 		EasyMock.verify(rand, cv, controller);
 	}
 
