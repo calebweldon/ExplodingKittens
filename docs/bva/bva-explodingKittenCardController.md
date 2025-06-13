@@ -16,9 +16,9 @@
 ### Step 4:
 ##### All-combination or each-choice: Each-choice
 
-|             | System under test                              | Expected output         | Implemented? |
-|-------------|------------------------------------------------|-------------------------|--------------|
-| Test Case 1 | Player is null                                 | IllegalStateException   | :x:          |
-| Test Case 2 | Player has defuse card, deck size > 0         | TurnResult.CONTINUE     | :x:          |
-| Test Case 3 | Player has no defuse card                      | TurnResult.ELIMINATED   | :x:          |
-| Test Case 4 | Player has defuse card, empty deck (size = 0) | TurnResult.CONTINUE     | :x:          | 
+|             | System under test                              | Expected output         | Implemented?         |
+|-------------|------------------------------------------------|-------------------------|----------------------|
+| Test Case 1 | Player is null                                 | IllegalStateException   | :white_check_mark:   |
+| Test Case 2 | Player has defuse card, deck size > 0          | TurnResult.CONTINUE     | :white_check_mark:   |
+| Test Case 3 | Player has no defuse card                      | TurnResult.ELIMINATED   | :white_check_mark:   |
+| Test Case 4 | Player has defuse card, empty deck (size = 0)  | TurnResult.CONTINUE     | :white_check_mark:   | 
