@@ -51,7 +51,7 @@ class TurnControllerTest {
 
 		EasyMock.replay(deck, turnView, player, controller);
 		//Assert to ensure Null return mutation killed
-		assertNotNull(tc.takeTurn(player));
+		assertEquals(TurnResult.CONTINUE, tc.takeTurn(player));
 		EasyMock.verify(deck, turnView, player, controller);
 	}
 
@@ -76,8 +76,8 @@ class TurnControllerTest {
 		EasyMock.expect(controller.handleCardDraw()).andReturn(TurnResult.CONTINUE);
 
 		EasyMock.replay(deck, turnView, player, controller);
-		//Assert to ensure Null return mutation killed
-		assertNotNull(tc.takeTurn(player));
+		// Assert to ensure Null return mutation killed
+		assertEquals(TurnResult.CONTINUE, tc.takeTurn(player));
 		EasyMock.verify(deck, turnView, player, controller);
 	}
 
