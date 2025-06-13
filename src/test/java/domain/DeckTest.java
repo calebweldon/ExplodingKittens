@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeckTest {
 	public static final int INT_MAX = 2147483647;
-	public static final int MAX_DECK_SIZE = 65;
+	public static final int MAX_DECK_SIZE = 61;
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, INT_MAX})
