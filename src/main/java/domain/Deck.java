@@ -17,7 +17,6 @@ public class Deck {
 	public final static int NUMBER_OF_SHUFFLE = 4;
 	public final static int NUMBER_OF_REVERSE = 4;
 	public final static int NUMBER_OF_SWAP = 4;
-	public final static int NUMBER_OF_EMBARRASS = 4;
 	public final static int NUMBER_OF_RECYCLE = 4;
 	public final static int NUMBER_OF_SEE = 5;
 	public final static int NUMBER_OF_ALTER = 5;
@@ -40,7 +39,12 @@ public class Deck {
 		}
 	}
 
-	private void fillDeck() {
+	Deck(Deck otherDeck) {
+		this.deck = new LinkedList<>(otherDeck.deck);
+		this.rand = new SecureRandom();
+	}
+
+	void fillDeck() {
 		for (int i = 0; i < NUMBER_OF_GOD; i++) {
 			deck.add(CardType.GOD_CAT);
 		}
@@ -65,9 +69,6 @@ public class Deck {
 		}
 		for (int i = 0; i < NUMBER_OF_SWAP; i++) {
 			deck.add(CardType.SWAP);
-		}
-		for (int i = 0; i < NUMBER_OF_EMBARRASS; i++) {
-			deck.add(CardType.EMBARRASS);
 		}
 		for (int i = 0; i < NUMBER_OF_RECYCLE; i++) {
 			deck.add(CardType.RECYCLE);

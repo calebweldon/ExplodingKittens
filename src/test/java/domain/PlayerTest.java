@@ -1,6 +1,8 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.easymock.EasyMock;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -132,16 +134,17 @@ public class PlayerTest {
 		EasyMock.verify(hand);
 	}
 
-	@Test
-	public void playCard_oneBasicKitten_throwsException() {
+	@ParameterizedTest
+	@EnumSource(value = CardType.class, names = {"BEARD_CAT", "CATTERMELON", "POTATO_CAT", "RAINBOW_RALPHING_CAT", "TACO_CAT"})
+	public void playCard_oneBasicKitten_throwsException(CardType cardType) {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
-		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(1);
+		EasyMock.expect(hand.getOrDefault(cardType, 0)).andReturn(1);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
 
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			player.playCard(CardType.TACO_CAT);
+			player.playCard(cardType);
 		});
 
 		String expectedMessage = "You do not have enough cards to play.";
@@ -156,7 +159,7 @@ public class PlayerTest {
 	public void removeCard_oneCard_succeeds() {
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -171,7 +174,7 @@ public class PlayerTest {
 		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(2);
 		EasyMock.expect(hand.put(CardType.TACO_CAT, 1)).andReturn(2);
 		EasyMock.expect(hand.getOrDefault(CardType.TACO_CAT, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.TACO_CAT, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.TACO_CAT)).andReturn(0);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -187,7 +190,7 @@ public class PlayerTest {
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(2);
 		EasyMock.expect(hand.put(CardType.ATTACK, 1)).andReturn(2);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand);
 
 		Player player = new Player(hand);
@@ -284,7 +287,7 @@ public class PlayerTest {
 		EasyMock.expect(keys.size()).andReturn(1);
 		EasyMock.expect(rand.nextInt(1)).andReturn(0);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand, keys, rand);
 
 		Player player = new Player(hand, rand);
@@ -307,7 +310,7 @@ public class PlayerTest {
 		EasyMock.expect(keys.size()).andReturn(2);
 		EasyMock.expect(rand.nextInt(2)).andReturn(0);
 		EasyMock.expect(hand.getOrDefault(CardType.ATTACK, 0)).andReturn(1);
-		EasyMock.expect(hand.put(CardType.ATTACK, 0)).andReturn(1);
+		EasyMock.expect(hand.remove(CardType.ATTACK)).andReturn(0);
 		EasyMock.replay(hand, keys, rand);
 
 		Player player = new Player(hand, rand);
@@ -336,5 +339,19 @@ public class PlayerTest {
 		assertTrue(actualMessage.contains(expectedMessage));
 
 		EasyMock.verify(hand);
+	}
+
+	// Not using mocks because using copy constructor internally
+	@Test
+	public void viewHand_returnsHand() {
+		Map<CardType, Integer> hand = new java.util.HashMap<>();
+		hand.put(CardType.ATTACK, 2);
+		hand.put(CardType.SKIP, 1);
+
+		Player player = new Player(hand);
+		Map<CardType, Integer> actualHand = player.viewHand();
+
+		assertEquals(2, actualHand.getOrDefault(CardType.ATTACK, 0));
+		assertEquals(1, actualHand.getOrDefault(CardType.SKIP, 0));
 	}
 }

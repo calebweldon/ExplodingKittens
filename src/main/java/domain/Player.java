@@ -37,10 +37,7 @@ public class Player {
 
 	public void playCard(CardType cardType) {
 		int removeCount = 1;
-		if (cardType == CardType.TACO_CAT || cardType == CardType.CATTERMELON
-				|| cardType == CardType.POTATO_CAT
-				|| cardType == CardType.BEARD_CAT
-				|| cardType == CardType.RAINBOW_RALPHING_CAT) {
+		if (isBasicCard(cardType)) {
 			removeCount = 2;
 		}
 		int count = this.hand.getOrDefault(cardType, 0);
@@ -55,12 +52,23 @@ public class Player {
 		}
 	}
 
+	private boolean isBasicCard(CardType cardType) {
+		return cardType == CardType.TACO_CAT || cardType == CardType.CATTERMELON
+				|| cardType == CardType.POTATO_CAT
+				|| cardType == CardType.BEARD_CAT
+				|| cardType == CardType.RAINBOW_RALPHING_CAT;
+	}
+
 	public void removeCard(CardType cardType) {
 		int count = this.hand.getOrDefault(cardType, 0);
 		if (count < 1) {
 			throw new IllegalArgumentException("Not enough cards to remove.");
 		}
-		this.hand.put(cardType, count - 1);
+		if (count == 1) {
+			this.hand.remove(cardType);
+		} else {
+			this.hand.put(cardType, count - 1);
+		}
 	}
 
 	public int getId() {

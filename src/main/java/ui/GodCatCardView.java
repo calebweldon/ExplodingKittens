@@ -31,15 +31,13 @@ public class GodCatCardView {
 		final int REVERSE = 5;
 		final int SHUFFLE = 6;
 		final int SWAP = 7;
-		final int EMBARRASS = 8;
-		final int RECYCLE = 9;
-		final int ALTER = 10;
-		final int SEE = 11;
+		final int RECYCLE = 8;
+		final int ALTER = 9;
+		final int SEE = 10;
 
 		final String godCatPromptForCardType = labels.getString("godCatPromptForCardType");
 		System.out.println(godCatPromptForCardType);
 
-		// TODO : May need to add/remove types depending on final amount
 		final String godCatCardSelection = labels.getString("godCatCardSelection");
 		final String godCatInvalidSelection = labels.getString("godCatInvalidSelection");
 
@@ -61,8 +59,6 @@ public class GodCatCardView {
 					return CardType.SHUFFLE;
 				case SWAP:
 					return CardType.SWAP;
-				case EMBARRASS:
-					return CardType.EMBARRASS;
 				case RECYCLE:
 					return CardType.RECYCLE;
 				case ALTER:

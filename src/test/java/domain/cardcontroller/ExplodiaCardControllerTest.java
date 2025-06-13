@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExplodiaCardControllerTest {
 	private ExplodiaCardView cv;
@@ -34,11 +34,10 @@ public class ExplodiaCardControllerTest {
 		FlipCardController c5 = EasyMock.createMock(FlipCardController.class);
 		ShuffleCardController c6 = EasyMock.createMock(ShuffleCardController.class);
 		SwapHandCardController c7 = EasyMock.createMock(SwapHandCardController.class);
-		EmbarrassCardController c8 = EasyMock.createMock(EmbarrassCardController.class);
-		RecycleCardController c9 = EasyMock.createMock(RecycleCardController.class);
-		SeeFutureCardController c10 = EasyMock.createMock(SeeFutureCardController.class);
-		AlterFutureCardController c11 = EasyMock.createMock(AlterFutureCardController.class);
-		this.cardControllers = new ArrayList<>(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11));
+		RecycleCardController c8 = EasyMock.createMock(RecycleCardController.class);
+		SeeFutureCardController c9 = EasyMock.createMock(SeeFutureCardController.class);
+		AlterFutureCardController c10 = EasyMock.createMock(AlterFutureCardController.class);
+		this.cardControllers = new ArrayList<>(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10));
 	}
 
 	@ParameterizedTest
@@ -64,7 +63,7 @@ public class ExplodiaCardControllerTest {
 
 	@Test
 	public void handleExplodiaCardDraw_Won() {
-		int numExplodia = 5;
+		int numExplodia = 4;
 		Player player = EasyMock.createMock(Player.class);
 		Map<CardType, Integer> hand = EasyMock.createMock(Map.class);
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
@@ -84,19 +83,51 @@ public class ExplodiaCardControllerTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0,1,2,3,4,5,6,7,8,9,10})
+	@ValueSource(ints = {0,1,2,3,4,5,6,7,8,9})
 	public void handleExplodiaCardAction_BecomesOtherCard(int index) {
-		int NUM_CONTROLLERS = 11;
+		int NUM_CONTROLLERS = 10;
 
 		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
 
 		cv.actionMessage();
 		EasyMock.expect(rand.nextInt(NUM_CONTROLLERS)).andReturn(index);
 		ActionCardController controller = (ActionCardController) cardControllers.get(index);
-		EasyMock.expect(controller.handleCardAction()).andReturn(null);
+		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
 
 		EasyMock.replay(rand, cv, controller);
-		explodiaCardController.handleCardAction();
+		// Assert to ensure Null return mutation killed
+		assertEquals(TurnResult.CONTINUE, explodiaCardController.handleCardAction());
 		EasyMock.verify(rand, cv, controller);
+	}
+
+	@Test
+	public void publicExplodiaConstructor_doesntCrash() {
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers);
+		assertNotNull(explodiaCardController);
+	}
+
+	@Test
+	public void handleExplodiaCardDraw_NullPlayer() {
+		EasyMock.replay(cv, rand);
+		
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
+		explodiaCardController.updatePlayer(null);
+		Exception exception = assertThrows(IllegalStateException.class, () -> {
+			explodiaCardController.handleCardDraw();
+		});
+		assertEquals("Player not set", exception.getMessage());
+
+		EasyMock.verify(cv, rand);
+	}
+
+	@Test
+	public void getInfo_ExplodiaCardController() {
+		cv.getInfo();
+		EasyMock.replay(cv, rand);
+
+		ExplodiaCardController explodiaCardController = new ExplodiaCardController(cv, cardControllers, rand);
+		explodiaCardController.getInfo();
+
+		EasyMock.verify(cv, rand);
 	}
 }

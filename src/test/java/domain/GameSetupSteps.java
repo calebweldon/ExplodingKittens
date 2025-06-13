@@ -49,9 +49,6 @@ public class GameSetupSteps {
 			Map<CardType, Integer> playerHand = pt.player.viewHand();
 
 			assertTrue(playerHand.containsKey(CardType.DEFUSE));
-
-			int numExplodingKittens = playerHand.getOrDefault(CardType.EXPLODING_KITTEN, 0);
-			correctNumExplodingKittens -= numExplodingKittens;
 		}
 
 		correctNumExplodingKittens -= gameSetup.getCardCount(CardType.EXPLODING_KITTEN);
