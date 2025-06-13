@@ -35,15 +35,23 @@
 
 ### Team member: Eiko Reisz
 #### PR created:
-- N/A
+- N/A - Everything approved
 
 ### PR done and approved
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/89
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/73
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/69 *adopted
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/62
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/61
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/57
 
 ### Other people's PR reviewed by you
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/88
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/87
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/84
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/83
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/75
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/74
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/72
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/70
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/67
