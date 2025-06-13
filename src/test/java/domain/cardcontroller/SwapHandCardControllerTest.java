@@ -9,6 +9,7 @@ import ui.SwapHandCardView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -89,7 +90,6 @@ public class SwapHandCardControllerTest {
 
 	@Test
 	public void IntegrationTest_TwoActivePlayersExcludingCurrentWithDiffHandSizes_handSwapped() {
-
 		Player playerOne = new Player(1);
 		Player playerTwo = new Player(2);
 		Player currentPlayer = new Player(3);
@@ -110,16 +110,19 @@ public class SwapHandCardControllerTest {
 		controller.updatePlayer(currentPlayer);
 		controller.updateActivePlayersExcludingCurrent(activePlayers);
 
-		assertEquals(2, currentPlayer.getHandSize());
-		assertEquals(0, playerOne.getHandSize());
+		Map<CardType, Integer> expectedCurrentPlayerHandAfterSwap = playerOne.viewHand();
+		Map<CardType, Integer> expectedPlayerOneHandAfterSwap = currentPlayer.viewHand();
 
-		TurnResult actual = controller.handleCardAction();
-		TurnResult expected = TurnResult.CONTINUE;
+		TurnResult actualTurnResult = controller.handleCardAction();
+		TurnResult expectedTurnResult = TurnResult.CONTINUE;
 
-		assertEquals(actual, expected);
+		assertEquals(actualTurnResult, expectedTurnResult);
 
-		assertEquals(0, currentPlayer.getHandSize());
-		assertEquals(2, playerOne.getHandSize());
+		Map<CardType, Integer> actualCurrentPlayerHandAfterSwap = currentPlayer.viewHand();
+		Map<CardType, Integer> actualPlayerOneHandAfterSwap = playerOne.viewHand();
+
+		assertEquals(actualCurrentPlayerHandAfterSwap, expectedCurrentPlayerHandAfterSwap);
+		assertEquals(actualPlayerOneHandAfterSwap, expectedPlayerOneHandAfterSwap);
 
 		EasyMock.verify(view);
 	}
