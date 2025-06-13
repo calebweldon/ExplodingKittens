@@ -2,11 +2,18 @@ package domain.cardcontroller;
 
 import domain.CardType;
 import domain.Deck;
+import domain.Player;
 import domain.TurnResult;
 import ui.AlterFutureCardView;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+import ui.FavorCardView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -136,5 +143,45 @@ public class AlterFutureCardControllerTest {
 		controller.getInfo();
 
 		EasyMock.verify(view, deck);
+	}
+
+	@Test
+	public void IntegrationTest_alterFuture_threeCardsPartialReorder() {
+		Deck deck = new Deck();
+
+		CardType firstCard = deck.getCardAtIndex(0);
+		CardType secondCard = deck.getCardAtIndex(1);
+		CardType thirdCard = deck.getCardAtIndex(2);
+		CardType[] topCards = {firstCard, secondCard, thirdCard};
+
+		AlterFutureCardView view = EasyMock.createMock(AlterFutureCardView.class);
+		CardType[] reorderedCards = {firstCard, thirdCard, secondCard};
+		view.actionMessage();
+		view.displayTopCards(topCards);
+		EasyMock.expect(view.promptForNewOrder(topCards)).andReturn(reorderedCards);
+
+		EasyMock.replay(view);
+
+		AlterFutureCardController controller = new AlterFutureCardController(view, deck);
+
+		TurnResult expectedTurnResult = TurnResult.CONTINUE;
+		TurnResult actualTurnResult = controller.handleCardAction();
+
+		assertEquals(expectedTurnResult, actualTurnResult);
+
+		CardType expectedFirstCard = firstCard;
+		CardType expectedSecondCard = thirdCard;
+		CardType expectedThirdCard = secondCard;
+
+		CardType actualFirstCard = deck.getCardAtIndex(0);
+		CardType actualSecondCard = deck.getCardAtIndex(1);
+		CardType actualThirdCard = deck.getCardAtIndex(2);
+
+		assertEquals(expectedFirstCard, actualFirstCard);
+		assertEquals(expectedSecondCard, actualSecondCard);
+		assertEquals(expectedThirdCard, actualThirdCard);
+
+		EasyMock.verify(view);
+
 	}
 }

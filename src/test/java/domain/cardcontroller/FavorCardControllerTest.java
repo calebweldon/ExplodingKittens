@@ -108,13 +108,25 @@ public class FavorCardControllerTest {
 	}
 
 	@Test
+	public void getInfo_FavorCardController() {
+		FavorCardView view = EasyMock.createMock(FavorCardView.class);
+		view.getInfo();
+		EasyMock.replay(view);
+
+		FavorCardController controller = new FavorCardController(view);
+		controller.getInfo();
+
+		EasyMock.verify(view);
+	}
+
+	@Test
 	public void IntegrationTest_FavorCardFlow_TransfersCardBetweenPlayers() {
 		Player currentPlayer = new Player(1);
 		Player otherPlayer = new Player(2);
 
 		otherPlayer.addCard(CardType.SKIP);
 		otherPlayer.addCard(CardType.ATTACK);
-		
+
 		List<Player> activePlayersExcludingCurrent = new ArrayList<>();
 		activePlayersExcludingCurrent.add(otherPlayer);
 
@@ -122,7 +134,7 @@ public class FavorCardControllerTest {
 		view.actionMessage();
 		EasyMock.expect(view.promptForTargetPlayer(EasyMock.anyObject())).andReturn(otherPlayer);
 		EasyMock.expect(view.promptTargetPlayerForCard(otherPlayer)).andReturn(CardType.SKIP);
-		
+
 		EasyMock.replay(view);
 
 		FavorCardController controller = new FavorCardController(view);
@@ -134,7 +146,7 @@ public class FavorCardControllerTest {
 
 		Map<CardType, Integer> expectedOtherPlayerHandAfterTransfer = new HashMap<>();
 		expectedOtherPlayerHandAfterTransfer.put(CardType.ATTACK, 1);
-		
+
 		TurnResult actualTurnResult = controller.handleCardAction();
 		TurnResult expectedTurnResult = TurnResult.CONTINUE;
 
@@ -145,18 +157,6 @@ public class FavorCardControllerTest {
 
 		assertEquals(actualCurrentPlayerHandAfterTransfer, expectedCurrentPlayerHandAfterTransfer);
 		assertEquals(actualOtherPlayerHandAfterTransfer, expectedOtherPlayerHandAfterTransfer);
-		
-		EasyMock.verify(view);
-	}
-
-	@Test
-	public void getInfo_FavorCardController() {
-		FavorCardView view = EasyMock.createMock(FavorCardView.class);
-		view.getInfo();
-		EasyMock.replay(view);
-
-		FavorCardController controller = new FavorCardController(view);
-		controller.getInfo();
 
 		EasyMock.verify(view);
 	}
