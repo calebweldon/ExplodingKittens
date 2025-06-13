@@ -71,12 +71,20 @@
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/44
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/65
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/72
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/74
 
 ### Other people's PR reviewed by you
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/61
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/62
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/67
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/68
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/69
 - https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/70
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/83
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/84
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/87
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/88
+- https://github.com/nu-cs-sqe/course-project-20242510-team-01-20242503/pull/89
 
 ### Team member: Caleb Weldon
 #### PR created: 
