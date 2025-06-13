@@ -14,3 +14,6 @@
 
 ## Acknowledgements
 REFERENCES, SOURCE OF HELP ETC
+
+# Mutation Testing
+ - In order to check whether the shuffle method works, I compare cards at specific indices before and after shuffling. This mutation test may occasionally fail (due to an equivalent mutant) on the off chance that a copy of the same card somehow ends up in the same index.
