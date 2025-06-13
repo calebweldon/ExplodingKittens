@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.easymock.EasyMock;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -217,23 +218,57 @@ public class DeckTest {
 		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
 		Deck deck = new Deck(rand, true);
 		int originalSize = deck.getSize();
-		CardType[] originalDeck = new CardType[originalSize];
-		for (int i = 0; i < originalSize; i++) {
-			originalDeck[i] = deck.getCardAtIndex(i);
-		}
+		Deck flippedDeck = new Deck(deck);
 
-		deck.flipDeck();
+		flippedDeck.flipDeck();
 
 		int flippedSize = deck.getSize();
 		assertEquals(originalSize, flippedSize);
 		for (int i = 0; i < flippedSize; i++) {
-			assertEquals(originalDeck[flippedSize - 1 - i], deck.getCardAtIndex(i));
+			assertEquals(flippedDeck.getCardAtIndex(flippedSize - i - 1), deck.getCardAtIndex(i));
 		}
+	}
+
+	@Test
+	public void shuffleDeckIntegrationTest() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck = new Deck(rand, true);
+		int originalSize = deck.getSize();
+		Deck shuffledDeck = new Deck(deck);
+
+		shuffledDeck.shuffleDeck();
+
+		int shuffledSize = deck.getSize();
+		assertEquals(originalSize, shuffledSize);
+
+		CardType[] shuffled = new CardType[shuffledSize];
+		CardType[] original = new CardType[originalSize];
+		for (int i = 0; i < shuffledSize; i++) {
+			shuffled[i] = shuffledDeck.getCardAtIndex(i);
+			original[i] = deck.getCardAtIndex(i);
+		}
+		assertNotEquals(0,Arrays.compare(original,shuffled));
 	}
 
 	@Test
 	public void publicConstructor_doesntCrash() {
 		Deck deck = new Deck();
+		assertNotEquals(0, deck.getSize());
 		assertNotNull(deck);
+	}
+
+	@Test
+	public void ShuffleDeck_MutationTest() {
+		SecureRandom rand = EasyMock.createMock(SecureRandom.class);
+		Deck deck1 = new Deck();
+		Deck deck2 = new Deck(rand, true);
+
+		//Assumes God-Cat is added first
+		assertNotEquals(CardType.GOD_CAT,deck1.getCardAtIndex(0));
+		assertNotEquals(CardType.GOD_CAT,deck2.getCardAtIndex(0));
+
+		CardType firstCard = deck1.getCardAtIndex(deck1.getSize() - 1);
+		deck1.addSpecialCards(1);
+		assertNotEquals(firstCard,deck1.getCardAtIndex(deck1.getSize() - 1));
 	}
 }

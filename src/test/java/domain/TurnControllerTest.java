@@ -50,8 +50,8 @@ class TurnControllerTest {
 		player.addCard(CardType.ATTACK);
 
 		EasyMock.replay(deck, turnView, player, controller);
-		tc.takeTurn(player);
-
+		//Assert to ensure Null return mutation killed
+		assertEquals(TurnResult.CONTINUE, tc.takeTurn(player));
 		EasyMock.verify(deck, turnView, player, controller);
 	}
 
@@ -76,8 +76,8 @@ class TurnControllerTest {
 		EasyMock.expect(controller.handleCardDraw()).andReturn(TurnResult.CONTINUE);
 
 		EasyMock.replay(deck, turnView, player, controller);
-		tc.takeTurn(player);
-
+		// Assert to ensure Null return mutation killed
+		assertEquals(TurnResult.CONTINUE, tc.takeTurn(player));
 		EasyMock.verify(deck, turnView, player, controller);
 	}
 
@@ -86,12 +86,15 @@ class TurnControllerTest {
 		Deck deck = EasyMock.createMock(Deck.class);
 		TurnView turnView = EasyMock.createMock(TurnView.class);
 		Player player = EasyMock.createMock(Player.class);
-		ExplodingKittenCardController controller = EasyMock.createMock(ExplodingKittenCardController.class);
+		ExplodingKittenCardController explodingController = EasyMock.createMock(ExplodingKittenCardController.class);
+		RecycleCardController recycleController = EasyMock.createMock(RecycleCardController.class);
 		Map<CardType, CardController> cardControllers = new HashMap<>();
-		cardControllers.put(CardType.EXPLODING_KITTEN, controller);
+		cardControllers.put(CardType.EXPLODING_KITTEN, explodingController);
+		cardControllers.put(CardType.RECYCLE, recycleController);
 		TurnController tc = new TurnController(deck, turnView, cardControllers);
 
-		controller.updatePlayer(player);
+		explodingController.updatePlayer(player);
+		recycleController.updatePlayer(player);
 
 		turnView.displayHand(player);
 		EasyMock.expect(deck.getImplodingIndex()).andReturn(-1);
@@ -99,11 +102,12 @@ class TurnControllerTest {
 		EasyMock.expect(turnView.promptForInput()).andReturn("draw");
 		EasyMock.expect(deck.drawCard()).andReturn(CardType.EXPLODING_KITTEN);
 		turnView.showCardDrawn(CardType.EXPLODING_KITTEN);
-		EasyMock.expect(controller.handleCardDraw()).andReturn(TurnResult.CONTINUE);
+		EasyMock.expect(explodingController.handleCardDraw()).andReturn(TurnResult.CONTINUE);
+		recycleController.updateLastPlayed(CardType.DEFUSE);
 
-		EasyMock.replay(deck, turnView, player, controller);
+		EasyMock.replay(deck, turnView, player, explodingController, recycleController);
 		tc.takeTurn(player);
-		EasyMock.verify(deck, turnView, player, controller);
+		EasyMock.verify(deck, turnView, player, explodingController, recycleController);
 	}
 
 	@Test
@@ -493,19 +497,5 @@ class TurnControllerTest {
 			new TurnController(deck, turnView, null);
 		});
 		assertEquals("CardControllers cannot be null", exception.getMessage());
-	}
-
-	@Test
-	void getCardCount_runs() {
-		Deck deck = EasyMock.createMock(Deck.class);
-		TurnView turnView = EasyMock.createMock(TurnView.class);
-		Map<CardType, CardController> cardControllers = new HashMap<>();
-		TurnController turnController = new TurnController(deck, turnView, cardControllers);
-
-		EasyMock.expect(deck.getCardCount(CardType.ATTACK)).andReturn(10);
-		EasyMock.replay(deck, turnView);
-
-		int count = turnController.getCardCount(CardType.ATTACK);
-		assertTrue(count == 10);
 	}
 }

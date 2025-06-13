@@ -39,7 +39,12 @@ public class Deck {
 		}
 	}
 
-	private void fillDeck() {
+	Deck(Deck otherDeck) {
+		this.deck = new LinkedList<>(otherDeck.deck);
+		this.rand = new SecureRandom();
+	}
+
+	void fillDeck() {
 		for (int i = 0; i < NUMBER_OF_GOD; i++) {
 			deck.add(CardType.GOD_CAT);
 		}

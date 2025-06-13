@@ -47,8 +47,7 @@ public class ExplodiaCardController implements CardController,
 		int numExplodia = hand.getOrDefault(CardType.EXPLODIA, 0);
 		view.drawMessage(numExplodia);
 		player.addCard(CardType.EXPLODIA);
-
-		return numExplodia + 1 >= TOTAL_EXPLODIA ? TurnResult.WON : TurnResult.CONTINUE;
+		return numExplodia + 1 == TOTAL_EXPLODIA ? TurnResult.WON : TurnResult.CONTINUE;
 	}
 
 	@Override

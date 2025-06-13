@@ -1,7 +1,6 @@
 package domain.cardcontroller;
 
 import domain.CardType;
-import domain.Deck;
 import domain.Player;
 import domain.TurnResult;
 import org.easymock.EasyMock;
@@ -40,10 +39,10 @@ public class GodCatCardControllerTest {
 		cv.actionMessage();
 		EasyMock.expect(cv.chooseController()).andReturn(card);
 		ActionCardController controller = (ActionCardController) cardControllers.get(card);
-		EasyMock.expect(controller.handleCardAction()).andReturn(null);
+		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
 
 		EasyMock.replay(cv, controller);
-		godCatCardController.handleCardAction();
+		assertEquals(TurnResult.CONTINUE, godCatCardController.handleCardAction());
 		EasyMock.verify(cv, controller);
 	}
 

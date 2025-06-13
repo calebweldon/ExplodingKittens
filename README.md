@@ -20,3 +20,9 @@
 - Our two features for integration tests are:
   - Game setup
   - Functionality of four card controllers
+
+### Mutation Testing
+ - In order to check whether the shuffle method works, we compared cards at specific indices before and after shuffling. This mutation test may occasionally fail (due to an equivalent mutant) on the off chance that a copy of the same card somehow ends up at the same index.
+
+### Code Coverage
+ - The getCardCount() method in TurnController is purely a helper method for testing and arguably does not need code coverage.
