@@ -15,8 +15,8 @@ public class GameView {
 	public GameView() { }
 
 	public void chooseLanguage() {
-		final String promptForLanguage = "Enter the number of your choice";
-		final String languageOptions  = "1) English\n2) French\n";
+		final String promptForLanguage = "Enter the number of your choice:";
+		final String languageOptions  = "1) English\n2) French";
 		final String invalidChoice = "Invalid input. Please enter 1 or 2";
 
 		System.out.println(promptForLanguage);
@@ -51,7 +51,8 @@ public class GameView {
 		final String invalidNumPlayers = labels.getString("invalidNumPlayers");
 		String playersSelectedMessage;
 
-		System.out.println(promptForNumPlayers);
+		System.out.println();
+		System.out.print(promptForNumPlayers);
 
 		final int twoPlayers = 2;
 		final int threePlayers = 3;
@@ -88,6 +89,7 @@ public class GameView {
 
 	public void announceGameStart() {
 		final String gameStarting = labels.getString("gameStarting");
+		System.out.println();
 		System.out.println(gameStarting);
 	}
 
@@ -102,6 +104,7 @@ public class GameView {
 		final String displayTurn = labels.getString("displayTurn");
 		String turnMessage = MessageFormat.format(
 				"\n{0} {1}", displayTurn, currPlayer.getId());
-		System.out.print(turnMessage);
+		System.out.println(turnMessage);
+		System.out.println();
 	}
 }
