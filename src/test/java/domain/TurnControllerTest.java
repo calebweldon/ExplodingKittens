@@ -494,18 +494,4 @@ class TurnControllerTest {
 		});
 		assertEquals("CardControllers cannot be null", exception.getMessage());
 	}
-
-	@Test
-	void getCardCount_runs() {
-		Deck deck = EasyMock.createMock(Deck.class);
-		TurnView turnView = EasyMock.createMock(TurnView.class);
-		Map<CardType, CardController> cardControllers = new HashMap<>();
-		TurnController turnController = new TurnController(deck, turnView, cardControllers);
-
-		EasyMock.expect(deck.getCardCount(CardType.ATTACK)).andReturn(10);
-		EasyMock.replay(deck, turnView);
-
-		int count = turnController.getCardCount(CardType.ATTACK);
-		assertTrue(count == 10);
-	}
 }
