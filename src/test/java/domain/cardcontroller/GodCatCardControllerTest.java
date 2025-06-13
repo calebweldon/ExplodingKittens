@@ -1,6 +1,7 @@
 package domain.cardcontroller;
 
 import domain.CardType;
+import domain.TurnResult;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,6 +9,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ui.GodCatCardView;
 
 import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GodCatCardControllerTest {
 	@ParameterizedTest
@@ -34,10 +37,10 @@ public class GodCatCardControllerTest {
 		cv.actionMessage();
 		EasyMock.expect(cv.chooseController()).andReturn(card);
 		ActionCardController controller = (ActionCardController) cardControllers.get(card);
-		EasyMock.expect(controller.handleCardAction()).andReturn(null);
+		EasyMock.expect(controller.handleCardAction()).andReturn(TurnResult.CONTINUE);
 
 		EasyMock.replay(cv, controller);
-		godCatCardController.handleCardAction();
+		assertEquals(TurnResult.CONTINUE, godCatCardController.handleCardAction());
 		EasyMock.verify(cv, controller);
 	}
 
