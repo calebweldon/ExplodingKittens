@@ -65,7 +65,7 @@ public class RecycleCardControllerTest {
 		TurnResult actual = recycleCardController.handleCardAction();
 
 		assertEquals(expected, actual);
-		EasyMock.verify(view);
+		EasyMock.verify(view, player);
 	}
 
 	@Test
