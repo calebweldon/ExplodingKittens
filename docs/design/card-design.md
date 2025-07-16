@@ -9,7 +9,6 @@
     - Has no behavior until Exploding Kitten is drawn
     - Discard upon use
 
-
 3. Skip
     - End Player turn without drawing a card
     - Discard upon use
