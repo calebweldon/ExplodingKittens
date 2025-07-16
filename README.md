@@ -43,7 +43,7 @@
   <p>Comprehensive testing strategy including <strong>unit testing</strong>, <strong>integration testing</strong>, and <strong>regression testing</strong></p>
   <p>Full <strong>Boundary Value Analysis (BVA)</strong> and documentation</p>
   <p><strong>Code quality tools</strong>: SpotBugs, Checkstyle, Jacoco (code coverage), and Pitest (mutation testing)</p>
-  <p><strong>CI/CD</strong> via GitHub Actions and enforced <strong>branch protection</strong> with required reviewers</p>
+  <p><strong>CI</strong> via GitHub Actions and enforced <strong>branch protection</strong> with required reviewers</p>
   <p>Use of <strong>software design principles</strong> and patterns</p>
   <p>Project management through reports and GitHub Projects</p>
   <p>Full <strong>internationalization (i18n)</strong> support</p>
