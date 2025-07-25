@@ -68,16 +68,16 @@ Follow the steps below to set up and run the project locally on your machine.
 ### Prerequisites
 
 * IntelliJ  
-  > While IntelliJ is not required, it is the recommended IDE for building and running this project.
-  >
-  > ⚠️ **Note:** All instructions will assume use of IntelliJ
+  > While IntelliJ is not required, it is the recommended IDE for building and running this project.  
+  >  
+  > ⚠️ **Note:** All instructions will assume use of IntelliJ.
 
 * JDK 11  
-  > This project requires Java 11.
-  >   
-  > You can download it from the [Oracle JDK 11 page](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
-  > 
-  > or use a package manager:  
+  > This project requires Java 11.  
+  >  
+  > You can download it from the [Oracle JDK 11 page](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)  
+  >  
+  > Or install via a package manager:  
   > - **macOS**:  
   >   ```sh
   >   brew install openjdk@11
@@ -91,22 +91,24 @@ Follow the steps below to set up and run the project locally on your machine.
 ### Installation
 
 1. Clone the repo
+   
    ```sh
    git clone https://github.com/calebweldon/ExplodingKittens
    ```
-2. Configure module settings
-   > Press ⌘ + ↓ (Mac) or Ctrl + Alt + Shift + S (Windows/Linux) to open Project Structure
-   > 
-   > Go to the "Project" tab
-   > 
-   > Under Project SDK, select Java 11 (or add it if not listed)
-   > 
-   > Apply and close
-3. Build the project
+   
+3. Configure module settings
+   > - Press `⌘ + ↓` (Mac) or `Ctrl + Alt + Shift + S` (Windows/Linux) to open **Project Structure**  
+   > - Go to the **Project** tab  
+   > - Under **Project SDK**, select **Java 11** (or add it if not listed)  
+   > - Click **Apply** and **OK** to close  
+  
+4. Build the project
+   
    ```sh
    ./gradlew build
    ```
-4. Run the game
+   
+5. Run the game
    > In your file explorer, navigate to:
    ```sh
    src/main/java/ui
