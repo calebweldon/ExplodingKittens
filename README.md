@@ -65,14 +65,6 @@
 
 Follow the steps below to set up and run the project locally on your machine.
 
-### Dependencies
-* JDK 11
-* JUnit 5.10
-* Gradle 8.10
-* EasyMock 5.4
-* CheckStyle 10.18
-* Cucumber 7.20
-
 ### Prerequisites
 
 * IntelliJ  
@@ -120,6 +112,14 @@ Follow the steps below to set up and run the project locally on your machine.
    src/main/java/ui
    ```
    > Select ▶ Run 'Main.main()' from the context menu
+
+### Dependencies
+* JDK 11
+* JUnit 5.10
+* Gradle 8.10
+* EasyMock 5.4
+* CheckStyle 10.18
+* Cucumber 7.20
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
