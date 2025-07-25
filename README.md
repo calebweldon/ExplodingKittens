@@ -46,7 +46,7 @@
   <p><strong>CI</strong> via GitHub Actions and enforced <strong>branch protection</strong> with required reviewers</p>
   <p>Use of <strong>software design principles</strong> and patterns</p>
   <p>Project management through reports and GitHub Projects</p>
-  <p>Full <strong>internationalization (i18n)</strong> support</p>
+  <p><strong>internationalization (i18n)</strong> support</p>
 </div>
 
 
